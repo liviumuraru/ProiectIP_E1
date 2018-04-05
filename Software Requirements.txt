@@ -1,0 +1,28 @@
+					Software Evolution
+
+
+Requirements:
+
+   A platform will be made which provides support for a software project implementation with the following components: 
+
+	-module which allows introduction of details for the new project ( description, keywords , programming languages , DBMS etc.)
+
+	-crawling component which allows the user to download projects from github that are similar to the new project( using the details from the previous point)
+	
+	-a component which determines the similarities between projects , which will find the common areas between those projects such as : packages, classes, common methods
+
+	-on the common areas there will be a component for doing reverse engineering which will obtain the package and class diagrams
+
+	
+
+Main Actors:
+
+	1) GUI module 
+		
+		Role: Takes necessary information from the user and delivers it to the Crawler module.(a class which makes the connection between the GUI  and Crawler modules)
+		
+		Use Cases:
+			 Receive the details from the GUI module (JSON format).( getDetails())
+			 Parse the JSON file.( parseDetailsFile())
+	2) Crawler Component
+	3) GitHub Repositories

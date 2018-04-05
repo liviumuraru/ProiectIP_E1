@@ -13,16 +13,43 @@ Requirements:
 
 	-on the common areas there will be a component for doing reverse engineering which will obtain the package and class diagrams
 
+  Regarding the source code quality, attributes to be considered:
+	-popularity of the github project (e.g. number of downloads, forks, lull requests, ...)
+
+	-activity of the project (e.g. size of the development team, age of the project, update and commit frequency, nhmber of active developers, ...)
+
+	- project dependencies (incoming and outgoing)
+
+	- how change requests, bugs and security problems are handled (e.g. is their an automated issue tracker or bug tracker, and how is it used in practice)
+
+	- is the project distributed through some package manager? How easy is it to install?
+
+  Regarding the quality of the projects from a code point of view, than you may/should consider as well:
+	- presence of code duplication (using one of the many code duplication detector tools)
+	
+	- presence of cyclic dependencies (using one of the many dependency analysis tools available)
+
+	- presence of code smells, using smell detection tools or code critics tools
+
+	- performance issues, using dynamic code profilers
+
+	- presence, coverage and quality of unit tests
 	
 
 Main Actors:
 
-	1) GUI module 
+	1) User(GUI module) 
 		
 		Role: Takes necessary information from the user and delivers it to the Crawler module.(a class which makes the connection between the GUI  and Crawler modules)
 		
 		Use Cases:
 			 Receive the details from the GUI module (JSON format).( getDetails())
 			 Parse the JSON file.( parseDetailsFile())
-	2) Crawler Component
-	3) GitHub Repositories
+
+	2) GitHub Database
+		Role: Download repositories from GitHub with the required specifications(given in the JSON file)
+		Use Cases:
+			Search GitHub database for the projects with the given specifications (searchGit())
+			Download the repository. (downloadRepository())
+
+	3) Maintenance operator

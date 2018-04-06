@@ -1,0 +1,33 @@
+
+		Lucene
+	* indexeaza descrierile(componenta de indexare text, componenta de cautare-se dau descrierile, el elimina cuvinta neimportante si face potrivirea pe ce a ramas) *
+
+- links:
+	-- https://lucene.apache.org/core/	
+	-- https://lucene.apache.org/core/4_2_0/core/org/apache/lucene/search/similarities/Similarity.html	
+	-- tutorial: https://www.tutorialspoint.com/lucene/index.htm
+	-- how to create first app using Lucene(adding the library): https://www.tutorialspoint.com/lucene/lucene_first_application.htm
+	-- http://www.lucenetutorial.com/lucene-in-5-minutes.html
+	-- similarity between 2 documents: http://sujitpal.blogspot.ro/2011/10/computing-document-similarity-using.html
+	-- mining similarity between documents: http://www.essi.upc.edu/dtim/blog/post/mining-similarity-between-text-documents-using-apache-lucene
+
+- search engine library(written entirely in Java)
+
+- suitable for application that requires full-text search
+
+- features:
+	-- they are offered through an API
+	-- scalable, high-performance indexing
+	-- efficient search algorithms
+	-- open-source
+
+- example( with query ):
+	-- first, create an index( IndexWriter class )
+	-- then, add documents to the index:
+		--- create a document( Document class )
+		--- add features for document, content we want tokenized or not
+		--- then, use the method addDocument() to add the document to the index
+	-- using a defined query, search
+		--- create the query ( Query, QueryParser classes )
+		--- create a Searcher to search the index( IndexReader, IndexSearcher )
+		--- collect some hits ( TopScoreDocCollector is instantiated to collect the top hits )

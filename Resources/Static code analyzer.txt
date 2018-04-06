@@ -1,8 +1,0 @@
-Tools for static code analysis:
-    IntelliJ IDEA -> A leading Java IDE with built-in code inspection and analysis. Plugins for Checkstyle, FindBugs, and PMD.
-        Checkstyle -> Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard. It automates the process of checking Java code to spare humans of this boring (but important) task. This makes it ideal for projects that want to enforce a coding standard.
-        	API: http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/api/package-summary.html
-        FindBugs   ->  FindBugs is an open source static code analyser, which detects possible bugs in Java programs.
-        	 API: http://findbugs.sourceforge.net/api/index.html
-        PMD(Programming Mistake Detector) -> PMD is an open source static Java source code analyzer that reports on issue found within application code. PMD includes  built-in rule sets and supports the ability to write custom rules. PMD does not report compilation errors, as it only can process well-formed source files. Issues reported by PMD are rather inefficient code, or bad programming habits, which can reduce the performance and maintainability of the program if they accumulate.
-        	API: http://pmd.sourceforge.net/pmd-5.1.0/apidocs/overview-summary.html

@@ -38,13 +38,21 @@ Requirements:
 
 Main Actors:
 
-	1) User(GUI module) 
+	1) Application client
+
+		Role: Interact with the application and send input data
+
+		Use Cases:
+			Introduce input data, such as project description or language
+			Receive output data, the constructed diagrams for the specified details
+
+	1) GUI module
 		
-		Role: Takes necessary information from the user and delivers it to the Crawler module.(a class which makes the connection between the GUI  and Crawler modules)
+		Role: Takes necessary information from the client and delivers it to the Crawler module.(a class which makes the connection between the GUI  and Crawler modules)
 		
 		Use Cases:
-			 Receive the details from the GUI module (JSON format).( getDetails())
-			 Parse the JSON file.( parseDetailsFile())
+			Receive the details from the client (JSON format).( getDetails())
+			Parse the JSON file.( parseDetailsFile())
 
 	2) GitHub Database
 		Role: Download repositories from GitHub with the required specifications(given in the JSON file)
@@ -53,3 +61,9 @@ Main Actors:
 			Download the repository. (downloadRepository())
 
 	3) Maintenance operator
+		Role: interact with the client, inspect, repair or make adjustments for the application
+		Use Cases:
+			Interact with the client for information, problems about the application
+			Inspect the behavior of the application
+			Repair
+			Make adjustments

@@ -1,0 +1,41 @@
+
+the most efficient way to query GitHub projects and repositories is the GitHub API:
+
+
+- to extensively search projects by ID, name, keywords, ordering etc. , check out https://developer.github.com/v3/search/#search-repositories
+- to work with Projects, check out https://developer.github.com/v3/projects/#list-repository-projects
+- to work with repositories, check out https://developer.github.com/v3/repos/
+
+- to download data from a repository, there are multiple ways, each with it's own Pros/Cons:
+
+1. URL-based:
+ ex:  https://github.com/username/repository_name/archive/branch_name.zip downloads the contents of the latest commit on "branch_name"
+
+PROS:
+  simple
+CONS:
+  can't download specific files
+  can only download latest commits
+
+2. GitHub Repository Contents API:
+  https://developer.github.com/v3/repos/contents/
+
+PROS:
+  not as difficult to use as the Trees API
+  can download specific files
+CONS:
+  this API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the Git Trees API.
+  this API supports files up to 1 megabyte in size.
+
+3. GitHub Trees API
+  https://developer.github.com/v3/git/trees/
+
+PROS:
+  retrieves the full git commit tree, with branches
+  powerful and extensive
+  can build repo programatically
+
+CONS:
+  complex and difficult to use
+
+NOTE: The GitHub Projects and GitHub repository APIs are in preview mode! Expect changes!

@@ -1,3 +1,4 @@
 *.zargo~
 *.iml
 .idea/*
+*.class

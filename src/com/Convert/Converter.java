@@ -2,6 +2,6 @@ package com.Convert;
 
 public interface Converter
 {
-    public boolean tryConvert();
-    public Object Convert();
+    public boolean tryConvert(Object... params);
+    public Object Convert(Object... params);
 }

@@ -9,3 +9,7 @@ TODO:
 # Dependencies
 
 - [GitHub API for Java](http://github-api.kohsuke.org/)
+
+# Similarity
+
+- [Lucene](https://lucene.apache.org/core/documentation.html)

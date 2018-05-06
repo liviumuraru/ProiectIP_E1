@@ -1,10 +1,13 @@
 # ProiectIP_E1
 
 TODO: 
-- [X] 1 use case diagram
-- [X] 1 class diagram
-- [X] requirements analysis
+- [X] Build crawler
+- [X] Build project file
+- [X] Find similarities
 
+
+# Trello
+- [Planning](https://trello.com/b/hKMUbPgl/module-crawler)
 
 # Dependencies
 

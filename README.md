@@ -1,9 +1,9 @@
 # ProiectIP_E1
 
 TODO: 
-- [X] Build crawler
-- [X] Build project file
-- [X] Find similarities
+- Build crawler
+- Build project file
+- Find similarities
 
 
 # Trello

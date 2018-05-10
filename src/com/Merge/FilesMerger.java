@@ -1,11 +1,14 @@
 package com.Merge;
 
+import com.Git.Repository.Asset;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FilesMerger
 {
-    public ArrayList<File> files;
+    public List<Asset<File>> files;
 
     public void merge(String location)
     {
@@ -15,11 +18,11 @@ public class FilesMerger
             mergedFiles.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(mergedFiles));
 
-            for (File file : files)
+            for (Asset<File> fileAsset : files)
             {
-                BufferedReader br = new BufferedReader(new FileReader(file));
+                BufferedReader br = new BufferedReader(new FileReader(fileAsset.getAsset()));
                 String text = null;
-                bw.write(file.getAbsolutePath());
+                bw.write(fileAsset.getAsset().getAbsolutePath());
                 bw.newLine();
                 while ((text = br.readLine()) != null)
                 {
@@ -49,19 +52,13 @@ public class FilesMerger
 
     }
 
-    public FilesMerger(ArrayList<File> files)
+    public FilesMerger()
     {
-        this.files = files;
+        files = new ArrayList<>();
     }
 
-    public ArrayList<File> getFiles()
+    public void AddFileAsset(Asset<File> fileAsset)
     {
-
-        return files;
-    }
-
-    public void setFiles(ArrayList<File> files)
-    {
-        this.files = files;
+        files.add(fileAsset);
     }
 }

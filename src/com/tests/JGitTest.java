@@ -9,7 +9,7 @@ import org.kohsuke.github.GitHub;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public class Converter_Tests
+public class JGitTest
 {
     public static void main(String... args)
     {

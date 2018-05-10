@@ -9,9 +9,9 @@ import java.util.*;
 
 public class Crawler {
 
-    static int MAX_REPOS = 10;
+    public final static int MAX_REPOS = 10;
 
-    public static List<GHRepository> getRepos(List<String> keywords, String language) {
+    public List<GHRepository> getRepos(List<String> keywords, String language) {
 
         List<GHRepository> repositories = new ArrayList<>();
 

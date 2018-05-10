@@ -16,8 +16,8 @@ public class Main
         keywords.add("github");
 
         String language = "java";
-
-        List<GHRepository> repositories = Crawler.getRepos(keywords, language);
+        Crawler crawler = new Crawler();
+        List<GHRepository> repositories = crawler.getRepos(keywords, language);
 
         for(int i=0; i<repositories.size(); i++)
         {

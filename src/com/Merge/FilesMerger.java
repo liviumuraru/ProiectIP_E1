@@ -23,23 +23,13 @@ public class FilesMerger
                 bw.newLine();
                 while ((text = br.readLine()) != null)
                 {
-                    System.out.println(text);
+//                    System.out.println(text);
                     bw.write(text);
                     bw.newLine();
                 }
                 br.close();
             }
             bw.close();
-
-            //print merge file
-            BufferedReader br = new BufferedReader(new FileReader(mergedFiles));
-            String text = null;
-            while ((text = br.readLine()) != null)
-            {
-                System.out.println(text);
-//                bw.write(text);
-//                bw.newLine();
-            }
 
         }
         catch (Exception e )

@@ -11,8 +11,9 @@ TODO:
 
 # Dependencies
 
+## GitHub Crawling
 - [GitHub API for Java](http://github-api.kohsuke.org/)
-
-# Similarity
-
+## Repository Cloning
+- [Eclipse JGit](https://www.eclipse.org/jgit/)
+## Similarity
 - [Lucene](https://lucene.apache.org/core/documentation.html)

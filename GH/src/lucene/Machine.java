@@ -55,9 +55,20 @@ public class Machine {
             Object[] keyVector=keys.toArray(new String[keys.size()]);
             for(int i=0;i<keyVector.length;i++)
                 System.out.println("word : "+ keyVector[i] + " frequency : "+termFrequencyMap.get(keyVector[i]));
+
+            List<String> terms = new ArrayList<String>();// abstracting frequent terms collection for testing
+            terms.add("Mohan");
+            terms.add("Ramesh");
+            terms.add("HelloWorld");
+
+            for( String obj: terms ){ //searching by collection
+                search(obj);
+            }
         }
         catch (IOException e)
         {
+            e.printStackTrace();
+        } catch (ParseException e) { //catch parse exception for search call
             e.printStackTrace();
         }
     }
@@ -79,12 +90,12 @@ public class Machine {
         TopDocs hits = searcher.search(searchQuery);
         long endTime = System.currentTimeMillis();
 
-        System.out.println(hits.totalHits +
-                " documents found. Time :" + (endTime - startTime));
+        System.out.println(hits.totalHits + " documents found. Time :" + (endTime - startTime));
         for(ScoreDoc scoreDoc : hits.scoreDocs) {
             Document doc = searcher.getDocument(scoreDoc);
-            System.out.println("File: "
-                    + doc.get(LuceneConstants.FILE_PATH));
+            System.out.println("File: " + doc.get(LuceneConstants.FILE_PATH));
+            System.out.println("Score =  " + scoreDoc.score); //score field
+            System.out.println("Score =  " + hits.getMaxScore()); //maximum score
         }
         searcher.close();
     }

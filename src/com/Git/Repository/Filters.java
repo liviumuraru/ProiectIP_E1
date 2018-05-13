@@ -8,4 +8,14 @@ public class Filters
     {
         return file.getName().toLowerCase().endsWith(format);
     }
+
+    /**
+    ** @deprecated
+     * COMPATIBILITY USAGE ONLY!
+     * Use Filters.hasFormat(format, file) instead
+     */
+    public static boolean accept(File pathname)
+    {
+        return pathname.getName().toLowerCase().endsWith(".txt");
+    }
 }

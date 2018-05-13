@@ -1,13 +1,16 @@
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GitHub;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.*;
 
 public class Crawler {
 
     public final static int MAX_REPOS = 10;
+
 
     public List<GHRepository> getReposList(List<String> keywords, String language) {
 
@@ -17,17 +20,22 @@ public class Crawler {
             GitHub gitHub = GitHub.connectUsingPassword("ProiectIP2018", "ProiectIP2018-19");
             GHRepositorySearchBuilder ghRepositorySearchBuilder = gitHub.searchRepositories();
             ghRepositorySearchBuilder.language(language);
+            Object fields;
+            List<List<String>> allSubsets = AllSubsets.generateSubsets(keywords);
 
-            for(int listLength = keywords.size() - 1; listLength >= 1; listLength--) {
-                List<String> subKeywords = keywords.subList(0, listLength);
-                for (int i = 0; i < subKeywords.size(); i++)
-                    ghRepositorySearchBuilder.q(keywords.get(i));
+            for (List<String> subset : allSubsets) {
+                for (String element : subset)
+                    ghRepositorySearchBuilder.q(element);
+                for (GHRepository repo : ghRepositorySearchBuilder.list()) {
+                    repositories.add(repo);
+                }
+                try {
+                    fields = FieldUtils.readField(ghRepositorySearchBuilder, "terms", true);
+
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
-
-            for (GHRepository repo : ghRepositorySearchBuilder.list()) {
-                repositories.add(repo);
-            }
-
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -44,9 +52,6 @@ public class Crawler {
         return repositories;
     }
 
-    private void sortByKeywords(List<String> keywords){
-
-    }
 
     private void sortByCriteria(List<GHRepository> repositoryList, String filter) {
         switch (filter) {

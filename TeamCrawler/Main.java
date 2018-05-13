@@ -12,6 +12,8 @@ public class Main
         List<String> keywords = new ArrayList<>();
         keywords.add("crawler");
         keywords.add("github");
+        keywords.add("trala");
+
 
         String language = "java";
         Crawler crawler = new Crawler();

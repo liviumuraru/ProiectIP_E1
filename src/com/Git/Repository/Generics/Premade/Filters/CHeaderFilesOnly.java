@@ -1,13 +1,14 @@
 package com.Git.Repository.Generics.Premade.Filter;
 
 import com.Git.Repository.Asset;
-import com.Git.Repository.Generics.Filter;
+import com.Git.Repository.Generics.Filtering.Filter;
+import com.Git.Repository.Generics.Filtering.ListFilter;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CHeaderFilesOnly implements Filter<Asset<File>>
+public class CHeaderFilesOnly implements ListFilter<Asset<File>>
 {
     @Override
     public List<Asset<File>> accept(List<Asset<File>> input)

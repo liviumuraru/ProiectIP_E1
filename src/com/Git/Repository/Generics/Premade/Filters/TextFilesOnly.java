@@ -1,7 +1,7 @@
 package com.Git.Repository.Generics.Premade.Filter;
 
 import com.Git.Repository.Asset;
-import com.Git.Repository.Generics.Filter;
+import com.Git.Repository.Generics.Filtering.Filter;
 
 import java.io.File;
 import java.util.ArrayList;

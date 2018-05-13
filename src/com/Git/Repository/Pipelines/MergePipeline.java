@@ -1,6 +1,6 @@
 package com.Git.Repository;
 
-import com.Git.Repository.Generics.Filter;
+import com.Git.Repository.Generics.Filtering.Filter;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class MergePipeline
 {

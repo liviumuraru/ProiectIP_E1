@@ -1,7 +1,8 @@
-package com.Git.Repository.Generics.Premade.Filter;
+package com.Git.Repository.Generics.Premade.Filters;
 
 import com.Git.Repository.Asset;
 import com.Git.Repository.Generics.Filtering.Filter;
+import com.Git.Repository.Generics.Filtering.ListFilter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,5 +33,25 @@ public class TextFilesOnly implements Filter<Asset<File>>
         }
 
         return newFiles;
+    }
+
+    @Override
+    public boolean accept(Asset<File> file) {
+        int indexOfDot = file.getAsset().getName().indexOf(".");
+        if(!file.getAsset().isDirectory() && indexOfDot != -1)
+        {
+            String extension = file.getAsset().getName().substring(indexOfDot + 1,
+                    file
+                            .getAsset()
+                            .getName()
+                            .length());
+
+            System.out.println(extension);
+
+            if(extension.equals("txt"))
+                return true;
+        }
+
+        return false;
     }
 }

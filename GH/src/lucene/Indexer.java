@@ -1,10 +1,10 @@
 package lucene;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
 
+import filters.FilterFormat;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -59,7 +59,7 @@ public class Indexer
         writer.addDocument(document);
     }
 
-    public int createIndex(String dataDirPath, FileFilter filter)
+    public int createIndex(String dataDirPath, FilterFormat filter )
             throws IOException {
         //get all files in the data directory
         File[] files = new File(dataDirPath).listFiles();

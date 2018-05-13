@@ -1,4 +1,0 @@
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\requirements.txt
-requests
-grequests
-gevent

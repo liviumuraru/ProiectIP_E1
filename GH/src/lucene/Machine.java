@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import filters.TextFileFilter;
+import filters.FilterFormat;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.TermFreqVector;
@@ -66,7 +66,7 @@ public class Machine {
         indexer = new Indexer(indexDir);
         int numIndexed;
         long startTime = System.currentTimeMillis();
-        numIndexed = indexer.createIndex(dataDir, new TextFileFilter());
+        numIndexed = indexer.createIndex(dataDir, new FilterFormat( "txt" ) );
         long endTime = System.currentTimeMillis();
         indexer.close();
         System.out.println(numIndexed+" File indexed, time taken: "

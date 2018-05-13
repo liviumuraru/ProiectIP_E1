@@ -4,7 +4,8 @@ import com.Git.Repository.Asset;
 
 import java.util.List;
 
-public interface Filter<T extends Asset> extends ListFilter<T>, ElementFilter<T>
+@FunctionalInterface
+public interface ElementFilter<T extends Asset>
 {
-
+    public boolean accept(T input);
 }

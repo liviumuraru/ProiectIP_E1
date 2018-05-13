@@ -1,10 +1,9 @@
-import org.apache.commons.lang3.reflect.FieldUtils;
+
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GitHub;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.*;
 
 public class Crawler {
@@ -20,7 +19,6 @@ public class Crawler {
             GitHub gitHub = GitHub.connectUsingPassword("ProiectIP2018", "ProiectIP2018-19");
             GHRepositorySearchBuilder ghRepositorySearchBuilder = gitHub.searchRepositories();
             ghRepositorySearchBuilder.language(language);
-            Object fields;
             List<List<String>> allSubsets = AllSubsets.generateSubsets(keywords);
 
             for (List<String> subset : allSubsets) {
@@ -28,12 +26,6 @@ public class Crawler {
                     ghRepositorySearchBuilder.q(element);
                 for (GHRepository repo : ghRepositorySearchBuilder.list()) {
                     repositories.add(repo);
-                }
-                try {
-                    fields = FieldUtils.readField(ghRepositorySearchBuilder, "terms", true);
-
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
                 }
             }
         } catch (IOException e) {

@@ -1,5 +1,3 @@
-package com.company;
-
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GitHub;
@@ -14,14 +12,14 @@ public class Main
         List<String> keywords = new ArrayList<>();
         keywords.add("crawler");
         keywords.add("github");
+        keywords.add("tralsdgsda");
+
 
         String language = "java";
         Crawler crawler = new Crawler();
-        List<GHRepository> repositories = crawler.getRepos(keywords, language);
-
-        for(int i=0; i<repositories.size(); i++)
-        {
-            System.out.println(repositories.get(i).getName());
+        List<GHRepository> repositoryList = crawler.getRepos(keywords, language, CriteriaSorter.BY_STARS);
+        for(GHRepository repository : repositoryList){
+            System.out.println(repository.getName() + " + " + repository.getSvnUrl());
         }
     }
 }

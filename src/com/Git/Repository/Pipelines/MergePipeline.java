@@ -1,6 +1,8 @@
-package com.Git.Repository;
+package com.Git.Repository.Pipelines;
 
-import com.Git.Repository.Generics.Filter;
+import com.Git.Repository.Asset;
+import com.Git.Repository.Assets;
+import com.Git.Repository.Generics.Filtering.Filter;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
@@ -11,7 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class MergePipeline
 {
@@ -20,12 +21,38 @@ public class MergePipeline
     private String RepoURL;
     private Path DestinationDir;
     private String DestinationFileName;
+    private FilterSettings filterData;
 
-    private List<Filter<Asset<File>>> filters;
+    public class FilterSettings
+    {
+        private List<Filter<Asset<File>>> filters;
+
+        public FilterSettings()
+        {
+            filters = new ArrayList<>();
+        }
+
+        public void add(Filter<Asset<File>> filter)
+        {
+            filters.add(filter);
+        }
+
+        private List<Asset<File>> internal_execFilter(List<Asset<File>> files)
+        {
+            List<Asset<File>> filteredFiles = new ArrayList<>();
+
+            for(Filter<Asset<File>> f : filters)
+            {
+                filteredFiles = f.accept(files);
+            }
+
+            return filteredFiles;
+        }
+    }
 
     public MergePipeline(String userName, String repoName)
     {
-        filters = new ArrayList<>();
+        filterData = new FilterSettings();
         user = userName;
         repo = repoName;
         RepoURL = "https://github.com/" + user + "/" + repo + ".git";
@@ -33,9 +60,9 @@ public class MergePipeline
         DestinationFileName = "merged.txt";
     }
 
-    public void AddFilter(Filter<Asset<File>> filter)
+    public FilterSettings filters()
     {
-        filters.add(filter);
+        return filterData;
     }
 
     public File GetMergedFile() throws GitAPIException, IOException
@@ -62,13 +89,11 @@ public class MergePipeline
             Path p = (Path)o;
             files.add(Asset.FromFile(p.toFile()));
         }
-        // Filter the array
-        for(Filter<Asset<File>> f : filters)
-        {
-            files = f.accept(files);
-        }
 
-        File merged = Assets.MergeFiles(files, Paths.get(DestinationDir.toAbsolutePath().toString() + "/merged.txt"));
+        // delegate filtering to filterData
+        List<Asset<File>> filteredFiles = filterData.internal_execFilter(files);
+
+        File merged = Assets.MergeFiles(filteredFiles, Paths.get(DestinationDir.toAbsolutePath().toString() + "/merged.txt"));
 
         return merged;
     }

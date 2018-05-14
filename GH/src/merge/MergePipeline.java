@@ -65,7 +65,7 @@ public class MergePipeline
             Path p = (Path)o;
             files.add(Asset.FromFile(p.toFile()));
         }
-        // Filter the array
+        // Filters the array
         for(Filter<Asset<File>> f : filters)
         {
             files = f.accept(files);

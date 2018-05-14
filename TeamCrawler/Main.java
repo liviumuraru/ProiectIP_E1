@@ -12,17 +12,15 @@ public class Main
         List<String> keywords = new ArrayList<>();
         keywords.add("crawler");
         keywords.add("github");
-        keywords.add("trala");
+        keywords.add("tralsdgsda");
 
 
         String language = "java";
         Crawler crawler = new Crawler();
-        List<GHRepository> repositories = crawler.getReposList(keywords, language);
-        List<GHRepository> repositoryList = crawler.getRepos(repositories, "updated");
-        for(GHRepository repository : repositoryList)
-        {
+        List<GHRepository> repositories = crawler.getAllReposList(keywords, language);
+        List<GHRepository> repositoryList = crawler.getRepos(repositories, CriteriaSorter.BY_STARS);
+        for(GHRepository repository : repositoryList){
             System.out.println(repository.getName() + " + " + repository.getSvnUrl());
-
         }
     }
 }

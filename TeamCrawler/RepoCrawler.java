@@ -1,3 +1,5 @@
+package com.company;
+
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GitHub;
@@ -8,7 +10,9 @@ import java.util.List;
 
 public class RepoCrawler {
 
-    public static List<GHRepository> getReposList(List<String> set, String language) {
+    public final static int MAX_SIZE = 100;
+
+    public static List<GHRepository> getReposList(List<String> set, String language, int SIZE) {
 
         List<GHRepository> repositories = new ArrayList<>();
 
@@ -21,7 +25,10 @@ public class RepoCrawler {
                 ghRepositorySearchBuilder.q(element);
             }
             for (GHRepository repo : ghRepositorySearchBuilder.list()) {
+                if(SIZE==MAX_SIZE)
+                    return repositories;
                 repositories.add(repo);
+                SIZE++;
             }
 
         } catch (IOException e) {

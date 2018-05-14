@@ -1,3 +1,4 @@
+package com.company;
 
 import org.kohsuke.github.GHRepository;
 
@@ -12,13 +13,21 @@ public class Crawler {
         List<List<String>> allSubsets = AllSubsets.generateSubsets(keywords);
 
         for (List<String> subset : allSubsets) {
-            repositories.addAll(RepoCrawler.getReposList(subset, language));
+            if(repositories.size()==RepoCrawler.MAX_SIZE)
+                break;
+            repositories.addAll(RepoCrawler.getReposList(subset, language, repositories.size()));
         }
         return repositories;
     }
 
 
-    public List<GHRepository> getRepos(List<String> keywords, String language, int filter) {
+    public List<GHRepository> getRepos(List<String> keywords, String language, int filter) throws Exception {
+
+        if(keywords.isEmpty())
+            throw new Exception("No keywords were found.");
+        if(language==null)
+            throw new Exception("Language field cannot be empty.");
+
         List<GHRepository> repositories = new ArrayList<>(MAX_REPOS);
         List<GHRepository> repositoryList = getAllReposList(keywords, language);
         CriteriaSorter.sortByCriteria(repositoryList, filter);

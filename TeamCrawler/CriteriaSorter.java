@@ -1,3 +1,5 @@
+package com.company;
+
 import org.kohsuke.github.GHRepository;
 
 import java.io.IOException;

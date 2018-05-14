@@ -18,8 +18,9 @@ public class Crawler {
     }
 
 
-    public List<GHRepository> getRepos(List<GHRepository> repositoryList, int filter) {
-        List<GHRepository> repositories = new ArrayList<>(10);
+    public List<GHRepository> getRepos(List<String> keywords, String language, int filter) {
+        List<GHRepository> repositories = new ArrayList<>(MAX_REPOS);
+        List<GHRepository> repositoryList = getAllReposList(keywords, language);
         CriteriaSorter.sortByCriteria(repositoryList, filter);
         for (int i = 0; i < MAX_REPOS && i < repositoryList.size(); i++) {
             repositories.add(repositoryList.get(i));

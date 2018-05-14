@@ -17,8 +17,7 @@ public class Main
 
         String language = "java";
         Crawler crawler = new Crawler();
-        List<GHRepository> repositories = crawler.getAllReposList(keywords, language);
-        List<GHRepository> repositoryList = crawler.getRepos(repositories, CriteriaSorter.BY_STARS);
+        List<GHRepository> repositoryList = crawler.getRepos(keywords, language, CriteriaSorter.BY_STARS);
         for(GHRepository repository : repositoryList){
             System.out.println(repository.getName() + " + " + repository.getSvnUrl());
         }

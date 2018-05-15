@@ -1,0 +1,5 @@
+replace all other jars with these ones , they are all you need
+
+lucene-core-4.10.2.jar
+commons-math-2.0.jar
+lucene-analyzers-common-4.10.2.jar

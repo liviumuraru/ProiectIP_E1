@@ -2,7 +2,7 @@ package merge;
 
 import asset.Asset;
 import asset.Assets;
-import filters.Filter;
+import filter.filterInterfaces.Filter;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 
@@ -21,24 +21,50 @@ public class MergePipeline
     private String RepoURL;
     private Path DestinationDir;
     private String DestinationFileName;
+    private FilterSettings filterData;
     private long counter;
 
-    private List< Filter< Asset<File> > > filters;
-
-    public MergePipeline(String userName, String repoName, long counter)
+    public class FilterSettings
     {
-        filters = new ArrayList<>();
+        private List<Filter<Asset<File>>> filters;
+
+        public FilterSettings()
+        {
+            filters = new ArrayList<>();
+        }
+
+        public void add(Filter<Asset<File>> filter)
+        {
+            filters.add(filter);
+        }
+
+        private List<Asset<File>> internal_execFilter(List<Asset<File>> files)
+        {
+            List<Asset<File>> filteredFiles = new ArrayList<>();
+
+            for(Filter<Asset<File>> f : filters)
+            {
+                filteredFiles = f.accept(files);
+            }
+
+            return filteredFiles;
+        }
+    }
+
+    public MergePipeline(String userName, String repoName, long counter )
+    {
+        filterData = new FilterSettings();
         user = userName;
         repo = repoName;
         RepoURL = "https://github.com/" + user + "/" + repo + ".git";
-        DestinationDir = Paths.get("git/" + repo );
+        DestinationDir = Paths.get("git/" + repo);
         this.counter = counter;
         DestinationFileName = "merged" + this.counter + ".txt";
     }
 
-    public void AddFilter(Filter<Asset<File>> filter)
+    public FilterSettings filters()
     {
-        filters.add(filter);
+        return filterData;
     }
 
     public File GetMergedFile() throws GitAPIException, IOException
@@ -65,13 +91,11 @@ public class MergePipeline
             Path p = (Path)o;
             files.add(Asset.FromFile(p.toFile()));
         }
-        // Filters the array
-        for(Filter<Asset<File>> f : filters)
-        {
-            files = f.accept(files);
-        }
 
-        File merged = Assets.MergeFiles(files, Paths.get( "mergedFiles/merged" + counter + ".txt" ));
+        // delegate filtering to filterData
+        List<Asset<File>> filteredFiles = filterData.internal_execFilter(files);
+
+        File merged = Assets.MergeFiles(filteredFiles, Paths.get("mergedFiles/merged" + counter + ".txt" ));
 
         return merged;
     }

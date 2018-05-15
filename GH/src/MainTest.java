@@ -1,5 +1,8 @@
-import crawler.Crawler;
-import filters.TextFilesOnly;
+import crawler.concreteCrawler.Crawler;
+import crawler.sort.CriteriaSorter;
+import filter.concreteFilters.CHeaderFilesOnly;
+import filter.concreteFilters.TextFilesOnly;
+import filter.filterTypes.ORFilter;
 import lucene.Machine;
 import merge.MergePipeline;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -49,7 +52,7 @@ public class MainTest
             try
             {
                 MergePipeline mergePipeline = new MergePipeline( repository.getOwnerName(), repository.getName(), counter++ );
-                mergePipeline.AddFilter( new TextFilesOnly() );
+                mergePipeline.filters().add(new ORFilter<>(new CHeaderFilesOnly(), new TextFilesOnly()));
 
                 mergedFiles.add( mergePipeline.GetMergedFile() );
             }
@@ -73,8 +76,16 @@ public class MainTest
         String language = "java";
 
         // create crawler and get related repos
-        Crawler crawler = new Crawler();
-        List<GHRepository > repositories = crawler.getRepos(keywords, language);
+        Crawler crawler = new Crawler( 3 );
+        List<GHRepository > repositories = null;
+        try
+        {
+            repositories = crawler.getRepos(keywords, language, CriteriaSorter.BY_STARS);
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }
 
         // print repos
         printRepos( repositories );
@@ -86,7 +97,13 @@ public class MainTest
         printMergedFiles( mergedFiles );
 
         // create lucene machine
-        Machine machine = new Machine( "C:\\Users\\flori\\Documents\\ProiectIP_E1\\GH\\index", "C:\\Users\\flori\\Documents\\ProiectIP_E1\\GH\\mergedFiles" );
-        machine.startMachine( "C:\\Users\\flori\\Documents\\ProiectIP_E1\\GH\\index" );
+        try
+        {
+            Machine.getCosineSimilarity();
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
     }
 }

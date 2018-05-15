@@ -1,6 +1,1 @@
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\IDLog.txt
-16000091
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\IDLog1.txt
-28232508
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\test.txt
-StructureParser.java
+mergedFiles\merged0.txt

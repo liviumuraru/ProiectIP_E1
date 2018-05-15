@@ -12,10 +12,13 @@ public class Assets
         mergedFiles.createNewFile();
         BufferedWriter bw = new BufferedWriter(new FileWriter(mergedFiles));
 
+        if ( fileList.isEmpty() )
+            bw.write( destination.toString() );
         for (Asset<File> fileAsset : fileList)
         {
             BufferedReader br = new BufferedReader(new FileReader(fileAsset.getAsset()));
             String text = null;
+
             bw.write(fileAsset.getAsset().getAbsolutePath());
             bw.newLine();
             while ((text = br.readLine()) != null)

@@ -135,4 +135,74 @@ public class Machine {
 
         return totalTfv;
     }
+	
+	    public void cosineSimilarity(IndexReader indexReader, List<Integer> docNumbers, String[] fieldNames, Set<String> stopWords) throws IOException, ParseException {
+
+        Map<String, Integer> termFrequencyMap = getTermFrequencyMap(indexReader, docNumbers, fieldNames, stopWords);
+        Set keys = termFrequencyMap.keySet();
+
+        for (Integer docNum : docNumbers) {
+
+            for(int i=0;i<docNumbers.size();i++){
+                for(int j=0;j<docNumbers.size();j++){
+                    if(i==j) continue;
+
+                    for (String fieldName : fieldNames) {
+                        TermFreqVector tfv1 = indexReader.getTermFreqVector(i, fieldName);
+                        TermFreqVector tfv2 = indexReader.getTermFreqVector(j, fieldName);
+                        if (tfv1 == null || tfv2 == null) {
+                            continue;
+                        }
+
+                        String terms1[] = tfv1.getTerms();
+                        String terms2[] = tfv2.getTerms();
+
+                        searcher = new Searcher(indexDir);
+                        int cosine=0;
+                        float a=0;
+                        float b=0;
+                        float ap=0;
+                        float bp=0;
+                        float nmr=0;
+                        float nmi=0;
+
+                        String path1="";
+                        String path2="";
+
+                        for(String term : terms1){
+
+                            TopDocs hits = searcher.search(term);
+
+                            for (ScoreDoc scoreDoc : hits.scoreDocs) {
+                                Document doc = searcher.getDocument(scoreDoc);
+                                if(doc == indexReader.document(i)){
+                                    a=scoreDoc.score;
+                                    ap += a*a;
+                                    path1=doc.get(LuceneConstants.FILE_PATH);
+                                }
+                                if(doc == indexReader.document(j)){
+                                    b=scoreDoc.score;
+                                    bp += b*b;
+
+                                    path2=doc.get(LuceneConstants.FILE_PATH);
+                                }
+
+                                }
+                            nmr+=a*b;
+
+                        }
+                        nmi=ap*bp;
+
+
+                        System.out.println(nmr+ " " +nmi + " for files : \n\t " + path1+"\n\t"+path2+'\n');
+
+                        
+
+                }
+            }
+
+
+            }
+        }
+    }
 }

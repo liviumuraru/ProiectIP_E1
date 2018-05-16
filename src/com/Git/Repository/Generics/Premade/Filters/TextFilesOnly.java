@@ -25,8 +25,6 @@ public class TextFilesOnly implements Filter<Asset<File>>
                                 .getName()
                                 .length());
 
-                System.out.println(extension);
-
                 if(extension.equals("txt"))
                     newFiles.add(file);
             }
@@ -45,8 +43,6 @@ public class TextFilesOnly implements Filter<Asset<File>>
                             .getAsset()
                             .getName()
                             .length());
-
-            System.out.println(extension);
 
             if(extension.equals("txt"))
                 return true;

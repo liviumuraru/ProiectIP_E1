@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class AllSubsetsTest {
 
     @Test
-    public void generateSubsets() {
+    public void generateSubsets1() {
         List<String> elements = new ArrayList<>();
         elements.add("a");
         elements.add("b");
@@ -56,4 +56,17 @@ public class AllSubsetsTest {
 
         assertEquals(expResult, result);
     }
+
+    @Test
+    public void generateSubsets2() {
+        List<String> elements = new ArrayList<>();
+        AllSubsets instance = new AllSubsets();
+
+        List<List<String>> expResult = new ArrayList<>();
+
+        List<List<String>> result = instance.generateSubsets(elements);
+
+        assertEquals(expResult, result);
+    }
+
 }

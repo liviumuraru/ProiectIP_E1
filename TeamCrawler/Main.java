@@ -20,7 +20,7 @@ public class Main
 
         List<GHRepository> repositoryList = new ArrayList<>();
         try {
-            repositoryList = crawler.getRepos(keywords, language, CriteriaSorter.BY_STARS);
+            repositoryList = crawler.getRepos(keywords, language, CriteriaSorter.BY_KEYWORDS);
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -24,7 +24,6 @@ public class JavaFilesOnly implements Filter<Asset<File>>
                                 .getName()
                                 .length());
 
-                System.out.println(extension);
 
                 if(extension.equals("java"))
                     newFiles.add(file);
@@ -45,7 +44,6 @@ public class JavaFilesOnly implements Filter<Asset<File>>
                             .getName()
                             .length());
 
-            System.out.println(extension);
 
             if(extension.equals("java"))
                 return true;

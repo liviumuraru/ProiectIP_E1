@@ -19,23 +19,13 @@ public class Assets
             bw.newLine();
             while ((text = br.readLine()) != null)
             {
-                System.out.println(text);
                 bw.write(text);
                 bw.newLine();
             }
+            bw.write("END FILE " + fileAsset.getAsset().getAbsolutePath());
             br.close();
         }
         bw.close();
-
-//        //print merge file
-//        BufferedReader br = new BufferedReader(new FileReader(mergedFiles));
-//        String text = null;
-//        while ((text = br.readLine()) != null)
-//        {
-//        //    System.out.println(text); ????
-//                bw.write(text);
-//                bw.newLine();
-//        }
 
         return mergedFiles;
     }

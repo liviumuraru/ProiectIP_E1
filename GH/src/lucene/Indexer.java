@@ -14,6 +14,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.apache.lucene.analysis.Analyzer;
@@ -93,10 +94,10 @@ public class Indexer {
      */
     public String getAllText(File f) throws IOException {
         String textFileContent = "";
+        for (String line : Files.readAllLines(Paths.get(f.getAbsolutePath()), StandardCharsets.ISO_8859_1)) {
+        	textFileContent += line;
+        }        	
 
-        for (String line : Files.readAllLines(Paths.get(f.getAbsolutePath()))) {
-            textFileContent += line;
-        }
         return textFileContent;
     }
 }

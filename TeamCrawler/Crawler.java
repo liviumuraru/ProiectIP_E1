@@ -8,29 +8,30 @@ public class Crawler {
 
     private final static int MAX_REPOS = 10;
 
-    public List<GHRepository> getAllReposList(List<String> keywords, String language) {
-        List<GHRepository> repositories = new ArrayList<>();
+    private List<GHRepository> getAllReposList(List<String> keywords, List<String> languages) {
         List<List<String>> allSubsets = AllSubsets.generateSubsets(keywords);
+        List<GHRepository> repositories = new ArrayList<>();
 
         for (List<String> subset : allSubsets) {
-            if(repositories.size()==RepoCrawler.MAX_SIZE)
+            if(repositories.size()>=RepoCrawler.MAX_SIZE)
                 break;
-            repositories.addAll(RepoCrawler.getReposList(subset, language, repositories.size()));
+            repositories.addAll(RepoCrawler.getReposList(subset, languages, repositories.size()));
         }
         return repositories;
     }
 
 
-    public List<GHRepository> getRepos(List<String> keywords, String language, int filter) throws Exception {
+    public List<GHRepository> getRepos(List<String> keywords, List<String> languages) throws CrawlerException {
 
-        if(keywords.isEmpty())
-            throw new Exception("No keywords were found.");
-        if(language==null)
-            throw new Exception("Language field cannot be empty.");
+        if(keywords.isEmpty()) {
+            throw new CrawlerException("No keywords were found.");
+        }
+        if(languages.isEmpty()) {
+            throw new CrawlerException("Language field cannot be empty.");
+        }
 
         List<GHRepository> repositories = new ArrayList<>(MAX_REPOS);
-        List<GHRepository> repositoryList = getAllReposList(keywords, language);
-        CriteriaSorter.sortByCriteria(repositoryList, filter);
+        List<GHRepository> repositoryList = getAllReposList(keywords, languages);
         for (int i = 0; i < MAX_REPOS && i < repositoryList.size(); i++) {
             repositories.add(repositoryList.get(i));
         }

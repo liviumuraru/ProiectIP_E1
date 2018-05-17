@@ -6,14 +6,13 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
-public class CriteriaSorter {
+public class CriteriaSorter{
     public final static int BY_STARS = 1;
     public final static int BY_FOLLOWERS = 2;
     public final static int BY_CREATION_DATE = 3;
     public final static int BY_LAST_UPDATE_DATE = 4;
-    public final static int BY_KEYWORDS = 5;
 
-    public static void sortByCriteria(List<GHRepository> repositoryList, int filter) {
+    public static void sortByCriteria(List<GHRepository> repositoryList, int filter) throws CrawlerSorterException {
         switch (filter) {
             case BY_STARS:
                 repositoryList.sort(new Comparator<GHRepository>() {
@@ -67,9 +66,8 @@ public class CriteriaSorter {
                     }
                 }.reversed());
                 break;
-            case BY_KEYWORDS: break;
             //TODO:addException for default case
-            // default:
+             default: throw new CrawlerSorterException("Filter non-existent.");
         }
     }
 }

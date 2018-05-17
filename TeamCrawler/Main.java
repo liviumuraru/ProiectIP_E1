@@ -1,10 +1,7 @@
 package com.company;
 
 import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GHRepositorySearchBuilder;
-import org.kohsuke.github.GitHub;
 
-import java.io.IOException;
 import java.util.*;
 
 public class Main
@@ -15,12 +12,14 @@ public class Main
         keywords.add("crawler");
         keywords.add("github");
 
-        String language = "java";
+        List<String> languages = new ArrayList<>();
+        languages.add("java");
+        languages.add("c#");
         Crawler crawler = new Crawler();
 
         List<GHRepository> repositoryList = new ArrayList<>();
         try {
-            repositoryList = crawler.getRepos(keywords, language, CriteriaSorter.BY_KEYWORDS);
+            repositoryList = crawler.getRepos(keywords, languages);
         }
         catch (Exception e) {
             e.printStackTrace();

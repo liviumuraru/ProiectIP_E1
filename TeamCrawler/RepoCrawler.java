@@ -12,23 +12,25 @@ public class RepoCrawler {
 
     public final static int MAX_SIZE = 100;
 
-    public static List<GHRepository> getReposList(List<String> set, String language, int SIZE) {
+    public static List<GHRepository> getReposList(List<String> set, List<String> languages, int repoListSize) {
 
         List<GHRepository> repositories = new ArrayList<>();
 
         try {
             GitHub gitHub = GitHub.connectUsingPassword("ProiectIP2018", "ProiectIP2018-19");
             GHRepositorySearchBuilder ghRepositorySearchBuilder = gitHub.searchRepositories();
-            ghRepositorySearchBuilder.language(language);
+            for(String language : languages)
+                ghRepositorySearchBuilder.language(language);
 
             for (String element : set) {
                 ghRepositorySearchBuilder.q(element);
             }
+            ghRepositorySearchBuilder.sort(GHRepositorySearchBuilder.Sort.STARS);
             for (GHRepository repo : ghRepositorySearchBuilder.list()) {
-                if(SIZE==MAX_SIZE)
+                if(repoListSize>=MAX_SIZE)
                     return repositories;
                 repositories.add(repo);
-                SIZE++;
+                repoListSize++;
             }
 
         } catch (IOException e) {

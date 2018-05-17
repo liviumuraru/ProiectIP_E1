@@ -27,7 +27,7 @@ public class Crawler {
             throw new CrawlerException("No keywords were found.");
         }
         if(languages.isEmpty()) {
-            throw new CrawlerException("Language field cannot be empty.");
+            throw new CrawlerException("No languages were found.");
         }
 
         List<GHRepository> repositories = new ArrayList<>(MAX_REPOS);

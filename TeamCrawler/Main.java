@@ -13,8 +13,8 @@ public class Main
         keywords.add("github");
 
         List<String> languages = new ArrayList<>();
-        languages.add("java");
-        languages.add("c#");
+       // languages.add("java");
+       // languages.add("c#");
         Crawler crawler = new Crawler();
 
         List<GHRepository> repositoryList = new ArrayList<>();

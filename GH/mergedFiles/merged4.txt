@@ -1,0 +1,2327 @@
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\GithubDungeonCrawler.txt
+Prosjekt GITHUB
+
+Prosjekt Navn: GithubCrawl
+Genre: DungeonCrawler
+
+Story: Frivillig inn for å komme opp til overflaten. Fanget av Dungeon keeper
+som lagde Dungeonen. Vet ikke hvordan overflaten ser ut. Har mulighet til å ta med seg flere "escapers".
+
+Verden: Generata verden, men innenfor temaer(De første levlene har samme tema som start byen) (Når man kommer høyere opp, så vil levlene se rarere ut). Flere veier opp.
+Checkpoints i byer. 
+
+Graphics: 2d så langt.
+
+Combat: Turn-based.
+
+Noe stress system som gjør at man må passe på squaden. 
+De du tar med har forskjellige factions som ikke liker hverandre.
+Og forskjellige egenskaper.
+
+Elementer;
+Alchemy: Mikse tre til fire ting for å få en potion eller kjemikalier.
+Enchanting: Runer som blir brukt på objekter som oppgraderer dem.
+Thaumografi: Gjøre metaler til sin vilje og lage våpner og redskaper av mineralene rundt seg.
+Energi: Items for å bruke noe avansert energi.
+
+---------------Alchemy----------------
+Gathering: 
+Processing(Heating,Drying):
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\res\world\world1.txt
+25 20
+100 100
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1
+1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1
+1 1 1 2 2 2 2 2 2 2 2 2 0 0 0 0 2 2 2 1 1 1 1 1 1
+1 1 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 2 1 1 1 1 1 1 1
+1 2 2 0 0 0 0 0 0 0 0 0 0 0 2 2 2 2 2 1 1 1 1 1 1
+1 1 2 2 0 0 0 0 0 0 0 0 0 0 0 2 2 2 2 1 1 1 1 1 1
+1 1 1 2 2 2 2 2 2 0 0 0 0 0 0 2 2 2 2 2 1 1 1 1 1
+1 1 1 1 1 1 1 2 2 2 0 0 0 0 0 0 0 2 2 1 1 1 1 1 1
+1 1 1 1 1 1 1 2 2 2 0 0 0 0 0 0 0 2 2 1 1 1 1 1 1
+1 1 1 1 1 2 2 2 0 0 0 0 0 0 0 0 0 2 2 2 1 1 1 1 1
+1 1 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 2 2 1 1 1 1 1
+1 1 2 2 2 2 2 0 0 0 0 0 2 0 0 0 0 2 2 2 2 2 1 1 1
+1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1
+1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1
+1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 1 1 2 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\creatures\Creature.java
+package dungeon.crawler.Engine.entities.creatures;
+
+import java.awt.Graphics;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.entities.Entity;
+import dungeon.crawler.Engine.gfx.Assets;
+import dungeon.crawler.Engine.tiles.Tile;
+
+public abstract class Creature extends Entity{
+	
+	
+	public static final float DEAFAULT_SPEED = 1.0f;
+	public static final int DEAFAULT_CREATURE_WIDTH = 62,
+							DEAFAULT_CREATURE_HEIGHT = 96;
+	
+	protected float speed;
+	protected float xMove, yMove;
+	
+	
+	public Creature(Handler handler, float x, float y, int width, int height) {
+		super(handler, x, y, width, height);
+		
+		speed = DEAFAULT_SPEED;
+		xMove = 0;
+		yMove = 0;
+
+	}
+	
+	public void move(){
+		if(!CheckEntityCollisions(xMove, 0f))
+			moveX();
+		if(!CheckEntityCollisions(0f, yMove))
+			moveY();
+		
+	}
+	
+	public void moveX(){
+		if(xMove > 0){//Moving right	
+			int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TILEWIDTH;
+			
+			if(!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT )&&
+				!collisionWithTile(tx, (int) (y + bounds.y + bounds.height) /Tile.TILEHEIGHT)){
+				x += xMove;
+			}else{
+				x = tx * Tile.TILEWIDTH - bounds.x - bounds.width - 1;
+			}
+			
+		}else if(xMove < 0){//Moving left
+			int tx =  (int) (x + xMove + bounds.x) / Tile.TILEWIDTH;
+			
+			if(!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TILEHEIGHT )&&
+					!collisionWithTile(tx, (int) (y + bounds.y + bounds.height) /Tile.TILEHEIGHT)){
+					x += xMove;
+				}else{
+					x = tx * Tile.TILEWIDTH + Tile.TILEWIDTH - bounds.x;
+				}
+		}
+			
+	}
+	
+	public void moveY(){
+		if(yMove < 0){//up
+			int ty = (int) (y + yMove + bounds.y) / Tile.TILEHEIGHT;
+			
+			if(!collisionWithTile((int) (x + bounds.x) / Tile.TILEWIDTH, ty) &&
+					!collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)){
+				y += yMove;
+			}else{
+				y = ty *Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.y;
+			}
+			
+		}else if(yMove > 0){//Down
+			int ty = (int) (y + yMove + bounds.y + bounds.height) / Tile.TILEHEIGHT;
+			
+			if(!collisionWithTile((int) (x + bounds.x) /Tile.TILEWIDTH, ty) &&
+					!collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TILEWIDTH, ty)){
+				y += yMove;
+			}else{
+				y = ty * Tile.TILEHEIGHT - bounds.y - bounds.height -1;
+			}
+		}
+	}
+	
+	protected boolean collisionWithTile(int x, int y){
+		return handler.getWorld().getTile(x, y).isSolid();
+	}
+	
+	
+	//Getters and Setters
+	
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+	public float getxMove() {
+		return xMove;
+	}
+
+	public void setxMove(float xMove) {
+		this.xMove = xMove;
+	}
+
+	public float getyMove() {
+		return yMove;
+	}
+
+	public void setyMove(float yMove) {
+		this.yMove = yMove;
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\creatures\Player.java
+package dungeon.crawler.Engine.entities.creatures;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.Inventory.Inventory;
+import dungeon.crawler.Engine.entities.Entity;
+import dungeon.crawler.Engine.gfx.Animation;
+import dungeon.crawler.Engine.gfx.Assets;
+
+public class Player extends Creature{
+	
+	// Animation
+	private Animation animDown, animUp, animLeft, animRight, playerDownStand, playerUpStand, playerLeftStand, playerRightStand, playerAUp,
+					  playerADown, playerALeft, playerARight;
+	// MoventSpeed
+	private float run = 2.0f, walk = 1.0f;
+	boolean runner = false;
+	private int timer = 500, timermod = 250;
+	// Attack timer
+	private long lastAttackTimer, attackCooldown = 800, attackTimer = attackCooldown ;
+	// Inventory
+	private Inventory inventory;
+	
+	public Player(Handler handler, float x, float y) {
+		super(handler, x, y, Creature.DEAFAULT_CREATURE_WIDTH, Creature.DEAFAULT_CREATURE_HEIGHT);
+		
+		bounds.x = 19;
+		bounds.y = 60;
+		bounds.width = 24;
+		bounds.height = 35;
+		
+		// Animation
+		animDown = new Animation(timer, Assets.playerDown); 
+		animUp = new Animation(timer, Assets.playerup);
+		animLeft = new Animation(timer, Assets.playerLeft);
+		animRight = new Animation(timer, Assets.playerRight);
+		playerDownStand = new Animation(timer, Assets.PlayerDownStill);
+		playerUpStand = new Animation(timer, Assets.PlayerUpStill);
+		playerLeftStand = new Animation(timer, Assets.PlayerLeftStill);
+		playerRightStand = new Animation(timer, Assets.PlayerRightStill);
+		playerAUp = new Animation(timer, Assets.playerAUp);
+		playerADown = new Animation(timer, Assets.playerADown);
+		playerALeft = new Animation(timer, Assets.playerALeft);
+		playerARight = new Animation(timer, Assets.playerARight);
+		
+		inventory = new Inventory(handler);
+	}
+	
+	
+	public void tick() {
+		getInput();
+		
+		
+		
+		// Animation
+		animDown.tick();
+		animUp.tick();
+		animLeft.tick();
+		animRight.tick();
+		playerDownStand.tick();
+		playerUpStand.tick();
+		playerLeftStand.tick();
+		playerRightStand.tick();
+		// animEnd
+		
+		// Movement
+		move();
+		handler.getgameCamera().centerOnEntity(this);
+		runner=false;
+		if(speed != walk)
+			speed = 1.0f;
+		if(timer != 500)
+			timer = 500;
+		
+		// Attack
+		checkAttack();
+		
+		// Inventory
+		inventory.tick();
+	}
+
+	public void checkAttack(){
+		attackTimer += System.currentTimeMillis() - lastAttackTimer;
+		lastAttackTimer = System.currentTimeMillis();
+		if(attackTimer < attackCooldown)
+			return;
+		
+		if(inventory.isActive())
+			return;
+		
+		Rectangle cb = getCollisionBounds(0, 0);
+		Rectangle ar = new Rectangle();
+		int arSize = 20;
+		ar.width = arSize;
+		ar.height = arSize;
+		
+		if(handler.getkeyManager().aUp){
+			ar.x = cb.x + cb.width / 2 - arSize / 2;
+			ar.y = cb.y - arSize;
+		}else if(handler.getkeyManager().aDown){
+			ar.x = cb.x + cb.width / 2 - arSize / 2;
+			ar.y = cb.y + cb.height;
+		}else if(handler.getkeyManager().aLeft){
+			ar.x = cb.x - arSize;
+			ar.y = cb.y + cb.height / 2 - arSize / 2;
+		}else if(handler.getkeyManager().aRight){
+			ar.x = cb.x + cb.width;
+			ar.y = cb.y + cb.height / 2 - arSize / 2;
+		}else{
+			return;
+		}
+		
+		attackTimer = 0;
+		
+		for(Entity e : handler.getWorld().getEntityManager().getEntities()){
+			if(e.equals(this))
+				continue;
+			if(e.getCollisionBounds(0, 0).intersects(ar)){
+				e.hurt(1);
+				return;
+			}
+		}
+	}
+	
+	@Override
+	public void die(){
+		System.out.println("You lose");
+	}
+	
+	private void getInput() {
+		xMove = 0;
+		yMove = 0;
+		
+		if(inventory.isActive())
+			return;
+		
+		if(handler.getkeyManager().shift)
+			runner = true;
+		if(runner != false)
+			speed+=run;
+			timer= -timermod;
+		if(handler.getkeyManager().up)
+			yMove = -speed;
+		if(handler.getkeyManager().down)
+			yMove = +speed;
+		if(handler.getkeyManager().left)
+			xMove = -speed;
+		if(handler.getkeyManager().right)
+			xMove = +speed;
+	}
+	
+	public void render(Graphics g){
+		g.drawImage(getCurrentAnimationFrame(), (int) (x - handler.getgameCamera().getxOffset()), (int) (y - handler.getgameCamera().getyOffset()), width, height, null);
+		//g.setColor(Color.red);
+		//g.fillRect((int) (x + bounds.x - handler.getgameCamera().getxOffset()),(int) (y + bounds.y - handler.getgameCamera().getyOffset()),bounds.width, bounds.height);
+	}
+	
+	public void postRender(Graphics g){
+		inventory.render(g);
+	}
+	
+	private BufferedImage getCurrentAnimationFrame(){
+		if(xMove > 0){
+			return animRight.getCurrentFrame();
+		} else if(xMove < 0){
+			return animLeft.getCurrentFrame();
+		}else if(yMove > 0){
+			return animDown.getCurrentFrame();
+		}else if(yMove < 0){
+			return animUp.getCurrentFrame();
+		}else 
+			return playerDownStand.getCurrentFrame();
+	}
+
+	// Getters and Setters
+	
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\Entity.java
+package dungeon.crawler.Engine.entities;
+
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import Engine.Handler;
+
+public abstract class Entity {
+	
+	public static final int DEAFAULT_HEALTH = 4;
+	
+	
+	protected Handler handler;
+	protected float x, y;
+	protected int width, height;
+	protected int health;
+	protected Rectangle bounds;
+	protected boolean active = true;
+	
+	
+	public Entity(Handler handler, float x, float y, int width, int height){
+		this.handler = handler;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		health = DEAFAULT_HEALTH;
+		
+		bounds = new Rectangle(0, 0, width, height);
+	}
+	public abstract void tick();
+	
+	public abstract void render(Graphics g);
+	
+	public abstract void die();
+	
+	public void hurt(int amt){
+		health -= amt;
+		if(health <= 0){
+			active = false;
+			die();
+			}
+	}
+	
+	public float getX() {
+		return x;
+	}
+	
+	public boolean CheckEntityCollisions(float xOffset, float yOffset){
+		for(Entity e : handler.getWorld().getEntityManager().getEntities()){
+			if(e.equals(this))
+				continue;
+			if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)))
+				return true;
+		}
+		return false;
+	}
+	
+	public Rectangle getCollisionBounds(float xOffset, float yOffset){
+		return new Rectangle ((int) (x + bounds.x + xOffset), (int)(y + bounds.y + yOffset), bounds.width, bounds.height);
+	}
+
+	//Getters and Setters
+	public int getHealth() {
+		return health;
+	}
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\EntityManager.java
+package dungeon.crawler.Engine.entities;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.entities.creatures.Player;
+
+public class EntityManager {
+	
+	private Handler handler;
+	private Player player;
+	private ArrayList<Entity> entities;
+	private Comparator<Entity> renderSorter = new Comparator<Entity>(){
+
+		@Override
+		public int compare(Entity a, Entity b) {
+			if(a.getY() + a.getHeight() < b.getY() + b.height)
+				return -1;
+			return +1;
+		}
+		
+	};
+	
+	public EntityManager(Handler handler, Player player){
+		this.handler = handler;
+		this.player = player;
+		entities = new ArrayList<Entity>();
+		addEntity(player);
+	}
+
+	public void tick(){
+		Iterator<Entity> it = entities.iterator();
+		while(it.hasNext()){
+			Entity e = it.next();
+			e.tick();
+			if(!e.isActive())
+				it.remove();
+		}
+		entities.sort(renderSorter);
+	}
+	
+	public void render(Graphics g){
+		for(Entity e : entities){
+			e.render(g);
+		}
+		player.postRender(g);
+	}
+	
+	public void addEntity(Entity e){
+		entities.add(e);
+	}
+	
+	//Getters and Setters
+	
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public ArrayList<Entity> getEntities() {
+		return entities;
+	}
+
+	public void setEntities(ArrayList<Entity> entities) {
+		this.entities = entities;
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\statics\Rock.java
+package dungeon.crawler.Engine.entities.statics;
+
+import java.awt.Graphics;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.Items.Items;
+import dungeon.crawler.Engine.gfx.Assets;
+import dungeon.crawler.Engine.tiles.Tile;
+
+public class Rock extends StaticEntity{
+
+	public Rock(Handler handler, float x, float y) {
+		super(handler, x, y, Tile.TILEWIDTH * 2, Tile.TILEHEIGHT * 2);
+		
+		bounds.x = 10;
+		bounds.y = (int) (height / 1.5f);
+		bounds.width = width - 20;
+		bounds.height = (int) (height - height / 1.5f); 
+	}
+
+	@Override
+	public void tick() {
+		
+	}
+	
+	@Override
+	public void die(){
+		handler.getWorld().getItemManager().addItems(Items.rockItem.createNew((int)x, (int)y));
+	}
+	
+	@Override
+	public void render(Graphics g) {
+		g.drawImage(Assets.rock, (int) (x - handler.getgameCamera().getxOffset()), (int) (y - handler.getgameCamera().getyOffset()), width, height, null);
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\statics\StaticEntity.java
+package dungeon.crawler.Engine.entities.statics;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.entities.Entity;
+
+public abstract class StaticEntity extends Entity{
+
+	public StaticEntity(Handler handler, float x, float y, int width, int height) {
+		super(handler, x, y, width, height);
+		
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\statics\Tree.java
+package dungeon.crawler.Engine.entities.statics;
+
+import java.awt.Graphics;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.Items.Items;
+import dungeon.crawler.Engine.gfx.Assets;
+import dungeon.crawler.Engine.tiles.Tile;
+
+public class Tree extends StaticEntity{
+
+	public Tree(Handler handler, float x, float y) {
+		super(handler, x, y, Tile.TILEWIDTH * 2, Tile.TILEHEIGHT * 4);
+		
+		bounds.x = 10;
+		bounds.y = (int) (height / 1.5f);
+		bounds.width = width - 20;
+		bounds.height = (int) (height - height / 1.5f); 
+	}
+
+	@Override
+	public void tick() {
+		
+	}
+	
+	@Override
+	public void die(){
+		handler.getWorld().getItemManager().addItems(Items.woodItem.createNew((int)x, (int)y));
+	}
+	
+	@Override
+	public void render(Graphics g) {
+		g.drawImage(Assets.tree, (int) (x - handler.getgameCamera().getxOffset()), (int) (y - handler.getgameCamera().getyOffset()), width, height, null);
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\Animation.java
+package dungeon.crawler.Engine.gfx;
+
+import java.awt.image.BufferedImage;
+
+public class Animation {
+	private int speed, index;
+	private BufferedImage[] frames;
+	private long LastTime, timer;
+	
+	public Animation(int speed, BufferedImage[] frames){
+		this.speed = speed;
+		this.frames = frames;
+		index = 0;
+		timer = 0;
+		LastTime = System.currentTimeMillis();
+	}
+	
+	public void tick(){
+		timer += System.currentTimeMillis() - LastTime;
+		LastTime = System.currentTimeMillis();
+		
+		if(timer > speed){
+			index++;
+			timer = 0;
+			if(index >= frames.length)
+				index = 0;
+		}
+	}
+	
+	public BufferedImage getCurrentFrame(){
+		return frames[index];
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\Assets.java
+package dungeon.crawler.Engine.gfx;
+
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+
+public class Assets {
+	
+	private static final int width = 32, height = 32;		//Width/height for tile sprite sheet
+	private static final int widthC = 31, heightC = 31;		//Width/height for Character sprite sheet
+	
+	public static Font font41;
+
+	public static BufferedImage[] playerDown, PlayerDownStill, PlayerUpStill, PlayerRightStill, PlayerLeftStill, playerLeft, playerRight, playerup,
+								  playerAUp, playerADown, playerALeft, playerARight;
+	public static BufferedImage Player, grass, water, sand, test4, tree, rock, wood;
+	public static BufferedImage[] btn_Start;
+	public static BufferedImage Inventory;
+	
+	public static void init(){
+		font41 = FontLoader.loadFont("res/fonts/slkscr.ttf", 41);
+		
+		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/StartButtons.png"));
+		SpriteSheet tileSheet = new SpriteSheet(ImageLoader.loadImage("/textures/First tile sheet.png"));
+		SpriteSheet sheet1 = new SpriteSheet(ImageLoader.loadImage("/textures/Charakter Base test SpriteSheet.png"));
+		
+		//Inventory
+		
+		Inventory = ImageLoader.loadImage("/textures/InventoryScreen.png");
+		
+		// sheet.crop(xrow,yrow,x,y,width,height)
+    
+		//Animation Standing
+		PlayerDownStill = new BufferedImage[1];
+		PlayerDownStill[0] = sheet1.crop(1,1,0, 0, widthC, heightC);
+		
+		PlayerUpStill = new BufferedImage[1];
+		PlayerUpStill[0] = sheet1.crop(4,1,0, 0, widthC, heightC);
+		
+		PlayerLeftStill = new BufferedImage[1];
+		PlayerLeftStill[0] = sheet1.crop(4,2,0, 0, widthC, heightC);
+		
+		PlayerRightStill = new BufferedImage[1];
+		PlayerRightStill[0] = sheet1.crop(1,2,0, 0, widthC, heightC);
+		
+		//Player Attack
+		
+		playerAUp = new BufferedImage[3];
+		
+		playerAUp[0] = sheet1.crop(1, 4, 0, 0, widthC, heightC);
+		playerAUp[1] = sheet1.crop(2, 4, 0, 0, widthC, heightC);
+		playerAUp[2] = sheet1.crop(3, 4, 0, 0, widthC, heightC);
+		
+		playerADown = new BufferedImage[3];
+		
+		playerADown[0] = sheet1.crop(4, 4, 0, 0, widthC, heightC);
+		playerADown[1] = sheet1.crop(5, 4, 0, 0, widthC, heightC);
+		playerADown[2] = sheet1.crop(6, 4, 0, 0, widthC, heightC);
+		
+		playerALeft = new BufferedImage[3];
+		
+		playerALeft[0] = sheet1.crop(1, 6, 0, 0, widthC, heightC);
+		playerALeft[1] = sheet1.crop(2, 6, 0, 0, widthC, heightC);
+		playerALeft[2] = sheet1.crop(3, 6, 0, 0, widthC, heightC);
+		
+		playerARight = new BufferedImage[3];
+		
+		playerARight[0] = sheet1.crop(1, 5, 0, 0, widthC, heightC);
+		playerARight[1] = sheet1.crop(2, 5, 0, 0, widthC, heightC);
+		playerARight[2] = sheet1.crop(3, 5, 0, 0, widthC, heightC);
+		
+		//Animation movement
+		playerDown = new BufferedImage[2];
+		
+		playerDown[0] = sheet1.crop(2,1,0, 0, widthC, heightC);
+		playerDown[1] = sheet1.crop(3,1,0, 0, widthC, heightC);
+		
+		playerup = new BufferedImage[2];
+		
+		playerup[0] = sheet1.crop(5,1,0, 0, widthC, heightC);
+		playerup[1] = sheet1.crop(6,1,0, 0, widthC, heightC);
+		
+		playerLeft = new BufferedImage[4];
+		
+		playerLeft[0] = sheet1.crop(5,2,0, 0, widthC, heightC);
+		playerLeft[1] = sheet1.crop(4,2,0, 0, widthC, heightC);
+		playerLeft[2] = sheet1.crop(6,2,0, 0, widthC, heightC);
+		playerLeft[3] = sheet1.crop(4,2,0, 0, widthC, heightC);
+		
+		playerRight = new BufferedImage[4];
+		
+		playerRight[0] = sheet1.crop(2,2,0, 0, widthC, heightC);
+		playerRight[1] = sheet1.crop(1,2,0, 0, widthC, heightC);
+		playerRight[2] = sheet1.crop(3,2,0, 0, widthC, heightC);
+		playerRight[3] = sheet1.crop(1,2, 0, 0, widthC, heightC);
+		
+		//Meny and Hud
+		
+		btn_Start = new BufferedImage[2];
+		btn_Start[0] = sheet1.crop(1,3,0, 0, widthC*2, heightC);
+		btn_Start[1] = sheet1.crop(2,3,1, 0, widthC*2, heightC);
+		
+		//World
+		
+		grass = tileSheet.crop(1, 1, 0, 0, width, height);
+		water = tileSheet.crop(2, 1, 0, 0, width, height);
+		sand = tileSheet.crop(3, 1, 0, 0, width, height);
+		test4 = tileSheet.crop(4, 3, 0, 0, width,height);
+		
+		//Static Entity
+		
+		wood = tileSheet.crop(1, 4, 0, 0, width, height);
+		tree = tileSheet.crop(1, 1, 0, 33, width, height * 2);
+		rock = tileSheet.crop(2, 2, 0, 0, width, height);
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\FontLoader.java
+package dungeon.crawler.Engine.gfx;
+
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.IOException;
+
+public class FontLoader {
+
+	public static Font loadFont(String path, float size){
+		try{
+		return Font.createFont(Font.TRUETYPE_FONT, new File(path)).deriveFont(Font.PLAIN, size);
+		}catch(FontFormatException | IOException e){
+			e.printStackTrace();
+			System.exit(1);
+		}
+		return null;
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\GameCamera.java
+package dungeon.crawler.Engine.gfx;
+
+import Engine.Handler;
+import Engine.mainEngine;
+import dungeon.crawler.Engine.entities.Entity;
+import dungeon.crawler.Engine.tiles.Tile;
+
+public class GameCamera {
+	
+	private Handler handler;
+	private float xOffset, yOffset;
+	
+	public GameCamera(Handler handler, float xOffset, float yOffset){
+		this.handler = handler;
+		this.yOffset = yOffset;
+		this.xOffset = xOffset;
+	}
+	
+	public void CheckBlankSpace(){
+		if(xOffset < 0){
+			xOffset = 0;
+		}else if(xOffset > handler.getWorld().getWidth() * Tile.TILEWIDTH - handler.getWidth()){
+			xOffset = handler.getWorld().getWidth() * Tile.TILEWIDTH - handler.getWidth();
+		}
+			
+		
+		if(yOffset < 0){
+			yOffset = 0;
+		}else if (yOffset > handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight()){
+			yOffset = handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
+		}
+	}
+	
+	public void centerOnEntity(Entity e){
+		xOffset = e.getX() - handler.getWidth()/2 + e.getWidth()/2;
+		yOffset = e.getY() - handler.getHeight()/2 + e.getHeight()/2;
+		CheckBlankSpace();
+	}
+	
+	public void move(float xAmt, float yAmt){
+		xOffset += xAmt;
+		yOffset += yAmt;
+		CheckBlankSpace();
+	}
+
+	public float getxOffset() {
+		return xOffset;
+	}
+
+	public void setxOffset(float xOffset) {
+		this.xOffset = xOffset;
+	}
+
+	public float getyOffset() {
+		return yOffset;
+	}
+
+	public void setyOffset(float yOffset) {
+		this.yOffset = yOffset;
+	}
+	
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\ImageLoader.java
+package dungeon.crawler.Engine.gfx;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class ImageLoader {
+
+		public static BufferedImage loadImage(String path){
+			try {
+				return ImageIO.read(ImageLoader.class.getResource(path));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.exit(1);
+			}
+			return null;
+		}
+	}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\SpriteSheet.java
+package dungeon.crawler.Engine.gfx;
+
+import java.awt.image.BufferedImage;
+
+public class SpriteSheet {
+
+	private BufferedImage sheet;
+
+	public SpriteSheet(BufferedImage sheet) {
+		this.sheet = sheet;
+	}
+
+	public BufferedImage crop(int xrow, int yrow, int x, int y, int width, int height) { // INT xrow/yrow is row number in that sprite sheet
+
+		try {
+			if(xrow <= 1 && yrow >= 2){
+				return sheet.getSubimage((x + xrow), (y + yrow)+(height * (yrow -1)), width , height);
+			}
+			if(xrow <= 1 && yrow >= 2){
+				return sheet.getSubimage((x + xrow) + (width * (xrow - 1)), (y + yrow), width , height);
+			}
+			if(xrow <= 1 && yrow <= 1){
+				return sheet.getSubimage(x + xrow, y + yrow, width, height);
+			}
+			else{
+				return sheet.getSubimage((x + xrow) + (width * (xrow - 1)), (y + yrow)+(height * (yrow -1)), width , height);
+			}
+		} catch (Exception e) {
+			return sheet.getSubimage(x, y, width , height);
+		}
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\Text.java
+package dungeon.crawler.Engine.gfx;
+
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+
+
+public class Text {
+	
+	public static void drawString(Graphics g, String text, int xPos, int yPos, boolean center, Color c, Font font){
+		g.setColor(c);
+		g.setFont(font);
+		int x = xPos;
+		int y = yPos;
+		if(center){
+			FontMetrics fm = g.getFontMetrics(font);
+			x = xPos - fm.stringWidth(text) / 2;
+			y = (yPos - fm.getHeight() / 2) + fm.getAscent();
+		}
+		g.drawString(text, x, y);
+	}
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\input\KeyManager.java
+package dungeon.crawler.Engine.input;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class KeyManager implements KeyListener{
+
+	private boolean[] keys, justPressed, cantPress;
+	public boolean up, down, left, right, esc, shift;
+	public boolean aUp, aDown, aLeft, aRight, attack;
+	
+	public KeyManager(){
+		keys = new boolean[256];
+		justPressed = new boolean[keys.length];
+		cantPress = new boolean[keys.length];
+	}
+	
+	public void tick(){
+		for(int i = 0; i < keys.length;i++){
+			if(cantPress[i] && !keys[i]){
+				cantPress[i] = false;
+			}else if(justPressed[i]){
+				cantPress[i] = true;
+				justPressed[i] = false;
+			}
+			if(!cantPress[i] && keys[i]){
+				justPressed[i] = true;
+			}
+		}
+		
+		up = keys[KeyEvent.VK_W];
+		down = keys[KeyEvent.VK_S];
+		left= keys[KeyEvent.VK_A];
+		right = keys[KeyEvent.VK_D];
+		esc = keys[KeyEvent.VK_ESCAPE];
+		shift = keys[KeyEvent.VK_SHIFT];
+		
+		attack = keys[KeyEvent.VK_C];
+		aUp= keys[KeyEvent.VK_UP];
+		aDown = keys[KeyEvent.VK_DOWN];
+		aLeft= keys[KeyEvent.VK_LEFT];
+		aRight = keys[KeyEvent.VK_RIGHT];
+	}
+	
+	public boolean keyJustPressed(int keyCode){
+		  if(keyCode < 0 || keyCode >= keys.length)
+		    return false;
+		  return justPressed[keyCode];
+		}
+	
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() < 0 || e.getKeyCode() >= keys.length)
+			return;
+		keys[e.getKeyCode()] = true;
+	}
+
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() < 0 || e.getKeyCode() >= keys.length)
+			return;
+		keys[e.getKeyCode()] = false;
+	}
+
+
+	public void keyTyped(KeyEvent e) {
+		
+	}
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\input\MouseManager.java
+package dungeon.crawler.Engine.input;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+import dungeon.crawler.Engine.ui.UIManager;
+
+public class MouseManager implements MouseListener, MouseMotionListener{
+
+	private boolean LeftPressed, RightPressed;
+	private int MouseX, MouseY;
+	private UIManager uiManager;
+	
+	public MouseManager(){
+		
+	}
+	
+	public void setUIManager(UIManager uiManager){
+		this.uiManager = uiManager;
+	}
+	
+	//Getters
+	
+	public boolean isLeftPressed(){
+		return LeftPressed;
+	}
+	
+	public boolean isRightPressed(){
+		return RightPressed;
+	}
+	
+	public int getMouseX(){
+		return MouseX;
+	}
+	
+	public int getMouseY(){
+		return MouseY;
+	}
+	
+	//Implemented Methods
+	
+	public void mousePressed(MouseEvent e) {
+		if(e.getButton() == MouseEvent.BUTTON1)
+			LeftPressed = true;
+		else if(e.getButton() == MouseEvent.BUTTON3)
+			RightPressed = true;
+	}
+	
+	public void mouseReleased(MouseEvent e) {
+		if(e.getButton() == MouseEvent.BUTTON1)
+			LeftPressed = false;
+		else if(e.getButton() == MouseEvent.BUTTON3)
+			RightPressed = false;
+		
+		if(uiManager != null)
+			uiManager.onMouseRelease(e);
+	}
+	
+	public void mouseMoved(MouseEvent e) {
+		MouseX = e.getX();
+		MouseY = e.getY();
+		
+		if(uiManager != null)
+			uiManager.onMouseMove(e);
+	}
+	
+	public void mouseDragged(MouseEvent e) {
+		
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		
+	}
+
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	public void mouseExited(MouseEvent e) {
+		
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\Inventory\Inventory.java
+package dungeon.crawler.Engine.Inventory;
+
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
+import java.awt.Color;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.Items.Items;
+import dungeon.crawler.Engine.gfx.Assets;
+import dungeon.crawler.Engine.gfx.Text;
+
+public class Inventory {
+	
+	private Handler handler;
+	private boolean active = false;
+	private ArrayList<Items> inventoryItems;
+	
+	private int invX=64, invY=48,
+			invWidth=674, invHeight=500,
+			invListCenterX = invX + 200,
+			invListCenterY = invY + invHeight /2 + 17,
+			invListSpacing = 70;
+	
+	private int invImageX = 505, invImageY = 80,
+			invImageWidth = 103, invImageHeight = 103;
+	
+	private int invCountX = 665, invCountY = 84;
+	
+	private int selectedItem = 0;
+	
+	public Inventory(Handler handler){
+		this.handler = handler;
+		inventoryItems = new ArrayList<Items>();
+		
+		addItem(Items.rockItem.createNew(5));
+		addItem(Items.woodItem.createNew(3));
+		addItem(Items.rockItem.createNew(5));
+		addItem(Items.woodItem.createNew(3));
+		addItem(Items.rockItem.createNew(5));
+		addItem(Items.woodItem.createNew(3));
+		addItem(Items.rockItem.createNew(5));
+		addItem(Items.woodItem.createNew(3));
+		addItem(Items.rockItem.createNew(5));
+		addItem(Items.woodItem.createNew(3));
+		addItem(Items.rockItem.createNew(5));
+		addItem(Items.woodItem.createNew(3));
+		addItem(Items.rockItem.createNew(5));
+		addItem(Items.woodItem.createNew(3));
+		addItem(Items.rockItem.createNew(5));
+		addItem(Items.woodItem.createNew(3));
+	}
+	
+	public void tick(){
+		if(handler.getkeyManager().keyJustPressed(KeyEvent.VK_I))
+		active = !active;
+			
+		if(!active)
+			return;
+		
+		if(handler.getkeyManager().keyJustPressed(KeyEvent.VK_W))
+			selectedItem--;
+		if(handler.getkeyManager().keyJustPressed(KeyEvent.VK_S))
+			selectedItem++;
+		
+		if(selectedItem < 0)
+			selectedItem = inventoryItems.size() -1;
+		else if(selectedItem >= inventoryItems.size())
+			selectedItem = 0;
+	}
+	
+	public void render(Graphics g){
+		if(!active)
+			return;
+		g.drawImage(Assets.Inventory, invX, invY, invWidth, invHeight, null);
+		
+		int len = inventoryItems.size();
+		if(len == 0)
+			return;
+		
+		for(int i = -3; i < 3;i++){
+			if(selectedItem + i < 0 || selectedItem + i >= len)
+				continue;
+			if(i == 0){
+				Text.drawString(g, " > " + inventoryItems.get(selectedItem + i).getName() + " < ", invListCenterX, invListCenterY + i * invListSpacing, true, Color.CYAN, Assets.font41);
+			}else{
+				Text.drawString(g, inventoryItems.get(selectedItem + i).getName(), invListCenterX, invListCenterY + i * invListSpacing, true, Color.WHITE, Assets.font41);
+			}
+				
+		}
+		
+		Items items = inventoryItems.get(selectedItem);
+		g.drawImage(items.getTexture(), invImageX, invImageY, invImageWidth, invImageHeight, null);
+		Text.drawString(g, Integer.toString(items.getCount()), invCountX, invCountY, true, Color.white, Assets.font41);
+}
+	
+	// Inventory Methods
+	 
+	public void addItem(Items item){
+		for(Items i : inventoryItems){
+			if(i.getId() == item.getId()){
+				i.setCount(i.getCount() + item.getCount());
+			return;
+			}
+		}
+		inventoryItems.add(item);
+	}
+	
+	// Getters and Setters
+	
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\Items\ItemManager.java
+package dungeon.crawler.Engine.Items;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import Engine.Handler;
+
+public class ItemManager {
+	
+	private Handler handler;
+	private ArrayList<Items> items;
+	
+	public ItemManager(Handler handler){
+		this.handler = handler;
+		items = new ArrayList<Items>();
+	}
+	
+	public void tick(){
+		Iterator<Items> it = items.iterator();
+		while(it.hasNext()){
+			Items i = it.next();
+			i.tick();
+			if(i.isPICKEDUP())
+				it.remove();
+		}
+	}
+	
+	public void render(Graphics g){
+		for(Items i : items)
+			i.render(g);
+	}
+	
+	public void addItems (Items i){
+		i.setHandler(handler);
+		items.add(i);
+	}
+	
+	//Getters and Setters
+	
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\Items\Items.java
+package dungeon.crawler.Engine.Items;
+
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.gfx.Assets;
+
+public class Items {
+	
+	//Handler
+	
+	public static Items[] items = new Items[256];
+	public static Items woodItem = new Items(Assets.wood, "Wood", 0);
+	public static Items rockItem = new Items(Assets.rock, "Rock", 1);
+	
+	//Class
+	
+	public static final int ITEMSWIDTH = 32, ITEMSHEIGHT = 32;
+	
+	protected Handler handler;
+	protected BufferedImage texture;
+	protected String name;
+	protected final int id;
+	
+	protected int x, y, count;
+	protected boolean PICKEDUP = false;
+	
+	protected Rectangle bounds;
+	
+	public Items(BufferedImage texture, String name, int id){
+		this.texture = texture;
+		this.name = name;
+		this.id = id;
+		count = 1;
+		
+		bounds = new Rectangle(x, y, ITEMSWIDTH, ITEMSHEIGHT);
+		
+		items[id] = this;
+	}
+	
+	public void tick(){
+		if(handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0f, 0f).intersects(bounds)){
+			PICKEDUP = true;
+			handler.getWorld().getEntityManager().getPlayer().getInventory().addItem(this);
+		}
+	}
+	
+	public void render(Graphics g){
+		if(handler == null)
+			return;
+		render(g,(int) (x - handler.getgameCamera().getxOffset()), (int) (y - handler.getgameCamera().getyOffset()));
+	}
+	
+	public void render(Graphics g, int x, int y){
+		g.drawImage(texture, x, y, ITEMSWIDTH, ITEMSHEIGHT, null);
+	}
+	
+	public Items createNew(int count){
+		Items i = new Items(texture, name, id);
+		i.setPICKEDUP(true);
+		i.setCount(count);
+		return i;
+	}
+	
+	public Items createNew(int x, int y){
+		Items i = new Items(texture, name, id);
+		i.setPosition(x, y);
+		return i;
+	}
+	
+	public void setPosition(int x, int y){
+		this.x = x;
+		this.y = y;
+		bounds.x = x;
+		bounds.y = y;
+	}
+	//Getters and Setters
+	
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public boolean isPICKEDUP() {
+		return PICKEDUP;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
+
+	public BufferedImage getTexture() {
+		return texture;
+	}
+
+	public void setTexture(BufferedImage texture) {
+		this.texture = texture;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setPICKEDUP(boolean pICKEDUP) {
+		PICKEDUP = pICKEDUP;
+	}
+	
+}	
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\states\GameState.java
+package dungeon.crawler.Engine.states;
+
+import java.awt.Graphics;
+
+import Engine.Handler;
+import dungeon.crawler.Engine.entities.creatures.Player;
+import dungeon.crawler.Engine.world.World;
+
+
+//The main game State, the graphics for the game world
+
+public class GameState extends State{
+	
+	private Player player;
+	private World world;
+	
+	public GameState(Handler handler) {
+		super(handler);
+		world = new World(handler, "res/world/world1.txt");
+		handler.setWorld(world);
+		player = new Player(handler, 100, 100);
+	}
+
+	@Override
+	public void tick() {
+		world.tick();
+		if(handler.getkeyManager().esc)
+			State.setState(handler.getmainEngine().menustate);
+	}
+
+	@Override
+	public void render(Graphics g) {
+		world.render(g);
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\states\MenuState.java
+package dungeon.crawler.Engine.states;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import Engine.Handler;
+import Engine.mainEngine;
+import dungeon.crawler.Engine.gfx.Assets;
+import dungeon.crawler.Engine.gfx.ImageLoader;
+import dungeon.crawler.Engine.ui.UIImageButton;
+import dungeon.crawler.Engine.ui.UIManager;
+import dungeon.crawler.Engine.ui.ClickListener;
+
+//The Game Menu that opens at the beginning of running the game
+
+public class MenuState extends State{
+
+	private BufferedImage Background;
+	private UIManager uiManager;
+	
+	public MenuState(final Handler handler) {
+		super(handler);
+		Background = ImageLoader.loadImage("/textures/Background1.png");
+		
+		uiManager = new UIManager(handler);
+		handler.getmouseManager().setUIManager(uiManager);
+		
+		uiManager.addObject(new UIImageButton(300, 250, 200, 100, Assets.btn_Start, new ClickListener(){
+
+			@Override
+			public void onClick() {
+				State.setState(handler.getmainEngine().gamestate);
+				
+			}}));
+			
+	}
+	
+	@Override
+	public void tick() {
+		uiManager.tick();
+	}
+
+	@Override
+	public void render(Graphics g) {
+		g.drawImage(Background, 0, 0, null);
+		uiManager.render(g);
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\states\SettingState.java
+package dungeon.crawler.Engine.states;
+
+import java.awt.Graphics;
+
+import Engine.Handler;
+import Engine.mainEngine;
+
+public class SettingState extends State{
+
+		public SettingState(Handler handler){
+			super(handler);
+		}
+
+		@Override
+		public void tick() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void render(Graphics g) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\states\State.java
+package dungeon.crawler.Engine.states;
+
+import java.awt.Graphics;
+
+import Engine.Handler;
+
+public abstract class State {
+	
+	private static State currentState = null;
+	
+	public static void setState(State state){
+		currentState = state;
+	}
+	
+	public static State getState(){
+		return currentState;
+	}
+	
+	//CLASS
+	
+	protected Handler handler;
+	
+	public State(Handler handler){
+		this.handler = handler;
+	}
+	
+	public abstract void tick();
+	
+	public abstract void render(Graphics g);
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\GrassTile.java
+package dungeon.crawler.Engine.tiles;
+
+import dungeon.crawler.Engine.gfx.Assets;
+
+public class GrassTile extends Tile{
+
+	public GrassTile(int id){
+		super(Assets.grass, id);
+	}
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\SandTile.java
+package dungeon.crawler.Engine.tiles;
+
+import dungeon.crawler.Engine.gfx.Assets;
+
+public class SandTile extends Tile{
+
+	public SandTile(int id){
+		super(Assets.sand, id);
+	}
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\Test4Tile.java
+package dungeon.crawler.Engine.tiles;
+
+import dungeon.crawler.Engine.gfx.Assets;
+
+//Remember to change the: super(Assets.NAME IN ASSETS, id);
+
+public class Test4Tile extends Tile{
+
+	public Test4Tile( int id) {
+		super(Assets.test4, id);
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\Tile.java
+package dungeon.crawler.Engine.tiles;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+public class Tile {
+	
+	//STATIC
+	
+	public static Tile[] tiles = new Tile[256];
+	public static Tile grassTile = new GrassTile(0);
+	public static Tile waterTile = new WaterTile(1);
+	public static Tile sandTile = new SandTile(2);
+	public static Tile test4Tile = new Test4Tile(4);
+	
+	
+	//CLASS
+	
+	public static final int TILEWIDTH = 32, TILEHEIGHT = 32;
+	
+	protected BufferedImage texture;
+	protected final int id;
+	
+	
+	public Tile(BufferedImage texture, int id){
+		this.texture = texture;
+		this.id = id;		
+		
+		tiles[id] = this;
+	}
+	
+	public void tick(){
+		
+	}
+	
+	public void render(Graphics g, int x, int y){
+		g.drawImage(texture, x, y, TILEWIDTH, TILEHEIGHT, null);	
+	}
+	
+	public boolean isSolid(){
+		return false;
+	}
+	
+	public int getId(){
+		return id;
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\WaterTile.java
+package dungeon.crawler.Engine.tiles;
+
+import dungeon.crawler.Engine.gfx.Assets;
+
+public class WaterTile extends Tile{
+
+	public WaterTile( int id) {
+		super(Assets.water, id);
+	}
+	
+	@Override
+	public boolean isSolid(){
+		return true;
+	}
+	
+	
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\ui\ClickListener.java
+package dungeon.crawler.Engine.ui;
+
+public interface ClickListener {
+	
+	public void onClick();
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\ui\UIImageButton.java
+package dungeon.crawler.Engine.ui;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+public class UIImageButton extends UIObject{
+	
+	private BufferedImage[] images;
+	private ClickListener clicker;
+	
+	public UIImageButton(float x, float y, int width, int height, BufferedImage[] images, ClickListener clicker) {
+		super(x, y, width, height);
+		this.images = images;
+		this.clicker = clicker;
+	}
+
+	public void tick() {}
+
+	public void render(Graphics g) {
+		if (hoovering)
+			g.drawImage(images[0], (int) x, (int) y, width, height, null);
+		else
+			g.drawImage(images[1], (int) x, (int) y, width, height, null);
+	}
+
+	public void onClick() {
+		clicker.onClick();
+	}
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\ui\UIManager.java
+package dungeon.crawler.Engine.ui;
+
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+import Engine.Handler;
+
+public class UIManager {
+	
+	private Handler handler;
+	private ArrayList<UIObject> objects;
+	
+	public UIManager(Handler handler){
+		
+		this.handler = handler;
+		objects = new ArrayList<UIObject>();
+	}
+	
+	public void tick(){
+		for(UIObject o : objects)
+			o.tick();
+	}
+	
+	public void render(Graphics g){	
+		for(UIObject o : objects)
+			o.render(g);
+	}
+	
+	public void onMouseMove(MouseEvent e){
+		for(UIObject o : objects)
+			o.onMouseMove(e);
+	}
+	
+	public void onMouseRelease(MouseEvent e){
+		for(UIObject o : objects)
+			o.onMouseRelease(e);
+	}
+	
+	
+	//Getters and Setters
+	
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
+
+	public ArrayList<UIObject> getObjects() {
+		return objects;
+	}
+
+	public void setObjects(ArrayList<UIObject> objects) {
+		this.objects = objects;
+	}
+
+	public void addObject(UIObject o){
+		objects.add(o);
+	}
+	
+	public void removeObject(UIObject o){
+		objects.remove(o);
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\ui\UIObject.java
+package dungeon.crawler.Engine.ui;
+
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+
+import Engine.Handler;
+
+public abstract class UIObject {
+	
+	protected float x, y;
+	protected int width, height;
+	protected boolean hoovering = false;
+	protected Rectangle bounds;
+	
+	public UIObject(float x, float y, int width, int height){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		bounds = new Rectangle((int) x, (int) y, width, height);
+	}
+
+	public abstract void tick();
+	
+	public abstract void render(Graphics g);
+	
+	public abstract void onClick();
+	
+	public void onMouseMove(MouseEvent e){
+		if(bounds.contains(e.getX(), e.getY()))
+			hoovering = true;
+		else
+			hoovering = false;
+	}
+	
+	public void onMouseRelease(MouseEvent e){
+		if(hoovering)
+			onClick();
+	}
+	//Getters and Setters
+	
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public boolean isHoovering() {
+		return hoovering;
+	}
+
+	public void setHoovering(boolean hoovering) {
+		this.hoovering = hoovering;
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\utils\Utils.java
+package dungeon.crawler.Engine.utils;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Utils {
+
+	public static String loadFileAsString(String path){
+		StringBuilder builder = new StringBuilder();
+		
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			String line;
+			while((line = br.readLine()) != null)
+				builder.append(line + "\n");
+			
+			br.close();
+		}catch(IOException e){
+				e.printStackTrace();
+			}
+			
+			return builder.toString();
+		}
+	
+	public static int parseInt(String number){
+		try{
+			return Integer.parseInt(number);
+		}catch(NumberFormatException e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	}
+	
+
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\Window\Window.java
+package dungeon.crawler.Engine.Window;
+
+import java.awt.Canvas;
+import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+
+public class Window{
+	
+	private JFrame frame;
+	private Canvas canvas;
+	
+	private String title;
+	private int width, height;
+
+	public Window(String title, int width, int height){
+		this.title = title;
+		this.width = width;
+		this.height = height;
+		
+		createWindow();
+	}
+	
+	public void createWindow(){
+		
+		frame = new JFrame(title);
+		
+		frame.setSize(width, height);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		
+		canvas = new Canvas();
+		canvas.setPreferredSize(new Dimension(width, height));
+		canvas.setMaximumSize(new Dimension(width, height));
+		canvas.setMinimumSize(new Dimension(width, height));
+		canvas.setFocusable(false);
+		
+		
+		frame.add(canvas);
+		frame.pack();
+		
+	}
+	
+	public Canvas getCanvas(){
+		return canvas;
+	}
+	
+	public JFrame getFrame(){
+		return frame;
+	}
+	
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\world\World.java
+package dungeon.crawler.Engine.world;
+
+import java.awt.Graphics;
+import Engine.Handler;
+import com.sun.deploy.uitoolkit.impl.fx.Utils;
+
+import dungeon.crawler.Engine.Items.ItemManager;
+import dungeon.crawler.Engine.entities.EntityManager;
+import dungeon.crawler.Engine.entities.creatures.Player;
+import dungeon.crawler.Engine.entities.statics.Rock;
+import dungeon.crawler.Engine.entities.statics.Tree;
+import dungeon.crawler.Engine.tiles.Tile;
+
+public class World {
+	
+	private Handler handler;
+	private int width, height;
+	private int spawnX, spawnY;
+	private int[][] tiles;
+	//Entities
+	private EntityManager entityManager;
+	//Items
+	private ItemManager itemManager;
+	
+	public World(Handler handler, String path){
+		this.handler = handler;
+		entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+		itemManager = new ItemManager(handler);
+		
+		//Temporary Entity Code
+		entityManager.addEntity(new Tree(handler, 300, 300));
+		entityManager.addEntity(new Rock(handler, 200, 200));
+		entityManager.addEntity(new Tree(handler, 450, 200));
+		entityManager.addEntity(new Rock(handler, 240, 300));
+		entityManager.addEntity(new Tree(handler, 350, 100));
+		entityManager.addEntity(new Rock(handler, 400, 100));
+		
+		loadWorld(path);
+		
+		entityManager.getPlayer().setX(spawnX);
+		entityManager.getPlayer().setY(spawnY);
+	}
+	
+	public void tick(){
+		itemManager.tick();
+		entityManager.tick();	
+	}
+	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void render(Graphics g){
+		int xStart = (int) Math.max(0, handler.getgameCamera().getxOffset() / Tile.TILEWIDTH);
+		int xEnd = (int) Math.min(width, (handler.getgameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
+		int yStart = (int) Math.max(0, handler.getgameCamera().getyOffset() / Tile.TILEHEIGHT);
+		int yEnd = (int) Math.min(height, (handler.getgameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT +1);
+		
+		for(int y = yStart; y < yEnd; y++){
+			for(int x = xStart; x < xEnd; x++){
+				getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - handler.getgameCamera().getxOffset()),
+										(int) (y * Tile.TILEHEIGHT - handler.getgameCamera().getyOffset()));
+				
+			}
+		}
+		//Entities
+		entityManager.render(g);
+		//Items
+		itemManager.render(g);
+	}
+	
+	public Tile getTile(int x, int y){
+		
+		if(x < 0 || y < 0 || x>= width || y>=height){
+			return Tile.grassTile;
+		}
+		
+		Tile t = Tile.tiles[tiles[x][y]];
+		if(t == null){
+			return Tile.grassTile;
+		}
+		return t;
+	}
+	
+	private void loadWorld(String path){
+		String file = dungeon.crawler.Engine.utils.Utils.loadFileAsString(path);
+		String[] tokens = file.split("\\s+");
+		width = dungeon.crawler.Engine.utils.Utils.parseInt(tokens[0]);
+		height = dungeon.crawler.Engine.utils.Utils.parseInt(tokens[1]);
+		spawnX = dungeon.crawler.Engine.utils.Utils.parseInt(tokens[2]);
+		spawnY = dungeon.crawler.Engine.utils.Utils.parseInt(tokens[3]);
+		
+		tiles = new int[width][height];
+		for(int y = 0;y <height;y++){
+			for(int x = 0;x < width;x++){
+				tiles[x][y] = dungeon.crawler.Engine.utils.Utils.parseInt(tokens[(x + y * width) + 4]);
+			}
+		}
+				
+	}
+	
+	//Getters and Setters
+
+	public Handler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(Handler handler) {
+		this.handler = handler;
+	}
+
+	public ItemManager getItemManager() {
+		return itemManager;
+	}
+
+	public void setItemManager(ItemManager itemManager) {
+		this.itemManager = itemManager;
+	}
+
+	public int getWidth(){
+		return width;
+	}
+	
+	public int getHeight(){
+		return height;
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\Engine\Handler.java
+package Engine;
+
+import dungeon.crawler.Engine.gfx.GameCamera;
+import dungeon.crawler.Engine.input.KeyManager;
+import dungeon.crawler.Engine.input.MouseManager;
+import dungeon.crawler.Engine.world.World;
+
+public class Handler {
+
+	private mainEngine mainengine;
+	private World world;
+
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
+	}
+
+	public Handler(mainEngine mainengine) {
+		this.mainengine = mainengine;
+	}
+
+	public GameCamera getgameCamera() {
+		return mainengine.getgameCamera();
+	}
+
+	public KeyManager getkeyManager() {
+		return mainengine.getKeyManager();
+	}
+
+	public MouseManager getmouseManager() {
+		return mainengine.getmouseManager();
+	}
+
+	public int getWidth() {
+		return mainengine.getWidth();
+	}
+
+	public int getHeight() {
+		return mainengine.getHeight();
+	}
+
+	public mainEngine getmainEngine() {
+		return mainengine;
+	}
+
+	public void setmainEngine(mainEngine mainengine) {
+		this.mainengine = mainengine;
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\Engine\Launcher.java
+package Engine;
+
+
+
+public class Launcher {
+
+	public static void main(String[] args) {
+		mainEngine mainengine = new mainEngine("DungeonCrawler", 800, 600);
+		mainengine.start();
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\Engine\mainEngine.java
+package Engine;
+
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+
+import dungeon.crawler.Engine.Window.Window;
+import dungeon.crawler.Engine.gfx.Assets;
+import dungeon.crawler.Engine.gfx.GameCamera;
+import dungeon.crawler.Engine.input.KeyManager;
+import dungeon.crawler.Engine.input.MouseManager;
+import dungeon.crawler.Engine.states.GameState;
+import dungeon.crawler.Engine.states.MenuState;
+import dungeon.crawler.Engine.states.SettingState;
+import dungeon.crawler.Engine.states.State;
+
+public class mainEngine implements Runnable{
+
+    private Window window;
+	
+	private int width, height;
+	public String title;
+	
+	private boolean running = false;
+	private Thread thread;
+	
+	private BufferStrategy bs;
+	private Graphics g;
+	
+	//States
+	public State menustate;
+	public State gamestate;
+	public State settingstate;
+	
+	//Input
+	private KeyManager keyManager;
+	private MouseManager mouseManager;
+	
+	//Handler
+	private Handler handler;
+	
+	//Camera
+	private GameCamera gamecamera;
+	
+	public mainEngine(String title, int width, int height){
+		this.width = width;
+		this.height = height;
+		this.title = title;
+		keyManager = new KeyManager();
+		mouseManager = new MouseManager();
+	}
+
+	
+	private void init(){	
+		window = new Window(title, width, height);
+		window.getFrame().addKeyListener(keyManager);
+		window.getFrame().addMouseListener(mouseManager);
+		window.getFrame().addMouseMotionListener(mouseManager);
+		window.getCanvas().addMouseListener(mouseManager);
+		window.getCanvas().addMouseMotionListener(mouseManager);
+		Assets.init();
+		
+		handler = new Handler(this);
+		gamecamera = new GameCamera(handler, 0, 0);
+		
+		menustate = new MenuState(handler);
+		gamestate = new GameState(handler);
+		State.setState(menustate);
+	}
+
+	private void tick(){
+		keyManager.tick();
+		
+		if(State.getState() != null)
+			State.getState().tick();
+			
+	}
+	
+	private void render(){
+		bs = window.getCanvas().getBufferStrategy();
+		if(bs == null){
+			window.getCanvas().createBufferStrategy(3);
+			return;
+			}
+		g = bs.getDrawGraphics();
+		//Clears Screen
+		g.clearRect(0, 0, width, height);
+		//Draw here!
+		
+		if(State.getState() != null)
+			State.getState().render(g);
+			
+		//End Drawing!
+		bs.show();
+		g.dispose();
+	}
+	
+	public void run() {
+		
+		init();
+		
+		int fps = 60;
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+		
+		//This part is to here get it to run smoothly
+		
+		while(running){
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now - lastTime;
+			lastTime = now;
+			
+			if(delta >= 1){
+				tick();
+				render();
+				ticks++;
+				delta--;
+			}
+			
+			if(timer >= 1000000000){
+			//System.out.println("Ticks and Frames; " + ticks); 
+				ticks = 0;
+				timer = 0;
+			}
+		}
+		
+		stop();
+	}
+	
+	public KeyManager getKeyManager(){
+		return keyManager;
+	}
+	
+	public MouseManager getmouseManager(){
+		return mouseManager;
+	}
+	
+	public GameCamera getgameCamera(){
+		return gamecamera;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	
+	public int getHeight() {
+		return height;	
+	}
+	
+	public void start() {
+		if (running)
+			return;
+		running = true;
+		thread = new Thread(this);
+		thread.start();
+	}
+	
+	public void stop() {
+		if(!running)
+			return;
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}

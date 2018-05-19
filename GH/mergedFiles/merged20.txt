@@ -1,0 +1,2113 @@
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\constant\DispenserType.java
+package com.chenlu.vertx.crawler.app.github.domain.constant;
+
+/**
+ * 分配器类型
+ *
+ * @author chenlu
+ */
+public enum DispenserType {
+
+    ZERO("dispenser_zero"),
+    YEAR("dispenser_year"),
+    WEEKEND("dispenser_weekend"),
+    MONTH("dispenser_month"),
+    MANY("dispenser_many"),
+    DAY("dispenser_day");
+
+    private String name;
+
+    DispenserType(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\constant\ErrorResponseCode.java
+package com.chenlu.vertx.crawler.app.github.domain.constant;
+
+/**
+ * 异常码
+ *
+ * @author chenlu
+ */
+public class ErrorResponseCode {
+
+    /**
+     * 通用异常码
+     */
+    public static int DEFAULT_ERROR = 10000;
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\constant\EventAddress.java
+package com.chenlu.vertx.crawler.app.github.domain.constant;
+
+/**
+ * eventBus 收发地址配置
+ *
+ * @author chenlu
+ */
+public class EventAddress {
+
+    private static final String BASE = "com.chenlu.vertx.github";
+
+    public static final String SCORE_VERTICLE = BASE + ".score";
+
+    public static final String OVERVIEW_VERTICLE = SCORE_VERTICLE + ".overview";
+
+    public static final String CONTRIBUTION_VERTICLE = OVERVIEW_VERTICLE + ".contribution";
+
+    public static final String DAY_VERTICLE = CONTRIBUTION_VERTICLE + ".day";
+
+    public static final String WEEKEND_VERTICLE = CONTRIBUTION_VERTICLE + ".weekend";
+
+    public static final String MONTH_VERTICLE = CONTRIBUTION_VERTICLE + ".month";
+
+    public static final String LEARN_SCORE = BASE + ".learn.score";
+
+    public static final String LEARN_OVERVIEW = LEARN_SCORE + ".overview";
+
+    public static final String LEARN_CONTRIBUTION = LEARN_OVERVIEW + ".distribution";
+
+    public static final String LEARN_DAY = LEARN_CONTRIBUTION + ".day";
+
+    public static final String LOOP_CRAWLER_FOLLOWERS = "loopCrawlerName";
+
+    public static final String LOOP_CRAWLER_DAY = "loopCrawlerDay";
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\constant\SlimeConfigName.java
+package com.chenlu.vertx.crawler.app.github.domain.constant;
+
+/**
+ * 配置名称
+ *
+ * @author chenlu
+ */
+public class SlimeConfigName {
+
+    public static final String DISPENSER_CONFIG = "dispenserConfig";
+
+    public static final String SLIME_CONFIG = "slimeConfig";
+
+    public static final String VALUE = "value";
+
+    public static final String SCORE_TOTAL = "scoreTotal";
+
+    public static final String DISPENSER_RATE = "dispenserRate";
+
+    public static final String DISPENSER_RATE_OVERVIEW = "overview";
+
+    public static final String DISPENSER_RATE_REPOSITORY = "repository";
+
+    public static final String DISPENSER_RATE_FOLLOWERS = "followers";
+
+    public static final String DISPENSER_RATE_FOLLOWING = "following";
+
+    public static final String DISPENSER_RATE_STARS = "stars";
+
+    public static final String OVERVIEW_DISTRIBUTION = "distribution";
+
+    public static final String OVERVIEW_DISTRIBUTION_DAY = "dayAnalysis";
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\DataOperator.java
+package com.chenlu.vertx.crawler.app.github.domain;
+
+import io.vertx.core.json.JsonArray;
+
+public interface DataOperator {
+
+    public JsonArray index();
+
+    public JsonArray insertParams();
+
+    public JsonArray updateParams();
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\Dispenser.java
+package com.chenlu.vertx.crawler.app.github.domain;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.DispenserType;
+
+import io.vertx.core.json.Json;
+
+/**
+ * 分配器
+ *
+ * @author chenlu
+ */
+public class Dispenser {
+
+    /**
+     * 计算因子
+     */
+    private double factor = 0;
+
+    /**
+     * 种类
+     */
+    private DispenserType name;
+
+    public static Dispenser zero() {
+        Dispenser dispenser = new Dispenser();
+        dispenser.name = DispenserType.ZERO;
+        return dispenser;
+    }
+
+    public double getFactor() {
+        return factor;
+    }
+
+    public void setFactor(double factor) {
+        this.factor = factor;
+    }
+
+    public DispenserType getName() {
+        return name;
+    }
+
+    public void setName(DispenserType name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return Json.encode(this);
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\overview\CountUtils.java
+package com.chenlu.vertx.crawler.app.github.domain.overview;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+public class CountUtils {
+
+    public static <T, K> Map<T, K> cast(Map map) {
+        return (Map<T, K>) map;
+    }
+
+    public static int index90(List<Integer> dayCounts) {
+        int size = dayCounts.size();
+        return dayCounts.get(new Double((size + 1) * 0.9).intValue() - 1);
+    }
+
+    public static double median(List<Integer> dayCounts) {
+        int size = dayCounts.size();
+        if (size % 2 == 0) {
+            int index0 = size / 2 - 1;
+            int index1 = size / 2;
+            return (dayCounts.get(index0) + dayCounts.get(index1)) * 1.0 / 2;
+        } else {
+            return dayCounts.get((size + 1) / 2 - 1);
+        }
+    }
+
+    public static void sort(List<Integer> dayCounts) {
+        dayCounts.sort((a, b) -> Objects.equals(a, b) ? 0 : a < b ? -1 : 1);
+    }
+
+    public static int minCount(List<Integer> dayCounts) {
+        return dayCounts.stream().min((a, b) -> Objects.equals(a, b) ? 0 : a < b ? -1 : 1).get();
+    }
+
+    public static int maxCount(List<Integer> dayCounts) {
+        return dayCounts.stream().max((a, b) -> Objects.equals(a, b) ? 0 : a < b ? -1 : 1).get();
+    }
+
+    public static long countSum(Map<String, Integer> contributions) {
+        return contributions.values()
+                .stream()
+                .reduce(0, (sum, v) -> sum + v);
+    }
+
+    public static String yearMonth(String yyyymmdd) {
+        return yyyymmdd.substring(0, yyyymmdd.lastIndexOf("-"));
+    }
+
+    public static String year(String yyyymmdd) {
+        return yyyymmdd.substring(0, yyyymmdd.indexOf("-"));
+    }
+
+    public static LocalDate toDate(String yyyymmdd) {
+        String[] t = yyyymmdd.split("-");
+        int year = Integer.valueOf(t[0]);
+        int month = Integer.valueOf(t[1]);
+        int day = Integer.valueOf(t[2]);
+        return LocalDate.of(year, month, day);
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\overview\DataCount.java
+package com.chenlu.vertx.crawler.app.github.domain.overview;
+
+import com.chenlu.vertx.crawler.app.github.domain.DataOperator;
+
+import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonArray;
+
+public class DataCount implements DataOperator {
+
+    private String name;
+    private double avg;
+    private double frequency;
+    private int max;
+    private int min;
+    private double median;
+    private int index90;
+
+    public DataCount(String name, double avg, double frequency, int max, int min, double median,
+            int index90) {
+        this.name = name;
+        this.avg = avg;
+        this.frequency = frequency;
+        this.max = max;
+        this.min = min;
+        this.median = median;
+        this.index90 = index90;
+    }
+
+    public DataCount() {
+    }
+
+    @Override
+    public JsonArray index() {
+        return new JsonArray().add(name);
+    }
+
+    public JsonArray insertParams() {
+        return new JsonArray().add(name)
+                .add(avg)
+                .add(frequency)
+                .add(max)
+                .add(min)
+                .add(median)
+                .add(index90);
+    }
+
+    public JsonArray updateParams() {
+        return new JsonArray()
+                .add(avg)
+                .add(frequency)
+                .add(max)
+                .add(min)
+                .add(median)
+                .add(index90)
+                .add(name);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getAvg() {
+        return avg;
+    }
+
+    public void setAvg(double avg) {
+        this.avg = avg;
+    }
+
+    public double getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(double frequency) {
+        this.frequency = frequency;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public double getMedian() {
+        return median;
+    }
+
+    public void setMedian(double median) {
+        this.median = median;
+    }
+
+    public int getIndex90() {
+        return index90;
+    }
+
+    public void setIndex90(int index90) {
+        this.index90 = index90;
+    }
+
+    @Override
+    public String toString() {
+        return Json.encode(this);
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\overview\WeekendCount.java
+package com.chenlu.vertx.crawler.app.github.domain.overview;
+
+import com.chenlu.vertx.crawler.app.github.domain.DataOperator;
+
+import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonArray;
+
+public class WeekendCount implements DataOperator {
+
+    private String name;
+
+    private double weekendCountRate;
+
+    private double weekendDayRate;
+
+    public WeekendCount(String name, double weekendCountRate, double weekendDayRate) {
+        this.name = name;
+        this.weekendCountRate = weekendCountRate;
+        this.weekendDayRate = weekendDayRate;
+    }
+
+    public WeekendCount() {
+    }
+
+    @Override
+    public JsonArray index() {
+        return new JsonArray().add(name);
+    }
+
+    public JsonArray insertParams() {
+        return new JsonArray().add(name).add(weekendCountRate).add(weekendDayRate);
+    }
+
+    public JsonArray updateParams() {
+        return new JsonArray().add(weekendCountRate).add(weekendDayRate).add(name);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getWeekendCountRate() {
+        return weekendCountRate;
+    }
+
+    public void setWeekendCountRate(double weekendCountRate) {
+        this.weekendCountRate = weekendCountRate;
+    }
+
+    public double getWeekendDayRate() {
+        return weekendDayRate;
+    }
+
+    public void setWeekendDayRate(double weekendDayRate) {
+        this.weekendDayRate = weekendDayRate;
+    }
+
+    @Override
+    public String toString() {
+        return Json.encode(this);
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\ScoreResponse.java
+package com.chenlu.vertx.crawler.app.github.domain;
+
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import io.vertx.core.json.Json;
+
+/**
+ * 分值结果
+ *
+ * @author chenlu
+ */
+public class ScoreResponse {
+
+    private int score;
+
+    private List<Dispenser> dispensers;
+
+    public static ScoreResponse init() {
+        ScoreResponse scoreResponse = new ScoreResponse();
+        scoreResponse.dispensers = Lists.newArrayList();
+        scoreResponse.score = 0;
+        return scoreResponse;
+    }
+
+    public ScoreResponse addDispenser(Dispenser dispenser) {
+        this.dispensers.add(dispenser);
+        return this;
+    }
+
+    public static ScoreResponse score(int score, List<Dispenser> dispensers) {
+        ScoreResponse scoreResponse = new ScoreResponse();
+        scoreResponse.score = score;
+        scoreResponse.dispensers = dispensers;
+        return scoreResponse;
+    }
+
+    public ScoreResponse add(ScoreResponse scoreResponse) {
+        this.score += scoreResponse.score;
+        this.dispensers.addAll(scoreResponse.dispensers);
+        return this;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public List<Dispenser> getDispensers() {
+        return dispensers;
+    }
+
+    public void setDispensers(
+            List<Dispenser> dispensers) {
+        this.dispensers = dispensers;
+    }
+
+    @Override
+    public String toString() {
+        return Json.encode(this);
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-domain\src\main\java\com\chenlu\vertx\crawler\app\github\domain\SlimeApiResponse.java
+package com.chenlu.vertx.crawler.app.github.domain;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.ErrorResponseCode;
+
+import io.vertx.core.json.Json;
+
+/**
+ * event response
+ *
+ * @author chenlu
+ */
+public class SlimeApiResponse<T> {
+
+    private int code = 0;
+
+    private String error;
+
+    private T data;
+
+    public static <K> SlimeApiResponse<K> success(K data) {
+        SlimeApiResponse<K> response = new SlimeApiResponse<>();
+        response.data = data;
+        return response;
+    }
+
+    public static <K> SlimeApiResponse<K> error(String error) {
+        SlimeApiResponse<K> response = new SlimeApiResponse<>();
+        response.error = error;
+        response.code = ErrorResponseCode.DEFAULT_ERROR;
+        return response;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return Json.encode(this);
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-learn\src\main\java\com\chenlu\vertx\crawler\app\github\learn\CrawlerLauncher.java
+package com.chenlu.vertx.crawler.app.github.learn;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import io.vertx.core.Launcher;
+import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
+import io.vertx.core.json.JsonObject;
+import io.vertx.spi.cluster.zookeeper.ZookeeperClusterManager;
+
+public class CrawlerLauncher extends Launcher {
+
+    private final static Logger logger = LoggerFactory.getLogger(CrawlerLauncher.class);
+
+    public static void main(String[] args) {
+        ZookeeperClusterManager manager = new ZookeeperClusterManager();
+        manager.setConfig(zkConfig());
+        VertxOptions vertxOptions = new VertxOptions()
+                .setHAEnabled(true)
+                .setClustered(true)
+                .setClusterManager(manager);
+        Vertx.clusteredVertx(vertxOptions, res -> {
+            if (res.succeeded()) {
+                res.result().deployVerticle(MainVerticle.class.getName());
+            } else {
+                logger.error("vertx集群启动失败", res.cause());
+            }
+        });
+    }
+
+    private static JsonObject zkConfig() {
+        return new JsonObject()
+                .put("zookeeperHosts", "www.lusyun.com:2289")
+                .put("sessionTimeout", 20000)
+                .put("connectTimeout", 3000)
+                .put("rootPath", "io.lusyun.vertx")
+                .put("retry",
+
+                        new JsonObject()
+                                .put("initialSleepTime", 100)
+                                .put("intervalTimes", 10000)
+                                .put("maxTimes", 5));
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-learn\src\main\java\com\chenlu\vertx\crawler\app\github\learn\LoopVerticle.java
+package com.chenlu.vertx.crawler.app.github.learn;
+
+import java.util.List;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.ErrorResponseCode;
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.mysql.MysqlClientFactory;
+import com.google.common.collect.Lists;
+
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.Future;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
+import io.vertx.ext.asyncsql.AsyncSQLClient;
+import io.vertx.ext.sql.ResultSet;
+import io.vertx.ext.sql.UpdateResult;
+import io.vertx.ext.web.client.HttpResponse;
+import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.WebClientOptions;
+
+/**
+ * @author chenlu
+ */
+public class LoopVerticle extends AbstractVerticle {
+
+    private final static Logger logger = LoggerFactory.getLogger(LoopVerticle.class);
+    private static String GITHUB = "https://github.com/";
+    private WebClient webClient;
+
+    @Override
+    public void start() throws Exception {
+        webClient = WebClient.create(vertx,
+                new WebClientOptions().setKeepAlive(false));
+        //link-gray pl-1
+        vertx.eventBus().<String>consumer(EventAddress.LOOP_CRAWLER_FOLLOWERS).handler(message -> {
+            String name = message.body();
+            logger.info("请求 {} 的 followers", name);
+            String followersUrl = GITHUB.concat(name).concat("?tab=followers");
+            crawler(followersUrl, message);
+        });
+    }
+
+    private void crawler(String url, Message<String> message) {
+        Future<HttpResponse<Buffer>> future = Future.future();
+        webClient.getAbs(url)
+                .timeout(10000)
+                .send(future);
+        future.setHandler(res -> {
+            if (res.succeeded()) {
+                parse(res.result().bodyAsString(), message);
+            } else {
+                logger.error("爬取followers异常", res.cause());
+                message.fail(ErrorResponseCode.DEFAULT_ERROR, "请求超时");
+            }
+        });
+    }
+
+    private void parse(String html, Message<String> message) {
+        Document document = Jsoup.parse(html);
+        Elements elements = document.select(".link-gray.pl-1");
+        List<String> names = Lists.newArrayList();
+        elements.forEach(e -> names.add(e.text().trim()));
+        logger.info("followers-names:{}", names);
+        loop(names, message);
+    }
+
+    private void loop(List<String> names, Message<String> message) {
+        AsyncSQLClient sqlClient = MysqlClientFactory.mysqlClient();
+        List<Future> futures = Lists.newArrayList();
+        names.forEach(name -> {
+            Future<ResultSet> future = Future.future(f -> sqlClient.queryWithParams(
+                    "select id from contribution_name where name = ?",
+                    new JsonArray().add(name), f));
+            Future<UpdateResult> insertFuture = Future.future();
+            futures.add(future.compose(resultSet -> {
+                if (resultSet.getRows().isEmpty()) {
+                    sqlClient.updateWithParams("insert into contribution_name(name)values(?)",
+                            new JsonArray().add(name), insertFuture);
+                    return insertFuture;
+                }
+                return Future.succeededFuture();
+            }));
+        });
+        CompositeFuture.all(futures).setHandler(res -> {
+            sqlClient.close();
+            message.reply("ok");
+        });
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-learn\src\main\java\com\chenlu\vertx\crawler\app\github\learn\MainVerticle.java
+package com.chenlu.vertx.crawler.app.github.learn;
+
+import java.io.IOException;
+
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.DeploymentOptions;
+import io.vertx.core.Vertx;
+
+public class MainVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+        vertx.deployVerticle(ReadVerticle.class.getName());
+        //    if (res.succeeded()) {
+        //        vertx.eventBus().send("loop", "China-Chenlu");
+        //    }
+        //});
+    }
+
+    public static void main(String[] args) throws IOException {
+        Vertx.vertx()
+                .deployVerticle(MainVerticle.class.getName(),
+                        new DeploymentOptions().setWorkerPoolSize(500));
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-learn\src\main\java\com\chenlu\vertx\crawler\app\github\learn\ReadVerticle.java
+package com.chenlu.vertx.crawler.app.github.learn;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.mysql.MysqlClientFactory;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.ScoreVerticle;
+import com.google.common.collect.Lists;
+
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.DeploymentOptions;
+import io.vertx.core.Future;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.asyncsql.AsyncSQLClient;
+import io.vertx.ext.sql.ResultSet;
+import io.vertx.ext.sql.UpdateResult;
+
+public class ReadVerticle extends AbstractVerticle {
+
+    private final static Logger logger = LoggerFactory.getLogger(ReadVerticle.class);
+
+
+    @Override
+    public void start() throws Exception {
+        CompositeFuture.all(
+                Future.<String>future(f -> vertx.deployVerticle(ScoreVerticle.class.getName(),
+                        new DeploymentOptions(), f)),
+                Future.<String>future(f -> vertx.deployVerticle(LoopVerticle.class.getName(), f))
+        ).setHandler(res -> {
+            if (res.succeeded()) {
+                loopReadFollowers();
+                loopParseScore();
+            }
+        });
+    }
+
+    private void loopParseScore() {
+        AsyncSQLClient sqlClient = MysqlClientFactory.mysqlClient();
+        Future<ResultSet> queryFuture = Future.future();
+        sqlClient.query("select name from contribution_name where is_day_crawler = 0 limit 1",
+                queryFuture);
+        queryFuture.compose(resultSet -> {
+            List<JsonObject> nameObjs = resultSet.getRows();
+            List<Future> futures = Lists.newArrayList();
+            nameObjs.forEach(nameObj -> {
+                String name = nameObj.getString("name");
+                logger.info("检索name:{}", name);
+                futures.add(Future.<Message<String>>future(
+                        f -> vertx.eventBus().send(EventAddress.SCORE_VERTICLE, name, f))
+                        .compose(message ->
+                                Future.<UpdateResult>future(k -> sqlClient.updateWithParams(
+                                        "update contribution_name set is_day_crawler =1 where "
+                                                + "name =?",
+                                        new JsonArray().add(name), k))));
+            });
+
+            return CompositeFuture.all(futures);
+        }).setHandler(res -> {
+            sqlClient.close();
+            if (res.succeeded()) {
+                loopParseScore();
+            } else {
+                logger.error("read name and loop 异常", res.cause());
+                loopParseScore();
+            }
+        });
+    }
+
+    private void loopReadFollowers() {
+        AsyncSQLClient sqlClient = MysqlClientFactory.mysqlClient();
+        Future<ResultSet> queryFuture = Future.future();
+        sqlClient.query("select name from contribution_name where is_crawler = 0 limit 1",
+                queryFuture);
+        queryFuture.compose(resultSet -> {
+            JsonObject nameObj = resultSet.getRows().get(0);
+            String name = nameObj.getString("name");
+            logger.info("检索name:{}", name);
+            return Future.<Message<String>>future(
+                    f -> vertx.eventBus().send(EventAddress.LOOP_CRAWLER_FOLLOWERS, name, f))
+                    .compose(message ->
+                            Future.<UpdateResult>future(k -> sqlClient.updateWithParams(
+                                    "update contribution_name set is_crawler =1 where name =?",
+                                    new JsonArray().add(name), k)));
+        }).setHandler(res -> {
+            sqlClient.close();
+            if (res.succeeded()) {
+                loopReadFollowers();
+            } else {
+                logger.error("read name and loop 异常", res.cause());
+                loopReadFollowers();
+            }
+        });
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-mysql\src\main\java\com\chenlu\vertx\crawler\app\github\mysql\DataCurlHandler.java
+package com.chenlu.vertx.crawler.app.github.mysql;
+
+import java.util.function.Consumer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.DataOperator;
+import com.chenlu.vertx.crawler.app.github.domain.ScoreResponse;
+import com.chenlu.vertx.crawler.app.github.domain.constant.ErrorResponseCode;
+import com.chenlu.vertx.crawler.app.github.domain.overview.DataCount;
+import com.chenlu.vertx.crawler.app.github.domain.overview.WeekendCount;
+
+import io.vertx.core.Future;
+import io.vertx.core.eventbus.Message;
+import io.vertx.ext.asyncsql.AsyncSQLClient;
+import io.vertx.ext.sql.ResultSet;
+import io.vertx.ext.sql.UpdateResult;
+
+public class DataCurlHandler {
+
+    private final static Logger logger = LoggerFactory.getLogger(DataCurlHandler.class);
+
+    private static void insertOrUpdate(String querySql, String insertSql, String updateSql,
+            DataOperator dataOperator, Consumer<UpdateResult> successConsumer,
+            Consumer<Throwable> failureConsumer) {
+        AsyncSQLClient sqlClient = MysqlClientFactory.mysqlClient();
+        Future<ResultSet> queryFuture = Future.future(
+                f -> sqlClient.queryWithParams(querySql, dataOperator.index(), f));
+        queryFuture.setHandler(res -> {
+            if (res.succeeded()) {
+                if (res.result().getRows().isEmpty()) {
+                    logger.info("{} 不存在数据 query:{},insert", dataOperator.index());
+                    sqlClient.updateWithParams(insertSql, dataOperator.insertParams(),
+                            ires -> {
+                                if (ires.succeeded()) {
+                                    logger.info("insert成功");
+                                    successConsumer.accept(ires.result());
+                                } else {
+                                    logger.error("insert异常", ires.cause());
+                                    failureConsumer.accept(ires.cause());
+                                }
+                                sqlClient.close();
+                            });
+                } else {
+                    logger.info("{} 已存在查询的数据 query:{},update", dataOperator.index());
+                    sqlClient.updateWithParams(updateSql, dataOperator.updateParams(),
+                            ures -> {
+                                if (ures.succeeded()) {
+                                    logger.info("update成功");
+                                    successConsumer.accept(ures.result());
+                                } else {
+                                    logger.error("update异常", ures.cause());
+                                    failureConsumer.accept(ures.cause());
+                                }
+                                sqlClient.close();
+                            });
+                }
+            } else {
+                logger.error("读取DayCount异常", res.cause());
+                sqlClient.close();
+                failureConsumer.accept(res.cause());
+            }
+        });
+    }
+
+    public static void insertOrUpdateDayCount(DataCount dataCount, Message<String> message) {
+        insertOrUpdate(Sql.QueryDayCountByName, Sql.InsertDayCount, Sql.UpdateDayCount, dataCount,
+                updateResult -> message.reply(ScoreResponse.init().toString()),
+                throwable -> message.fail(ErrorResponseCode.DEFAULT_ERROR, "insertOrUpdate-error"));
+    }
+
+    public static void insertOrUpdateWeekend(WeekendCount weekendCount,
+            Message<String> message) {
+        logger.info("insertOrUpdateWeekend:{}", weekendCount);
+        insertOrUpdate(Sql.QueryWeekendCountByName, Sql.InsertWeekendCount, Sql.UpdateWeekendCount,
+                weekendCount,
+                updateResult -> message.reply(ScoreResponse.init().toString()),
+                throwable -> message.fail(ErrorResponseCode.DEFAULT_ERROR, "insertOrUpdate-error"));
+    }
+
+    public static void insertOrUpdateMonthCount(DataCount dataCount, Message<String> message) {
+        insertOrUpdate(Sql.QueryMonthCountByName, Sql.InsertMonthCount, Sql.UpdateMonthCount,
+                dataCount,
+                updateResult -> message.reply(ScoreResponse.init().toString()),
+                throwable -> message.fail(ErrorResponseCode.DEFAULT_ERROR, "insertOrUpdate-error"));
+    }
+
+    public static void insertOrUpdateYearCount(DataCount dataCount, Message<String> message) {
+        insertOrUpdate(Sql.QueryYearCountByName, Sql.InsertYearCount, Sql.UpdateYearCount,
+                dataCount,
+                updateResult -> message.reply(ScoreResponse.init().toString()),
+                throwable -> message.fail(ErrorResponseCode.DEFAULT_ERROR, "insertOrUpdate-error"));
+    }
+
+    public static class Sql {
+
+        static String QueryDayCountByName =
+                "select id from contributions where name = ? and type = 0 limit 1";
+
+        static String InsertDayCount =
+                "INSERT INTO contributions(name, avg, frequency, max, min, "
+                        + "median, index90) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        static String UpdateDayCount =
+                "update contributions set avg = ?, frequency = ?, max=?, min = ?, median = ?, "
+                        + "index90 = ? where name = ? and type = 0";
+
+        static String QueryWeekendCountByName =
+                "select id from contributions_weekend where name = ? limit 1";
+
+        static String InsertWeekendCount =
+                "insert into contributions_weekend(name,weekend_count_rate,weekend_day_rate)"
+                        + "values(?,?,?)";
+
+        static String UpdateWeekendCount =
+                "update contributions_weekend set weekend_count_rate= ?,weekend_day_rate = ?"
+                        + " where name = ?";
+
+        static String QueryMonthCountByName =
+                "select id from contributions where name = ? and type = 1 limit 1";
+
+        static String InsertMonthCount =
+                "INSERT INTO contributions(name, avg, frequency, max, min, "
+                        + "median, index90,type) VALUES (?, ?, ?, ?, ?, ?, ?,1)";
+
+        static String UpdateMonthCount =
+                "update contributions set avg = ?, frequency = ?, max=?, min = ?, median = ?, "
+                        + "index90 = ? where name = ? and type = 1";
+
+        static String QueryYearCountByName =
+                "select id from contributions where name = ? and type = 2 limit 1";
+
+        static String InsertYearCount =
+                "INSERT INTO contributions(name, avg, frequency, max, min, "
+                        + "median, index90,type) VALUES (?, ?, ?, ?, ?, ?, ?,2)";
+
+        static String UpdateYearCount =
+                "update contributions set avg = ?, frequency = ?, max=?, min = ?, median = ?, "
+                        + "index90 = ? where name = ? and type = 2";
+    }
+}
+
+
+
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-mysql\src\main\java\com\chenlu\vertx\crawler\app\github\mysql\MysqlClientFactory.java
+package com.chenlu.vertx.crawler.app.github.mysql;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.asyncsql.AsyncSQLClient;
+import io.vertx.ext.asyncsql.MySQLClient;
+
+public class MysqlClientFactory {
+
+
+    public static final String mysqlPoolName = "mysqlPoolName";
+
+    public static JsonObject mysqlClientConfig() {
+        return new JsonObject()
+                .put("host", "rm-wz94c094t3kx554299o.mysql.rds.aliyuncs.com")
+                .put("port", 3306)
+                .put("maxPoolSize", 20)
+                .put("username", "root")
+                .put("password", "Chenlu19941204")
+                .put("database", "study")
+                .put("charset", "utf-8")
+                .put("queryTimeout", 100 * 1000);
+    }
+
+    public static AsyncSQLClient mysqlClient() {
+        return MySQLClient.createShared(Vertx.currentContext().owner(),
+                mysqlClientConfig(),
+                mysqlPoolName);
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\common\Constant.java
+package com.chenlu.vertx.crawler.app.github.verticle.common;
+
+/**
+ * @author chenlu
+ */
+public class Constant {
+
+    public static String GITHUB = "https://github.com/";
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\common\EventUtils.java
+package com.chenlu.vertx.crawler.app.github.verticle.common;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.EventBus;
+
+/**
+ * 辅助类
+ *
+ * @author chenlu
+ */
+public class EventUtils {
+
+    /**
+     * 当前vertx的eventBus
+     */
+    public static EventBus eventBus() {
+        return Vertx.currentContext().owner().eventBus();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\MainVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.SlimeConfigName;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.RestVerticle;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.ScoreVerticle;
+
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Vertx;
+import io.vertx.core.file.FileSystem;
+import io.vertx.core.json.JsonObject;
+
+/**
+ * main-verticle
+ *
+ * @author chenlu
+ */
+public class MainVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+
+        Vertx vertx=Vertx.vertx();
+        FileSystem fileSystem = vertx.fileSystem();
+        JsonObject slimeConf = fileSystem.readFileBlocking("slimeScore.conf").toJsonObject();
+        vertx.sharedData()
+                .getLocalMap(SlimeConfigName.SLIME_CONFIG)
+                .put(SlimeConfigName.DISPENSER_CONFIG,
+                        slimeConf.getJsonObject(SlimeConfigName.DISPENSER_CONFIG));
+        vertx.deployVerticle(RestVerticle.class.getName());
+        vertx.deployVerticle(ScoreVerticle.class.getName());
+    }
+
+    public static void main(String[] args) {
+        Vertx.vertx().deployVerticle(MainVerticle.class.getName());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\followers\FollowersVericle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.followers;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 接收 followers 评分计算的任务
+ *
+ * @author chenlu
+ */
+public class FollowersVericle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\following\FollowingVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.following;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 接收 following 评分计算的任务
+ *
+ * @author chenlu
+ */
+public class FollowingVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\ContributionHandler.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution;
+
+import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * Contributions 评分
+ *
+ * @author chenlu
+ */
+public interface ContributionHandler extends Handler<Message<String>> {
+
+    static ContributionHandler create() {
+        return new ContributionHandlerImp();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\ContributionHandlerImp.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.ScoreResponse;
+import com.chenlu.vertx.crawler.app.github.domain.constant.ErrorResponseCode;
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.verticle.common.Constant;
+import com.chenlu.vertx.crawler.app.github.verticle.common.EventUtils;
+import com.google.common.collect.Lists;
+
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.Future;
+import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.client.HttpResponse;
+import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.WebClientOptions;
+
+/**
+ * contribution实现类
+ *
+ * @author chenlu
+ */
+public class ContributionHandlerImp implements ContributionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(ContributionHandler.class);
+    private WebClient webClient;
+
+    @Override
+    public void handle(Message<String> message) {
+        String name = message.body();
+        String githubHome = Constant.GITHUB.concat(name);
+        String overviewUrl = githubHome.concat("?tab=overview");
+        List<Future> futures = Lists.newArrayList();
+        for (int year = year() - 3; year <= year(); year++) {
+            Future<HttpResponse<Buffer>> future = getHtmlFuture(overviewUrl, year);
+            futures.add(future);
+        }
+        Future.future(CompositeFuture.all(futures)::setHandler).compose(res -> {
+            JsonObject dateCount = new JsonObject();
+            for (int i = 0; i < res.result().size(); i++) {
+                HttpResponse<Buffer> response = res.result().resultAt(i);
+                JsonObject dc = dateCount(response.bodyAsString());
+                if (dc != null) {
+                    addAll(dateCount, dc);
+                }
+            }
+            EventBus eventBus = EventUtils.eventBus();
+            Future<Message<String>> dayFuture = Future.future();
+            JsonObject mes = new JsonObject()
+                    .put("name", name)
+                    .put("url", overviewUrl)
+                    .put("contributions", dateCount);
+            eventBus.send(EventAddress.DAY_VERTICLE, mes.toString(), dayFuture);
+            Future<Message<String>> weekendFuture = Future.future();
+            eventBus.send(EventAddress.WEEKEND_VERTICLE, mes.toString(), weekendFuture);
+            Future<Message<String>> monthFuture = Future.future();
+            eventBus.send(EventAddress.MONTH_VERTICLE, mes.toString(), monthFuture);
+            return Future.future(
+                    CompositeFuture.all(
+                            Lists.newArrayList(dayFuture, weekendFuture, monthFuture))::setHandler);
+        }).setHandler(res -> {
+            if (res.succeeded()) {
+                CompositeFuture resultCompositeFuture = res.result();
+                ScoreResponse response = ScoreResponse.init();
+                for (int i = 0; i < resultCompositeFuture.size(); i++) {
+                    Message<String> resultMes = resultCompositeFuture.resultAt(i);
+                    ScoreResponse scoreResponse = Json.decodeValue(resultMes.body(),
+                            ScoreResponse.class);
+                    response.add(scoreResponse);
+                }
+                message.reply(response.toString());
+                webClient.close();
+            } else {
+                logger.error("distribution子任务处理异常", res.cause());
+                message.fail(ErrorResponseCode.DEFAULT_ERROR, res.cause().getMessage());
+                webClient.close();
+            }
+        });
+    }
+
+    private void addAll(JsonObject jsonObject, JsonObject s) {
+        s.fieldNames().forEach(n -> jsonObject.put(n, s.getInteger(n)));
+    }
+
+    private Future<HttpResponse<Buffer>> getHtmlFuture(String overviewUrl, int year) {
+
+        String yearUrl = overviewUrl.concat("&from=" + year + "-12-31&tm=" + Math.random());
+        Future<HttpResponse<Buffer>> htmlFuture = Future.future();
+        webClient = WebClient.create(Vertx.currentContext().owner(),
+                new WebClientOptions().setKeepAlive(false).setTcpKeepAlive(false));
+        webClient.getAbs(yearUrl)
+                .timeout(10000)
+                .send(htmlFuture);
+        return htmlFuture;
+    }
+
+    private int year() {
+        return LocalDate.now().getYear();
+    }
+
+    private JsonObject dateCount(String html) {
+        JsonObject data = new JsonObject();
+        Document document = Jsoup.parse(html);
+        Element calendarElement = document.selectFirst(".js-calendar-graph-svg");
+        if (calendarElement == null) {
+            return null;
+        }
+        Element gElement = calendarElement.selectFirst("g");
+        Elements rects = gElement.select("rect");
+        rects.forEach(e -> {
+            String date = e.attr("data-date");
+            int count = Integer.valueOf(e.attr("data-count"));
+            if (count != 0) {
+                data.put(date, count);
+            }
+        });
+        return data;
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\ContributionVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.day
+        .DayCountAnalysisVerticle;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.month
+        .MonthCountAnalysisVerticle;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.weekend
+        .WeekendDataAnalysisVerticle;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.year
+        .YearCountAnalysisVerticle;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 接收contribution评分计算的任务
+ *
+ * @author chenlu
+ */
+public class ContributionVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+        deploy();
+        vertx.eventBus().<String>consumer(EventAddress.CONTRIBUTION_VERTICLE)
+                .handler(ContributionHandler.create());
+    }
+
+    private void deploy() {
+        vertx.deployVerticle(DayCountAnalysisVerticle.class.getName());
+        vertx.deployVerticle(WeekendDataAnalysisVerticle.class.getName());
+        vertx.deployVerticle(MonthCountAnalysisVerticle.class.getName());
+        vertx.deployVerticle(YearCountAnalysisVerticle.class.getName());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\day\DayCountAnalysisHandler.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.day;
+
+import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * 日最提交数据分析
+ *
+ * @author chenlu
+ */
+public interface DayCountAnalysisHandler extends Handler<Message<String>> {
+
+    static DayCountAnalysisHandler create() {
+        return new DayCountAnalysisHandlerImp();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\day\DayCountAnalysisHandlerImp.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.day;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.Dispenser;
+import com.chenlu.vertx.crawler.app.github.domain.ScoreResponse;
+import com.chenlu.vertx.crawler.app.github.domain.constant.SlimeConfigName;
+import com.chenlu.vertx.crawler.app.github.domain.overview.CountUtils;
+import com.chenlu.vertx.crawler.app.github.domain.overview.DataCount;
+import com.chenlu.vertx.crawler.app.github.mysql.DataCurlHandler;
+import com.google.common.collect.Lists;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
+
+/**
+ * 日提交数分析实现类
+ *
+ * @author chenlu
+ */
+public class DayCountAnalysisHandlerImp implements DayCountAnalysisHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(DayCountAnalysisHandlerImp.class);
+
+    @Override
+    public void handle(Message<String> message) {
+        JsonObject mes = new JsonObject(message.body());
+        String name = mes.getString("name");
+        JsonObject contributions = mes.getJsonObject("contributions");
+        if (contributions.isEmpty()) {
+            message.reply(ScoreResponse.init().addDispenser(Dispenser.zero()).toString());
+        } else {
+            Map<String, Integer> contributionMap = CountUtils.cast(contributions.getMap());
+            long countSum = CountUtils.countSum(contributionMap);
+            long daySum = contributions.size();
+            List<Integer> dayCounts = Lists.newArrayList(contributionMap.values());
+            CountUtils.sort(dayCounts);
+            logger.info("排序后数组:{}", dayCounts);
+            double avg = countSum * 1.0 / daySum;
+            double frequency = daySum * 1.0 / countSum;
+            int max = CountUtils.maxCount(dayCounts);
+            int min = CountUtils.minCount(dayCounts);
+            double median = CountUtils.median(dayCounts);
+            int index90 = CountUtils.index90(dayCounts);
+            DataCount dataCount = new DataCount(name, avg, frequency, max, min, median, index90);
+            logger.info("dayCount:{}", dataCount);
+            DataCurlHandler.insertOrUpdateDayCount(dataCount, message);
+        }
+    }
+
+    private int dayCountScore() {
+        JsonObject slimeConfig = (JsonObject) Vertx.currentContext()
+                .owner()
+                .sharedData()
+                .getLocalMap(SlimeConfigName.SLIME_CONFIG)
+                .get(SlimeConfigName.DISPENSER_CONFIG);
+        int totalScore = slimeConfig.getInteger(SlimeConfigName.SCORE_TOTAL);
+        JsonObject overviewConfig = slimeConfig.getJsonObject(SlimeConfigName.DISPENSER_RATE)
+                .getJsonObject(SlimeConfigName.DISPENSER_RATE_OVERVIEW);
+        double overviewRate = overviewConfig.getDouble(SlimeConfigName.VALUE);
+        int overviewScore = new Double(totalScore * overviewRate).intValue();
+        JsonObject distributionConfig = overviewConfig.getJsonObject(
+                SlimeConfigName.OVERVIEW_DISTRIBUTION);
+        double distributionRate = distributionConfig.getDouble(SlimeConfigName.VALUE);
+        int distributionScore = new Double(overviewScore * distributionRate).intValue();
+        JsonObject dayCountConfig = distributionConfig.getJsonObject(
+                SlimeConfigName.OVERVIEW_DISTRIBUTION_DAY);
+        double dayCountRate = dayCountConfig.getDouble(SlimeConfigName.VALUE);
+
+        return new Double(distributionScore * dayCountRate).intValue();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\day\DayCountAnalysisVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.day;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 日提交量分析
+ *
+ * @author chenlu
+ */
+public class DayCountAnalysisVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+        vertx.eventBus().<String>consumer(EventAddress.DAY_VERTICLE)
+                .handler(DayCountAnalysisHandler.create());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\month\MonthCountAnalysisHandler.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.month;
+
+import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * 月提交数据分析
+ *
+ * @author chenlu
+ */
+public interface MonthCountAnalysisHandler extends Handler<Message<String>> {
+
+    static MonthCountAnalysisHandler create() {
+        return new MonthCountAnalysisHandlerImp();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\month\MonthCountAnalysisHandlerImp.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.month;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.Dispenser;
+import com.chenlu.vertx.crawler.app.github.domain.ScoreResponse;
+import com.chenlu.vertx.crawler.app.github.domain.constant.SlimeConfigName;
+import com.chenlu.vertx.crawler.app.github.domain.overview.CountUtils;
+import com.chenlu.vertx.crawler.app.github.domain.overview.DataCount;
+import com.chenlu.vertx.crawler.app.github.mysql.DataCurlHandler;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
+
+/**
+ * 日提交数分析实现类
+ *
+ * @author chenlu
+ */
+public class MonthCountAnalysisHandlerImp implements MonthCountAnalysisHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(
+            MonthCountAnalysisHandlerImp.class);
+
+    @Override
+    public void handle(Message<String> message) {
+        JsonObject mes = new JsonObject(message.body());
+        String name = mes.getString("name");
+        JsonObject contributions = mes.getJsonObject("contributions");
+        if (contributions.isEmpty()) {
+            message.reply(ScoreResponse.init().addDispenser(Dispenser.zero()).toString());
+        } else {
+            Map<String, Integer> contributionMap = CountUtils.cast(contributions.getMap());
+            Map<String, Integer> monthContributionMap = monthContributionMap(contributionMap);
+            long countSum = CountUtils.countSum(monthContributionMap);
+            long monthSum = monthContributionMap.size();
+            List<Integer> monthCounts = Lists.newArrayList(contributionMap.values());
+            CountUtils.sort(monthCounts);
+            logger.info("排序后数组:{}", monthCounts);
+            double avg = countSum * 1.0 / monthSum;
+            double frequency = monthSum * 1.0 / countSum;
+            int max = CountUtils.maxCount(monthCounts);
+            int min = CountUtils.minCount(monthCounts);
+            double median = CountUtils.median(monthCounts);
+            int index90 = CountUtils.index90(monthCounts);
+            DataCount dataCount = new DataCount(name, avg, frequency, max, min, median, index90);
+            logger.info("monthCount:{}", dataCount);
+            DataCurlHandler.insertOrUpdateMonthCount(dataCount, message);
+        }
+    }
+
+    private Map<String, Integer> monthContributionMap(Map<String, Integer> contributionMap) {
+        Map<String, Integer> monthContributionMap = Maps.newHashMap();
+        contributionMap.forEach((k, v) -> {
+            String month = CountUtils.yearMonth(k);
+            if (monthContributionMap.containsKey(month)) {
+                int monthCount = monthContributionMap.get(month) + v;
+                monthContributionMap.put(month, monthCount);
+            } else {
+                monthContributionMap.put(month, v);
+            }
+        });
+        return monthContributionMap;
+    }
+
+    private int dayCountScore() {
+        JsonObject slimeConfig = (JsonObject) Vertx.currentContext()
+                .owner()
+                .sharedData()
+                .getLocalMap(SlimeConfigName.SLIME_CONFIG)
+                .get(SlimeConfigName.DISPENSER_CONFIG);
+        int totalScore = slimeConfig.getInteger(SlimeConfigName.SCORE_TOTAL);
+        JsonObject overviewConfig = slimeConfig.getJsonObject(SlimeConfigName.DISPENSER_RATE)
+                .getJsonObject(SlimeConfigName.DISPENSER_RATE_OVERVIEW);
+        double overviewRate = overviewConfig.getDouble(SlimeConfigName.VALUE);
+        int overviewScore = new Double(totalScore * overviewRate).intValue();
+        JsonObject distributionConfig = overviewConfig.getJsonObject(
+                SlimeConfigName.OVERVIEW_DISTRIBUTION);
+        double distributionRate = distributionConfig.getDouble(SlimeConfigName.VALUE);
+        int distributionScore = new Double(overviewScore * distributionRate).intValue();
+        JsonObject dayCountConfig = distributionConfig.getJsonObject(
+                SlimeConfigName.OVERVIEW_DISTRIBUTION_DAY);
+        double dayCountRate = dayCountConfig.getDouble(SlimeConfigName.VALUE);
+
+        return new Double(distributionScore * dayCountRate).intValue();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\month\MonthCountAnalysisVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.month;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 月提交量分析
+ *
+ * @author chenlu
+ */
+public class MonthCountAnalysisVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+        vertx.eventBus().<String>consumer(EventAddress.MONTH_VERTICLE)
+                .handler(MonthCountAnalysisHandler.create());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\weekend\WeekendDataAnalysisHandler.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.weekend;
+
+import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * 日最提交数据分析
+ *
+ * @author chenlu
+ */
+public interface WeekendDataAnalysisHandler extends Handler<Message<String>> {
+
+    static WeekendDataAnalysisHandler create() {
+        return new WeekendDataAnalysisHandlerImp();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\weekend\WeekendDataAnalysisHandlerImp.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.weekend;
+
+import java.time.LocalDate;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.Dispenser;
+import com.chenlu.vertx.crawler.app.github.domain.ScoreResponse;
+import com.chenlu.vertx.crawler.app.github.domain.constant.SlimeConfigName;
+import com.chenlu.vertx.crawler.app.github.domain.overview.CountUtils;
+import com.chenlu.vertx.crawler.app.github.domain.overview.WeekendCount;
+import com.chenlu.vertx.crawler.app.github.mysql.DataCurlHandler;
+import com.google.common.collect.Maps;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
+
+/**
+ * 周末提交数分析实现类
+ *
+ * @author chenlu
+ */
+public class WeekendDataAnalysisHandlerImp implements WeekendDataAnalysisHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(
+            WeekendDataAnalysisHandlerImp.class);
+
+    @Override
+    public void handle(Message<String> message) {
+        JsonObject mes = new JsonObject(message.body());
+        String name = mes.getString("name");
+        logger.info("{} weekend数据分析",name);
+        JsonObject contributions = mes.getJsonObject("contributions");
+        if (contributions.isEmpty()) {
+            message.reply(ScoreResponse.init().addDispenser(Dispenser.zero()).toString());
+        } else {
+            Map<String, Integer> contributionMap = CountUtils.cast(contributions.getMap());
+            Map<String, Integer> weekendContributionMap = weekendContributions(contributionMap);
+            long countSum = CountUtils.countSum(contributionMap);
+            long daySum = contributions.size();
+
+            long weekendCountSum = CountUtils.countSum(weekendContributionMap);
+            long weekendDaySum = weekendDaySum(weekendContributionMap);
+
+            double weekendCountRate = weekendCountSum * 1.0 / countSum;
+            double weekendDayRate = weekendDaySum * 1.0 / daySum;
+            WeekendCount weekendCount = new WeekendCount(name, weekendCountRate, weekendDayRate);
+            DataCurlHandler.insertOrUpdateWeekend(weekendCount, message);
+        }
+    }
+
+    private Map<String, Integer> weekendContributions(Map<String, Integer> contributions) {
+        Map<String, Integer> weekendContributions = Maps.newHashMap();
+        contributions.forEach((date, count) -> {
+            if (isWeekend(date)) {
+                if (weekendContributions.containsKey(date)) {
+                    int c = weekendContributions.get(date) + count;
+                    weekendContributions.put(date, c);
+                } else {
+                    weekendContributions.put(date, count);
+                }
+            }
+        });
+        return weekendContributions;
+    }
+
+    private boolean isWeekend(String yyyymmdd) {
+        LocalDate localDate = CountUtils.toDate(yyyymmdd);
+        return localDate.getDayOfWeek().getValue() >= 6;
+    }
+
+    private int weekendDaySum(Map<String, Integer> map) {
+        int count = 0;
+        for (String date : map.keySet()) {
+            if (isWeekend(date)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private int dayCountScore() {
+        JsonObject slimeConfig = (JsonObject) Vertx.currentContext()
+                .owner()
+                .sharedData()
+                .getLocalMap(SlimeConfigName.SLIME_CONFIG)
+                .get(SlimeConfigName.DISPENSER_CONFIG);
+        int totalScore = slimeConfig.getInteger(SlimeConfigName.SCORE_TOTAL);
+        JsonObject overviewConfig = slimeConfig.getJsonObject(SlimeConfigName.DISPENSER_RATE)
+                .getJsonObject(SlimeConfigName.DISPENSER_RATE_OVERVIEW);
+        double overviewRate = overviewConfig.getDouble(SlimeConfigName.VALUE);
+        int overviewScore = new Double(totalScore * overviewRate).intValue();
+        JsonObject distributionConfig = overviewConfig.getJsonObject(
+                SlimeConfigName.OVERVIEW_DISTRIBUTION);
+        double distributionRate = distributionConfig.getDouble(SlimeConfigName.VALUE);
+        int distributionScore = new Double(overviewScore * distributionRate).intValue();
+        JsonObject dayCountConfig = distributionConfig.getJsonObject(
+                SlimeConfigName.OVERVIEW_DISTRIBUTION_DAY);
+        double dayCountRate = dayCountConfig.getDouble(SlimeConfigName.VALUE);
+
+        return new Double(distributionScore * dayCountRate).intValue();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\weekend\WeekendDataAnalysisVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.weekend;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 周末提交数据分析
+ */
+public class WeekendDataAnalysisVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+        vertx.eventBus().<String>consumer(EventAddress.WEEKEND_VERTICLE)
+                .handler(WeekendDataAnalysisHandler.create());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\year\YearCountAnalysisHandler.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.year;
+
+import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * 月提交数据分析
+ *
+ * @author chenlu
+ */
+public interface YearCountAnalysisHandler extends Handler<Message<String>> {
+
+    static YearCountAnalysisHandler create() {
+        return new YearCountAnalysisHandlerImp();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\year\YearCountAnalysisHandlerImp.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.year;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.Dispenser;
+import com.chenlu.vertx.crawler.app.github.domain.ScoreResponse;
+import com.chenlu.vertx.crawler.app.github.domain.constant.SlimeConfigName;
+import com.chenlu.vertx.crawler.app.github.domain.overview.CountUtils;
+import com.chenlu.vertx.crawler.app.github.domain.overview.DataCount;
+import com.chenlu.vertx.crawler.app.github.mysql.DataCurlHandler;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
+
+/**
+ * 日提交数分析实现类
+ *
+ * @author chenlu
+ */
+public class YearCountAnalysisHandlerImp implements YearCountAnalysisHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(
+            YearCountAnalysisHandlerImp.class);
+
+    @Override
+    public void handle(Message<String> message) {
+        JsonObject mes = new JsonObject(message.body());
+        String name = mes.getString("name");
+        JsonObject contributions = mes.getJsonObject("contributions");
+        if (contributions.isEmpty()) {
+            message.reply(ScoreResponse.init().addDispenser(Dispenser.zero()).toString());
+        } else {
+            Map<String, Integer> contributionMap = CountUtils.cast(contributions.getMap());
+            Map<String, Integer> yearContributionMap = yearContributionMap(contributionMap);
+            long countSum = CountUtils.countSum(yearContributionMap);
+            long yearSum = yearContributionMap.size();
+            List<Integer> yearCounts = Lists.newArrayList(contributionMap.values());
+            CountUtils.sort(yearCounts);
+            logger.info("排序后数组:{}", yearCounts);
+            double avg = countSum * 1.0 / yearSum;
+            double frequency = yearSum * 1.0 / countSum;
+            int max = CountUtils.maxCount(yearCounts);
+            int min = CountUtils.minCount(yearCounts);
+            double median = CountUtils.median(yearCounts);
+            int index90 = CountUtils.index90(yearCounts);
+            DataCount dataCount = new DataCount(name, avg, frequency, max, min, median, index90);
+            logger.info("yearCount:{}", dataCount);
+            DataCurlHandler.insertOrUpdateYearCount(dataCount, message);
+        }
+    }
+
+    private Map<String, Integer> yearContributionMap(Map<String, Integer> contributionMap) {
+        Map<String, Integer> yearContributionMap = Maps.newHashMap();
+        contributionMap.forEach((k, v) -> {
+            String year = CountUtils.year(k);
+            if (yearContributionMap.containsKey(year)) {
+                int monthCount = yearContributionMap.get(year) + v;
+                yearContributionMap.put(year, monthCount);
+            } else {
+                yearContributionMap.put(year, v);
+            }
+        });
+        return yearContributionMap;
+    }
+
+    private int dayCountScore() {
+        JsonObject slimeConfig = (JsonObject) Vertx.currentContext()
+                .owner()
+                .sharedData()
+                .getLocalMap(SlimeConfigName.SLIME_CONFIG)
+                .get(SlimeConfigName.DISPENSER_CONFIG);
+        int totalScore = slimeConfig.getInteger(SlimeConfigName.SCORE_TOTAL);
+        JsonObject overviewConfig = slimeConfig.getJsonObject(SlimeConfigName.DISPENSER_RATE)
+                .getJsonObject(SlimeConfigName.DISPENSER_RATE_OVERVIEW);
+        double overviewRate = overviewConfig.getDouble(SlimeConfigName.VALUE);
+        int overviewScore = new Double(totalScore * overviewRate).intValue();
+        JsonObject distributionConfig = overviewConfig.getJsonObject(
+                SlimeConfigName.OVERVIEW_DISTRIBUTION);
+        double distributionRate = distributionConfig.getDouble(SlimeConfigName.VALUE);
+        int distributionScore = new Double(overviewScore * distributionRate).intValue();
+        JsonObject dayCountConfig = distributionConfig.getJsonObject(
+                SlimeConfigName.OVERVIEW_DISTRIBUTION_DAY);
+        double dayCountRate = dayCountConfig.getDouble(SlimeConfigName.VALUE);
+
+        return new Double(distributionScore * dayCountRate).intValue();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\contribution\year\YearCountAnalysisVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution.year;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 月提交量分析
+ *
+ * @author chenlu
+ */
+public class YearCountAnalysisVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+        vertx.eventBus().<String>consumer(EventAddress.MONTH_VERTICLE)
+                .handler(YearCountAnalysisHandler.create());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\OverviewHandler.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview;
+
+import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * overview评分handler
+ *
+ * @author chenlu
+ */
+public interface OverviewHandler extends Handler<Message<String>> {
+
+    static OverviewHandler create() {
+        return new OverviewHandlerImp();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\OverviewHandlerImp.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.ErrorResponseCode;
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.verticle.common.EventUtils;
+import com.google.common.collect.Lists;
+
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.Future;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * overview 评分计算任务实现类
+ *
+ * @author chenlu
+ */
+public class OverviewHandlerImp implements OverviewHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(OverviewHandler.class);
+
+    @Override
+    public void handle(Message<String> message) {
+        EventBus eventBus = EventUtils.eventBus();
+        Future<Message<String>> contributionFuture = Future.future();
+        eventBus.send(EventAddress.CONTRIBUTION_VERTICLE, message.body(), contributionFuture);
+        CompositeFuture compositeFuture = CompositeFuture.all(
+                Lists.newArrayList(contributionFuture));
+        compositeFuture.setHandler(res -> {
+            if (res.succeeded()) {
+                Message<String> contributionResult = res.result().resultAt(0);
+
+                logger.info("contribution-res:{}", contributionResult.body());
+                message.reply(contributionResult.body());
+            } else {
+                logger.error("执行overview的评分任务失败", res.cause());
+                message.fail(ErrorResponseCode.DEFAULT_ERROR, res.cause().getMessage());
+            }
+        });
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\overview\OverviewVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.overview;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.contribution
+        .ContributionVerticle;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 接收 overview 评分计算任务
+ *
+ * @author chenlu
+ */
+public class OverviewVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+        vertx.deployVerticle(ContributionVerticle.class.getName());
+        vertx.eventBus().<String>consumer(EventAddress.OVERVIEW_VERTICLE)
+                .handler(OverviewHandler.create());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\repository\RepositoryVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.repository;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 接收 repository 评分计算的任务
+ *
+ * @author chenlu
+ */
+public class RepositoryVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\RestScoreHandler.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle;
+
+import io.vertx.core.Handler;
+import io.vertx.ext.web.RoutingContext;
+
+/**
+ * 评分http请求的handler
+ *
+ * @author chenlu
+ */
+public interface RestScoreHandler extends Handler<RoutingContext> {
+
+    static RestScoreHandler create() {
+        return new RestScoreHandlerImp();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\RestScoreHandlerImp.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.SlimeApiResponse;
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.verticle.common.EventUtils;
+
+import io.vertx.core.Future;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.http.HttpServerResponse;
+import io.vertx.ext.web.RoutingContext;
+
+/**
+ * 评分http请求处理实现类
+ *
+ * @author chenlu
+ */
+public class RestScoreHandlerImp implements RestScoreHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(RestScoreHandlerImp.class);
+
+    @Override
+    public void handle(RoutingContext context) {
+        Future<Message<String>> future = Future.future();
+        EventBus eventBus = EventUtils.eventBus();
+        eventBus.send(EventAddress.SCORE_VERTICLE, context.pathParam("name"), future);
+        HttpServerResponse response = context.response()
+                .putHeader("Content-Type", "application/json;charset=utf-8");
+
+        future.<String>setHandler(res -> {
+            if (res.succeeded()) {
+                String result = res.result().body();
+                logger.info("结果:{}", result);
+                response.end(result);
+            } else {
+                logger.error("执行评分任务失败", res.cause());
+                response.end(SlimeApiResponse.error(res.cause().getMessage()).toString());
+            }
+        });
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\RestVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle;
+
+import io.vertx.core.AbstractVerticle;
+import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.BodyHandler;
+
+/**
+ * 开放 http 接口
+ *
+ * @author chenlu
+ */
+public class RestVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+
+        Router router = Router.router(vertx);
+        vertx.createHttpServer().requestHandler(router::accept).listen(8080);
+        router.route().handler(BodyHandler.create());
+
+        router.get("/slime/score/:name").handler(RestScoreHandler.create());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\ScoreHandler.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle;
+
+import io.vertx.core.Handler;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * 评分的handler
+ *
+ * @author chenlu
+ */
+public interface ScoreHandler extends Handler<Message<String>> {
+
+    static ScoreHandler create() {
+        return new ScoreHandlerImp();
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\ScoreHandlerImp.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.ErrorResponseCode;
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.verticle.common.EventUtils;
+import com.google.common.collect.Lists;
+
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.Future;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
+
+/**
+ * 评分任务处理实现类
+ *
+ * @author chenlu
+ */
+public class ScoreHandlerImp implements ScoreHandler {
+
+    private final static Logger logger = LoggerFactory.getLogger(ScoreHandlerImp.class);
+
+    @Override
+    public void handle(Message<String> message) {
+        String name = message.body();
+        EventBus eventBus = EventUtils.eventBus();
+        Future<Message<String>> overviewFuture = Future.future();
+        eventBus.send(EventAddress.OVERVIEW_VERTICLE, name, overviewFuture);
+        CompositeFuture compositeFuture = CompositeFuture.all(Lists.newArrayList(overviewFuture));
+        compositeFuture.<String>setHandler(res -> {
+            if (res.succeeded()) {
+                Message<String> overviewResult = res.result().resultAt(0);
+                logger.info("overview部分的结果:{}", overviewResult.body());
+                message.reply(overviewResult.body());
+            } else {
+                logger.error("执行评分任务失败", res.cause());
+                message.fail(ErrorResponseCode.DEFAULT_ERROR, res.cause().getMessage());
+            }
+        });
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\ScoreVerticle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle;
+
+import com.chenlu.vertx.crawler.app.github.domain.constant.EventAddress;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.followers.FollowersVericle;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.following.FollowingVerticle;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.overview.OverviewVerticle;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.repository.RepositoryVerticle;
+import com.chenlu.vertx.crawler.app.github.verticle.verticle.stars.StarsVericle;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 评分任务接收
+ *
+ * @author chenlu
+ */
+public class ScoreVerticle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+        vertx.deployVerticle(OverviewVerticle.class.getName());
+        vertx.deployVerticle(FollowersVericle.class.getName());
+        vertx.deployVerticle(FollowingVerticle.class.getName());
+        vertx.deployVerticle(RepositoryVerticle.class.getName());
+        vertx.deployVerticle(StarsVericle.class.getName());
+        vertx.eventBus().<String>consumer(EventAddress.SCORE_VERTICLE)
+                .handler(ScoreHandler.create());
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\crawler-app-github\crawler-app-github-verticle\src\main\java\com\chenlu\vertx\crawler\app\github\verticle\verticle\stars\StarsVericle.java
+package com.chenlu.vertx.crawler.app.github.verticle.verticle.stars;
+
+import io.vertx.core.AbstractVerticle;
+
+/**
+ * 接收 stars 评分计算的任务
+ *
+ * @author chenlu
+ */
+public class StarsVericle extends AbstractVerticle {
+
+    @Override
+    public void start() throws Exception {
+
+    }
+}

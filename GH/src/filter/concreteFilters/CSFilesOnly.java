@@ -24,7 +24,6 @@ public class CSFilesOnly implements Filter<Asset <File>>
                                 .getName()
                                 .length());
 
-                System.out.println(extension);
 
                 if(extension.equals("cs"))
                     newFiles.add(file);
@@ -45,7 +44,6 @@ public class CSFilesOnly implements Filter<Asset <File>>
                             .getName()
                             .length());
 
-            System.out.println(extension);
 
             if(extension.equals("cs"))
                 return true;

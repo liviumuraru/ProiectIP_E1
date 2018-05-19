@@ -17,7 +17,6 @@ public class PyFilesOnly implements Filter< Asset<File> >
             int indexOfDot = file.getAsset().getName().indexOf(".");
             if(!file.getAsset().isDirectory() && indexOfDot != -1){
                 String extension = file.getAsset().getName().substring(indexOfDot + 1, file.getAsset().getName().length());
-                System.out.println(extension);
 
                 for(String ext : possibleExtensions) {
                     if(extension.equals(ext)) {
@@ -42,7 +41,6 @@ public class PyFilesOnly implements Filter< Asset<File> >
                             .getName()
                             .length());
 
-            System.out.println(extension);
 
             for(String ext : possibleExtensions)
                 if(extension.equals(ext))

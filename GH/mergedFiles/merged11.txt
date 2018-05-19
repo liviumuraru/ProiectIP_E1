@@ -1,0 +1,628 @@
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\FacebookCrawler.java
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package facebookcrawler;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.*;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import facebookcrawler.orthopermubot.TypoCreator;
+import java.io.IOException;
+import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Manu
+ */
+public class FacebookCrawler {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void startTimedMessages() throws IOException {
+        // TODO code application logic here
+
+
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(
+            new Runnable(){
+                @Override
+                public void run()
+                {
+                    try {
+                        FacebookCrawler.postToGroup("183107588431067", FacebookCrawler.getRandomMessage());
+                    } catch (IOException ex) {
+                        System.out.println("ERROR");
+                    }
+                }
+            },
+            0,  //Delay
+            57,  //Interval
+            TimeUnit.MINUTES
+        );
+        
+    }
+    
+    public static void postToGroup(String groupID, String message) throws IOException {
+        BrowserVersion useragent = new BrowserVersion(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), (new Random()).nextInt(10));
+        
+        final WebClient webClient = new WebClient(useragent);
+        webClient.setJavaScriptEnabled(false);
+        webClient.setCssEnabled(false);
+        JavaScriptEngine engine = new JavaScriptEngine(webClient);
+        webClient.setJavaScriptEngine(engine);
+        
+        System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog", "fatal");
+        final HtmlPage loginPage = webClient.getPage("http://m.facebook.com/");
+        final HtmlForm form = (HtmlForm) loginPage.getElementsByTagName("form").get(0);
+                
+        final HtmlSubmitInput button = form.getInputByName("login");
+        
+        System.out.println(button.asXml());
+        
+        final HtmlTextInput textField = form.getInputByName("email");
+        textField.setValueAttribute("viveks3th@gmail.com");
+        final HtmlPasswordInput textField2 = form.getInputByName("pass");
+        textField2.setValueAttribute("PASS HERE");
+        final HtmlPage loginResponsePage = button.click();
+
+        final HtmlPage rutgersGroupPage = webClient.getPage("http://m.facebook.com/groups/"+groupID);
+        
+        final HtmlForm postForm = rutgersGroupPage.getFirstByXPath("//form[@id='composer_form']");
+                       
+        System.out.println(postForm.getElementById("composerInput").asXml());
+        
+        HtmlTextArea textArea = postForm.getElementById("composerInput");
+        
+        textArea.setText(message);
+        System.out.println(textArea.getText());
+        
+        HtmlSubmitInput postButton = postForm.getInputByName("update");
+        System.out.println(postButton.asXml());
+        
+        postButton.click();
+    }
+    
+    public static void postToRUGroup(String message) throws IOException {
+        FacebookCrawler.postToGroup("183107588431067", message);
+    }
+    
+    public static String getRandomMessage() {
+        String[] messagesArray = {
+            "I have Douglass, Lippincott and i'm looking to trade\n"
+                + "\n"
+                + "Located right next to bus stop, almost all SEBS classes, dining hall, has a beautiful view, and a lot of hot girls\n"
+                + "\n"
+                + "Looking to trade for any other campus MESSAGE me if interested",
+            "I'm in Douglass campus, Lippincott Hall.\n"
+                + "\n"
+                + "Want to trade?\n"
+                + "\n"
+                + "It's a beautiful campus, close to the bus stop and dining halls. not to mention all the girls :P. Please MESSAGE me if intersted.",
+            "Hey, I'm looking to trade my Douglass, Lippincott.\n"
+                + "\n"
+                + "SEBS students, Douglass - Lippincott is conveniently located right near all the SEBS classes so if you're a SEBS student please trade!\n"
+                + "\n"
+                + "It's also next to the dining hall, bus stop, and passion puddle, not to forget all the ladies here. Please MESSAGE me if you're interested in trading"
+        };
+        
+        int index = (new Random()).nextInt(messagesArray.length);
+        String selectedMessage = messagesArray[index];
+        
+        String selectedMessageWithTypos = TypoCreator.realisticTypos(selectedMessage);
+        
+        //System.out.println(selectedMessageWithTypos);
+        
+        return selectedMessageWithTypos;
+        
+    }
+    
+    
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\MainWindow.java
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package facebookcrawler;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Manu
+ */
+public class MainWindow extends javax.swing.JFrame {
+
+    /**
+     * Creates new form MainWindow
+     */
+    public MainWindow() {
+        initComponents();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        jLabel1.setText("Facebook Crawler");
+
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .add(jLabel1)
+                .add(43, 43, 43))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .add(54, 54, 54)
+                .add(jLabel1)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /*
+         * Set the Nimbus look and feel
+         */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /*
+         * Create and display the form
+         */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                new MainWindow().setVisible(true);
+            }
+        });
+        try {
+            FacebookCrawler.startTimedMessages();
+        } catch (IOException ex) {
+            System.out.println("ERROR");
+        }
+        
+    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    // End of variables declaration//GEN-END:variables
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\Deletion.java
+package facebookcrawler.orthopermubot;
+
+public class Deletion extends RandomPermutation {
+    @Override
+	protected String permute( String str, int index ) {
+	System.out.println("Deletion typo");	
+        return str.substring( 0, index ) + str.substring( index + 1 );
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\FatFingering.java
+package facebookcrawler.orthopermubot;
+
+public class FatFingering extends RandomKeyboardPermutation {
+	
+	public FatFingering( Keyboard keyboard ) {
+		super( keyboard );
+	}
+	
+    @Override
+	protected String permute( String str, int index ) {
+	System.out.println("Fat Fingering typo");	
+        return str.substring( 0, index ) +
+				keyboard.characterNear( str.charAt( index ) ) + 
+				str.substring( index + 1 );
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\Insertion.java
+package facebookcrawler.orthopermubot;
+
+public class Insertion extends RandomKeyboardPermutation {
+	public Insertion( Keyboard keyboard ) {
+		super( keyboard );
+	}
+	
+    @Override
+	protected String permute( String str, int index ) {
+                System.out.println("Insertion typo");
+        // We'll never insert a character at the beginning of the word.
+		return str.substring( 0, index + 1 ) +
+				keyboard.characterNear( str.charAt( index ) ) +
+				str.substring( index + 1 );
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\Keyboard.java
+package facebookcrawler.orthopermubot;
+
+/**
+ * A class representing a keyboard.
+ * 
+ * @author Eric Galluzzo
+ */
+public interface Keyboard {
+
+	/**
+	 * Finds a character near the given character on the keyboard.  If the
+	 * character cannot be found on the keyboard, returns the character itself.
+	 * 
+	 * @param c  The character
+	 * 
+	 * @return  The character on the keyboard
+	 */
+	char characterNear( char c );
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\MultiplePermutation.java
+package facebookcrawler.orthopermubot;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public final class MultiplePermutation extends Permutation {
+	protected Random random = new Random();
+	protected Keyboard keyboard = null;
+	protected List<Permutation> permutations;
+	
+	public MultiplePermutation( Keyboard keyboard ) {
+		if ( keyboard == null ) {
+			throw new IllegalArgumentException( "keyboard cannot be null" );
+		}
+		this.keyboard = keyboard;
+		
+		registerDefaultPermutations();
+	}
+	
+    @Override
+	public String permute( String word ) {
+		String newWord = word;
+		if ( word.length() >= 3 ) {
+			int numPermutations = random.nextInt( word.length() / 2 );
+			for ( int i = 0; i < numPermutations; i++ ) {
+				Permutation permutation =
+						permutations.get( random.nextInt( permutations.size() ) );
+				newWord = permutation.permute( newWord );
+			}
+		}
+		return newWord;
+	}
+	
+	protected void registerDefaultPermutations() {
+		/*permutations = new ArrayList<Permutation>();
+		permutations.add( new Repetition() );
+		permutations.add( new Insertion( keyboard ) );
+		permutations.add( new Deletion() );
+		permutations.add( new Transposition() );
+		permutations.add( new FatFingering( keyboard ) );
+                * 
+                */
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\Permutation.java
+package facebookcrawler.orthopermubot;
+
+/**
+ * An individual type of permutation that can be applied to a string to generate
+ * a new string.
+ * 
+ * @author Eric Galluzzo
+ */
+public abstract class Permutation {
+	/**
+	 * Permutes the given string.
+	 * 
+	 * @param str  The string to permute
+	 * 
+	 * @return  The permutation of the string
+	 */
+	abstract String permute( String str );
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\QwertyKeyboard.java
+package facebookcrawler.orthopermubot;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+public class QwertyKeyboard implements Keyboard {
+	protected Random random = new Random();
+	
+	protected static class KeyboardPosition {
+		public int x;
+		public int y;
+		public boolean shift;
+		
+		public KeyboardPosition( int x, int y, boolean shift ) {
+			this.x = x;
+			this.y = y;
+			this.shift = shift;
+		}
+	}
+	
+	protected String[] keyboard = {
+		"1234567890-=",
+		"qwertyuiop[]\\",
+		"asdfghjkl;'",
+		"zxcvbnm,./"
+	};
+	
+	protected String[] shiftKeyboard = {
+		"!@#$%^&*()_+",
+		"QWERTYUIOP{}|",
+		"ASDFGHJKL:\"",
+		"ZXCVBNM<>?"
+	};
+	
+	protected Map<Character, KeyboardPosition> charToPositionMap =
+		new HashMap<Character, KeyboardPosition>();
+	
+	public QwertyKeyboard() {
+		computeKeyboardPositions( keyboard, false );
+		computeKeyboardPositions( shiftKeyboard, true );
+	}
+	
+	protected void computeKeyboardPositions( String[] keyboard, boolean shift ) {
+		for ( int y = 0; y < keyboard.length; y++ ) {
+			for ( int x = 0; x < keyboard[y].length(); x++ ) {
+				charToPositionMap.put( keyboard[y].charAt( x ),
+						new KeyboardPosition( x, y, shift ) );
+			}
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see net.galluzzo.wave.orthopermubot.permutation.Keyboard#characterNear(char)
+	 */
+	public char characterNear( char c ) {
+		KeyboardPosition position = positionOf( c );
+		if ( position == null ) {
+			// Can't find the character on the keyboard.
+			return c;
+		}
+		
+		Character newChar = null;
+		while ( newChar == null ) {
+			KeyboardPosition newPosition = positionNear( position );
+			newChar = characterAt( newPosition );
+		}
+		
+		return newChar.charValue();
+	}
+	
+	protected KeyboardPosition positionNear( KeyboardPosition pos ) {
+		switch ( random.nextInt( 4 ) ) {
+			case 0:
+				return new KeyboardPosition( pos.x - 1, pos.y, pos.shift );
+			case 1:
+				return new KeyboardPosition( pos.x + 1, pos.y, pos.shift );
+			case 2:
+				return new KeyboardPosition( pos.x, pos.y - 1, pos.shift );
+			case 3:
+				return new KeyboardPosition( pos.x, pos.y + 1, pos.shift );
+			default:
+				throw new IllegalStateException(
+						"Random position change int should be between 0 and 3, inclusive" );
+		}
+	}
+	
+	protected KeyboardPosition positionOf( char c ) {
+		return charToPositionMap.get( c );
+	}
+	
+	protected Character characterAt( KeyboardPosition pos ) {
+		String[] keyboardToUse = pos.shift ? shiftKeyboard : keyboard;
+		if ( pos.y < 0 || pos.y >= keyboardToUse.length ) {
+			return null;
+		}
+		
+		String keyboardRow = keyboardToUse[pos.y];
+		if ( pos.x < 0 || pos.x >= keyboardRow.length() ) {
+			return null;
+		}
+		
+		return keyboardRow.charAt( pos.x );
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\RandomKeyboardPermutation.java
+package facebookcrawler.orthopermubot;
+
+public abstract class RandomKeyboardPermutation extends RandomPermutation {
+	protected Keyboard keyboard = null;
+	
+	public RandomKeyboardPermutation( Keyboard keyboard ) {
+		if ( keyboard == null ) {
+			throw new IllegalArgumentException( "keyboard cannot be null" );
+		}
+		this.keyboard = keyboard;
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\RandomPermutation.java
+package facebookcrawler.orthopermubot;
+
+import java.util.Random;
+
+/**
+ * A permutation that operates at a random index within a string.
+ * 
+ * @author Eric Galluzzo
+ */
+public class RandomPermutation {
+	protected Random random = new Random();
+
+       
+        
+	public String permute( String str ) {
+		int index = random.nextInt( str.length() );
+		return permute( str, index );
+	}
+	
+	/**
+	 * Permutes the string at the given index.
+	 * 
+	 * @param str    The string
+	 * @param index  The index at which to permute the string; must be between
+	 *               0 and <code>str.length() - 1</code>
+	 */
+	protected String permute( String str, int index ) {
+            return str;
+        }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\Repetition.java
+package facebookcrawler.orthopermubot;
+
+public class Repetition  extends RandomPermutation {
+
+        public Repetition() {
+            super();
+        }
+    
+    @Override
+        protected String permute( String str, int index ) {
+            System.out.println("repetition typo");
+            return str.substring( 0, index ) + str.charAt( index ) +
+				str.substring( index );
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\Transposition.java
+package facebookcrawler.orthopermubot;
+
+public class Transposition extends RandomPermutation {
+    @Override
+	protected String permute( String str, int index ) {
+		System.out.println("Transposition typo");
+                if ( index == 0 ) {
+			index++;
+		}
+		return str.substring( 0, index - 1 ) + str.charAt( index ) +
+			str.charAt( index - 1 ) + str.substring( index + 1 );
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\FacebookCrawler\src\facebookcrawler\orthopermubot\TypoCreator.java
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package facebookcrawler.orthopermubot;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+/**
+ *
+ * @author Manu
+ */
+public class TypoCreator {
+    static private Keyboard keyboard = new QwertyKeyboard();
+    //private ArrayList<RandomPermutation> typoTypeArray;
+    public static String realisticTypos(String realString) {
+        
+        String copyOfRealString = realString;
+        
+        RandomPermutation[] typoTypeArray = {
+            ( new Repetition() ), 
+            ( new Insertion( keyboard ) ), 
+            ( new Deletion() ),
+            ( new Transposition() ),
+            ( new FatFingering( keyboard ) )
+        };
+        
+        //String sdf = typoTypeArray[0].permute("fdsfsadfa", 0);
+        
+        
+        //if ((typoTypeArray == null)) {
+//            typoTypeArray.add( new Repetition() );
+//            typoTypeArray.add( new Insertion( keyboard ) );
+//            typoTypeArray.add( new Deletion() );
+//            typoTypeArray.add( new Transposition() );
+//            typoTypeArray.add( new FatFingering( keyboard ) );
+        //}
+        
+        int randIntNumErrorFreq = (new Random()).nextInt(9);
+        int numOfErrors = 0;
+        ArrayList<RandomPermutation> selectedTypoTypeArrayList = new ArrayList();
+        
+        if (randIntNumErrorFreq < 2) {
+            numOfErrors = 0;
+        }
+        else if (randIntNumErrorFreq < 8) {
+            System.out.println("1 typo added");
+            numOfErrors = 1;
+        }
+        else if (randIntNumErrorFreq < 10) {
+            System.out.println("2 typos added");
+            numOfErrors = 2;
+        }
+        
+        if (numOfErrors == 0) {
+            System.out.println("no typos added");
+            return realString;
+        }
+        
+        else {
+            for (int i = 0; i < numOfErrors; i++) {
+                selectedTypoTypeArrayList.add(typoTypeArray[((new Random()).nextInt(typoTypeArray.length))]);
+            }
+            
+            if (selectedTypoTypeArrayList != null) {
+                for (int i = 0; i < selectedTypoTypeArrayList.size(); i ++) {
+                    
+                    
+                    copyOfRealString = ((RandomPermutation)selectedTypoTypeArrayList.get(i)).permute(copyOfRealString);
+                }
+            }
+            
+        }
+        
+        return copyOfRealString;
+    }
+}

@@ -1,6 +1,6 @@
 import crawler.concreteCrawler.Crawler;
-import crawler.sort.CriteriaSorter;
 import filter.concreteFilters.CHeaderFilesOnly;
+import filter.concreteFilters.JavaFilesOnly;
 import filter.concreteFilters.TextFilesOnly;
 import filter.filterTypes.ORFilter;
 import lucene.Machine;
@@ -20,29 +20,6 @@ public class MainTest
             System.out.println(repositories.get( i ).getName() );
     }
 
-    public static void printMergedFiles( List<File> mergedFiles )
-    {
-        for ( File file : mergedFiles )
-        {
-            BufferedReader br = null;
-            try
-            {
-                br = new BufferedReader( new FileReader( file ) );
-                String text = null;
-
-                while ( ( text = br.readLine() ) != null )
-                    System.out.println( text );
-                System.out.println();
-                System.out.println();
-                System.out.println();
-            }
-            catch ( IOException e )
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public static List<File> createMergedFiles( List<GHRepository> repositories )
     {
         long counter = 0;
@@ -52,7 +29,7 @@ public class MainTest
             try
             {
                 MergePipeline mergePipeline = new MergePipeline( repository.getOwnerName(), repository.getName(), counter++ );
-                mergePipeline.filters().add(new ORFilter<>(new CHeaderFilesOnly(), new TextFilesOnly()));
+                mergePipeline.filters().add( new ORFilter<>( new ORFilter<>( new CHeaderFilesOnly(), new TextFilesOnly() ), new JavaFilesOnly() ) );
 
                 mergedFiles.add( mergePipeline.GetMergedFile() );
             }
@@ -72,15 +49,16 @@ public class MainTest
         keywords.add( "crawler" );
         keywords.add( "github" );
 
-        // add language for crawler
-        String language = "java";
+        // add languages for crawler
+        List<String> languages = new ArrayList<>();
+        languages.add( "java" );
 
         // create crawler and get related repos
-        Crawler crawler = new Crawler( 3 );
+        Crawler crawler = new Crawler( 25 );
         List<GHRepository > repositories = null;
         try
         {
-            repositories = crawler.getRepos(keywords, language, CriteriaSorter.BY_STARS);
+            repositories = crawler.getRepos( keywords, languages );
         }
         catch ( Exception e )
         {
@@ -92,9 +70,6 @@ public class MainTest
 
         // create a merged file for each repo
         List<File> mergedFiles = createMergedFiles( repositories );
-
-        // print each merged file
-        printMergedFiles( mergedFiles );
 
         // create lucene machine
         try

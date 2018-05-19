@@ -1,0 +1,266 @@
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\WebCrawler_Test\src\main\java\vaibscrawl\Controller2.java
+package vaibscrawl;
+
+import java.util.Date;
+import edu.uci.ics.crawler4j.crawler.Page;
+import edu.uci.ics.crawler4j.crawler.CrawlConfig;
+import edu.uci.ics.crawler4j.crawler.CrawlController;
+import edu.uci.ics.crawler4j.fetcher.PageFetcher;
+import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
+import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
+import java.util.ArrayList;
+import java.util.Map;
+import Jama.Matrix;
+import org.jgrapht.DirectedGraph;
+import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
+
+//import Jama.Matrix;
+/**
+ * @author Vaibs
+ * iseebug.com
+ *
+ */
+
+@SuppressWarnings("deprecation")
+public class Controller2 {
+    public static void main(String[] args) throws Exception {
+    	String crawlStorageFolder = "/data/crawl/root";
+        int numberOfCrawlers = 10;
+
+        CrawlConfig config = new CrawlConfig();
+        config.setCrawlStorageFolder(crawlStorageFolder);
+        config.setPolitenessDelay(200);
+        config.setMaxPagesToFetch(1000);
+        config.setResumableCrawling(false);
+        config.setIncludeBinaryContentInCrawling(true);
+        
+        /*
+         * Instantiate the controller for this crawl.
+         */
+        PageFetcher pageFetcher = new PageFetcher(config);
+        RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
+        RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
+        CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
+
+        /*
+         * For each crawl, you need to add some seed urls. These are the first
+         * URLs that are fetched and then the crawler starts following links
+         * which are found in these pages
+         */
+        controller.addSeed("https://sikaman.dyndns.org/");
+        controller.addSeed("https://sikaman.dyndns.org/courses/");
+        controller.addSeed("https://sikaman.dyndns.org/courses/4601");
+    	controller.addSeed("https://carleton.ca/");
+        controller.addSeed("https://github.com/");
+        controller.addSeed("https://www.linkedin.com/");
+        controller.addSeed("https://carleton.ca/scs/");
+        controller.addSeed("https://pastebin.com/");
+        controller.addSeed("https://stackoverflow.com/");
+        controller.addSeed("https://pages.github.com/");
+        /*
+         * Start the crawl. This is a blocking operation, meaning that your code
+         * will reach the line after this only when crawling is finished.
+         */
+
+        //DirectedGraph<Integer, DefaultEdge> dg = PageGraph.getInstance().getDg();
+        
+        controller.start(MVaibsWecker2.class, numberOfCrawlers);
+        
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\WebCrawler_Test\src\main\java\vaibscrawl\Graph.java
+package vaibscrawl;
+import java.io.Serializable;
+public class Graph implements Serializable{
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\WebCrawler_Test\src\main\java\vaibscrawl\GraphTester.java
+package vaibscrawl;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import org.jgrapht.ListenableGraph;
+import org.jgrapht.ext.JGraphXAdapter;
+import org.jgrapht.graph.DefaultWeightedEdge;
+import org.jgrapht.graph.ListenableDirectedWeightedGraph;
+import com.mxgraph.layout.mxCircleLayout;
+import com.mxgraph.layout.mxIGraphLayout;
+import com.mxgraph.swing.mxGraphComponent;
+
+public class GraphTester {
+
+    private static void createAndShowGui() {
+        JFrame frame = new JFrame("DemoGraph");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        ListenableGraph<String, MyEdge> g = buildGraph();
+        JGraphXAdapter<String, MyEdge> graphAdapter = 
+                new JGraphXAdapter<String, MyEdge>(g);
+
+        mxIGraphLayout layout = new mxCircleLayout(graphAdapter);
+        layout.execute(graphAdapter.getDefaultParent());
+
+        frame.add(new mxGraphComponent(graphAdapter));
+
+        frame.pack();
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGui();
+            }
+        });
+    }
+
+    public static class MyEdge extends DefaultWeightedEdge {
+        @Override
+        public String toString() {
+            return String.valueOf(getWeight());
+        }
+    }
+
+    public static ListenableGraph<String, MyEdge> buildGraph() {
+        ListenableDirectedWeightedGraph<String, MyEdge> g = 
+            new ListenableDirectedWeightedGraph<String, MyEdge>(MyEdge.class);
+
+        String x1 = "x1";
+        String x2 = "x2";
+        String x3 = "x3";
+
+        g.addVertex(x1);
+        g.addVertex(x2);
+        g.addVertex(x3);
+
+        MyEdge e = g.addEdge(x1, x2);
+        g.setEdgeWeight(e, 1);
+        e = g.addEdge(x2, x3);
+        g.setEdgeWeight(e, 2);
+
+        e = g.addEdge(x3, x1);
+        g.setEdgeWeight(e, 3);
+
+        return g;
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\WebCrawler_Test\src\main\java\vaibscrawl\multipleCrawler.java
+//This is a multi threaded crawler that enables each thread that has one seed
+
+package vaibscrawl;
+
+import edu.uci.ics.crawler4j.crawler.CrawlConfig; 
+import edu.uci.ics.crawler4j.crawler.CrawlController; 
+import edu.uci.ics.crawler4j.fetcher.PageFetcher; 
+import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig; 
+import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
+import java.util.Date;
+
+
+
+public class multipleCrawler{
+	public static void main(String[] args) throws Exception {
+	String crawlStorageFolder = "/data/crawl/root";
+	int numberOfCrawlers = 1;
+	CrawlConfig config1 = new CrawlConfig(); 
+	CrawlConfig config2 = new CrawlConfig();
+	
+	
+	PageFetcher pageFetcher1 = new PageFetcher(config1); 
+	PageFetcher pageFetcher2 = new PageFetcher(config2); 
+
+	RobotstxtConfig robotstxtConfig = new RobotstxtConfig(); 
+	RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher1);
+	
+	CrawlController controller1 = new CrawlController(config1, pageFetcher1, robotstxtServer); 
+	CrawlController controller2 = new CrawlController(config2, pageFetcher2, robotstxtServer);
+	
+	controller1.addSeed("https://sikaman.dyndns.org/courses/4601");
+	controller1.addSeed("https://sikaman.dyndns.org/");
+	controller1.addSeed("https://sikaman.dyndns.org/courses/");
+	controller2.addSeed("https://carleton.ca/");
+    controller2.addSeed("https://github.com/");
+    controller1.start(MVaibsWecker2.class, numberOfCrawlers);
+    controller2.start(MVaibsWecker2.class, numberOfCrawlers);
+	}
+	 
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\WebCrawler_Test\src\main\java\vaibscrawl\MVaibsWecker2.java
+package vaibscrawl;
+
+import java.util.Set;
+import java.util.logging.LogManager;
+import java.util.regex.Pattern;
+
+import edu.uci.ics.crawler4j.crawler.Page;
+import edu.uci.ics.crawler4j.crawler.WebCrawler;
+import edu.uci.ics.crawler4j.parser.HtmlParseData;
+import edu.uci.ics.crawler4j.url.WebURL;
+import java.net.UnknownHostException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import com.mongodb.*;
+import org.bson.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ * @author Vaibs
+ *
+ */
+public class MVaibsWecker2 extends WebCrawler {
+    // final static Logger logger = Logger.getLogger(MVaibsWecker.class);
+	static int counter = 0;
+    private final static Pattern FILTERS = Pattern
+	    .compile(".*(\\.(css|js|gif|jpe?g" + "|png|mp3|mp3|zip|gz))$");
+    String urli = "https://sikaman.dyndns.org/";
+
+    /**
+     * This method receives two parameters. The first parameter is the page in
+     * which we have discovered this new url and the second parameter is the new
+     * url. You should implement this function to specify whether the given url
+     * should be crawled or not (based on your crawling logic). In this example,
+     * we are instructing the crawler to ignore urls that have css, js, git, ...
+     * extensions and to only accept urls that start with
+     * "http://www.ics.uci.edu/". In this case, we didn't need the referringPage
+     * parameter to make the decision.
+     */
+    @Override
+    public boolean shouldVisit(Page referringPage, WebURL url) {
+	String href = url.getURL().toLowerCase();
+
+	return !FILTERS.matcher(href).matches();
+    }
+
+    /**
+     * This function is called when a page is fetched and ready to be processed
+     * by your program.
+     */
+    MongoClient client = new MongoClient("localhost", 27017);
+	@SuppressWarnings("deprecation")
+	DB database = client.getDB("WebCrawler_final");
+	DBCollection coll_temp = database.getCollection("Urls");
+    @Override
+    public void visit(Page page){
+        String url = page.getWebURL().getURL();
+        System.out.println("URL: " + url);
+		BasicDBObject document = new BasicDBObject();
+		document.put("url_id", counter);
+		document.put("url_Name", url);
+		coll_temp.insert(document);
+        if (page.getParseData() instanceof HtmlParseData) {
+            HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
+            String text = htmlParseData.getText();
+            String html = htmlParseData.getHtml();
+            Set<WebURL> links = htmlParseData.getOutgoingUrls();
+
+            System.out.println("Text length: " + text.length());
+            System.out.println("Html length: " + html.length());
+            System.out.println("Number of outgoing links: " + links.size());
+            System.out.println("Number of visited pages: " + counter);
+            counter++;
+        }
+   }
+
+}

@@ -25,7 +25,6 @@ public class CHeaderFilesOnly implements Filter< Asset<File> >
                                 .getName()
                                 .length());
 
-                System.out.println(extension);
 
                 if(extension.equals("h"))
                     newFiles.add(file);
@@ -46,7 +45,6 @@ public class CHeaderFilesOnly implements Filter< Asset<File> >
                             .getName()
                             .length());
 
-            System.out.println(extension);
 
             if(extension.equals("h"))
                 return true;

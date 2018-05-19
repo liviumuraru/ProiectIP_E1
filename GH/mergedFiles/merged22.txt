@@ -1,0 +1,749 @@
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\MySinaCrawler\IPrepo.txt
+111.161.65.79:80
+218.204.140.104:8118
+202.107.233.85:8080
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\MySinaCrawler\src\edu\bjtu\myc\Crawler.java
+package edu.bjtu.myc;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Vector;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import org.apache.http.client.ClientProtocolException;
+
+
+/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * @filename Crawler.java
+ * @version  1.0
+ * @note     Main Class: Crawl html pages from sina_tweet, and save to local file,
+ *                       then finally trans to txt and xml files
+ * @author   DianaCody
+ * @since    2014-09-27 15:23:28
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ 
+public class Crawler {
+	
+	/** 1.搜索页面是否存在 */
+	public boolean isExistResult(String html) {
+		boolean isExist = true;
+		Pattern pExist = Pattern.compile("\\\\u6ca1\\\\u6709\\\\u627e\\\\u5230\\\\u76f8"
+				+ "\\\\u5173\\\\u7684\\\\u5fae\\\\u535a\\\\u5462\\\\uff0c\\\\u6362\\\\u4e2a"
+				+ "\\\\u5173\\\\u952e\\\\u8bcd\\\\u8bd5\\\\u5427\\\\uff01");//没有找到相关的微博呢，换个关键词试试吧！
+		Matcher mExist = pExist.matcher(html);
+		if(mExist.find()) {
+			isExist = false;
+		}
+		return isExist;
+	}
+	
+	public static void main(String[] args) throws ClientProtocolException, URISyntaxException, IOException, InterruptedException {
+		long starttime = System.currentTimeMillis();
+		String[] searchwords = {"samsung", "iPhone6", "htc", "huawei", "xiaomi", "zte", "lenovo", "mx", "coolpad",
+				"google", "IBM", "Microsoft", "Amazon", "Intel", "Apple"};
+		System.out.println("");
+		File dirGetTweetSub = new File(Utils.ROOTDIR + "tweethtml/");
+		dirGetTweetSub.mkdirs();
+		File dirGetTweetTxtSub = new File(Utils.ROOTDIR + "tweettxt/");
+		dirGetTweetTxtSub.mkdirs();
+		File dirGetTweetXmlSub = new File(Utils.ROOTDIR + "tweetxml/");
+		dirGetTweetXmlSub.mkdirs();
+		Vector<String> ip = new Vector<String>();
+		ip = FileWR.getLines(Utils.ROOTDIR + "IPrepo.txt");
+		int ipNum = ip.size();
+		int iIP = 0;
+		for(int n=0; n<searchwords.length; n++) {
+			String searchword = searchwords[n];
+			String dirPath = Utils.ROOTDIR + "tweethtml/" + searchword;
+			File f = new File(dirPath);
+			f.mkdirs();
+			int totalPage = 50;
+			System.out.println("Start to download html pages of the topic: " + searchword);
+			String html;
+			for(int i=totalPage; i>0; i--) {
+				String hostName = ip.get(iIP).split(":")[0];
+				int port = Integer.parseInt(ip.get(iIP).split(":")[1]);
+				html = new LoadHTML().getHTML("http://s.weibo.com/weibo/" + searchword + "&nodup=1&page=" + String.valueOf(i), hostName, port);
+				System.out.println("http://s.weibo.com/weibo/" + searchword + "&nodup=1&page=" + String.valueOf(i));
+				int iReconn = 0;
+				while(html.equals("null")) {
+					html = new LoadHTML().getHTML("http://s.weibo.com/weibo/" + searchword + "&nodup=1&page=" + String.valueOf(i), hostName, port);
+					iReconn ++;
+					System.out.println(ip.get(iIP) + " reconnected" + iReconn + " times.");
+					//connnect over 4 times, then break.
+					if(iReconn == 4) {
+						break;
+					}
+				}
+				if(html.equals("null")) {
+					System.out.println("Failed 3 times, now trying a new IP from IPrepo...");
+					if(iIP == ipNum-1) {
+						System.out.println("All valid proxy IPs have been tried, still cannot get all data, now trying a valid proxy IP list again...");
+						iIP = 0;
+						System.out.println("IP: " + ip.get(iIP) + ", start connecting...");
+					}
+					else {
+						iIP ++;
+						System.out.println("IP: " + ip.get(iIP) + ", start connecting...");
+					}
+					i ++;
+				}
+		
+				//写入硬盘
+				Utils.write2disk(searchword, Utils.ROOTDIR + "tweethtml/", i, html);
+			}
+			System.out.println("topic \"" + searchword + "\"crawling has been done!****");
+			System.out.println("Begin writing the tweets to local files: txt & xml");
+			String saveTXTPath = Utils.ROOTDIR + "tweettxt/" + searchword + ".txt";
+			HTMLParser htmlParser = new HTMLParser();
+			Vector<String> tweets = htmlParser.write2txt(searchword, dirPath, saveTXTPath);
+			String saveXMLPath = Utils.ROOTDIR + "tweetxml/" + "/" + searchword + ".xml";
+			htmlParser.writeVector2xml(tweets, saveXMLPath);
+			System.out.println("Save to txt & xml files succeed.");
+			
+			long endtime = System.currentTimeMillis();
+			System.out.println((double)(endtime-starttime)/60000 + "mins");
+		}
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\MySinaCrawler\src\edu\bjtu\myc\FileWR.java
+package edu.bjtu.myc;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Vector;
+
+/** * * * * * * * * * * * * * * * * * * * * * *
+ * @filename FileWR.java
+ * @version  1.0
+ * @note     Write and Read from files
+ * @author   DianaCody
+ * @since    2014-09-27 15:23:28
+ * * * * * * * * * * * * * * * * * * * * * * */
+
+public class FileWR {
+	public static Vector<String> getLines(String path) throws IOException {
+		Vector<String> lines = new Vector<String>();
+		File f = new File(path); //"e:/tweet/validIPs.txt"
+		FileReader fr = new FileReader(f);
+		BufferedReader br = new BufferedReader(fr);
+		String s;
+		while((s = br.readLine()) != null) {
+			lines.add(s);
+		}
+		br.close();
+		return lines;
+	}
+	
+	public static void write2txt(Vector<String> vector, String savePath) throws IOException {
+		File f = new File(savePath);
+		FileWriter fw = new FileWriter(f);
+		BufferedWriter bw = new BufferedWriter(fw);
+		for(int i=0; i<vector.size(); i++) {
+			bw.write(vector.get(i) + "\r\n");
+			//System.out.println(vector.get(i));
+		}
+		bw.close();
+	}
+	
+	/** (公共方法)把String写到本地文件 */
+	public static void writeString(String s, String savePath) throws IOException {
+		File f = new File(savePath);
+		FileWriter fw = new FileWriter(f);
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write(s);
+		bw.close();
+	}
+	
+	/** 由html文件得到微博 */
+	public static String html2String(String htmlPath) throws IOException {
+		String html = "";
+		File f = new File(htmlPath);
+		FileReader fr = new FileReader(f);
+		BufferedReader br = new BufferedReader(fr);
+		String s;
+		while((s=br.readLine()) != null) {
+			html += s;
+		}
+		br.close();
+		return html;
+	}
+	
+	/** 把某关键字搜索到的微博写到txt文件里去 */
+	public static void writeVector(Vector<String> vector, String savePath) throws IOException {
+		File f = new File(savePath);
+		FileWriter fw = new FileWriter(f);
+		BufferedWriter bw = new BufferedWriter(fw);
+		for(int i=0; i<vector.size(); i++) {
+			bw.write(vector.get(i) + "\r\n");
+		}
+		bw.close();
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\MySinaCrawler\src\edu\bjtu\myc\HTMLParser.java
+package edu.bjtu.myc;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.dom4j.DocumentHelper;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import com.sun.net.httpserver.Filter;
+
+/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * @filename HTMLParser.java
+ * @version  1.0
+ * @note     Parse HTML pages, and write result to txt file and xml file with dom4j
+ * @author   DianaCody
+ * @since    2014-09-27 15:23:28
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+public class HTMLParser {
+	public Vector<String> splitHTML(String html) {
+		Vector<String> pieces = new Vector<String>();
+		Pattern p = Pattern.compile("<dl class=\"feed_list\".+?<dd class=\"clear\">");
+		Matcher m = p.matcher(html);
+		while(m.find()) {
+			pieces.add(m.group());
+		}
+		return pieces;
+	}
+	
+	public String parse(String html) {
+		String s = "";
+		Document doc = Jsoup.parse(html);
+		Elements userNames = doc.select("dt[class].face > a");
+		Elements userids = doc.select("span > a[action-data]");
+		Elements dates = doc.select("a[date]");
+		Elements tweetids = doc.select("dl[mid]");
+		Elements tweets = doc.select("p > em");
+		Elements forwardNums = doc.select("a:contains(转发)");
+		Elements commentNums = doc.select("a:contains(评论)");
+		for(Element userName : userNames) {
+			String attr = userName.attr("title");
+			s += "<userName> " + attr + " </userName>";
+		}
+		for(Element userid : userids) {
+			String attr = userid.attr("action-data");
+			attr = attr.substring(attr.indexOf("uid="));
+			Pattern p = Pattern.compile("[0-9]+");
+			Matcher m = p.matcher(attr);
+			if(m.find()) {
+				attr = m.group();
+			}
+			s += "<userid> " + attr + " </userid>";
+		}
+		for(Element date : dates) {
+			String attr = date.text();
+			s += "<date> " + attr + " </date>";
+		}
+		for(Element tweetid : tweetids) {
+			String attr = tweetid.attr("mid");
+			s += "<tweetid> " + attr + " </tweetid>";
+		}
+		for(Element tweet : tweets) {
+			String attr = tweet.text();
+			s += "<tweetContent> " + attr + " </tweetContent>";
+		}
+		for(Element forwardNum : forwardNums) {
+			String attr = forwardNum.text();
+			if(attr.equals("转发")) {
+				attr = "0";
+			}
+			else {
+				if(!attr.contains("转发(")) {
+					attr = "0";
+				}
+				else {
+					attr = attr.substring(attr.indexOf("转发(")+3, attr.indexOf(")"));
+				}
+			}
+			System.out.println(attr);
+			s += "<forwardNum> " + attr + " </forwardNum>";
+			
+		}
+		for(Element commentNum : commentNums) {
+			String attr = commentNum.text();
+			if(attr.equals("评论")) {
+				attr = "0";
+			}
+			else {
+				if(!attr.contains("评论(")) {
+					attr = "0";
+				}
+				else {
+					//modify
+					attr = attr.substring(attr.indexOf("评论(")+3, attr.indexOf(")"));
+				}
+			}
+			System.out.println(attr);
+			s += "<commentNum> " + attr + " </commentNum>";
+		}
+		return s;
+	}
+	
+	public Vector<String> write2txt(String searchword, String dirPath, String saveTXTPath) throws IOException {
+		Vector<String> tweets = new Vector<String>();
+		String onePiece;
+		File f = new File(saveTXTPath); //建立一个空文件
+		FileWriter fw = new FileWriter(f);
+		BufferedWriter bw = new BufferedWriter(fw);
+		//dirPath = "e:/tweet/tweettxt/";
+		for(int page=1; page<51; page++) {
+			//String path = dirPath + "/" + searchword + page + ".html";
+			String path = dirPath + "/" + page + ".html";
+			System.out.println("=================" + path);
+			File ff = new File(path);
+			if(ff.exists()) {
+				String html = FileWR.html2String(path);
+				Vector<String> pieces = new HTMLParser().splitHTML(html);
+				for(int i=0; i<pieces.size(); i++) {
+					onePiece = pieces.get(i);
+					if(onePiece.contains("feed_list_forwardContent")) {
+						Pattern p = Pattern.compile("feed_list_forwadContent.+?<p class=\"info W_linkb W_textb");
+						Matcher m = p.matcher(onePiece);
+						if(m.find()) {
+							onePiece = onePiece.replace(m.group(), "");
+						}
+					}
+//					System.out.println("=============" + onePiece);
+					String s = new HTMLParser().parse(onePiece);
+					tweets.add(s);
+					bw.write(s+"\r\n"); //每次写完一条之后要换行!
+				}
+			}
+		}
+		bw.close();
+		return tweets;
+	}
+
+	public void writeVector2xml(Vector<String> vector, String saveXMLPath) throws IOException {
+		int vectorSize = vector.size();
+		String oneIniTweet;
+		OutputFormat format = OutputFormat.createPrettyPrint();
+		format.setEncoding("GB2312"); //xml被识别格式仅为gb2312,默认utf8不被识别
+		File f = new File(saveXMLPath);
+		f.createNewFile(); //建立一个空xml文件
+		FileWriter fw = new FileWriter(f);
+		org.dom4j.Document document = DocumentHelper.createDocument();
+		org.dom4j.Element rootElement = document.addElement("tweets"); //根节点tweets
+		rootElement.addAttribute("totalNumber", String.valueOf(vectorSize)); //设置属性:总条目数
+		for(int j=0; j<vectorSize; j++) {
+			oneIniTweet = vector.get(j);
+			String userName = oneIniTweet.substring(oneIniTweet.indexOf("<userName> ")+12, oneIniTweet.indexOf(" </userName>"));
+			String userid = oneIniTweet.substring(oneIniTweet.indexOf("<userid> ")+10, oneIniTweet.indexOf(" </userid>"));
+			String date = oneIniTweet.substring(oneIniTweet.indexOf("<date> ")+8, oneIniTweet.indexOf(" </date>"));
+			String tweetid = oneIniTweet.substring(oneIniTweet.indexOf("<tweetid> ")+11, oneIniTweet.indexOf(" </tweetid>"));
+			String forwardNum = oneIniTweet.substring(oneIniTweet.indexOf("<forwardNum> ")+14, oneIniTweet.indexOf(" </forwardNum>"));
+			String commentNum = oneIniTweet.substring(oneIniTweet.indexOf("<commentNum> ")+14, oneIniTweet.indexOf(" </commentNum>"));
+			String tweetContent = oneIniTweet.substring(oneIniTweet.indexOf("<tweetContent> ")+17, oneIniTweet.indexOf(" </tweetContent>"));
+			org.dom4j.Element tweetElement = rootElement.addElement("tweet");
+			tweetElement.addAttribute("userName", userName);
+			tweetElement.addAttribute("userid", userid);
+			tweetElement.addAttribute("date", date);
+			tweetElement.addAttribute("tweetid", tweetid);
+			tweetElement.addAttribute("forwardNum", forwardNum);
+			tweetElement.addAttribute("commentNum", commentNum);
+			tweetElement.setText(tweetContent); // 设置节点文本内容
+		}
+		XMLWriter xw = new XMLWriter(fw, format);
+		xw.write(document);
+		xw.close();
+	}
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\MySinaCrawler\src\edu\bjtu\myc\IPrepo.java
+package edu.bjtu.myc;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.apache.http.client.ClientProtocolException;
+
+/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * @filename IPrepo.java
+ * @version  1.0
+ * @note     Get local IP repository
+ *             (1) Find candidate IPs from proxyIP website;
+ *             (2) Verify IPs to use them;
+ * @author   DianaCody
+ * @since    2014-09-27 15:23:28
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+public class IPrepo {
+	
+	/** candidate IPs from proxyIP website */
+	public static Vector<String> getProxyIPs(String html) throws ClientProtocolException, IOException {
+		Vector<String> IPs = new Vector<String>();
+		Pattern p = Pattern.compile("<td>\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}</td>\\n+?\\s+?<td>\\d{1,5}</td>"); //<td>\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}</td>\n+?\s+?<td>\d{1,5}</td>
+		Matcher m = p.matcher(html);
+		String s, ip, port, address;
+		while(m.find()) {
+			s = m.group();
+			ip = s.split("\\n+?\\s+?")[0].replace("<td>", "").replace("</td>", "");
+			port = s.split("\\n+?\\s+?")[1].replace("<td>", "").replace("</td>", "").trim();
+			address = ip + ":" +port;
+			if(Integer.parseInt(port) < 65535) { //port:0~65535
+				if(! IPs.contains(address)) {
+					IPs.add(address);
+				}
+			}
+			System.out.println("Find an ip address: " + address);
+		}
+		return IPs;
+	}
+	
+	/**  Find proxy IPs from website "http://www.xici.net.co/" */
+	public static Vector<String> getIPsPageLinks(String ipLibURL) throws ClientProtocolException, URISyntaxException, IOException {
+		Vector<String> IPsPageLinks = new Vector<String>();
+		IPsPageLinks.add("http://www.xici.net.co/nn/"); //national High anonymity IPs
+		IPsPageLinks.add("http://www.xici.net.co/nt/"); //national transparent IPs
+		IPsPageLinks.add("http://www.xici.net.co/wn/"); //international High anonymity IPs
+		IPsPageLinks.add("http://www.xici.net.co/wt/"); //international transparent IPs
+		IPsPageLinks.add("http://www.xici.net.co/qq/"); //qq proxy IPs
+		return IPsPageLinks;
+	}
+	
+	/**
+	 * Get all unverified proxy in all IP library links.
+	 * @param a specified URL "http://www.xici.net.co/"
+	 * @return a String Vector contains all unverified IPs
+	 */
+	public static Vector<String> getAllProxyIPs(String ipLibURL) throws ClientProtocolException, IOException, URISyntaxException {
+		Vector<String> IPsPageLinks = getIPsPageLinks(ipLibURL); //"http://www.xici.net.co/"
+		Vector<String> onePageIPs = new Vector<String>();
+		Vector<String> allIPs = new Vector<String>();
+		for(int i=0; i<IPsPageLinks.size(); i++) {
+			String url = IPsPageLinks.get(i);
+			String[] html = new LoadHTML().getHTML(url);
+			//modify
+			if(html == null) continue;
+			//end
+			int page = 2;
+		
+			while((html[0] != null)&&(! html[0].equals("404"))) {
+				//System.out.println("状态码 " + html[0]);
+				System.out.println("start finding proxy IPs under this link: " + url);
+				onePageIPs = getProxyIPs(html[1]);
+				for(int j=0; j<onePageIPs.size(); j++) {
+					String s = onePageIPs.get(j);
+					if(! allIPs.contains(s)) {
+						allIPs.add(s);
+					}
+				}
+				if(url.endsWith("/\\d+?/?")) {//page like "http://www.xici.net.co/3" --the 3rd page
+					url = url + page + ".html";
+				}
+				else {
+					url = url + ".html";
+				}
+				//System.out.println("page= " + page);
+				html = new LoadHTML().getHTML(url);
+				//System.out.println("状态码 " + html[0]);
+				page ++;
+			}
+		}
+		System.out.println("total proxy IP number: " + allIPs.size());
+		return allIPs;
+	}
+	
+
+	/** Test all proxy IPs and select a valid one from all candidate proxy IPs.
+	 * @param Vector<String>: All proxy IPs
+	 * @return Vector<String>: All valid IPs
+	 * @throws ClientProtocolException, IOException
+	 */
+	public static Vector<String> getValidProxyIPs(Vector<String> allIPs) throws ClientProtocolException, IOException {
+		System.out.println("Start getting valid proxy IPs...");
+		Vector<String> validHostname = new Vector<String>();
+		Vector<String> validIPs = new Vector<String>();
+		int validIPNum = 0;
+		for(int i=0; i<allIPs.size(); i++) {
+			System.out.println("No." + i + " ip be verified.");
+			if(i == 100) {
+				break;
+			}
+			String ip = allIPs.get(i);
+			String hostName = ip.split(":")[0];
+			int port = Integer.parseInt(ip.split(":")[1]);
+			//modify
+			//在线查询认证IP网站:"http://www.ip138.com/ips138.asp"
+			String varifyURL = "http://www.ip138.com/ips138.asp";//http://ip.uee.cn/";
+			//modify
+			String html = new LoadHTML().getHTMLbyProxy(varifyURL, hostName, port);
+			System.out.println("============html" + html);
+			int iReconn = 0;
+			while(html.equals("null")) { //reconnect 2 times (total 3 times connection)
+				if(iReconn == 2) {
+					break;
+				}
+				html = new LoadHTML().getHTMLbyProxy(varifyURL, hostName, port);
+				iReconn ++;
+			}
+			Pattern p = Pattern.compile("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}");
+			Matcher m = p.matcher(html);
+			String s;
+			if(m.find()) {
+				s = m.group();
+				if(! validHostname.contains(s)) {
+					validHostname.add(s);
+					validIPs.add(s+":"+String.valueOf(port));
+					//bw.write(s+"\r\n"); //write a valid proxy ip
+					validIPNum ++;
+					System.out.println("Valid proxy IP"+s+": "+String.valueOf(port));
+				}
+			}
+			else {
+				System.out.println("Html doesn't contain an IP.");
+			}
+		}
+		System.out.println("Total number of valid IPs: " + validIPNum);
+		return validIPs;		
+	}
+	
+	/**
+	 * Verify all valid IPs then save to the IPrepo (data file).
+	 * @param validIPs -the Vector<String> contains all valid IPs
+	 * @param repoPath -a String giving a path to save all final usable IPs. "Final usable" IP indicate
+	 * @return IPrepo
+	 * @throws ClientProtocolException, IOException
+	 */
+	public Vector<String> classifyIPs(Vector<String> validIPs, String repoPath) throws ClientProtocolException, IOException {
+		final String verificationURL = "http://s.weibo.com/weibo/iphone&nodup=1&page=50";
+		//Vector<String> utf8IPs = new Vector<String>();
+		Vector<String> IPrepo = new Vector<String>();
+		String ip;
+		//int ConnectionTimes = 0;
+		for(int i=0; i<validIPs.size(); i++) {
+			ip = validIPs.get(i);
+			String html = new LoadHTML().getHTMLbyProxy(verificationURL, ip.split(":")[0], Integer.parseInt(ip.split(":")[1]));
+			int iReconnectTimes = 0;
+			while(html.equals("null")) {
+				if(iReconnectTimes == 4) {
+					break;
+				}
+				html = new LoadHTML().getHTMLbyProxy(verificationURL, ip.split(":")[0], Integer.parseInt(ip.split(":")[1]));
+				iReconnectTimes ++;
+				System.out.println(ip+" is reconnecting the "+iReconnectTimes+" times");
+			}
+		}
+		return IPrepo;
+	}
+	
+	public static void main(String[] args) throws ClientProtocolException, IOException, URISyntaxException, InterruptedException {
+		long starttime = System.currentTimeMillis();
+		String ipLibURL = "http://www.xici.net.co/";
+		Vector<String> allIPs = getAllProxyIPs(ipLibURL);
+		Vector<String> validIPs = getValidProxyIPs(allIPs);
+		Vector<String> IPrepo = new IPrepo().classifyIPs(validIPs, Utils.ROOTDIR + "IPrepo.txt");
+		FileWR.write2txt(allIPs, Utils.ROOTDIR + "allIPs.txt");
+		FileWR.write2txt(validIPs, Utils.ROOTDIR + "validIPs.txt");
+		FileWR.write2txt(IPrepo, Utils.ROOTDIR + "IPrepo.txt");
+		
+		long endtime = System.currentTimeMillis();
+		System.out.println((double)(endtime-starttime)/60000 + "mins");
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\MySinaCrawler\src\edu\bjtu\myc\LoadHTML.java
+package edu.bjtu.myc;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.text.ParseException;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieSpec;
+import org.apache.http.cookie.CookieSpecProvider;
+import org.apache.http.cookie.MalformedCookieException;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
+import org.apache.http.impl.cookie.BestMatchSpecFactory;
+import org.apache.http.impl.cookie.BrowserCompatSpec;
+import org.apache.http.impl.cookie.BrowserCompatSpecFactory;
+import org.apache.http.protocol.HttpContext;
+import org.apache.http.util.EntityUtils;
+
+/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * @filename LoadHTML.java
+ * @version  1.0
+ * @note     (1) Download html pages according to url (search keywords),
+ *           (2) Defined 3 methods to get html: normal, custom cookie policy, and proxyIP.
+ * @author   DianaCody
+ * @since    2014-09-27 15:23:28
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+public class LoadHTML {
+	
+	/** 一般方法 */
+	public String[] getHTML(String url) throws ClientProtocolException, IOException {
+		String[] html = new String[2];
+		html[1] = "null";
+		RequestConfig requestConfig = RequestConfig.custom()
+				.setSocketTimeout(Utils.HTTP_TIMEOUT) //设置socket超时 6000
+				.setConnectTimeout(Utils.HTTP_TIMEOUT) //设置connect超时 6000
+				.build();
+		CloseableHttpClient httpClient = HttpClients.custom()
+				.setDefaultRequestConfig(requestConfig)
+				.build();
+		HttpGet httpGet = new HttpGet(url);
+		
+		try {
+			CloseableHttpResponse response = httpClient.execute(httpGet);
+			//System.out.println(response.getStatusLine().getStatusCode());
+			html[0] = String.valueOf(response.getStatusLine().getStatusCode());
+			html[1] = EntityUtils.toString(response.getEntity(), "utf-8");
+			//System.out.println(html);
+		} catch (IOException e) {
+			System.out.println("Connection timeout...");
+		}
+		return html;
+	}
+	
+	/** cookie方法的getHTMl(): 设置cookie策略,防止cookie rejected问题,拒绝写入cookie
+	 *  --重载,3参数:url, hostName, port */
+	public String getHTML(String url, String hostName, int port) throws URISyntaxException, ClientProtocolException, IOException {
+		//自定义的cookie策略,解决cookie rejected问题(cookie拒绝写入)
+		HttpHost proxy = new HttpHost(hostName, port);
+		DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
+		CookieSpecProvider cookieSpecProvider = new CookieSpecProvider() {
+			public CookieSpec create(HttpContext context) {
+				return new BrowserCompatSpec() {
+					@Override
+					public void validate(Cookie cookie, CookieOrigin origin) throws MalformedCookieException {
+						//Oh, I am easy;
+					}
+				};
+			}
+		};
+		Registry<CookieSpecProvider> r = RegistryBuilder
+				.<CookieSpecProvider> create()
+				.register(CookieSpecs.BEST_MATCH, new BestMatchSpecFactory())
+				.register(CookieSpecs.BROWSER_COMPATIBILITY, new BrowserCompatSpecFactory())
+				.register("easy", cookieSpecProvider)
+				.build();
+		RequestConfig requestConfig = RequestConfig.custom()
+				.setCookieSpec("easy")
+				.setSocketTimeout(2*Utils.HTTP_TIMEOUT) //设置socket超时
+				.setConnectTimeout(2*Utils.HTTP_TIMEOUT) //设置connect超时
+				.build();
+		CloseableHttpClient httpClient = HttpClients.custom()
+				.setDefaultCookieSpecRegistry(r)
+				.setRoutePlanner(routePlanner)
+				.build();
+		HttpGet httpGet = new HttpGet(url);
+		httpGet.setConfig(requestConfig);
+		String html = "null";
+		try {
+			CloseableHttpResponse response = httpClient.execute(httpGet);
+			html = EntityUtils.toString(response.getEntity(), "utf-8");
+		} catch (IOException e) {
+			System.out.println("Connection timeout...");
+		}
+		return html;
+	}
+	
+	/** proxy代理IP方法 */
+	public String getHTMLbyProxy(String targetURL, String hostName, int port) throws ClientProtocolException, IOException {
+		HttpHost proxy = new HttpHost(hostName, port);
+		String html = "null";
+		DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
+		RequestConfig requestConfig = RequestConfig.custom()
+				.setSocketTimeout(Utils.HTTP_TIMEOUT) //设置socket超时 2000
+				.setConnectTimeout(Utils.HTTP_TIMEOUT) //设置connect超时 2000
+				.build();
+		CloseableHttpClient httpClient = HttpClients.custom()
+				.setRoutePlanner(routePlanner)
+				.setDefaultRequestConfig(requestConfig)
+				.build();
+		HttpGet httpGet = new HttpGet(targetURL); //http://www.ip138.com/ips138.asp
+		try {
+			CloseableHttpResponse response = httpClient.execute(httpGet);
+			int statusCode = response.getStatusLine().getStatusCode();
+			//System.out.println(response.getStatusLine().getStatusCode());
+			if(statusCode == HttpStatus.SC_OK) {
+				html = EntityUtils.toString(response.getEntity(), "gb2312");
+			}
+			response.close();
+			//System.out.println(html);
+		} catch (IOException e) {
+			System.out.println("Connection timeout...");
+		}
+		return html;
+	}
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\MySinaCrawler\src\edu\bjtu\myc\Utils.java
+package edu.bjtu.myc;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Vector;
+
+import org.omg.CORBA.TIMEOUT;
+
+
+public class Utils {
+
+	//root_dir
+	// switch to e:/result/tweet/
+	public static final String ROOTDIR = "/home/jangwee/result/tweet/";
+	
+	//http_timeout(ms)
+	public static final int HTTP_TIMEOUT = 6000 ; 
+	
+	//modify
+	public static void write2disk(String searchword,String dirPath,Integer pageIndex ,String htmlInfo) throws IOException{
+		File f = new File(dirPath +  searchword + "/" + pageIndex + ".html");
+		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw.write(htmlInfo);
+		bw.close();
+	}
+	//end 
+	
+	
+	public static void main(String[] args) throws IOException{
+		String saveTXTPath = "/home/jangwee/result/tweet/tweettxt/samsung.txt";
+		String searchword = "samsung";
+		HTMLParser htmlParser = new HTMLParser();
+		Vector<String> tweets = htmlParser.write2txt(searchword, "/home/jangwee/result/tweet/tweethtml/samsung", saveTXTPath);
+		String saveXMLPath = "/home/jangwee/result/tweet/tweetxml/" + "/" + searchword + ".xml";
+		htmlParser.writeVector2xml(tweets, saveXMLPath);
+		System.out.println("Save to txt & xml files succeed.");
+	}
+
+}

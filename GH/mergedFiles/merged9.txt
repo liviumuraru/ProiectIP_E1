@@ -1,0 +1,46 @@
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\html-link-extractor\src\crawler\WebCrawler.java
+package crawler;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.io.*;
+
+public class WebCrawler {
+
+	public static void main(String[] args) throws Exception  {
+		//Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxy", 8080)); UNCOMMENT IF YOU HAVE A PROXY CONNECTION
+
+		
+		String htmlurl = "https://google.com";//your url
+		
+		URLConnection webConnect = new URL(htmlurl).openConnection();//(proxy);	UNCOMMENT IF YOU HAVE A PROXY CONNECTION
+		BufferedReader in = new BufferedReader(new InputStreamReader(webConnect.getInputStream())); //Save html content (with getInputStream) in new Buffer (in)
+		String htmlcontent = org.apache.commons.io.IOUtils.toString(in);// convert Buffer to String
+		
+		List<String> extractedUrls = extractUrls(htmlcontent);//Call List<String> function and pass 'htmlcontent' content
+		for (String url : extractedUrls)
+		{
+		    System.out.println(url);
+		}
+		
+	}
+	
+	public static List<String> extractUrls(String text)// htmlcontent = text
+	{
+	    List<String> containedUrls = new ArrayList<String>();//create Array containedUrls
+	    String urlRegex = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";//Regex value to detect links
+	    Pattern pattern = Pattern.compile(urlRegex, Pattern.CASE_INSENSITIVE);//here the regular expressions will be applied over a whole line
+	    Matcher urlMatcher = pattern.matcher(text);//all results passed the regular expressions will now be passed to urlMatcher
+	    
+	    while (urlMatcher.find())//recall function until urlMatcher receives no values
+	    {
+	        containedUrls.add(text.substring(urlMatcher.start(0),
+	                urlMatcher.end(0)));
+	    }
+	    return containedUrls;
+	}
+	
+
+}

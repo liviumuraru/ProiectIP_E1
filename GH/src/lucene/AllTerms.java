@@ -44,7 +44,6 @@ public class AllTerms {
         pos = 0;
         for(Entry<String,Integer> s : allTerms.entrySet())
         {
-            System.out.println(s.getKey());
             s.setValue(pos++);
         }
     }

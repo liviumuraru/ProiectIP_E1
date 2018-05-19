@@ -1,0 +1,4615 @@
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\complete\src\main\java\hello\Quote.java
+package hello;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Quote {
+
+    private String type;
+    private Value value;
+
+    public Quote() {
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Value getValue() {
+        return value;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "Quote{" +
+                "type='" + type + '\'' +
+                ", value=" + value +
+                '}';
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\complete\src\main\java\hello\Value.java
+package hello;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Value {
+
+    private Long id;
+    private String quote;
+
+    public Value() {
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getQuote() {
+        return this.quote;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setQuote(String quote) {
+        this.quote = quote;
+    }
+
+    @Override
+    public String toString() {
+        return "Value{" +
+                "id=" + id +
+                ", quote='" + quote + '\'' +
+                '}';
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\Application.java
+package githubcrawler;
+
+import githubcrawler.domain.ReportPojo;
+import githubcrawler.service.RestGitHubFetcher;
+import githubcrawler.service.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
+
+// http://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/package-summary.html
+// https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#_learning_about_spring_boot_features
+
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+public class Application {
+
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
+
+    public static void main(String args[]) {
+        SpringApplication.run(Application.class);
+    }
+
+    @Bean
+    public RestController restController(){
+        return new RestController();
+    }
+
+    @Bean
+    public RestGitHubFetcher restFetcher(RestTemplate restTemplate) {
+        return new RestGitHubFetcher(restTemplate);
+    }
+
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
+
+    @Bean
+    public ReportPojo reportPojo() {
+        return new ReportPojo();
+    }
+
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\domain\BranchProtectionInfoReport.java
+package githubcrawler.domain;
+
+/**
+ * Created by adrian on 4/12/17.
+ */
+public class BranchProtectionInfoReport {
+
+    Boolean isRequireStatusChecks = false;
+    Boolean isIncludeAdministrators = false;
+    Boolean isRequireBranchesToBeUpToDate = false;
+
+
+    public Boolean getIncludeAdministrators() {
+        return isIncludeAdministrators;
+    }
+
+    public void setIncludeAdministrators(Boolean includeAdministrators) {
+        isIncludeAdministrators = includeAdministrators;
+    }
+
+    public Boolean getRequireBranchesToBeUpToDate() {
+        return isRequireBranchesToBeUpToDate;
+    }
+
+    public void setRequireBranchesToBeUpToDate(Boolean requireBranchesToBeUpToDate) {
+        isRequireBranchesToBeUpToDate = requireBranchesToBeUpToDate;
+    }
+
+
+    public Boolean getRequireStatusChecks() {
+        return isRequireStatusChecks;
+    }
+
+    public void setRequireStatusChecks(Boolean requireStatusChecks) {
+        isRequireStatusChecks = requireStatusChecks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BranchProtectionInfoReport that = (BranchProtectionInfoReport) o;
+
+        if (!isRequireStatusChecks.equals(that.isRequireStatusChecks)) return false;
+        if (!isIncludeAdministrators.equals(that.isIncludeAdministrators)) return false;
+        return isRequireBranchesToBeUpToDate.equals(that.isRequireBranchesToBeUpToDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = isRequireStatusChecks.hashCode();
+        result = 31 * result + isIncludeAdministrators.hashCode();
+        result = 31 * result + isRequireBranchesToBeUpToDate.hashCode();
+        return result;
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\domain\GitRepositoryReport.java
+package githubcrawler.domain;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by adrian on 4/12/17.
+ */
+public class GitRepositoryReport {
+
+    private String name = "";
+    private String actualDefaultBranch = "";
+    private List<String> branchesNames = new ArrayList<>();
+
+    private Map<String, BranchProtectionInfoReport> branchesProtectionInfo = new HashMap<String, BranchProtectionInfoReport>();
+
+    public void addBranchProtectionInfo(String branchName, BranchProtectionInfoReport branchProtectionInfoReport) {
+        branchesProtectionInfo.put(branchName, branchProtectionInfoReport);
+    }
+
+    public Map<String, BranchProtectionInfoReport> getBranchesProtectionInfo() {
+        return this.branchesProtectionInfo;
+    }
+
+    /* Criterion 1 - DTC git branching model*/
+    public Boolean getMasterBranchExists() {
+        return branchesNames.indexOf("master") != -1;
+    }
+
+    /* Criterion 2 - DTC git branching model*/
+    public Boolean getDevelopBranchExists() {
+        return branchesNames.indexOf("develop") != -1;
+    }
+
+    public void addBranchName(String name) {
+        branchesNames.add(name);
+    }
+
+    public String getActualDefaultBranch() {
+        return actualDefaultBranch;
+    }
+
+    public void setActualDefaultBranch(String actualDefaultBranch) {
+        this.actualDefaultBranch = actualDefaultBranch;
+    }
+
+    /* Criterion 4 - DTC git branching model*/
+    public Boolean getIsDefaultBranchDevelop() {
+        return getActualDefaultBranch().equals("develop");
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\domain\ReportPojo.java
+package githubcrawler.domain;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by adrian on 4/12/17.
+ */
+public class ReportPojo {
+
+    private List<GitRepositoryReport> gitRepoList = new ArrayList<>();
+
+    public void addRepoReport(GitRepositoryReport gitRepositoryReport) {
+        this.gitRepoList.add(gitRepositoryReport);
+    }
+
+    public List<GitRepositoryReport> getGitRepositoryReportList() {
+        return this.gitRepoList;
+    }
+
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\AuthorDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "email",
+        "date"
+})
+public class AuthorDTO {
+
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("date")
+    private String date;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("email")
+    public String getEmail() {
+        return email;
+    }
+
+    @JsonProperty("email")
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @JsonProperty("date")
+    public String getDate() {
+        return date;
+    }
+
+    @JsonProperty("date")
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public String toString() {
+        return "AuthorDTO{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\Author_.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "login",
+        "id",
+        "avatar_url",
+        "gravatar_id",
+        "url",
+        "html_url",
+        "followers_url",
+        "following_url",
+        "gists_url",
+        "starred_url",
+        "subscriptions_url",
+        "organizations_url",
+        "repos_url",
+        "events_url",
+        "received_events_url",
+        "type",
+        "site_admin"
+})
+public class Author_ {
+
+    @JsonProperty("login")
+    private String login;
+    @JsonProperty("id")
+    private Integer id;
+    @JsonProperty("avatar_url")
+    private String avatarUrl;
+    @JsonProperty("gravatar_id")
+    private String gravatarId;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("html_url")
+    private String htmlUrl;
+    @JsonProperty("followers_url")
+    private String followersUrl;
+    @JsonProperty("following_url")
+    private String followingUrl;
+    @JsonProperty("gists_url")
+    private String gistsUrl;
+    @JsonProperty("starred_url")
+    private String starredUrl;
+    @JsonProperty("subscriptions_url")
+    private String subscriptionsUrl;
+    @JsonProperty("organizations_url")
+    private String organizationsUrl;
+    @JsonProperty("repos_url")
+    private String reposUrl;
+    @JsonProperty("events_url")
+    private String eventsUrl;
+    @JsonProperty("received_events_url")
+    private String receivedEventsUrl;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("site_admin")
+    private Boolean siteAdmin;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("login")
+    public String getLogin() {
+        return login;
+    }
+
+    @JsonProperty("login")
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @JsonProperty("id")
+    public Integer getId() {
+        return id;
+    }
+
+    @JsonProperty("id")
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @JsonProperty("avatar_url")
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    @JsonProperty("avatar_url")
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    @JsonProperty("gravatar_id")
+    public String getGravatarId() {
+        return gravatarId;
+    }
+
+    @JsonProperty("gravatar_id")
+    public void setGravatarId(String gravatarId) {
+        this.gravatarId = gravatarId;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("html_url")
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonProperty("followers_url")
+    public String getFollowersUrl() {
+        return followersUrl;
+    }
+
+    @JsonProperty("followers_url")
+    public void setFollowersUrl(String followersUrl) {
+        this.followersUrl = followersUrl;
+    }
+
+    @JsonProperty("following_url")
+    public String getFollowingUrl() {
+        return followingUrl;
+    }
+
+    @JsonProperty("following_url")
+    public void setFollowingUrl(String followingUrl) {
+        this.followingUrl = followingUrl;
+    }
+
+    @JsonProperty("gists_url")
+    public String getGistsUrl() {
+        return gistsUrl;
+    }
+
+    @JsonProperty("gists_url")
+    public void setGistsUrl(String gistsUrl) {
+        this.gistsUrl = gistsUrl;
+    }
+
+    @JsonProperty("starred_url")
+    public String getStarredUrl() {
+        return starredUrl;
+    }
+
+    @JsonProperty("starred_url")
+    public void setStarredUrl(String starredUrl) {
+        this.starredUrl = starredUrl;
+    }
+
+    @JsonProperty("subscriptions_url")
+    public String getSubscriptionsUrl() {
+        return subscriptionsUrl;
+    }
+
+    @JsonProperty("subscriptions_url")
+    public void setSubscriptionsUrl(String subscriptionsUrl) {
+        this.subscriptionsUrl = subscriptionsUrl;
+    }
+
+    @JsonProperty("organizations_url")
+    public String getOrganizationsUrl() {
+        return organizationsUrl;
+    }
+
+    @JsonProperty("organizations_url")
+    public void setOrganizationsUrl(String organizationsUrl) {
+        this.organizationsUrl = organizationsUrl;
+    }
+
+    @JsonProperty("repos_url")
+    public String getReposUrl() {
+        return reposUrl;
+    }
+
+    @JsonProperty("repos_url")
+    public void setReposUrl(String reposUrl) {
+        this.reposUrl = reposUrl;
+    }
+
+    @JsonProperty("events_url")
+    public String getEventsUrl() {
+        return eventsUrl;
+    }
+
+    @JsonProperty("events_url")
+    public void setEventsUrl(String eventsUrl) {
+        this.eventsUrl = eventsUrl;
+    }
+
+    @JsonProperty("received_events_url")
+    public String getReceivedEventsUrl() {
+        return receivedEventsUrl;
+    }
+
+    @JsonProperty("received_events_url")
+    public void setReceivedEventsUrl(String receivedEventsUrl) {
+        this.receivedEventsUrl = receivedEventsUrl;
+    }
+
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
+
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @JsonProperty("site_admin")
+    public Boolean getSiteAdmin() {
+        return siteAdmin;
+    }
+
+    @JsonProperty("site_admin")
+    public void setSiteAdmin(Boolean siteAdmin) {
+        this.siteAdmin = siteAdmin;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\branchprotection\BranchProtectionInfo.java
+
+package githubcrawler.dto.branchprotection;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "url",
+        "required_status_checks",
+        "restrictions",
+        "required_pull_request_reviews",
+        "enforce_admins"
+})
+public class BranchProtectionInfo {
+
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("required_status_checks")
+    private RequiredStatusChecks requiredStatusChecks;
+    @JsonProperty("restrictions")
+    private Restrictions restrictions;
+    @JsonProperty("required_pull_request_reviews")
+    private RequiredPullRequestReviews requiredPullRequestReviews;
+    @JsonProperty("enforce_admins")
+    private EnforceAdmins enforceAdmins;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("required_status_checks")
+    public RequiredStatusChecks getRequiredStatusChecks() {
+        return requiredStatusChecks;
+    }
+
+    @JsonProperty("required_status_checks")
+    public void setRequiredStatusChecks(RequiredStatusChecks requiredStatusChecks) {
+        this.requiredStatusChecks = requiredStatusChecks;
+    }
+
+    @JsonProperty("restrictions")
+    public Restrictions getRestrictions() {
+        return restrictions;
+    }
+
+    @JsonProperty("restrictions")
+    public void setRestrictions(Restrictions restrictions) {
+        this.restrictions = restrictions;
+    }
+
+    @JsonProperty("required_pull_request_reviews")
+    public RequiredPullRequestReviews getRequiredPullRequestReviews() {
+        return requiredPullRequestReviews;
+    }
+
+    @JsonProperty("required_pull_request_reviews")
+    public void setRequiredPullRequestReviews(RequiredPullRequestReviews requiredPullRequestReviews) {
+        this.requiredPullRequestReviews = requiredPullRequestReviews;
+    }
+
+    @JsonProperty("enforce_admins")
+    public EnforceAdmins getEnforceAdmins() {
+        return enforceAdmins;
+    }
+
+    @JsonProperty("enforce_admins")
+    public void setEnforceAdmins(EnforceAdmins enforceAdmins) {
+        this.enforceAdmins = enforceAdmins;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\branchprotection\DismissalRestrictions.java
+
+package githubcrawler.dto.branchprotection;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "url",
+        "users_url",
+        "teams_url",
+        "users",
+        "teams"
+})
+public class DismissalRestrictions {
+
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("users_url")
+    private String usersUrl;
+    @JsonProperty("teams_url")
+    private String teamsUrl;
+    @JsonProperty("users")
+    private List<Object> users = null;
+    @JsonProperty("teams")
+    private List<Object> teams = null;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("users_url")
+    public String getUsersUrl() {
+        return usersUrl;
+    }
+
+    @JsonProperty("users_url")
+    public void setUsersUrl(String usersUrl) {
+        this.usersUrl = usersUrl;
+    }
+
+    @JsonProperty("teams_url")
+    public String getTeamsUrl() {
+        return teamsUrl;
+    }
+
+    @JsonProperty("teams_url")
+    public void setTeamsUrl(String teamsUrl) {
+        this.teamsUrl = teamsUrl;
+    }
+
+    @JsonProperty("users")
+    public List<Object> getUsers() {
+        return users;
+    }
+
+    @JsonProperty("users")
+    public void setUsers(List<Object> users) {
+        this.users = users;
+    }
+
+    @JsonProperty("teams")
+    public List<Object> getTeams() {
+        return teams;
+    }
+
+    @JsonProperty("teams")
+    public void setTeams(List<Object> teams) {
+        this.teams = teams;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\branchprotection\EnforceAdmins.java
+
+package githubcrawler.dto.branchprotection;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "url",
+        "enabled"
+})
+public class EnforceAdmins {
+
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("enabled")
+    private Boolean enabled;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("enabled")
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    @JsonProperty("enabled")
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\branchprotection\RequiredPullRequestReviews.java
+
+package githubcrawler.dto.branchprotection;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "url",
+        "include_admins",
+        "dismissal_restrictions"
+})
+public class RequiredPullRequestReviews {
+
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("include_admins")
+    private Boolean includeAdmins;
+    @JsonProperty("dismissal_restrictions")
+    private DismissalRestrictions dismissalRestrictions;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("include_admins")
+    public Boolean getIncludeAdmins() {
+        return includeAdmins;
+    }
+
+    @JsonProperty("include_admins")
+    public void setIncludeAdmins(Boolean includeAdmins) {
+        this.includeAdmins = includeAdmins;
+    }
+
+    @JsonProperty("dismissal_restrictions")
+    public DismissalRestrictions getDismissalRestrictions() {
+        return dismissalRestrictions;
+    }
+
+    @JsonProperty("dismissal_restrictions")
+    public void setDismissalRestrictions(DismissalRestrictions dismissalRestrictions) {
+        this.dismissalRestrictions = dismissalRestrictions;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\branchprotection\RequiredStatusChecks.java
+
+package githubcrawler.dto.branchprotection;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "url",
+        "strict",
+        "include_admins",
+        "contexts",
+        "contexts_url"
+})
+public class RequiredStatusChecks {
+
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("strict")
+    private Boolean strict;
+    @JsonProperty("include_admins")
+    private Boolean includeAdmins;
+    @JsonProperty("contexts")
+    private List<Object> contexts = null;
+    @JsonProperty("contexts_url")
+    private String contextsUrl;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("strict")
+    public Boolean getStrict() {
+        return strict;
+    }
+
+    @JsonProperty("strict")
+    public void setStrict(Boolean strict) {
+        this.strict = strict;
+    }
+
+    @JsonProperty("include_admins")
+    public Boolean getIncludeAdmins() {
+        return includeAdmins;
+    }
+
+    @JsonProperty("include_admins")
+    public void setIncludeAdmins(Boolean includeAdmins) {
+        this.includeAdmins = includeAdmins;
+    }
+
+    @JsonProperty("contexts")
+    public List<Object> getContexts() {
+        return contexts;
+    }
+
+    @JsonProperty("contexts")
+    public void setContexts(List<Object> contexts) {
+        this.contexts = contexts;
+    }
+
+    @JsonProperty("contexts_url")
+    public String getContextsUrl() {
+        return contextsUrl;
+    }
+
+    @JsonProperty("contexts_url")
+    public void setContextsUrl(String contextsUrl) {
+        this.contextsUrl = contextsUrl;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\branchprotection\Restrictions.java
+
+package githubcrawler.dto.branchprotection;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "url",
+        "users_url",
+        "teams_url",
+        "users",
+        "teams"
+})
+public class Restrictions {
+
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("users_url")
+    private String usersUrl;
+    @JsonProperty("teams_url")
+    private String teamsUrl;
+    @JsonProperty("users")
+    private List<Object> users = null;
+    @JsonProperty("teams")
+    private List<Object> teams = null;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("users_url")
+    public String getUsersUrl() {
+        return usersUrl;
+    }
+
+    @JsonProperty("users_url")
+    public void setUsersUrl(String usersUrl) {
+        this.usersUrl = usersUrl;
+    }
+
+    @JsonProperty("teams_url")
+    public String getTeamsUrl() {
+        return teamsUrl;
+    }
+
+    @JsonProperty("teams_url")
+    public void setTeamsUrl(String teamsUrl) {
+        this.teamsUrl = teamsUrl;
+    }
+
+    @JsonProperty("users")
+    public List<Object> getUsers() {
+        return users;
+    }
+
+    @JsonProperty("users")
+    public void setUsers(List<Object> users) {
+        this.users = users;
+    }
+
+    @JsonProperty("teams")
+    public List<Object> getTeams() {
+        return teams;
+    }
+
+    @JsonProperty("teams")
+    public void setTeams(List<Object> teams) {
+        this.teams = teams;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\commitdetails\Author.java
+
+package githubcrawler.dto.commitdetails;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "email",
+        "date"
+})
+public class Author {
+
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("date")
+    private String date;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("email")
+    public String getEmail() {
+        return email;
+    }
+
+    @JsonProperty("email")
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @JsonProperty("date")
+    public String getDate() {
+        return date;
+    }
+
+    @JsonProperty("date")
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\commitdetails\Commit.java
+
+package githubcrawler.dto.commitdetails;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "author",
+        "committer",
+        "message",
+        "tree",
+        "url",
+        "comment_count"
+})
+public class Commit {
+
+    @JsonProperty("author")
+    private Author author;
+    @JsonProperty("committer")
+    private Committer committer;
+    @JsonProperty("message")
+    private String message;
+    @JsonProperty("tree")
+    private Tree tree;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("comment_count")
+    private Integer commentCount;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("author")
+    public Author getAuthor() {
+        return author;
+    }
+
+    @JsonProperty("author")
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    @JsonProperty("committer")
+    public Committer getCommitter() {
+        return committer;
+    }
+
+    @JsonProperty("committer")
+    public void setCommitter(Committer committer) {
+        this.committer = committer;
+    }
+
+    @JsonProperty("message")
+    public String getMessage() {
+        return message;
+    }
+
+    @JsonProperty("message")
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @JsonProperty("tree")
+    public Tree getTree() {
+        return tree;
+    }
+
+    @JsonProperty("tree")
+    public void setTree(Tree tree) {
+        this.tree = tree;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("comment_count")
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    @JsonProperty("comment_count")
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\commitdetails\CommitDetailsDTO.java
+
+package githubcrawler.dto.commitdetails;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sha",
+        "commit",
+        "url",
+        "html_url",
+        "comments_url",
+        "author",
+        "committer",
+        "parents",
+        "stats",
+        "files"
+})
+public class CommitDetailsDTO {
+
+    @JsonProperty("sha")
+    private String sha;
+    @JsonProperty("commit")
+    private Commit commit;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("html_url")
+    private String htmlUrl;
+    @JsonProperty("comments_url")
+    private String commentsUrl;
+    @JsonProperty("author")
+    private Object author;
+    @JsonProperty("committer")
+    private Object committer;
+    @JsonProperty("parents")
+    private List<Parent> parents = null;
+    @JsonProperty("stats")
+    private Stats stats;
+    @JsonProperty("files")
+    private List<File> files = null;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("sha")
+    public String getSha() {
+        return sha;
+    }
+
+    @JsonProperty("sha")
+    public void setSha(String sha) {
+        this.sha = sha;
+    }
+
+    @JsonProperty("commit")
+    public Commit getCommit() {
+        return commit;
+    }
+
+    @JsonProperty("commit")
+    public void setCommit(Commit commit) {
+        this.commit = commit;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("html_url")
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonProperty("comments_url")
+    public String getCommentsUrl() {
+        return commentsUrl;
+    }
+
+    @JsonProperty("comments_url")
+    public void setCommentsUrl(String commentsUrl) {
+        this.commentsUrl = commentsUrl;
+    }
+
+    @JsonProperty("author")
+    public Object getAuthor() {
+        return author;
+    }
+
+    @JsonProperty("author")
+    public void setAuthor(Object author) {
+        this.author = author;
+    }
+
+    @JsonProperty("committer")
+    public Object getCommitter() {
+        return committer;
+    }
+
+    @JsonProperty("committer")
+    public void setCommitter(Object committer) {
+        this.committer = committer;
+    }
+
+    @JsonProperty("parents")
+    public List<Parent> getParents() {
+        return parents;
+    }
+
+    @JsonProperty("parents")
+    public void setParents(List<Parent> parents) {
+        this.parents = parents;
+    }
+
+    @JsonProperty("stats")
+    public Stats getStats() {
+        return stats;
+    }
+
+    @JsonProperty("stats")
+    public void setStats(Stats stats) {
+        this.stats = stats;
+    }
+
+    @JsonProperty("files")
+    public List<File> getFiles() {
+        return files;
+    }
+
+    @JsonProperty("files")
+    public void setFiles(List<File> files) {
+        this.files = files;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\commitdetails\Committer.java
+
+package githubcrawler.dto.commitdetails;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "email",
+        "date"
+})
+public class Committer {
+
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("date")
+    private String date;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("email")
+    public String getEmail() {
+        return email;
+    }
+
+    @JsonProperty("email")
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @JsonProperty("date")
+    public String getDate() {
+        return date;
+    }
+
+    @JsonProperty("date")
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\commitdetails\File.java
+
+package githubcrawler.dto.commitdetails;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sha",
+        "filename",
+        "status",
+        "additions",
+        "deletions",
+        "changes",
+        "blob_url",
+        "raw_url",
+        "contents_url",
+        "patch"
+})
+public class File {
+
+    @JsonProperty("sha")
+    private String sha;
+    @JsonProperty("filename")
+    private String filename;
+    @JsonProperty("status")
+    private String status;
+    @JsonProperty("additions")
+    private Integer additions;
+    @JsonProperty("deletions")
+    private Integer deletions;
+    @JsonProperty("changes")
+    private Integer changes;
+    @JsonProperty("blob_url")
+    private String blobUrl;
+    @JsonProperty("raw_url")
+    private String rawUrl;
+    @JsonProperty("contents_url")
+    private String contentsUrl;
+    @JsonProperty("patch")
+    private String patch;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("sha")
+    public String getSha() {
+        return sha;
+    }
+
+    @JsonProperty("sha")
+    public void setSha(String sha) {
+        this.sha = sha;
+    }
+
+    @JsonProperty("filename")
+    public String getFilename() {
+        return filename;
+    }
+
+    @JsonProperty("filename")
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    @JsonProperty("status")
+    public String getStatus() {
+        return status;
+    }
+
+    @JsonProperty("status")
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @JsonProperty("additions")
+    public Integer getAdditions() {
+        return additions;
+    }
+
+    @JsonProperty("additions")
+    public void setAdditions(Integer additions) {
+        this.additions = additions;
+    }
+
+    @JsonProperty("deletions")
+    public Integer getDeletions() {
+        return deletions;
+    }
+
+    @JsonProperty("deletions")
+    public void setDeletions(Integer deletions) {
+        this.deletions = deletions;
+    }
+
+    @JsonProperty("changes")
+    public Integer getChanges() {
+        return changes;
+    }
+
+    @JsonProperty("changes")
+    public void setChanges(Integer changes) {
+        this.changes = changes;
+    }
+
+    @JsonProperty("blob_url")
+    public String getBlobUrl() {
+        return blobUrl;
+    }
+
+    @JsonProperty("blob_url")
+    public void setBlobUrl(String blobUrl) {
+        this.blobUrl = blobUrl;
+    }
+
+    @JsonProperty("raw_url")
+    public String getRawUrl() {
+        return rawUrl;
+    }
+
+    @JsonProperty("raw_url")
+    public void setRawUrl(String rawUrl) {
+        this.rawUrl = rawUrl;
+    }
+
+    @JsonProperty("contents_url")
+    public String getContentsUrl() {
+        return contentsUrl;
+    }
+
+    @JsonProperty("contents_url")
+    public void setContentsUrl(String contentsUrl) {
+        this.contentsUrl = contentsUrl;
+    }
+
+    @JsonProperty("patch")
+    public String getPatch() {
+        return patch;
+    }
+
+    @JsonProperty("patch")
+    public void setPatch(String patch) {
+        this.patch = patch;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\commitdetails\Parent.java
+
+package githubcrawler.dto.commitdetails;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sha",
+        "url",
+        "html_url"
+})
+public class Parent {
+
+    @JsonProperty("sha")
+    private String sha;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("html_url")
+    private String htmlUrl;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("sha")
+    public String getSha() {
+        return sha;
+    }
+
+    @JsonProperty("sha")
+    public void setSha(String sha) {
+        this.sha = sha;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("html_url")
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\commitdetails\Stats.java
+
+package githubcrawler.dto.commitdetails;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "total",
+        "additions",
+        "deletions"
+})
+public class Stats {
+
+    @JsonProperty("total")
+    private Integer total;
+    @JsonProperty("additions")
+    private Integer additions;
+    @JsonProperty("deletions")
+    private Integer deletions;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("total")
+    public Integer getTotal() {
+        return total;
+    }
+
+    @JsonProperty("total")
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    @JsonProperty("additions")
+    public Integer getAdditions() {
+        return additions;
+    }
+
+    @JsonProperty("additions")
+    public void setAdditions(Integer additions) {
+        this.additions = additions;
+    }
+
+    @JsonProperty("deletions")
+    public Integer getDeletions() {
+        return deletions;
+    }
+
+    @JsonProperty("deletions")
+    public void setDeletions(Integer deletions) {
+        this.deletions = deletions;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\commitdetails\Tree.java
+
+package githubcrawler.dto.commitdetails;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sha",
+        "url"
+})
+public class Tree {
+
+    @JsonProperty("sha")
+    private String sha;
+    @JsonProperty("url")
+    private String url;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("sha")
+    public String getSha() {
+        return sha;
+    }
+
+    @JsonProperty("sha")
+    public void setSha(String sha) {
+        this.sha = sha;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\CommitDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "author",
+        "committer",
+        "message",
+        "tree",
+        "url",
+        "comment_count"
+})
+public class CommitDTO {
+
+    @JsonProperty("author")
+    private AuthorDTO author;
+    @JsonProperty("committer")
+    private CommitterDTO committer;
+    @JsonProperty("message")
+    private String message;
+    @JsonProperty("tree")
+    private TreeDTO tree;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("comment_count")
+    private Integer commentCount;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("author")
+    public AuthorDTO getAuthor() {
+        return author;
+    }
+
+    @JsonProperty("author")
+    public void setAuthor(AuthorDTO author) {
+        this.author = author;
+    }
+
+    @JsonProperty("committer")
+    public CommitterDTO getCommitter() {
+        return committer;
+    }
+
+    @JsonProperty("committer")
+    public void setCommitter(CommitterDTO committer) {
+        this.committer = committer;
+    }
+
+    @JsonProperty("message")
+    public String getMessage() {
+        return message;
+    }
+
+    @JsonProperty("message")
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @JsonProperty("tree")
+    public TreeDTO getTree() {
+        return tree;
+    }
+
+    @JsonProperty("tree")
+    public void setTree(TreeDTO tree) {
+        this.tree = tree;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("comment_count")
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    @JsonProperty("comment_count")
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+    @Override
+    public String toString() {
+        return "CommitDTO{" +
+                "message='" + message + '\'' +
+                '}';
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\CommitterDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "email",
+        "date"
+})
+public class CommitterDTO {
+
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("date")
+    private String date;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("email")
+    public String getEmail() {
+        return email;
+    }
+
+    @JsonProperty("email")
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @JsonProperty("date")
+    public String getDate() {
+        return date;
+    }
+
+    @JsonProperty("date")
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\Committer_.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "login",
+        "id",
+        "avatar_url",
+        "gravatar_id",
+        "url",
+        "html_url",
+        "followers_url",
+        "following_url",
+        "gists_url",
+        "starred_url",
+        "subscriptions_url",
+        "organizations_url",
+        "repos_url",
+        "events_url",
+        "received_events_url",
+        "type",
+        "site_admin"
+})
+public class Committer_ {
+
+    @JsonProperty("login")
+    private String login;
+    @JsonProperty("id")
+    private Integer id;
+    @JsonProperty("avatar_url")
+    private String avatarUrl;
+    @JsonProperty("gravatar_id")
+    private String gravatarId;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("html_url")
+    private String htmlUrl;
+    @JsonProperty("followers_url")
+    private String followersUrl;
+    @JsonProperty("following_url")
+    private String followingUrl;
+    @JsonProperty("gists_url")
+    private String gistsUrl;
+    @JsonProperty("starred_url")
+    private String starredUrl;
+    @JsonProperty("subscriptions_url")
+    private String subscriptionsUrl;
+    @JsonProperty("organizations_url")
+    private String organizationsUrl;
+    @JsonProperty("repos_url")
+    private String reposUrl;
+    @JsonProperty("events_url")
+    private String eventsUrl;
+    @JsonProperty("received_events_url")
+    private String receivedEventsUrl;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("site_admin")
+    private Boolean siteAdmin;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("login")
+    public String getLogin() {
+        return login;
+    }
+
+    @JsonProperty("login")
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @JsonProperty("id")
+    public Integer getId() {
+        return id;
+    }
+
+    @JsonProperty("id")
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @JsonProperty("avatar_url")
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    @JsonProperty("avatar_url")
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    @JsonProperty("gravatar_id")
+    public String getGravatarId() {
+        return gravatarId;
+    }
+
+    @JsonProperty("gravatar_id")
+    public void setGravatarId(String gravatarId) {
+        this.gravatarId = gravatarId;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("html_url")
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonProperty("followers_url")
+    public String getFollowersUrl() {
+        return followersUrl;
+    }
+
+    @JsonProperty("followers_url")
+    public void setFollowersUrl(String followersUrl) {
+        this.followersUrl = followersUrl;
+    }
+
+    @JsonProperty("following_url")
+    public String getFollowingUrl() {
+        return followingUrl;
+    }
+
+    @JsonProperty("following_url")
+    public void setFollowingUrl(String followingUrl) {
+        this.followingUrl = followingUrl;
+    }
+
+    @JsonProperty("gists_url")
+    public String getGistsUrl() {
+        return gistsUrl;
+    }
+
+    @JsonProperty("gists_url")
+    public void setGistsUrl(String gistsUrl) {
+        this.gistsUrl = gistsUrl;
+    }
+
+    @JsonProperty("starred_url")
+    public String getStarredUrl() {
+        return starredUrl;
+    }
+
+    @JsonProperty("starred_url")
+    public void setStarredUrl(String starredUrl) {
+        this.starredUrl = starredUrl;
+    }
+
+    @JsonProperty("subscriptions_url")
+    public String getSubscriptionsUrl() {
+        return subscriptionsUrl;
+    }
+
+    @JsonProperty("subscriptions_url")
+    public void setSubscriptionsUrl(String subscriptionsUrl) {
+        this.subscriptionsUrl = subscriptionsUrl;
+    }
+
+    @JsonProperty("organizations_url")
+    public String getOrganizationsUrl() {
+        return organizationsUrl;
+    }
+
+    @JsonProperty("organizations_url")
+    public void setOrganizationsUrl(String organizationsUrl) {
+        this.organizationsUrl = organizationsUrl;
+    }
+
+    @JsonProperty("repos_url")
+    public String getReposUrl() {
+        return reposUrl;
+    }
+
+    @JsonProperty("repos_url")
+    public void setReposUrl(String reposUrl) {
+        this.reposUrl = reposUrl;
+    }
+
+    @JsonProperty("events_url")
+    public String getEventsUrl() {
+        return eventsUrl;
+    }
+
+    @JsonProperty("events_url")
+    public void setEventsUrl(String eventsUrl) {
+        this.eventsUrl = eventsUrl;
+    }
+
+    @JsonProperty("received_events_url")
+    public String getReceivedEventsUrl() {
+        return receivedEventsUrl;
+    }
+
+    @JsonProperty("received_events_url")
+    public void setReceivedEventsUrl(String receivedEventsUrl) {
+        this.receivedEventsUrl = receivedEventsUrl;
+    }
+
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
+
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @JsonProperty("site_admin")
+    public Boolean getSiteAdmin() {
+        return siteAdmin;
+    }
+
+    @JsonProperty("site_admin")
+    public void setSiteAdmin(Boolean siteAdmin) {
+        this.siteAdmin = siteAdmin;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\GitHubBranchDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "commitDTO"
+})
+public class GitHubBranchDTO {
+
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("commitDTO")
+    private CommitDTO commitDTO;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("commitDTO")
+    public CommitDTO getCommitDTO() {
+        return commitDTO;
+    }
+
+    @JsonProperty("commitDTO")
+    public void setCommitDTO(CommitDTO commitDTO) {
+        this.commitDTO = commitDTO;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\GitHubCommitDetailsDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sha",
+        "commitDTO",
+        "url",
+        "html_url",
+        "comments_url",
+        "author",
+        "committer",
+        "parents"
+})
+public class GitHubCommitDetailsDTO {
+
+    @JsonProperty("sha")
+    private String sha;
+    @JsonProperty("commitDTO")
+    private CommitDTO commitDTO;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("html_url")
+    private String htmlUrl;
+    @JsonProperty("comments_url")
+    private String commentsUrl;
+    @JsonProperty("author")
+    private Author_ author;
+    @JsonProperty("committer")
+    private Committer_ committer;
+    @JsonProperty("parents")
+    private List<ParentDTO> parents = null;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("sha")
+    public String getSha() {
+        return sha;
+    }
+
+    @JsonProperty("sha")
+    public void setSha(String sha) {
+        this.sha = sha;
+    }
+
+    @JsonProperty("commitDTO")
+    public CommitDTO getCommitDTO() {
+        return commitDTO;
+    }
+
+    @JsonProperty("commitDTO")
+    public void setCommitDTO(CommitDTO commitDTO) {
+        this.commitDTO = commitDTO;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("html_url")
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonProperty("comments_url")
+    public String getCommentsUrl() {
+        return commentsUrl;
+    }
+
+    @JsonProperty("comments_url")
+    public void setCommentsUrl(String commentsUrl) {
+        this.commentsUrl = commentsUrl;
+    }
+
+    @JsonProperty("author")
+    public Author_ getAuthor() {
+        return author;
+    }
+
+    @JsonProperty("author")
+    public void setAuthor(Author_ author) {
+        this.author = author;
+    }
+
+    @JsonProperty("committer")
+    public Committer_ getCommitter() {
+        return committer;
+    }
+
+    @JsonProperty("committer")
+    public void setCommitter(Committer_ committer) {
+        this.committer = committer;
+    }
+
+    @JsonProperty("parents")
+    public List<ParentDTO> getParents() {
+        return parents;
+    }
+
+    @JsonProperty("parents")
+    public void setParents(List<ParentDTO> parents) {
+        this.parents = parents;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\GitHubOrgRepoDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "id",
+        "name",
+        "full_name",
+        "owner",
+        "private",
+        "html_url",
+        "description",
+        "fork",
+        "url",
+        "forks_url",
+        "keys_url",
+        "collaborators_url",
+        "teams_url",
+        "hooks_url",
+        "issue_events_url",
+        "events_url",
+        "assignees_url",
+        "branches_url",
+        "tags_url",
+        "blobs_url",
+        "git_tags_url",
+        "git_refs_url",
+        "trees_url",
+        "statuses_url",
+        "languages_url",
+        "stargazers_url",
+        "contributors_url",
+        "subscribers_url",
+        "subscription_url",
+        "commits_url",
+        "git_commits_url",
+        "comments_url",
+        "issue_comment_url",
+        "contents_url",
+        "compare_url",
+        "merges_url",
+        "archive_url",
+        "downloads_url",
+        "issues_url",
+        "pulls_url",
+        "milestones_url",
+        "notifications_url",
+        "labels_url",
+        "releases_url",
+        "deployments_url",
+        "created_at",
+        "updated_at",
+        "pushed_at",
+        "git_url",
+        "ssh_url",
+        "clone_url",
+        "svn_url",
+        "homepage",
+        "size",
+        "stargazers_count",
+        "watchers_count",
+        "language",
+        "has_issues",
+        "has_projects",
+        "has_downloads",
+        "has_wiki",
+        "has_pages",
+        "forks_count",
+        "mirror_url",
+        "open_issues_count",
+        "forks",
+        "open_issues",
+        "watchers",
+        "default_branch",
+        "permissions"
+})
+public class GitHubOrgRepoDTO {
+
+    @JsonProperty("id")
+    private Integer id;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("full_name")
+    private String fullName;
+    @JsonProperty("owner")
+    private OwnerDTO owner;
+    @JsonProperty("private")
+    private Boolean _private;
+    @JsonProperty("html_url")
+    private String htmlUrl;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("fork")
+    private Boolean fork;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("forks_url")
+    private String forksUrl;
+    @JsonProperty("keys_url")
+    private String keysUrl;
+    @JsonProperty("collaborators_url")
+    private String collaboratorsUrl;
+    @JsonProperty("teams_url")
+    private String teamsUrl;
+    @JsonProperty("hooks_url")
+    private String hooksUrl;
+    @JsonProperty("issue_events_url")
+    private String issueEventsUrl;
+    @JsonProperty("events_url")
+    private String eventsUrl;
+    @JsonProperty("assignees_url")
+    private String assigneesUrl;
+    @JsonProperty("branches_url")
+    private String branchesUrl;
+    @JsonProperty("tags_url")
+    private String tagsUrl;
+    @JsonProperty("blobs_url")
+    private String blobsUrl;
+    @JsonProperty("git_tags_url")
+    private String gitTagsUrl;
+    @JsonProperty("git_refs_url")
+    private String gitRefsUrl;
+    @JsonProperty("trees_url")
+    private String treesUrl;
+    @JsonProperty("statuses_url")
+    private String statusesUrl;
+    @JsonProperty("languages_url")
+    private String languagesUrl;
+    @JsonProperty("stargazers_url")
+    private String stargazersUrl;
+    @JsonProperty("contributors_url")
+    private String contributorsUrl;
+    @JsonProperty("subscribers_url")
+    private String subscribersUrl;
+    @JsonProperty("subscription_url")
+    private String subscriptionUrl;
+    @JsonProperty("commits_url")
+    private String commitsUrl;
+    @JsonProperty("git_commits_url")
+    private String gitCommitsUrl;
+    @JsonProperty("comments_url")
+    private String commentsUrl;
+    @JsonProperty("issue_comment_url")
+    private String issueCommentUrl;
+    @JsonProperty("contents_url")
+    private String contentsUrl;
+    @JsonProperty("compare_url")
+    private String compareUrl;
+    @JsonProperty("merges_url")
+    private String mergesUrl;
+    @JsonProperty("archive_url")
+    private String archiveUrl;
+    @JsonProperty("downloads_url")
+    private String downloadsUrl;
+    @JsonProperty("issues_url")
+    private String issuesUrl;
+    @JsonProperty("pulls_url")
+    private String pullsUrl;
+    @JsonProperty("milestones_url")
+    private String milestonesUrl;
+    @JsonProperty("notifications_url")
+    private String notificationsUrl;
+    @JsonProperty("labels_url")
+    private String labelsUrl;
+    @JsonProperty("releases_url")
+    private String releasesUrl;
+    @JsonProperty("deployments_url")
+    private String deploymentsUrl;
+    @JsonProperty("created_at")
+    private String createdAt;
+    @JsonProperty("updated_at")
+    private String updatedAt;
+    @JsonProperty("pushed_at")
+    private String pushedAt;
+    @JsonProperty("git_url")
+    private String gitUrl;
+    @JsonProperty("ssh_url")
+    private String sshUrl;
+    @JsonProperty("clone_url")
+    private String cloneUrl;
+    @JsonProperty("svn_url")
+    private String svnUrl;
+    @JsonProperty("homepage")
+    private Object homepage;
+    @JsonProperty("size")
+    private Integer size;
+    @JsonProperty("stargazers_count")
+    private Integer stargazersCount;
+    @JsonProperty("watchers_count")
+    private Integer watchersCount;
+    @JsonProperty("language")
+    private Object language;
+    @JsonProperty("has_issues")
+    private Boolean hasIssues;
+    @JsonProperty("has_projects")
+    private Boolean hasProjects;
+    @JsonProperty("has_downloads")
+    private Boolean hasDownloads;
+    @JsonProperty("has_wiki")
+    private Boolean hasWiki;
+    @JsonProperty("has_pages")
+    private Boolean hasPages;
+    @JsonProperty("forks_count")
+    private Integer forksCount;
+    @JsonProperty("mirror_url")
+    private Object mirrorUrl;
+    @JsonProperty("open_issues_count")
+    private Integer openIssuesCount;
+    @JsonProperty("forks")
+    private Integer forks;
+    @JsonProperty("open_issues")
+    private Integer openIssues;
+    @JsonProperty("watchers")
+    private Integer watchers;
+    @JsonProperty("default_branch")
+    private String defaultBranch;
+    @JsonProperty("permissions")
+    private PermissionsDTO permissions;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("id")
+    public Integer getId() {
+        return id;
+    }
+
+    @JsonProperty("id")
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("full_name")
+    public String getFullName() {
+        return fullName;
+    }
+
+    @JsonProperty("full_name")
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    @JsonProperty("owner")
+    public OwnerDTO getOwner() {
+        return owner;
+    }
+
+    @JsonProperty("owner")
+    public void setOwner(OwnerDTO owner) {
+        this.owner = owner;
+    }
+
+    @JsonProperty("private")
+    public Boolean getPrivate() {
+        return _private;
+    }
+
+    @JsonProperty("private")
+    public void setPrivate(Boolean _private) {
+        this._private = _private;
+    }
+
+    @JsonProperty("html_url")
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonProperty("description")
+    public String getDescription() {
+        return description;
+    }
+
+    @JsonProperty("description")
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @JsonProperty("fork")
+    public Boolean getFork() {
+        return fork;
+    }
+
+    @JsonProperty("fork")
+    public void setFork(Boolean fork) {
+        this.fork = fork;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("forks_url")
+    public String getForksUrl() {
+        return forksUrl;
+    }
+
+    @JsonProperty("forks_url")
+    public void setForksUrl(String forksUrl) {
+        this.forksUrl = forksUrl;
+    }
+
+    @JsonProperty("keys_url")
+    public String getKeysUrl() {
+        return keysUrl;
+    }
+
+    @JsonProperty("keys_url")
+    public void setKeysUrl(String keysUrl) {
+        this.keysUrl = keysUrl;
+    }
+
+    @JsonProperty("collaborators_url")
+    public String getCollaboratorsUrl() {
+        return collaboratorsUrl;
+    }
+
+    @JsonProperty("collaborators_url")
+    public void setCollaboratorsUrl(String collaboratorsUrl) {
+        this.collaboratorsUrl = collaboratorsUrl;
+    }
+
+    @JsonProperty("teams_url")
+    public String getTeamsUrl() {
+        return teamsUrl;
+    }
+
+    @JsonProperty("teams_url")
+    public void setTeamsUrl(String teamsUrl) {
+        this.teamsUrl = teamsUrl;
+    }
+
+    @JsonProperty("hooks_url")
+    public String getHooksUrl() {
+        return hooksUrl;
+    }
+
+    @JsonProperty("hooks_url")
+    public void setHooksUrl(String hooksUrl) {
+        this.hooksUrl = hooksUrl;
+    }
+
+    @JsonProperty("issue_events_url")
+    public String getIssueEventsUrl() {
+        return issueEventsUrl;
+    }
+
+    @JsonProperty("issue_events_url")
+    public void setIssueEventsUrl(String issueEventsUrl) {
+        this.issueEventsUrl = issueEventsUrl;
+    }
+
+    @JsonProperty("events_url")
+    public String getEventsUrl() {
+        return eventsUrl;
+    }
+
+    @JsonProperty("events_url")
+    public void setEventsUrl(String eventsUrl) {
+        this.eventsUrl = eventsUrl;
+    }
+
+    @JsonProperty("assignees_url")
+    public String getAssigneesUrl() {
+        return assigneesUrl;
+    }
+
+    @JsonProperty("assignees_url")
+    public void setAssigneesUrl(String assigneesUrl) {
+        this.assigneesUrl = assigneesUrl;
+    }
+
+    @JsonProperty("branches_url")
+    public String getBranchesUrl() {
+        return branchesUrl;
+    }
+
+    @JsonProperty("branches_url")
+    public void setBranchesUrl(String branchesUrl) {
+        this.branchesUrl = branchesUrl;
+    }
+
+    @JsonProperty("tags_url")
+    public String getTagsUrl() {
+        return tagsUrl;
+    }
+
+    @JsonProperty("tags_url")
+    public void setTagsUrl(String tagsUrl) {
+        this.tagsUrl = tagsUrl;
+    }
+
+    @JsonProperty("blobs_url")
+    public String getBlobsUrl() {
+        return blobsUrl;
+    }
+
+    @JsonProperty("blobs_url")
+    public void setBlobsUrl(String blobsUrl) {
+        this.blobsUrl = blobsUrl;
+    }
+
+    @JsonProperty("git_tags_url")
+    public String getGitTagsUrl() {
+        return gitTagsUrl;
+    }
+
+    @JsonProperty("git_tags_url")
+    public void setGitTagsUrl(String gitTagsUrl) {
+        this.gitTagsUrl = gitTagsUrl;
+    }
+
+    @JsonProperty("git_refs_url")
+    public String getGitRefsUrl() {
+        return gitRefsUrl;
+    }
+
+    @JsonProperty("git_refs_url")
+    public void setGitRefsUrl(String gitRefsUrl) {
+        this.gitRefsUrl = gitRefsUrl;
+    }
+
+    @JsonProperty("trees_url")
+    public String getTreesUrl() {
+        return treesUrl;
+    }
+
+    @JsonProperty("trees_url")
+    public void setTreesUrl(String treesUrl) {
+        this.treesUrl = treesUrl;
+    }
+
+    @JsonProperty("statuses_url")
+    public String getStatusesUrl() {
+        return statusesUrl;
+    }
+
+    @JsonProperty("statuses_url")
+    public void setStatusesUrl(String statusesUrl) {
+        this.statusesUrl = statusesUrl;
+    }
+
+    @JsonProperty("languages_url")
+    public String getLanguagesUrl() {
+        return languagesUrl;
+    }
+
+    @JsonProperty("languages_url")
+    public void setLanguagesUrl(String languagesUrl) {
+        this.languagesUrl = languagesUrl;
+    }
+
+    @JsonProperty("stargazers_url")
+    public String getStargazersUrl() {
+        return stargazersUrl;
+    }
+
+    @JsonProperty("stargazers_url")
+    public void setStargazersUrl(String stargazersUrl) {
+        this.stargazersUrl = stargazersUrl;
+    }
+
+    @JsonProperty("contributors_url")
+    public String getContributorsUrl() {
+        return contributorsUrl;
+    }
+
+    @JsonProperty("contributors_url")
+    public void setContributorsUrl(String contributorsUrl) {
+        this.contributorsUrl = contributorsUrl;
+    }
+
+    @JsonProperty("subscribers_url")
+    public String getSubscribersUrl() {
+        return subscribersUrl;
+    }
+
+    @JsonProperty("subscribers_url")
+    public void setSubscribersUrl(String subscribersUrl) {
+        this.subscribersUrl = subscribersUrl;
+    }
+
+    @JsonProperty("subscription_url")
+    public String getSubscriptionUrl() {
+        return subscriptionUrl;
+    }
+
+    @JsonProperty("subscription_url")
+    public void setSubscriptionUrl(String subscriptionUrl) {
+        this.subscriptionUrl = subscriptionUrl;
+    }
+
+    @JsonProperty("commits_url")
+    public String getCommitsUrl() {
+        return commitsUrl;
+    }
+
+    @JsonProperty("commits_url")
+    public void setCommitsUrl(String commitsUrl) {
+        this.commitsUrl = commitsUrl;
+    }
+
+    @JsonProperty("git_commits_url")
+    public String getGitCommitsUrl() {
+        return gitCommitsUrl;
+    }
+
+    @JsonProperty("git_commits_url")
+    public void setGitCommitsUrl(String gitCommitsUrl) {
+        this.gitCommitsUrl = gitCommitsUrl;
+    }
+
+    @JsonProperty("comments_url")
+    public String getCommentsUrl() {
+        return commentsUrl;
+    }
+
+    @JsonProperty("comments_url")
+    public void setCommentsUrl(String commentsUrl) {
+        this.commentsUrl = commentsUrl;
+    }
+
+    @JsonProperty("issue_comment_url")
+    public String getIssueCommentUrl() {
+        return issueCommentUrl;
+    }
+
+    @JsonProperty("issue_comment_url")
+    public void setIssueCommentUrl(String issueCommentUrl) {
+        this.issueCommentUrl = issueCommentUrl;
+    }
+
+    @JsonProperty("contents_url")
+    public String getContentsUrl() {
+        return contentsUrl;
+    }
+
+    @JsonProperty("contents_url")
+    public void setContentsUrl(String contentsUrl) {
+        this.contentsUrl = contentsUrl;
+    }
+
+    @JsonProperty("compare_url")
+    public String getCompareUrl() {
+        return compareUrl;
+    }
+
+    @JsonProperty("compare_url")
+    public void setCompareUrl(String compareUrl) {
+        this.compareUrl = compareUrl;
+    }
+
+    @JsonProperty("merges_url")
+    public String getMergesUrl() {
+        return mergesUrl;
+    }
+
+    @JsonProperty("merges_url")
+    public void setMergesUrl(String mergesUrl) {
+        this.mergesUrl = mergesUrl;
+    }
+
+    @JsonProperty("archive_url")
+    public String getArchiveUrl() {
+        return archiveUrl;
+    }
+
+    @JsonProperty("archive_url")
+    public void setArchiveUrl(String archiveUrl) {
+        this.archiveUrl = archiveUrl;
+    }
+
+    @JsonProperty("downloads_url")
+    public String getDownloadsUrl() {
+        return downloadsUrl;
+    }
+
+    @JsonProperty("downloads_url")
+    public void setDownloadsUrl(String downloadsUrl) {
+        this.downloadsUrl = downloadsUrl;
+    }
+
+    @JsonProperty("issues_url")
+    public String getIssuesUrl() {
+        return issuesUrl;
+    }
+
+    @JsonProperty("issues_url")
+    public void setIssuesUrl(String issuesUrl) {
+        this.issuesUrl = issuesUrl;
+    }
+
+    @JsonProperty("pulls_url")
+    public String getPullsUrl() {
+        return pullsUrl;
+    }
+
+    @JsonProperty("pulls_url")
+    public void setPullsUrl(String pullsUrl) {
+        this.pullsUrl = pullsUrl;
+    }
+
+    @JsonProperty("milestones_url")
+    public String getMilestonesUrl() {
+        return milestonesUrl;
+    }
+
+    @JsonProperty("milestones_url")
+    public void setMilestonesUrl(String milestonesUrl) {
+        this.milestonesUrl = milestonesUrl;
+    }
+
+    @JsonProperty("notifications_url")
+    public String getNotificationsUrl() {
+        return notificationsUrl;
+    }
+
+    @JsonProperty("notifications_url")
+    public void setNotificationsUrl(String notificationsUrl) {
+        this.notificationsUrl = notificationsUrl;
+    }
+
+    @JsonProperty("labels_url")
+    public String getLabelsUrl() {
+        return labelsUrl;
+    }
+
+    @JsonProperty("labels_url")
+    public void setLabelsUrl(String labelsUrl) {
+        this.labelsUrl = labelsUrl;
+    }
+
+    @JsonProperty("releases_url")
+    public String getReleasesUrl() {
+        return releasesUrl;
+    }
+
+    @JsonProperty("releases_url")
+    public void setReleasesUrl(String releasesUrl) {
+        this.releasesUrl = releasesUrl;
+    }
+
+    @JsonProperty("deployments_url")
+    public String getDeploymentsUrl() {
+        return deploymentsUrl;
+    }
+
+    @JsonProperty("deployments_url")
+    public void setDeploymentsUrl(String deploymentsUrl) {
+        this.deploymentsUrl = deploymentsUrl;
+    }
+
+    @JsonProperty("created_at")
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    @JsonProperty("created_at")
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @JsonProperty("updated_at")
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    @JsonProperty("updated_at")
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @JsonProperty("pushed_at")
+    public String getPushedAt() {
+        return pushedAt;
+    }
+
+    @JsonProperty("pushed_at")
+    public void setPushedAt(String pushedAt) {
+        this.pushedAt = pushedAt;
+    }
+
+    @JsonProperty("git_url")
+    public String getGitUrl() {
+        return gitUrl;
+    }
+
+    @JsonProperty("git_url")
+    public void setGitUrl(String gitUrl) {
+        this.gitUrl = gitUrl;
+    }
+
+    @JsonProperty("ssh_url")
+    public String getSshUrl() {
+        return sshUrl;
+    }
+
+    @JsonProperty("ssh_url")
+    public void setSshUrl(String sshUrl) {
+        this.sshUrl = sshUrl;
+    }
+
+    @JsonProperty("clone_url")
+    public String getCloneUrl() {
+        return cloneUrl;
+    }
+
+    @JsonProperty("clone_url")
+    public void setCloneUrl(String cloneUrl) {
+        this.cloneUrl = cloneUrl;
+    }
+
+    @JsonProperty("svn_url")
+    public String getSvnUrl() {
+        return svnUrl;
+    }
+
+    @JsonProperty("svn_url")
+    public void setSvnUrl(String svnUrl) {
+        this.svnUrl = svnUrl;
+    }
+
+    @JsonProperty("homepage")
+    public Object getHomepage() {
+        return homepage;
+    }
+
+    @JsonProperty("homepage")
+    public void setHomepage(Object homepage) {
+        this.homepage = homepage;
+    }
+
+    @JsonProperty("size")
+    public Integer getSize() {
+        return size;
+    }
+
+    @JsonProperty("size")
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    @JsonProperty("stargazers_count")
+    public Integer getStargazersCount() {
+        return stargazersCount;
+    }
+
+    @JsonProperty("stargazers_count")
+    public void setStargazersCount(Integer stargazersCount) {
+        this.stargazersCount = stargazersCount;
+    }
+
+    @JsonProperty("watchers_count")
+    public Integer getWatchersCount() {
+        return watchersCount;
+    }
+
+    @JsonProperty("watchers_count")
+    public void setWatchersCount(Integer watchersCount) {
+        this.watchersCount = watchersCount;
+    }
+
+    @JsonProperty("language")
+    public Object getLanguage() {
+        return language;
+    }
+
+    @JsonProperty("language")
+    public void setLanguage(Object language) {
+        this.language = language;
+    }
+
+    @JsonProperty("has_issues")
+    public Boolean getHasIssues() {
+        return hasIssues;
+    }
+
+    @JsonProperty("has_issues")
+    public void setHasIssues(Boolean hasIssues) {
+        this.hasIssues = hasIssues;
+    }
+
+    @JsonProperty("has_projects")
+    public Boolean getHasProjects() {
+        return hasProjects;
+    }
+
+    @JsonProperty("has_projects")
+    public void setHasProjects(Boolean hasProjects) {
+        this.hasProjects = hasProjects;
+    }
+
+    @JsonProperty("has_downloads")
+    public Boolean getHasDownloads() {
+        return hasDownloads;
+    }
+
+    @JsonProperty("has_downloads")
+    public void setHasDownloads(Boolean hasDownloads) {
+        this.hasDownloads = hasDownloads;
+    }
+
+    @JsonProperty("has_wiki")
+    public Boolean getHasWiki() {
+        return hasWiki;
+    }
+
+    @JsonProperty("has_wiki")
+    public void setHasWiki(Boolean hasWiki) {
+        this.hasWiki = hasWiki;
+    }
+
+    @JsonProperty("has_pages")
+    public Boolean getHasPages() {
+        return hasPages;
+    }
+
+    @JsonProperty("has_pages")
+    public void setHasPages(Boolean hasPages) {
+        this.hasPages = hasPages;
+    }
+
+    @JsonProperty("forks_count")
+    public Integer getForksCount() {
+        return forksCount;
+    }
+
+    @JsonProperty("forks_count")
+    public void setForksCount(Integer forksCount) {
+        this.forksCount = forksCount;
+    }
+
+    @JsonProperty("mirror_url")
+    public Object getMirrorUrl() {
+        return mirrorUrl;
+    }
+
+    @JsonProperty("mirror_url")
+    public void setMirrorUrl(Object mirrorUrl) {
+        this.mirrorUrl = mirrorUrl;
+    }
+
+    @JsonProperty("open_issues_count")
+    public Integer getOpenIssuesCount() {
+        return openIssuesCount;
+    }
+
+    @JsonProperty("open_issues_count")
+    public void setOpenIssuesCount(Integer openIssuesCount) {
+        this.openIssuesCount = openIssuesCount;
+    }
+
+    @JsonProperty("forks")
+    public Integer getForks() {
+        return forks;
+    }
+
+    @JsonProperty("forks")
+    public void setForks(Integer forks) {
+        this.forks = forks;
+    }
+
+    @JsonProperty("open_issues")
+    public Integer getOpenIssues() {
+        return openIssues;
+    }
+
+    @JsonProperty("open_issues")
+    public void setOpenIssues(Integer openIssues) {
+        this.openIssues = openIssues;
+    }
+
+    @JsonProperty("watchers")
+    public Integer getWatchers() {
+        return watchers;
+    }
+
+    @JsonProperty("watchers")
+    public void setWatchers(Integer watchers) {
+        this.watchers = watchers;
+    }
+
+    @JsonProperty("default_branch")
+    public String getDefaultBranch() {
+        return defaultBranch;
+    }
+
+    @JsonProperty("default_branch")
+    public void setDefaultBranch(String defaultBranch) {
+        this.defaultBranch = defaultBranch;
+    }
+
+    @JsonProperty("permissions")
+    public PermissionsDTO getPermissions() {
+        return permissions;
+    }
+
+    @JsonProperty("permissions")
+    public void setPermissions(PermissionsDTO permissions) {
+        this.permissions = permissions;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\GitHubRootDTO.java
+package githubcrawler.dto;
+
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "current_user_url",
+        "current_user_authorizations_html_url",
+        "authorizations_url",
+        "code_search_url",
+        "commit_search_url",
+        "emails_url",
+        "emojis_url",
+        "events_url",
+        "feeds_url",
+        "followers_url",
+        "following_url",
+        "gists_url",
+        "hub_url",
+        "issue_search_url",
+        "issues_url",
+        "keys_url",
+        "notifications_url",
+        "organization_repositories_url",
+        "organization_url",
+        "public_gists_url",
+        "rate_limit_url",
+        "repository_url",
+        "repository_search_url",
+        "current_user_repositories_url",
+        "starred_url",
+        "starred_gists_url",
+        "team_url",
+        "user_url",
+        "user_organizations_url",
+        "user_repositories_url",
+        "user_search_url"
+})
+public class GitHubRootDTO {
+
+    @JsonProperty("current_user_url")
+    private String currentUserUrl;
+    @JsonProperty("current_user_authorizations_html_url")
+    private String currentUserAuthorizationsHtmlUrl;
+    @JsonProperty("authorizations_url")
+    private String authorizationsUrl;
+    @JsonProperty("code_search_url")
+    private String codeSearchUrl;
+    @JsonProperty("commit_search_url")
+    private String commitSearchUrl;
+    @JsonProperty("emails_url")
+    private String emailsUrl;
+    @JsonProperty("emojis_url")
+    private String emojisUrl;
+    @JsonProperty("events_url")
+    private String eventsUrl;
+    @JsonProperty("feeds_url")
+    private String feedsUrl;
+    @JsonProperty("followers_url")
+    private String followersUrl;
+    @JsonProperty("following_url")
+    private String followingUrl;
+    @JsonProperty("gists_url")
+    private String gistsUrl;
+    @JsonProperty("hub_url")
+    private String hubUrl;
+    @JsonProperty("issue_search_url")
+    private String issueSearchUrl;
+    @JsonProperty("issues_url")
+    private String issuesUrl;
+    @JsonProperty("keys_url")
+    private String keysUrl;
+    @JsonProperty("notifications_url")
+    private String notificationsUrl;
+    @JsonProperty("organization_repositories_url")
+    private String organizationRepositoriesUrl;
+    @JsonProperty("organization_url")
+    private String organizationUrl;
+    @JsonProperty("public_gists_url")
+    private String publicGistsUrl;
+    @JsonProperty("rate_limit_url")
+    private String rateLimitUrl;
+    @JsonProperty("repository_url")
+    private String repositoryUrl;
+    @JsonProperty("repository_search_url")
+    private String repositorySearchUrl;
+    @JsonProperty("current_user_repositories_url")
+    private String currentUserRepositoriesUrl;
+    @JsonProperty("starred_url")
+    private String starredUrl;
+    @JsonProperty("starred_gists_url")
+    private String starredGistsUrl;
+    @JsonProperty("team_url")
+    private String teamUrl;
+    @JsonProperty("user_url")
+    private String userUrl;
+    @JsonProperty("user_organizations_url")
+    private String userOrganizationsUrl;
+    @JsonProperty("user_repositories_url")
+    private String userRepositoriesUrl;
+    @JsonProperty("user_search_url")
+    private String userSearchUrl;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("current_user_url")
+    public String getCurrentUserUrl() {
+        return currentUserUrl;
+    }
+
+    @JsonProperty("current_user_url")
+    public void setCurrentUserUrl(String currentUserUrl) {
+        this.currentUserUrl = currentUserUrl;
+    }
+
+    @JsonProperty("current_user_authorizations_html_url")
+    public String getCurrentUserAuthorizationsHtmlUrl() {
+        return currentUserAuthorizationsHtmlUrl;
+    }
+
+    @JsonProperty("current_user_authorizations_html_url")
+    public void setCurrentUserAuthorizationsHtmlUrl(String currentUserAuthorizationsHtmlUrl) {
+        this.currentUserAuthorizationsHtmlUrl = currentUserAuthorizationsHtmlUrl;
+    }
+
+    @JsonProperty("authorizations_url")
+    public String getAuthorizationsUrl() {
+        return authorizationsUrl;
+    }
+
+    @JsonProperty("authorizations_url")
+    public void setAuthorizationsUrl(String authorizationsUrl) {
+        this.authorizationsUrl = authorizationsUrl;
+    }
+
+    @JsonProperty("code_search_url")
+    public String getCodeSearchUrl() {
+        return codeSearchUrl;
+    }
+
+    @JsonProperty("code_search_url")
+    public void setCodeSearchUrl(String codeSearchUrl) {
+        this.codeSearchUrl = codeSearchUrl;
+    }
+
+    @JsonProperty("commit_search_url")
+    public String getCommitSearchUrl() {
+        return commitSearchUrl;
+    }
+
+    @JsonProperty("commit_search_url")
+    public void setCommitSearchUrl(String commitSearchUrl) {
+        this.commitSearchUrl = commitSearchUrl;
+    }
+
+    @JsonProperty("emails_url")
+    public String getEmailsUrl() {
+        return emailsUrl;
+    }
+
+    @JsonProperty("emails_url")
+    public void setEmailsUrl(String emailsUrl) {
+        this.emailsUrl = emailsUrl;
+    }
+
+    @JsonProperty("emojis_url")
+    public String getEmojisUrl() {
+        return emojisUrl;
+    }
+
+    @JsonProperty("emojis_url")
+    public void setEmojisUrl(String emojisUrl) {
+        this.emojisUrl = emojisUrl;
+    }
+
+    @JsonProperty("events_url")
+    public String getEventsUrl() {
+        return eventsUrl;
+    }
+
+    @JsonProperty("events_url")
+    public void setEventsUrl(String eventsUrl) {
+        this.eventsUrl = eventsUrl;
+    }
+
+    @JsonProperty("feeds_url")
+    public String getFeedsUrl() {
+        return feedsUrl;
+    }
+
+    @JsonProperty("feeds_url")
+    public void setFeedsUrl(String feedsUrl) {
+        this.feedsUrl = feedsUrl;
+    }
+
+    @JsonProperty("followers_url")
+    public String getFollowersUrl() {
+        return followersUrl;
+    }
+
+    @JsonProperty("followers_url")
+    public void setFollowersUrl(String followersUrl) {
+        this.followersUrl = followersUrl;
+    }
+
+    @JsonProperty("following_url")
+    public String getFollowingUrl() {
+        return followingUrl;
+    }
+
+    @JsonProperty("following_url")
+    public void setFollowingUrl(String followingUrl) {
+        this.followingUrl = followingUrl;
+    }
+
+    @JsonProperty("gists_url")
+    public String getGistsUrl() {
+        return gistsUrl;
+    }
+
+    @JsonProperty("gists_url")
+    public void setGistsUrl(String gistsUrl) {
+        this.gistsUrl = gistsUrl;
+    }
+
+    @JsonProperty("hub_url")
+    public String getHubUrl() {
+        return hubUrl;
+    }
+
+    @JsonProperty("hub_url")
+    public void setHubUrl(String hubUrl) {
+        this.hubUrl = hubUrl;
+    }
+
+    @JsonProperty("issue_search_url")
+    public String getIssueSearchUrl() {
+        return issueSearchUrl;
+    }
+
+    @JsonProperty("issue_search_url")
+    public void setIssueSearchUrl(String issueSearchUrl) {
+        this.issueSearchUrl = issueSearchUrl;
+    }
+
+    @JsonProperty("issues_url")
+    public String getIssuesUrl() {
+        return issuesUrl;
+    }
+
+    @JsonProperty("issues_url")
+    public void setIssuesUrl(String issuesUrl) {
+        this.issuesUrl = issuesUrl;
+    }
+
+    @JsonProperty("keys_url")
+    public String getKeysUrl() {
+        return keysUrl;
+    }
+
+    @JsonProperty("keys_url")
+    public void setKeysUrl(String keysUrl) {
+        this.keysUrl = keysUrl;
+    }
+
+    @JsonProperty("notifications_url")
+    public String getNotificationsUrl() {
+        return notificationsUrl;
+    }
+
+    @JsonProperty("notifications_url")
+    public void setNotificationsUrl(String notificationsUrl) {
+        this.notificationsUrl = notificationsUrl;
+    }
+
+    @JsonProperty("organization_repositories_url")
+    public String getOrganizationRepositoriesUrl() {
+        return organizationRepositoriesUrl;
+    }
+
+    @JsonProperty("organization_repositories_url")
+    public void setOrganizationRepositoriesUrl(String organizationRepositoriesUrl) {
+        this.organizationRepositoriesUrl = organizationRepositoriesUrl;
+    }
+
+    @JsonProperty("organization_url")
+    public String getOrganizationUrl() {
+        return organizationUrl;
+    }
+
+    @JsonProperty("organization_url")
+    public void setOrganizationUrl(String organizationUrl) {
+        this.organizationUrl = organizationUrl;
+    }
+
+    @JsonProperty("public_gists_url")
+    public String getPublicGistsUrl() {
+        return publicGistsUrl;
+    }
+
+    @JsonProperty("public_gists_url")
+    public void setPublicGistsUrl(String publicGistsUrl) {
+        this.publicGistsUrl = publicGistsUrl;
+    }
+
+    @JsonProperty("rate_limit_url")
+    public String getRateLimitUrl() {
+        return rateLimitUrl;
+    }
+
+    @JsonProperty("rate_limit_url")
+    public void setRateLimitUrl(String rateLimitUrl) {
+        this.rateLimitUrl = rateLimitUrl;
+    }
+
+    @JsonProperty("repository_url")
+    public String getRepositoryUrl() {
+        return repositoryUrl;
+    }
+
+    @JsonProperty("repository_url")
+    public void setRepositoryUrl(String repositoryUrl) {
+        this.repositoryUrl = repositoryUrl;
+    }
+
+    @JsonProperty("repository_search_url")
+    public String getRepositorySearchUrl() {
+        return repositorySearchUrl;
+    }
+
+    @JsonProperty("repository_search_url")
+    public void setRepositorySearchUrl(String repositorySearchUrl) {
+        this.repositorySearchUrl = repositorySearchUrl;
+    }
+
+    @JsonProperty("current_user_repositories_url")
+    public String getCurrentUserRepositoriesUrl() {
+        return currentUserRepositoriesUrl;
+    }
+
+    @JsonProperty("current_user_repositories_url")
+    public void setCurrentUserRepositoriesUrl(String currentUserRepositoriesUrl) {
+        this.currentUserRepositoriesUrl = currentUserRepositoriesUrl;
+    }
+
+    @JsonProperty("starred_url")
+    public String getStarredUrl() {
+        return starredUrl;
+    }
+
+    @JsonProperty("starred_url")
+    public void setStarredUrl(String starredUrl) {
+        this.starredUrl = starredUrl;
+    }
+
+    @JsonProperty("starred_gists_url")
+    public String getStarredGistsUrl() {
+        return starredGistsUrl;
+    }
+
+    @JsonProperty("starred_gists_url")
+    public void setStarredGistsUrl(String starredGistsUrl) {
+        this.starredGistsUrl = starredGistsUrl;
+    }
+
+    @JsonProperty("team_url")
+    public String getTeamUrl() {
+        return teamUrl;
+    }
+
+    @JsonProperty("team_url")
+    public void setTeamUrl(String teamUrl) {
+        this.teamUrl = teamUrl;
+    }
+
+    @JsonProperty("user_url")
+    public String getUserUrl() {
+        return userUrl;
+    }
+
+    @JsonProperty("user_url")
+    public void setUserUrl(String userUrl) {
+        this.userUrl = userUrl;
+    }
+
+    @JsonProperty("user_organizations_url")
+    public String getUserOrganizationsUrl() {
+        return userOrganizationsUrl;
+    }
+
+    @JsonProperty("user_organizations_url")
+    public void setUserOrganizationsUrl(String userOrganizationsUrl) {
+        this.userOrganizationsUrl = userOrganizationsUrl;
+    }
+
+    @JsonProperty("user_repositories_url")
+    public String getUserRepositoriesUrl() {
+        return userRepositoriesUrl;
+    }
+
+    @JsonProperty("user_repositories_url")
+    public void setUserRepositoriesUrl(String userRepositoriesUrl) {
+        this.userRepositoriesUrl = userRepositoriesUrl;
+    }
+
+    @JsonProperty("user_search_url")
+    public String getUserSearchUrl() {
+        return userSearchUrl;
+    }
+
+    @JsonProperty("user_search_url")
+    public void setUserSearchUrl(String userSearchUrl) {
+        this.userSearchUrl = userSearchUrl;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\OwnerDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "login",
+        "id",
+        "avatar_url",
+        "gravatar_id",
+        "url",
+        "html_url",
+        "followers_url",
+        "following_url",
+        "gists_url",
+        "starred_url",
+        "subscriptions_url",
+        "organizations_url",
+        "repos_url",
+        "events_url",
+        "received_events_url",
+        "type",
+        "site_admin"
+})
+public class OwnerDTO {
+
+    @JsonProperty("login")
+    private String login;
+    @JsonProperty("id")
+    private Integer id;
+    @JsonProperty("avatar_url")
+    private String avatarUrl;
+    @JsonProperty("gravatar_id")
+    private String gravatarId;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("html_url")
+    private String htmlUrl;
+    @JsonProperty("followers_url")
+    private String followersUrl;
+    @JsonProperty("following_url")
+    private String followingUrl;
+    @JsonProperty("gists_url")
+    private String gistsUrl;
+    @JsonProperty("starred_url")
+    private String starredUrl;
+    @JsonProperty("subscriptions_url")
+    private String subscriptionsUrl;
+    @JsonProperty("organizations_url")
+    private String organizationsUrl;
+    @JsonProperty("repos_url")
+    private String reposUrl;
+    @JsonProperty("events_url")
+    private String eventsUrl;
+    @JsonProperty("received_events_url")
+    private String receivedEventsUrl;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("site_admin")
+    private Boolean siteAdmin;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("login")
+    public String getLogin() {
+        return login;
+    }
+
+    @JsonProperty("login")
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @JsonProperty("id")
+    public Integer getId() {
+        return id;
+    }
+
+    @JsonProperty("id")
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @JsonProperty("avatar_url")
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    @JsonProperty("avatar_url")
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    @JsonProperty("gravatar_id")
+    public String getGravatarId() {
+        return gravatarId;
+    }
+
+    @JsonProperty("gravatar_id")
+    public void setGravatarId(String gravatarId) {
+        this.gravatarId = gravatarId;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("html_url")
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonProperty("followers_url")
+    public String getFollowersUrl() {
+        return followersUrl;
+    }
+
+    @JsonProperty("followers_url")
+    public void setFollowersUrl(String followersUrl) {
+        this.followersUrl = followersUrl;
+    }
+
+    @JsonProperty("following_url")
+    public String getFollowingUrl() {
+        return followingUrl;
+    }
+
+    @JsonProperty("following_url")
+    public void setFollowingUrl(String followingUrl) {
+        this.followingUrl = followingUrl;
+    }
+
+    @JsonProperty("gists_url")
+    public String getGistsUrl() {
+        return gistsUrl;
+    }
+
+    @JsonProperty("gists_url")
+    public void setGistsUrl(String gistsUrl) {
+        this.gistsUrl = gistsUrl;
+    }
+
+    @JsonProperty("starred_url")
+    public String getStarredUrl() {
+        return starredUrl;
+    }
+
+    @JsonProperty("starred_url")
+    public void setStarredUrl(String starredUrl) {
+        this.starredUrl = starredUrl;
+    }
+
+    @JsonProperty("subscriptions_url")
+    public String getSubscriptionsUrl() {
+        return subscriptionsUrl;
+    }
+
+    @JsonProperty("subscriptions_url")
+    public void setSubscriptionsUrl(String subscriptionsUrl) {
+        this.subscriptionsUrl = subscriptionsUrl;
+    }
+
+    @JsonProperty("organizations_url")
+    public String getOrganizationsUrl() {
+        return organizationsUrl;
+    }
+
+    @JsonProperty("organizations_url")
+    public void setOrganizationsUrl(String organizationsUrl) {
+        this.organizationsUrl = organizationsUrl;
+    }
+
+    @JsonProperty("repos_url")
+    public String getReposUrl() {
+        return reposUrl;
+    }
+
+    @JsonProperty("repos_url")
+    public void setReposUrl(String reposUrl) {
+        this.reposUrl = reposUrl;
+    }
+
+    @JsonProperty("events_url")
+    public String getEventsUrl() {
+        return eventsUrl;
+    }
+
+    @JsonProperty("events_url")
+    public void setEventsUrl(String eventsUrl) {
+        this.eventsUrl = eventsUrl;
+    }
+
+    @JsonProperty("received_events_url")
+    public String getReceivedEventsUrl() {
+        return receivedEventsUrl;
+    }
+
+    @JsonProperty("received_events_url")
+    public void setReceivedEventsUrl(String receivedEventsUrl) {
+        this.receivedEventsUrl = receivedEventsUrl;
+    }
+
+    @JsonProperty("type")
+    public String getType() {
+        return type;
+    }
+
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @JsonProperty("site_admin")
+    public Boolean getSiteAdmin() {
+        return siteAdmin;
+    }
+
+    @JsonProperty("site_admin")
+    public void setSiteAdmin(Boolean siteAdmin) {
+        this.siteAdmin = siteAdmin;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\ParentDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sha",
+        "url",
+        "html_url"
+})
+public class ParentDTO {
+
+    @JsonProperty("sha")
+    private String sha;
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("html_url")
+    private String htmlUrl;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("sha")
+    public String getSha() {
+        return sha;
+    }
+
+    @JsonProperty("sha")
+    public void setSha(String sha) {
+        this.sha = sha;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonProperty("html_url")
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    @JsonProperty("html_url")
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\PermissionsDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "admin",
+        "push",
+        "pull"
+})
+public class PermissionsDTO {
+
+    @JsonProperty("admin")
+    private Boolean admin;
+    @JsonProperty("push")
+    private Boolean push;
+    @JsonProperty("pull")
+    private Boolean pull;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("admin")
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    @JsonProperty("admin")
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
+    @JsonProperty("push")
+    public Boolean getPush() {
+        return push;
+    }
+
+    @JsonProperty("push")
+    public void setPush(Boolean push) {
+        this.push = push;
+    }
+
+    @JsonProperty("pull")
+    public Boolean getPull() {
+        return pull;
+    }
+
+    @JsonProperty("pull")
+    public void setPull(Boolean pull) {
+        this.pull = pull;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\dto\TreeDTO.java
+
+package githubcrawler.dto;
+
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sha",
+        "url"
+})
+public class TreeDTO {
+
+    @JsonProperty("sha")
+    private String sha;
+    @JsonProperty("url")
+    private String url;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("sha")
+    public String getSha() {
+        return sha;
+    }
+
+    @JsonProperty("sha")
+    public void setSha(String sha) {
+        this.sha = sha;
+    }
+
+    @JsonProperty("url")
+    public String getUrl() {
+        return url;
+    }
+
+    @JsonProperty("url")
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\GitHubURIconsts.java
+package githubcrawler;
+
+/**
+ * Created by adrian on 4/9/17.
+ */
+public class GitHubURIconsts {
+    public static final String github_url = "https://api.github.com";
+    public static final String organization_name = "astachurski-intj";
+    public static final String as_token = "Basic YXN0YWNodXJza2k6ZDY1MGRlN2E0MTI2NWQ3ZGY0ZjE3NTA4MWM5MWUzMDVkMDQ2ZjJhZQ==";
+    public static final String org_repos_url = "https://api.github.com/orgs/astachurski-intj/repos";
+
+}
+
+
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\service\GitHubMetrics.java
+package githubcrawler.service;
+
+public class GitHubMetrics {
+
+    private final String content;
+
+    public GitHubMetrics(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\service\RestController.java
+package githubcrawler.service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import githubcrawler.domain.ReportPojo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.*;
+import org.springframework.boot.jackson.JsonObjectDeserializer;
+import org.springframework.web.bind.annotation.*;
+
+@org.springframework.web.bind.annotation.RestController
+@EnableAutoConfiguration
+public class RestController {
+
+    private RestGitHubFetcher restGitHubFetcher;
+
+    @RequestMapping(value = "/github-metrics", method = RequestMethod.GET)
+    public String getGitHubMetrics(@RequestParam(value = "test", defaultValue = "dupa") String name) {
+        String report = "empty";
+        try {
+            ReportPojo reportPojo = restGitHubFetcher.fetchDTOs();
+            ObjectMapper om = new ObjectMapper();
+            report = om.writeValueAsString(reportPojo);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return report;
+    }
+    @RequestMapping("/")
+    String home() {
+        return "GitHub metrics gatherer";
+    }
+
+
+    @Autowired
+    public void setRestGitHubFetcher(RestGitHubFetcher restGitHubFetcher) {
+        this.restGitHubFetcher = restGitHubFetcher;
+    }
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\main\java\githubcrawler\service\RestGitHubFetcher.java
+package githubcrawler.service;
+
+import githubcrawler.GitHubURIconsts;
+import githubcrawler.domain.BranchProtectionInfoReport;
+import githubcrawler.domain.GitRepositoryReport;
+import githubcrawler.domain.ReportPojo;
+import githubcrawler.dto.CommitDTO;
+import githubcrawler.dto.GitHubBranchDTO;
+import githubcrawler.dto.GitHubOrgRepoDTO;
+import githubcrawler.dto.branchprotection.BranchProtectionInfo;
+import githubcrawler.dto.commitdetails.CommitDetailsDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+
+public class RestGitHubFetcher {
+
+    private static final Logger log = LoggerFactory.getLogger(RestGitHubFetcher.class);
+
+    private RestTemplate restTemplate;
+    private HttpHeaders httpHeaders = new HttpHeaders();
+
+    @Autowired
+    public void setReportPojo(ReportPojo reportPojo) {
+        this.reportPojo = reportPojo;
+    }
+
+    private ReportPojo reportPojo;
+
+    public RestGitHubFetcher(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+        httpHeaders.add("Authorization", GitHubURIconsts.as_token);
+        httpHeaders.add("Accept", "application/vnd.github.loki-preview+json");
+    }
+
+    /*e einie */
+    public ReportPojo fetchDTOs() throws Exception {
+
+        //URI github_root_uri = new URI(GitHubURIconsts.github_url);
+        URI org_repos_uri = new URI(GitHubURIconsts.org_repos_url);
+
+        //RequestEntity<GitHubRootDTO> requestEntity = new RequestEntity<>(httpHeaders, HttpMethod.GET, github_root_uri);
+        //ResponseEntity<GitHubRootDTO> resp = restTemplate.exchange(requestEntity, GitHubRootDTO.class);
+        //GitHubRootDTO gitHubRoot = resp.getBody();Got
+
+        List<GitHubOrgRepoDTO> reposList = getRepos(org_repos_uri);
+
+        log.info("repositories count is: " + reposList.size());
+
+        //iterate over repos to get branches, commits and repo-specific stuff
+        for (GitHubOrgRepoDTO gitHubOrgRepoDTO : reposList) {
+
+            GitRepositoryReport gitRepositoryReport = new GitRepositoryReport();
+            gitRepositoryReport.setName(gitHubOrgRepoDTO.getName());
+            gitRepositoryReport.setActualDefaultBranch(gitHubOrgRepoDTO.getDefaultBranch());
+            reportPojo.addRepoReport(gitRepositoryReport);
+
+            String branches_uri_str = gitHubOrgRepoDTO.getBranchesUrl();
+            List<GitHubBranchDTO> branchList = getBranches(branches_uri_str);
+
+            log.info(" repository name:  " + gitHubOrgRepoDTO.getName());
+            log.info(" default branch: " + gitHubOrgRepoDTO.getDefaultBranch());
+
+            if (branchList != null)
+                for (GitHubBranchDTO gitHubBranchDTO : branchList) {
+                    gitRepositoryReport.addBranchName(gitHubBranchDTO.getName());
+
+                    URI branch_protection_info = new URI(gitHubBranchDTO.getAdditionalProperties().get("protection_url").toString());
+                    RequestEntity<String> requestProtectionInfoForBranch = new RequestEntity<>(httpHeaders, HttpMethod.GET, branch_protection_info);
+                    try {
+                        ResponseEntity<BranchProtectionInfo> responseProtectionInfoForBranch =
+                                restTemplate.exchange(requestProtectionInfoForBranch, new ParameterizedTypeReference<BranchProtectionInfo>() {
+                        });
+
+                        BranchProtectionInfoReport branchProtectionInfoReport = new BranchProtectionInfoReport();
+                        branchProtectionInfoReport.setIncludeAdministrators(responseProtectionInfoForBranch.getBody().getRequiredStatusChecks().getIncludeAdmins());
+                        gitRepositoryReport.addBranchProtectionInfo(gitHubBranchDTO.getName(), branchProtectionInfoReport);
+
+                        log.info("protection info :" + responseProtectionInfoForBranch.getBody().getRestrictions().toString());
+                    } catch (HttpClientErrorException e) {
+                        //do nothing.
+                        //happens for all NOT SET protections
+                        //log.warn(e.getMessage());
+                    }
+                }
+
+            String commits_for_repo_uri_str = gitHubOrgRepoDTO.getCommitsUrl();
+            URI commits_uri = new URI(commits_for_repo_uri_str.substring(0, branches_uri_str.indexOf("{") - 1));
+
+            log.info("commits for repo uri: " + commits_uri.toURL().toString());
+
+            List<CommitDetailsDTO> commitDTOList = getCommits(commits_uri);
+
+            if (commitDTOList != null)
+                for (CommitDetailsDTO commitDetailsDTO : commitDTOList) {
+                    log.info("commitDTO: " + commitDetailsDTO.getCommit().getMessage());
+                }
+        }
+        return reportPojo;
+    }
+
+    private List<GitHubBranchDTO> getBranches(String branches_uri_str) throws URISyntaxException {
+        //extract collection resource getting rid of unused parameter
+        URI branches_uri = new URI(branches_uri_str.substring(0, branches_uri_str.indexOf("{")));
+
+        RequestEntity<GitHubBranchDTO> requestBranchForRepo = new RequestEntity<>(httpHeaders, HttpMethod.GET, branches_uri);
+        try {
+            ResponseEntity<List<GitHubBranchDTO>> responseEntityBranchesForRepo = restTemplate.exchange(requestBranchForRepo, new ParameterizedTypeReference<List<GitHubBranchDTO>>() {
+            });
+            return responseEntityBranchesForRepo.getBody();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    private List<GitHubOrgRepoDTO> getRepos(URI org_repos_uri) {
+
+        RequestEntity<GitHubOrgRepoDTO> requestReposForOrg = new RequestEntity<>(httpHeaders, HttpMethod.GET, org_repos_uri);
+
+        try {
+            ResponseEntity<List<GitHubOrgRepoDTO>> responseEntityReposForOrg =
+                    restTemplate.exchange(requestReposForOrg, new ParameterizedTypeReference<List<GitHubOrgRepoDTO>>() {
+                    });
+            return responseEntityReposForOrg.getBody();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+
+    }
+
+    private List<CommitDetailsDTO> getCommits(URI commits_uri) {
+
+        RequestEntity<CommitDTO> commitForRepoRequest = new RequestEntity<>(httpHeaders, HttpMethod.GET, commits_uri);
+        try {
+            ResponseEntity<List<CommitDTO>> responseEntityCommitsForRepo = restTemplate.exchange(
+                    commitForRepoRequest, new ParameterizedTypeReference<List<CommitDTO>>() {
+                    });
+            List<CommitDTO> commitDTOList = responseEntityCommitsForRepo.getBody();
+
+            List<CommitDetailsDTO> commitDetailsList = new ArrayList<>();
+
+            if (commitDTOList != null)
+                for (CommitDTO commitDTO : commitDTOList) {
+                    //String commitDetailsUrl = commitDTO.getUrl();
+                    URI commitDetailsUri = new URI(commitDTO.getUrl());
+                    RequestEntity<CommitDetailsDTO> commitDetailsRequest = new RequestEntity<>(httpHeaders, HttpMethod.GET, commitDetailsUri);
+                    ResponseEntity<CommitDetailsDTO> commitDetailsResponse = restTemplate.exchange(commitDetailsRequest, new ParameterizedTypeReference<CommitDetailsDTO>() {
+                    });
+                    commitDetailsList.add(commitDetailsResponse.getBody());
+                    //log.info("commit details: " + commitDetailsResponse.);
+                }
+
+            return commitDetailsList;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+
+    }
+
+
+}
+C:\Users\flori\Documents\ProiectIP_E1\GH\git\github-api-crawler\github-metrics-gatherer\src\test\java\githubcrawler\ApplicationTest.java
+/*
+ * Copyright 2012-2015 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package githubcrawler;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestTemplate;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ApplicationTest {
+	
+	@Autowired
+	private RestTemplate restTemplate;
+
+	@Test
+	public void contextLoads() {
+		assertThat(restTemplate).isNotNull();
+	}
+
+}

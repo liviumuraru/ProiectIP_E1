@@ -7,19 +7,21 @@ import java.util.List;
 
 public class Assets
 {
-    public static File MergeFiles( List< Asset<File> > fileList, Path destination ) throws IOException {
+    public static File MergeFiles( List< Asset<File> > fileList, Path destination, String repoURL, String destinationDir ) throws IOException {
         File mergedFiles = destination.toFile();
         mergedFiles.createNewFile();
         BufferedWriter bw = new BufferedWriter(new FileWriter(mergedFiles));
 
-        if ( fileList.isEmpty() )
-            bw.write( destination.toString() );
+        bw.write( repoURL );
+        bw.newLine();
+        bw.write( destinationDir );
+        bw.newLine();
+
         for (Asset<File> fileAsset : fileList)
         {
             BufferedReader br = new BufferedReader(new FileReader(fileAsset.getAsset()));
             String text = null;
 
-            bw.write(fileAsset.getAsset().getAbsolutePath());
             bw.newLine();
             while ((text = br.readLine()) != null)
             {

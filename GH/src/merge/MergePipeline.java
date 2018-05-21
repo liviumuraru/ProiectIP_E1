@@ -95,7 +95,7 @@ public class MergePipeline
         // delegate filtering to filterData
         List<Asset<File>> filteredFiles = filterData.internal_execFilter(files);
 
-        File merged = Assets.MergeFiles(filteredFiles, Paths.get("mergedFiles/merged" + counter + ".txt" ));
+        File merged = Assets.MergeFiles( filteredFiles, Paths.get("mergedFiles/merged" + counter + ".txt" ), RepoURL, "git/" + repo );
 
         return merged;
     }

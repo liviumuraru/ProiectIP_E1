@@ -1,8 +1,10 @@
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\IDLog.txt
+https://github.com/gitminingOrg/DataCrawler.git
+git/DataCrawler
+
 16000091
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\IDLog1.txt
+
 28232508
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\analysis\RepoInfo.java
+
 package analysis;
 
 import java.io.BufferedWriter;
@@ -885,7 +887,7 @@ public class RepoInfo {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\analysis\RepoPairRelation.java
+
 package analysis;
 
 public class RepoPairRelation {
@@ -917,7 +919,7 @@ public class RepoPairRelation {
 		this.relation_score = relation_score;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\analysis\RepoTagPair.java
+
 package analysis;
 
 public class RepoTagPair {
@@ -944,7 +946,7 @@ public class RepoTagPair {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\analysis\TestUser.java
+
 package analysis;
 
 import java.io.BufferedWriter;
@@ -1043,7 +1045,7 @@ public class TestUser {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\analysis\UserChart.java
+
 package analysis;
 
 import java.io.BufferedWriter;
@@ -1106,7 +1108,7 @@ public class UserChart {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\analysis\UserInfo.java
+
 package analysis;
 
 import java.io.File;
@@ -1406,7 +1408,7 @@ public class UserInfo {
 // "following" : 0,
 // "created_at" : "2013-06-01T00:43:49Z",
 // "updated_at" : "2014-11-01T16:19:07Z"
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\AAAAAAAAAAAAAAAAA.java
+
 package githubCrawler;
 
 import utility.MessageSender;
@@ -1486,7 +1488,7 @@ public class AAAAAAAAAAAAAAAAA {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\AssigneeCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -1622,7 +1624,7 @@ public class AssigneeCrawler {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\BranchCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -1755,7 +1757,7 @@ public class BranchCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\CommentCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -1888,7 +1890,7 @@ public class CommentCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\CommitCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -2196,7 +2198,7 @@ public class CommitCrawler {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\CommitCrawlerA.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -2503,7 +2505,7 @@ public class CommitCrawlerA {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\Committt.java
+
 package githubCrawler;
 
 import java.io.IOException;
@@ -2606,7 +2608,7 @@ public class Committt {
 		gitCommit.crawl("mojombo/grit");*/
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\ContentCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -2710,7 +2712,7 @@ public class ContentCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\ContributorCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -2846,7 +2848,7 @@ public class ContributorCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\CrawlPullAndIssue.java
+
 package githubCrawler;
 
 import utility.GetHostName;
@@ -2912,7 +2914,7 @@ public class CrawlPullAndIssue {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\DownloadReadme.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -3117,7 +3119,7 @@ public class DownloadReadme {
 		}*/
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\DownloadRepository.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -3144,7 +3146,7 @@ public class DownloadRepository {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\EventCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -3166,7 +3168,7 @@ public class EventCrawler {
 		return null;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\FilterOperate.java
+
 package githubCrawler;
 
 public class FilterOperate {
@@ -3185,7 +3187,7 @@ public class FilterOperate {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\FilterOperate1.java
+
 package githubCrawler;
 
 public class FilterOperate1 {
@@ -3202,7 +3204,7 @@ public class FilterOperate1 {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\FilterThread.java
+
 package githubCrawler;
 
 public class FilterThread extends Thread {
@@ -3214,7 +3216,7 @@ public class FilterThread extends Thread {
 		repoFilter.main(null);
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\FilterThread1.java
+
 package githubCrawler;
 
 public class FilterThread1 extends Thread {
@@ -3225,7 +3227,7 @@ public class FilterThread1 extends Thread {
 		repoFilter1.main(null);
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\ForkCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -3359,7 +3361,7 @@ public class ForkCrawler {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\GitCommit.java
+
 package githubCrawler;
 import java.io.BufferedReader;
 import java.io.File;
@@ -3801,7 +3803,7 @@ public class GitCommit {
 
 	}*/
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\GitCrawler.java
+
 package githubCrawler;
 import java.io.BufferedReader;
 import java.io.File;
@@ -4249,7 +4251,7 @@ public class GitCrawler {
 
 	}*/
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\GitrefCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -4382,7 +4384,7 @@ public class GitrefCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\IssueCommentCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -4515,7 +4517,7 @@ public class IssueCommentCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\IssueCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -4689,7 +4691,7 @@ public class IssueCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\IssueEventCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -4822,7 +4824,7 @@ public class IssueEventCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\LanguageCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -4915,7 +4917,7 @@ public class LanguageCrawler {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\OperateComment.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -5011,7 +5013,7 @@ public class OperateComment {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\PullCommitCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -5221,7 +5223,7 @@ public class PullCommitCrawler {
 		cursor.close();
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\PullCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -5393,7 +5395,7 @@ public class PullCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\RepoCrawler.java
+
 package githubCrawler;
 import java.io.BufferedReader;
 import java.io.File;
@@ -6767,7 +6769,7 @@ public class RepoCrawler {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\RepoFilter.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -7175,7 +7177,7 @@ public class RepoFilter {
 // System.out.println("----------------------------------------" +
 // Integer.parseInt(repo.get("id").toString()) + ":" + repo.get("full_name"));
 // repository.save(repo);
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\RepoFilter1.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -7544,7 +7546,7 @@ public class RepoFilter1 {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\RepositoryCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -7633,7 +7635,7 @@ public class RepositoryCrawler {
 		return repo;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\StargazerCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -7766,7 +7768,7 @@ public class StargazerCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\SubscriberCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -7899,7 +7901,7 @@ public class SubscriberCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\TagCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -8032,7 +8034,7 @@ public class TagCrawler {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\TreeCrawler.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -8304,7 +8306,7 @@ public class TreeCrawler {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\githubCrawler\TTTTTTTTTTTest.java
+
 package githubCrawler;
 
 import java.io.BufferedReader;
@@ -8625,7 +8627,7 @@ public class TTTTTTTTTTTest {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\CrawlerA.java
+
 package hehe;
 
 import utility.MongoInfo;
@@ -8673,7 +8675,7 @@ public class CrawlerA {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\CrawlerB.java
+
 package hehe;
 
 import utility.MongoInfo;
@@ -8719,7 +8721,7 @@ public class CrawlerB {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\IssueCrawlerA.java
+
 package hehe;
 
 import java.io.BufferedReader;
@@ -8888,7 +8890,7 @@ public class IssueCrawlerA {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\IssueCrawlerB.java
+
 package hehe;
 
 import java.io.BufferedReader;
@@ -9057,7 +9059,7 @@ public class IssueCrawlerB {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\PullCrawlerA.java
+
 package hehe;
 
 import java.io.BufferedReader;
@@ -9226,7 +9228,7 @@ public class PullCrawlerA {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\PullCrawlerB.java
+
 package hehe;
 
 import java.io.BufferedReader;
@@ -9395,7 +9397,7 @@ public class PullCrawlerB {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\RepoReFilter.java
+
 package hehe;
 
 import githubCrawler.AssigneeCrawler;
@@ -9543,7 +9545,7 @@ public class RepoReFilter {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\Test.java
+
 package hehe;
 
 import org.bson.Document;
@@ -9588,7 +9590,7 @@ public class Test {
 }
 /*owenchen
 19930301owenchen*/
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\hehe\TTest.java
+
 package hehe;
 
 public class TTest {
@@ -9605,7 +9607,7 @@ public class TTest {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\historyDownload\DecompressFile.java
+
 package historyDownload;
 
 import java.io.BufferedWriter;
@@ -9698,7 +9700,7 @@ public class DecompressFile {
         return ext;   
     }  
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\historyDownload\DownloadFile.java
+
 package historyDownload;
 
 import java.io.BufferedInputStream;
@@ -9830,7 +9832,7 @@ public class DownloadFile {
 		return true;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\historyDownload\HisFileFilter.java
+
 package historyDownload;
 
 import java.io.BufferedReader;
@@ -9946,7 +9948,7 @@ public class HisFileFilter {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\historyDownload\HistoryDriver.java
+
 package historyDownload;
 
 import java.io.BufferedWriter;
@@ -10087,7 +10089,7 @@ public class HistoryDriver {
 		return result;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\historyDownload\HistoryDriverBefore2013.java
+
 package historyDownload;
 
 import java.io.BufferedWriter;
@@ -10210,7 +10212,7 @@ public class HistoryDriverBefore2013 {
 		return result;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\historyDownload\HistoryFilter.java
+
 package historyDownload;
 
 import java.io.BufferedReader;
@@ -10300,7 +10302,7 @@ public class HistoryFilter {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\historyDownload\HistoryFilterBefore2013.java
+
 package historyDownload;
 
 import java.io.BufferedReader;
@@ -10415,7 +10417,7 @@ public class HistoryFilterBefore2013 {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\Assign.java
+
 package metrics22;
 
 public class Assign {
@@ -10448,7 +10450,7 @@ public class Assign {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\ClassVisitor.java
+
 package metrics22;
 
 import java.util.ArrayList;
@@ -10717,7 +10719,7 @@ public class ClassVisitor extends ASTVisitor {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\Driver.java
+
 package metrics22;
 
 import java.util.List;
@@ -10742,7 +10744,7 @@ public class Driver {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\Expression.java
+
 package metrics22;
 
 public class Expression {
@@ -10780,7 +10782,7 @@ public class Expression {
 		this.expression = expression;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\FileNameReader.java
+
 package metrics22;
 
 import java.io.BufferedReader;
@@ -10808,7 +10810,7 @@ public class FileNameReader {
 		return names;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\FileStringReader.java
+
 package metrics22;
 
 import java.io.BufferedInputStream;
@@ -10845,7 +10847,7 @@ public class FileStringReader {
 		return result;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\LineIdentifier.java
+
 package metrics22;
 
 import java.util.ArrayList;
@@ -10864,7 +10866,7 @@ public class LineIdentifier {
 		return lines;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\Metrcis3.java
+
 package metrics22;
 
 import java.io.BufferedReader;
@@ -11614,7 +11616,7 @@ public class Metrcis3 {
 		return result;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\Metric1.java
+
 package metrics22;
 
 import java.io.IOException;
@@ -12076,7 +12078,7 @@ public class Metric1 {
 		return new int[] { nextline, caseline };
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\Metrics2.java
+
 package metrics22;
 
 import java.io.IOException;
@@ -12642,7 +12644,7 @@ public class Metrics2 {
 				(varDeclares.size() + methodParas.size()) };
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\NormalStmt.java
+
 package metrics22;
 
 public class NormalStmt {
@@ -12650,7 +12652,7 @@ public class NormalStmt {
 	int start;
 	int length;
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\SpecialStmt.java
+
 package metrics22;
 
 public class SpecialStmt {
@@ -12691,7 +12693,7 @@ public class SpecialStmt {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\StructureParser.java
+
 package metrics22;
 
 import java.io.IOException;
@@ -12726,7 +12728,7 @@ public class StructureParser {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\Test.java
+
 package metrics22;
 
 import java.io.IOException;
@@ -12820,7 +12822,7 @@ public class Test {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\metrics22\VarDeclare.java
+
 package metrics22;
 
 public class VarDeclare {
@@ -12861,7 +12863,7 @@ public class VarDeclare {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\userInfoFetch\FetchOrgMembers.java
+
 package userInfoFetch;
 
 import java.util.ArrayList;
@@ -12915,7 +12917,7 @@ public class FetchOrgMembers {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\userInfoFetch\FetchUserFollowers.java
+
 package userInfoFetch;
 
 import java.util.ArrayList;
@@ -12979,7 +12981,7 @@ public class FetchUserFollowers {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\userInfoFetch\FetchUserInfo.java
+
 package userInfoFetch;
 
 import org.bson.Document;
@@ -13017,7 +13019,7 @@ public class FetchUserInfo {
 
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\userInfoFetch\FetchUserPage.java
+
 package userInfoFetch;
 
 import java.io.IOException;
@@ -13079,7 +13081,7 @@ public class FetchUserPage {
 
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\userInfoFetch\FetchUserRepos.java
+
 package userInfoFetch;
 
 import java.util.ArrayList;
@@ -13131,7 +13133,7 @@ public class FetchUserRepos {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\userInfoFetch\TestUser.java
+
 package userInfoFetch;
 
 import java.util.ArrayList;
@@ -13168,7 +13170,7 @@ public class TestUser {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\userInfoFetch\UserDeal.java
+
 package userInfoFetch;
 import java.util.List;
 
@@ -13233,7 +13235,7 @@ public class UserDeal {
 		mongoClient.close();
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\AccountUtil.java
+
 package utility;
 
 
@@ -13256,7 +13258,7 @@ public class AccountUtil {
 		return accounts[random];
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\GetAuthorization.java
+
 package utility;
 
 import java.nio.charset.Charset;
@@ -13274,7 +13276,7 @@ public class GetAuthorization {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\GetHostName.java
+
 package utility;
 
 import java.net.InetAddress;
@@ -13295,7 +13297,7 @@ public class GetHostName {
 		return hostname;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\GetURLConnection.java
+
 package utility;
 
 import java.net.HttpURLConnection;
@@ -13322,7 +13324,7 @@ public class GetURLConnection {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\HttpDeal.java
+
 package utility;
 
 import java.io.BufferedReader;
@@ -13363,7 +13365,7 @@ public class HttpDeal {
 
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\MessageReceiver.java
+
 package utility;
 
 import githubCrawler.GitCrawler;
@@ -13606,7 +13608,7 @@ public class MessageReceiver {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\MessageSender.java
+
 package utility;
 
 import java.io.IOException;
@@ -13646,7 +13648,7 @@ public class MessageSender {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\MongoInfo.java
+
 package utility;
 
 public class MongoInfo {
@@ -13656,7 +13658,7 @@ public class MongoInfo {
 		return remoteIP;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\MysqlInfo.java
+
 package utility;
 
 import java.io.File;
@@ -13699,7 +13701,7 @@ public class MysqlInfo {
 		return index;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\RepoSimple.java
+
 package utility;
 
 public class RepoSimple {
@@ -13712,7 +13714,7 @@ public class RepoSimple {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\ValidateInternetConnection.java
+
 package utility;
 
 import java.net.HttpURLConnection;
@@ -13731,7 +13733,7 @@ public class ValidateInternetConnection {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\utility\ValidateMongoConnection.java
+
 package utility;
 
 import com.mongodb.DB;
@@ -13754,7 +13756,7 @@ public class ValidateMongoConnection {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\AnalyseDriver.java
+
 package zwqneed;
 
 import java.text.ParseException;
@@ -14208,7 +14210,7 @@ public class AnalyseDriver {
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\DBCollectionInfo.java
+
 package zwqneed;
 
 public class DBCollectionInfo {
@@ -14223,7 +14225,7 @@ public class DBCollectionInfo {
 	public final static String EVENT_DB = "historyevents2";
 	public final static String EVENT_COLLECTION = "spec_events";
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\Event.java
+
 package zwqneed;
 
 import java.util.Date;
@@ -14275,7 +14277,7 @@ public class Event {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\HistoryEventFetcher.java
+
 package zwqneed;
 
 import java.sql.Connection;
@@ -14314,7 +14316,7 @@ public class HistoryEventFetcher {
 		return events;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\MongoQuery.java
+
 package zwqneed;
 
 import java.util.ArrayList;
@@ -14384,7 +14386,7 @@ public class MongoQuery {
 		mongoClient.close();
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\ProjectDataFetch.java
+
 package zwqneed;
 
 import java.util.HashMap;
@@ -14462,7 +14464,7 @@ public class ProjectDataFetch {
 		return result;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\PullRequest.java
+
 package zwqneed;
 
 public class PullRequest {
@@ -14654,7 +14656,7 @@ public class PullRequest {
 	
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\PullRequestFetch.java
+
 package zwqneed;
 
 import java.util.HashMap;
@@ -14711,7 +14713,7 @@ public class PullRequestFetch {
 		return commits;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\main\java\zwqneed\SubmitterDataFetch.java
+
 package zwqneed;
 
 import java.util.HashMap;
@@ -14752,7 +14754,7 @@ public class SubmitterDataFetch {
 		return commits;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\src\test\java\Testttt.java
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -14768,7 +14770,7 @@ public class Testttt {
 		//assertEquals(null, AccountUtil.getLoginPassword(), "owenchen93:19930301owenchen");
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\StructureParser.java
+
 
 From edf3791e6ebcff6e8e98c1dfed3ca3f83c0edca4 Mon Sep 17 00:00:00 2001
 From: WonderCsabo <kozakcsabi@gmail.com>
@@ -26756,5 +26758,5 @@ index 4844672..11113c9 100644
  		<module name="JavadocVariable" />
  		<module name="JavadocStyle" />
  	</module>
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DataCrawler\test.txt
+
 StructureParser.java

@@ -4,6 +4,7 @@ import filter.concreteFilters.JavaFilesOnly;
 import filter.concreteFilters.TextFilesOnly;
 import filter.filterTypes.ORFilter;
 import lucene.Machine;
+import lucene.Repo;
 import merge.MergePipeline;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.kohsuke.github.GHRepository;
@@ -54,7 +55,7 @@ public class MainTest
         languages.add( "java" );
 
         // create crawler and get related repos
-        Crawler crawler = new Crawler( 25 );
+        Crawler crawler = new Crawler( 5 );
         List<GHRepository > repositories = null;
         try
         {
@@ -74,7 +75,9 @@ public class MainTest
         // create lucene machine
         try
         {
-            Machine.getCosineSimilarity();
+            List<Repo> selectedRepos = Machine.getCosineSimilarity( 0.6 );
+            for ( Repo repo : selectedRepos )
+                System.out.println( repo );
         }
         catch ( IOException e )
         {

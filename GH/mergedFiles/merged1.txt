@@ -1,4 +1,6 @@
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\3Sum.java
+https://github.com/david-grey/leetcode-github.git
+git/leetcode-github
+
 public class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
@@ -38,7 +40,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\3Sum_Closest.java
+
 class Solution {
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
@@ -75,7 +77,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\3Sum_Smaller.java
+
 public class Solution {
     public int threeSumSmaller(int[] nums, int n) {
         Arrays.sort(nums);
@@ -98,7 +100,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\4Sum.java
+
 public class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
         Arrays.sort(nums);
@@ -153,7 +155,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Add_Binary.java
+
 public class Solution {
     public String addBinary(String a, String b) {
         int len = Math.max(a.length(), b.length());
@@ -185,7 +187,7 @@ public class Solution {
         return result.toString();
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Add_Two_Numbers.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -227,7 +229,7 @@ class Solution {
         return result.next;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Balanced_Binary_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -269,7 +271,7 @@ public class Solution {
     }
     
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Basic_Calculator_II.java
+
 public class Solution {
     public int calculate(String a) {
         String s = "+" + a + "+";
@@ -321,7 +323,7 @@ public class Solution {
         return ans;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Best_Time_to_Buy_and_Sell_Stock.java
+
 public class Solution {
     public int maxProfit(int[] prices) {
         if (prices == null || prices.length == 0){
@@ -338,7 +340,7 @@ public class Solution {
     }
     
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Best_Time_to_Buy_and_Sell_Stock_II.java
+
 public class Solution {
     public int maxProfit(int[] prices) {
         int max = 0;
@@ -350,7 +352,7 @@ public class Solution {
         return max;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Best_Time_to_Buy_and_Sell_Stock_with_Cooldown.java
+
 public class Solution {
     public int maxProfit(int[] prices) {
         if(prices == null || prices.length <= 1) return 0;
@@ -366,7 +368,7 @@ public class Solution {
         return s0;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Search_Tree_Iterator.java
+
 /**
  * Definition for binary tree
  * public class TreeNode {
@@ -416,7 +418,7 @@ public class BSTIterator {
  * BSTIterator i = new BSTIterator(root);
  * while (i.hasNext()) v[f()] = i.next();
  */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Inorder_Traversal.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -448,7 +450,7 @@ public class Solution {
     }
     
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Level_Order_Traversal.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -475,7 +477,7 @@ public class Solution {
         levelHelper(res, root.right, height+1);
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Level_Order_Traversal_II.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -516,7 +518,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Maximum_Path_Sum.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -548,7 +550,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Postorder_Traversal.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -580,7 +582,7 @@ public class Solution {
         return;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Preorder_Traversal.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -612,7 +614,7 @@ public class Solution {
         return;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Right_Side_View.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -654,7 +656,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Vertical_Order_Traversal.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -709,7 +711,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Binary_Tree_Zigzag_Level_Order_Traversal.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -754,7 +756,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Bomb_Enemy.java
+
 /*public class Solution {
     public int maxKilledEnemies(char[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length ==0){
@@ -855,7 +857,7 @@ public class Solution {
         return res;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Bulls_and_Cows.java
+
 public class Solution {
     public String getHint(String secret, String guess) {
         int bull = 0,cow = 0;
@@ -880,7 +882,7 @@ public class Solution {
         return bull + "A" + cow + "B";
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Climbing_Stairs.java
+
 public class Solution {
     public int climbStairs(int n) {
         if (n < 3){
@@ -895,7 +897,7 @@ public class Solution {
         return dp[n - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Closest_Binary_Search_Tree_Value.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -930,7 +932,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Coin_Change.java
+
 public class Solution {
     public int coinChange(int[] coins, int amount) {
         if (amount == 0){
@@ -956,7 +958,7 @@ public class Solution {
         return dp[amount];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Combination_Sum.java
+
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         Arrays.sort(candidates);
@@ -982,7 +984,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Combination_Sum_II.java
+
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
@@ -1011,7 +1013,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Combination_Sum_III.java
+
 class Solution {
     public List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> result = new ArrayList<>();
@@ -1034,7 +1036,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Container_With_Most_Water.java
+
 public class Solution {
     public int maxArea(int[] height) {
         if (height == null || height.length < 2){
@@ -1056,7 +1058,7 @@ public class Solution {
         return max;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Contains_Duplicate.java
+
 public class Solution {
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> set = new HashSet<>();
@@ -1069,7 +1071,7 @@ public class Solution {
         return false;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Contains_Duplicate_II.java
+
 public class Solution {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
         HashSet<Integer> set = new HashSet<>();
@@ -1083,7 +1085,7 @@ public class Solution {
         return false;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Convert_Sorted_Array_to_Binary_Search_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -1106,7 +1108,7 @@ public class Solution {
     }
     
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Convert_Sorted_List_to_Binary_Search_Tree.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -1156,7 +1158,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Counting_Bits.java
+
 public class Solution {
     public int[] countBits(int num) {
         int [] dp = new int[num + 1];
@@ -1178,7 +1180,7 @@ public class Solution {
         return dp;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Count_and_Say.java
+
 public class Solution {
     public String countAndSay(int n) {
         int cnt = 1;
@@ -1200,7 +1202,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Count_Complete_Tree_Nodes.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -1306,7 +1308,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Count_Numbers_with_Unique_Digits.java
+
 public class Solution {
     public int countNumbersWithUniqueDigits(int n) {
         if (n == 0) {
@@ -1320,7 +1322,7 @@ public class Solution {
         return ret;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Count_Primes.java
+
 /*public class Solution {
     public int countPrimes(int n) {
         ArrayList<Integer> primes = new ArrayList<>();
@@ -1374,7 +1376,7 @@ public class Solution {
         return count;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Course_Schedule.java
+
 /*class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
@@ -1447,7 +1449,7 @@ public class Solution {
             return true;
         }
     }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Decode_Ways.java
+
 public class Solution {
     public int numDecodings(String s) {
         if (s == null || s.equals("0")){
@@ -1490,7 +1492,7 @@ public class Solution {
         return dp[s.length() - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Delete_Node_in_a_Linked_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -1506,7 +1508,7 @@ class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Edit_Distance.java
+
 class Solution {
     public int minDistance(String word1, String word2) {
         int[][] dp = new int[word1.length() + 1][word2.length() + 1];
@@ -1529,7 +1531,7 @@ class Solution {
         return dp[word1.length()][word2.length()];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Encode_and_Decode_Strings.java
+
 public class Codec {
     StringBuilder sb = new StringBuilder();
     // Encodes a list of strings to a single string.
@@ -1557,7 +1559,7 @@ public class Codec {
 // Your Codec object will be instantiated and called as such:
 // Codec codec = new Codec();
 // codec.decode(codec.encode(strs));
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Encode_and_Decode_TinyURL.java
+
 public class Codec {
     int COUNTER;
     String elements;
@@ -1606,7 +1608,7 @@ public class Codec {
 // Your Codec object will be instantiated and called as such:
 // Codec codec = new Codec();
 // codec.decode(codec.encode(url));
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Find_All_Duplicates_in_an_Array.java
+
 class Solution {
     public List<Integer> findDuplicates(int[] nums) {
         List<Integer> result = new ArrayList<Integer>();
@@ -1623,7 +1625,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Find_Peak_Element.java
+
 class Solution {
     public int findPeakElement(int[] nums) {
         
@@ -1654,7 +1656,7 @@ class Solution {
         else return end;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Find_the_Difference.java
+
 class Solution {
     public char findTheDifference(String s, String t) {
         int[] charSet = new int[26];
@@ -1675,7 +1677,7 @@ class Solution {
         return ' ';
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\First_Bad_Version.java
+
 /* The isBadVersion API is defined in the parent class VersionControl.
       boolean isBadVersion(int version); */
 
@@ -1701,7 +1703,7 @@ public class Solution extends VersionControl {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Flatten_Binary_Tree_to_Linked_List.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -1742,7 +1744,7 @@ public class Solution {
         return;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Flatten_Nested_List_Iterator.java
+
 /**
  * // This is the interface that allows for creating nested lists.
  * // You should not implement it, or speculate about its implementation
@@ -1794,7 +1796,7 @@ public class NestedIterator implements Iterator<Integer> {
  * NestedIterator i = new NestedIterator(nestedList);
  * while (i.hasNext()) v[f()] = i.next();
  */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Flip_Game.java
+
 public class Solution {
     public List<String> generatePossibleNextMoves(String s) {
         List<String> ls = new ArrayList<>();
@@ -1807,7 +1809,7 @@ public class Solution {
         return ls;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Game_of_Life.java
+
 class Solution {
     public void gameOfLife(int[][] board) {
         int[][] result = new int[board.length][board[0].length];
@@ -1856,7 +1858,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Generate_Parentheses.java
+
 class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> rs = new ArrayList<>();
@@ -1879,7 +1881,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Group_Anagrams.java
+
 public class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> ans = new ArrayList<>();
@@ -1903,7 +1905,7 @@ public class Solution {
         return ans;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Group_Shifted_Strings.java
+
 public class Solution {
     public List<List<String>> groupStrings(String[] strings) {
         List<List<String>> result = new ArrayList<List<String>>();
@@ -1975,7 +1977,7 @@ public class Solution {
     }
 }
 */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\H-Index.java
+
 public class Solution {
     public int hIndex(int[] citations) {
         Arrays.sort(citations);
@@ -1987,7 +1989,7 @@ public class Solution {
         return 0;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Happy_Number.java
+
 public class Solution {
     public boolean isHappy(int n) {
         HashSet<Integer> visited = new HashSet<>();
@@ -2010,7 +2012,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\House_Robber.java
+
 public class Solution {
     public int rob(int[] nums) {
         int[] dp = new int[nums.length];
@@ -2028,7 +2030,7 @@ public class Solution {
         return dp[nums.length - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\House_Robber_II.java
+
 public class Solution {
     public int rob(int[] nums) {
         int[] dp = new int[nums.length];
@@ -2050,7 +2052,7 @@ public class Solution {
         return Math.max(dp[nums.length - 2],de[nums.length - 1]);
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Implement_Queue_using_Stacks.java
+
 class MyQueue {
     private Stack<Integer> stack = null;
     /** Initialize your data structure here. */
@@ -2095,7 +2097,7 @@ class MyQueue {
  * int param_3 = obj.peek();
  * boolean param_4 = obj.empty();
  */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Implement_Stack_using_Queues.java
+
 class MyStack {
     Queue<Integer> queue = null;
     
@@ -2150,7 +2152,7 @@ class MyStack {
  * int param_3 = obj.top();
  * boolean param_4 = obj.empty();
  */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Implement_strStr().java
+
 public class Solution {
     public int strStr(String haystack, String needle) {
         int len = needle.length();
@@ -2165,7 +2167,7 @@ public class Solution {
         return -1;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Insertion_Sort_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -2205,7 +2207,7 @@ class Solution {
         return dummy.next;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Integer_Break.java
+
 public class Solution {
     public int integerBreak(int n) {
         if (n < 4){
@@ -2221,7 +2223,7 @@ public class Solution {
         return dp[n - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Integer_to_Roman.java
+
 class Solution {
     public String intToRoman(int num) {
         String M[] = {"", "M", "MM", "MMM"};
@@ -2231,7 +2233,7 @@ class Solution {
         return M[num/1000] + C[(num%1000)/100]+ X[(num%100)/10] + I[num%10];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Intersection_of_Two_Arrays.java
+
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         HashSet<Integer> set = new HashSet<>();
@@ -2253,7 +2255,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Intersection_of_Two_Arrays_II.java
+
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -2280,7 +2282,7 @@ class Solution {
         return re;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Intersection_of_Two_Linked_Lists.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -2331,7 +2333,7 @@ public class Solution {
         return getNumber(l.next) + 1;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Invert_Binary_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -2356,7 +2358,7 @@ public class Solution {
         return root;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Island_Perimeter.java
+
 class Solution {
     public int islandPerimeter(int[][] grid) {
         int islands = 0, neighbours = 0;
@@ -2374,7 +2376,7 @@ class Solution {
         return islands * 4 - neighbours * 2;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Judge_Route_Circle.java
+
 class Solution {
     public boolean judgeCircle(String moves) {
         int[] check = new int[2];
@@ -2398,7 +2400,7 @@ class Solution {
         return false;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Jump_Game.java
+
 class Solution {
     public boolean canJump(int[] nums) {
         if (nums.length == 1){
@@ -2417,7 +2419,7 @@ class Solution {
         return false;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Kth_Largest_Element_in_an_Array.java
+
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> queue = new PriorityQueue<>(k);
@@ -2435,7 +2437,7 @@ class Solution {
         return queue.peek();
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Kth_Smallest_Element_in_a_BST.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -2478,7 +2480,7 @@ public class Solution {
     }
     
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Largest_Divisible_Subset.java
+
 public class Solution {
     public List<Integer> largestDivisibleSubset(int[] nums) {
         if (nums == null || nums.length == 0){
@@ -2512,7 +2514,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Largest_Number.java
+
 class Solution {
     public String largestNumber(int[] nums) {
         if (nums == null || nums.length == 0){
@@ -2540,7 +2542,7 @@ class Solution {
         return result;
     }
 } 
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Length_of_Last_Word.java
+
 public class Solution {
     public int lengthOfLastWord(String s) {
         if (s == null||s.length() == 0){
@@ -2557,7 +2559,7 @@ public class Solution {
         return s.length();
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Letter_Combinations_of_a_Phone_Number.java
+
 public class Solution {
     public List<String> letterCombinations(String digits) {
         LinkedList<String> ans = new LinkedList<String>();
@@ -2578,7 +2580,7 @@ public class Solution {
         return ans;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Linked_List_Cycle.java
+
 /**
  * Definition for singly-linked list.
  * class ListNode {
@@ -2607,7 +2609,7 @@ public class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Linked_List_Cycle_II.java
+
 /**
  * Definition for singly-linked list.
  * class ListNode {
@@ -2637,7 +2639,7 @@ public class Solution {
         return null;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Logger_Rate_Limiter.java
+
 class Logger {
     HashMap<String, Integer> bucket;
     /** Initialize your data structure here. */
@@ -2669,7 +2671,7 @@ class Logger {
  * Logger obj = new Logger();
  * boolean param_1 = obj.shouldPrintMessage(timestamp,message);
  */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Longest_Absolute_File_Path.java
+
 class Solution {
     public int lengthLongestPath(String input) {
         int max = 0;
@@ -2690,7 +2692,7 @@ class Solution {
         return max;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Longest_Consecutive_Sequence.java
+
 class Solution {
    public int longestConsecutive(int[] nums) {
             Set<Integer> set = new HashSet<>();
@@ -2710,7 +2712,7 @@ class Solution {
             return best;
         }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Longest_Increasing_Subsequence.java
+
 public class Solution {
     public int lengthOfLIS(int[] nums) {
         if (nums == null || nums.length == 0){
@@ -2735,7 +2737,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Longest_Palindrome.java
+
 class Solution {
     public int longestPalindrome(String s) {
         int len = 0;
@@ -2753,7 +2755,7 @@ class Solution {
         return len;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Longest_Palindromic_Substring.java
+
 class Solution {
     public String longestPalindrome(String s) {
         if (s == null || s.length() == 0) {
@@ -2784,7 +2786,7 @@ class Solution {
         return j - i - 1;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Longest_Substring_Without_Repeating_Characters.java
+
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
         int start = 0;
@@ -2803,7 +2805,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Longest_Substring_with_At_Most_K_Distinct_Characters.java
+
 class Solution {
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
         if (s == null || s.length() == 0 ) {
@@ -2835,7 +2837,7 @@ class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Longest_Uncommon_Subsequence_I.java
+
 class Solution {
     public int findLUSlength(String a, String b) {
         if (a.equals(b)) {
@@ -2844,7 +2846,7 @@ class Solution {
         return Math.max(a.length(), b.length());
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Lowest_Common_Ancestor_of_a_Binary_Search_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -2873,7 +2875,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Lowest_Common_Ancestor_of_a_Binary_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -2914,7 +2916,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Maximal_Square.java
+
 public class Solution {
     public int maximalSquare(char[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0){
@@ -2949,7 +2951,7 @@ public class Solution {
         return max * max;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Maximum_Depth_of_Binary_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -2974,7 +2976,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Maximum_Product_Subarray.java
+
 public class Solution {
     public int maxProduct(int[] nums) {
         if (nums == null || nums.length == 0){
@@ -2995,7 +2997,7 @@ public class Solution {
         return max[nums.length - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Maximum_Size_Subarray_Sum_Equals_k.java
+
 public class Solution {
     public int maxSubArrayLen(int[] nums, int k) {
         HashMap<Integer,Integer> map = new HashMap<>();
@@ -3015,7 +3017,7 @@ public class Solution {
         return ans;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Maximum_Subarray.java
+
 public class Solution {
     public int maxSubArray(int[] nums) {
         if (nums == null || nums.length == 0){
@@ -3036,7 +3038,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Maximum_XOR_of_Two_Numbers_in_an_Array.java
+
 class Solution {
     public int findMaximumXOR(int[] nums) {
         int max = 0, mask = 0;
@@ -3062,7 +3064,7 @@ class Solution {
         return max;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Max_Area_of_Island.java
+
 class Solution {
     public int maxAreaOfIsland(int[][] grid) {
         int[][] visited = new int[grid.length][grid[0].length];
@@ -3119,7 +3121,7 @@ class Solution {
         return max;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Median_of_Two_Sorted_Arrays.java
+
 class Solution {
     public double findMedianSortedArrays(int A[], int B[]) {
         int len = A.length + B.length;
@@ -3160,7 +3162,7 @@ class Solution {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Merge_Intervals.java
+
 /**
  * Definition for an interval.
  * public class Interval {
@@ -3201,7 +3203,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Merge_Sorted_Array.java
+
 public class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int cur = m + n - 1;
@@ -3229,7 +3231,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Merge_Two_Sorted_Lists.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -3262,7 +3264,7 @@ class Solution {
         return dummy.next;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Minimum_Depth_of_Binary_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -3299,7 +3301,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Minimum_Genetic_Mutation.java
+
 class Solution {
     public int minMutation(String start, String end, String[] bank) {
         if (bank == null|| bank.length == 0){
@@ -3342,7 +3344,7 @@ class Solution {
     }
     
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Minimum_Path_Sum.java
+
 public class Solution {
     public int minPathSum(int[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0){
@@ -3366,7 +3368,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Minimum_Size_Subarray_Sum.java
+
 public class Solution {
     public int minSubArrayLen(int s, int[] nums) {
         if (nums == null || nums.length == 0){
@@ -3396,7 +3398,7 @@ public class Solution {
         return min;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Minimum_Window_Substring.java
+
 public class Solution {
     public String minWindow(String s, String t) {
         int ahead = 0;
@@ -3463,7 +3465,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Min_Stack.java
+
 class MinStack {
     private Stack<Integer> stack = null;
     private Stack<Integer> min = null;
@@ -3513,7 +3515,7 @@ class MinStack {
  * int param_3 = obj.top();
  * int param_4 = obj.getMin();
  */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Missing_Ranges.java
+
 class Solution {
     public List<String> findMissingRanges(int[] nums, int lower, int upper) {
         List<String> result = new ArrayList<>();
@@ -3554,7 +3556,7 @@ class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Move_Zeroes.java
+
 public class Solution {
     public void moveZeroes(int[] nums) {
         if (nums == null || nums.length < 2){
@@ -3583,7 +3585,7 @@ public class Solution {
         return;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Moving_Average_from_Data_Stream.java
+
 class MovingAverage {
     Queue<Integer> queue;
     int size;
@@ -3617,7 +3619,7 @@ class MovingAverage {
  * MovingAverage obj = new MovingAverage(size);
  * double param_1 = obj.next(val);
  */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Next_Permutation.java
+
 public class Solution {
     public void nextPermutation(int[] nums) {
         int i = nums.length - 2;
@@ -3649,7 +3651,7 @@ public class Solution {
         nums[j] = temp;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Nim_Game.java
+
 class Solution {
     public boolean canWinNim(int n) {
         if (n % 4 == 0) {
@@ -3658,7 +3660,7 @@ class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Number_of_1_Bits.java
+
 public class Solution {
     // you need to treat n as an unsigned value
     public int hammingWeight(int n) {
@@ -3670,7 +3672,7 @@ public class Solution {
     	return ones;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Number_of_Islands.java
+
 class Solution {
     public int numIslands(char[][] grid) {
         if(grid == null || grid.length == 0 || grid[0].length == 0){
@@ -3728,7 +3730,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\One_Edit_Distance.java
+
 class Solution {
     public boolean isOneEditDistance(String s, String t) {
         if (Math.abs(s.length() - t.length()) > 1 || s.equals(t)){
@@ -3768,7 +3770,7 @@ class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Paint_Fence.java
+
 public class Solution {
     public int numWays(int n, int k) {
         if (n == 0){
@@ -3789,7 +3791,7 @@ public class Solution {
         return dp[n - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Paint_House.java
+
 public class Solution {
     public int minCost(int[][] costs) {
         if (costs == null || costs.length == 0){
@@ -3809,7 +3811,7 @@ public class Solution {
         return Math.min(Math.min(dp[costs.length - 1][0], dp[costs.length - 1][1]), dp[costs.length - 1][2]);
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Paint_House_II.java
+
 public class Solution {
     public int minCostII(int[][] costs) {
         if (costs == null || costs.length == 0){
@@ -3861,7 +3863,7 @@ public class Solution {
         return min;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Palindrome_Linked_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -3910,7 +3912,7 @@ public class Solution {
         return node;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Palindrome_Number.java
+
 class Solution {
     public boolean isPalindrome(int x) {
         if (x == 0){
@@ -3927,7 +3929,7 @@ class Solution {
         return (x == revert || x == revert / 10);
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Palindrome_Permutation.java
+
 class Solution {
     public boolean canPermutePalindrome(String s) {
         int[] charSet = new int[128];
@@ -3947,7 +3949,7 @@ class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Partition_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -3990,7 +3992,7 @@ class Solution {
         return dummy.next;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Pascal&#39;s_Triangle.java
+
 class Solution {
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> result = new ArrayList<>();
@@ -4014,7 +4016,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Path_Sum.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -4055,7 +4057,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Path_Sum_II.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -4098,7 +4100,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Perfect_Squares.java
+
 public class Solution {
     public int numSquares(int n) {
         int[] dp = new int[n + 1];
@@ -4126,7 +4128,7 @@ public class Solution {
         return dp[n];
      }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Permutations.java
+
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result =  new ArrayList<>();
@@ -4151,7 +4153,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Permutations_II.java
+
 class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -4179,7 +4181,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Plus_One.java
+
 class Solution {
     public int[] plusOne(int[] digits) {
         if (digits[0] == 0) {
@@ -4218,13 +4220,13 @@ class Solution {
 
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Power_of_Four.java
+
 class Solution {
     public boolean isPowerOfFour(int num) {
         return (num > 0) && ((num & (num - 1)) == 0) && ((num & 0x55555555) == num);
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Power_of_Three.java
+
 class Solution {
     public boolean isPowerOfThree(int n) {
         if (n == 0) {
@@ -4239,7 +4241,7 @@ class Solution {
         return isPowerOfThree(n / 3);
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Power_of_Two.java
+
 class Solution {
     public boolean isPowerOfTwo(int n) {
         if (n == 0 || n == Integer.MIN_VALUE) {
@@ -4251,7 +4253,7 @@ class Solution {
         return false;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Product_of_Array_Except_Self.java
+
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         int[] left = new int[nums.length];
@@ -4271,7 +4273,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Remove_Duplicates_from_Sorted_Array_II.java
+
 public class Solution {
     public int removeDuplicates(int[] nums) {
         if (nums == null || nums.length == 0){
@@ -4297,7 +4299,7 @@ public class Solution {
         return slow;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Remove_Duplicates_from_Sorted_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -4332,7 +4334,7 @@ public class Solution {
         return dummy.next;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Remove_Duplicates_from_Sorted_List_II.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -4372,7 +4374,7 @@ class Solution {
         return dummy.next;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Remove_Linked_List_Elements.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -4399,7 +4401,7 @@ class Solution {
         return dummy.next;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Remove_Nth_Node_From_End_of_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -4432,7 +4434,7 @@ public class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Repeated_DNA_Sequences.java
+
 public class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
         HashSet<String> set = new HashSet<>();
@@ -4450,7 +4452,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Restore_IP_Addresses.java
+
 public class Solution {
     public List<String> restoreIpAddresses(String s) {
         List<String> list = new ArrayList<>();
@@ -4505,7 +4507,7 @@ public class Solution {
         return list;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Reverse_Integer.java
+
 public class Solution {
     public int reverse(int x) {
         if(x == 0 || x == -2147483648){
@@ -4525,7 +4527,7 @@ public class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Reverse_Linked_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -4548,7 +4550,7 @@ class Solution {
         return tail;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Reverse_String.java
+
 public class Solution {
     public String reverseString(String s) {
         if (s == null || s.length() == 0){
@@ -4561,7 +4563,7 @@ public class Solution {
         return sb.toString();
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Reverse_Words_in_a_String.java
+
 public class Solution {
     public String reverseWords(String s) {
         StringBuilder sb = new StringBuilder();
@@ -4588,7 +4590,7 @@ public class Solution {
     }
     
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Roman_to_Integer.java
+
 class Solution {
     public int romanToInt(String s) {
         if (s.length() == 0){
@@ -4636,7 +4638,7 @@ class Solution {
         return cur + romanToInt(s.substring(1));
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Rotate_Image.java
+
 class Solution {
     public void rotate(int[][] matrix) {
         swap(0, matrix);
@@ -4656,7 +4658,7 @@ class Solution {
         swap(level + 1, matrix);
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Rotate_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -4698,7 +4700,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Same_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -4759,7 +4761,7 @@ public class Solution {
         return false;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Search_a_2D_Matrix_II.java
+
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0|| matrix[0].length == 0) {
@@ -4781,7 +4783,7 @@ class Solution {
         return false;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Search_for_a_Range.java
+
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int[] result = new int[2];        
@@ -4835,7 +4837,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Search_Insert_Position.java
+
 class Solution {
     public int searchInsert(int[] nums, int target) {
         int start = 0;
@@ -4863,7 +4865,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Search_in_Rotated_Sorted_Array_II.java
+
 
 class Solution {
     public boolean search(int[] nums, int target) {
@@ -4916,7 +4918,7 @@ class Solution {
         else {return false;}
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Set_Matrix_Zeroes.java
+
 class Solution {
     public void setZeroes(int[][] matrix) {
         if (matrix == null || matrix.length == 0){
@@ -4941,7 +4943,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Shortest_Word_Distance.java
+
 public class Solution {
     public int shortestDistance(String[] words, String word1, String word2) {
         ArrayList<Integer> w1 = new ArrayList<>();
@@ -4962,7 +4964,7 @@ public class Solution {
         return res;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Shortest_Word_Distance_II.java
+
 public class WordDistance {
     HashMap<String,ArrayList<Integer>> map = new HashMap<>();
     public WordDistance(String[] words) {
@@ -5006,7 +5008,7 @@ public class WordDistance {
  * WordDistance obj = new WordDistance(words);
  * int param_1 = obj.shortest(word1,word2);
  */
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Simplify_Path.java
+
 public class Solution {
     public String simplifyPath(String path) {
         Deque<String> stack = new LinkedList<>();
@@ -5020,7 +5022,7 @@ public class Solution {
         return res.isEmpty() ? "/" : res;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Single_Number.java
+
 public class Solution {
 public int singleNumber(int[] nums) {
     int ans =0;
@@ -5033,7 +5035,7 @@ public int singleNumber(int[] nums) {
     
 }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Sort_Colors.java
+
 class Solution {
     public void sortColors(int[] nums) {
         int[] map = new int[3];
@@ -5059,7 +5061,7 @@ class Solution {
         nums[index2] = temp;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Sort_List.java
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -5095,7 +5097,7 @@ class Solution {
         return head;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Sparse_Matrix_Multiplication.java
+
 public class Solution {
     public int[][] multiply(int[][] A, int[][] B) {
         int m = A.length, n = B.length, l = B[0].length;
@@ -5112,7 +5114,7 @@ public class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Spiral_Matrix.java
+
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
@@ -5147,7 +5149,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Strobogrammatic_Number.java
+
 public class Solution {
     public boolean isStrobogrammatic(String num) {
         int start = 0;
@@ -5174,7 +5176,7 @@ public class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Subarray_Sum_Equals_K.java
+
 class Solution {
     public int subarraySum(int[] nums, int k) {
         //HashMap<Integer, Integer> map = new HashMap<>();
@@ -5194,7 +5196,7 @@ class Solution {
         return cnt;  
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Subsets.java
+
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -5212,7 +5214,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Subsets_II.java
+
 class Solution {
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -5238,7 +5240,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Summary_Ranges.java
+
 class Solution {
     public List<String> summaryRanges(int[] nums) {
         List<String> ls = new ArrayList<>();
@@ -5272,7 +5274,7 @@ class Solution {
         return ls;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Sum_Root_to_Leaf_Numbers.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -5325,7 +5327,7 @@ public class Solution {
 
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Symmetric_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -5358,7 +5360,7 @@ public class Solution {
         return (le && re);
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\test.java
+
 public class Solution {
     public int numDecodings(String s) {
         if (s == null || s.equals("0")){
@@ -5401,7 +5403,7 @@ public class Solution {
         return dp[s.length() - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Top_K_Frequent_Words.java
+
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
         List<String> res = new ArrayList<>();
@@ -5434,7 +5436,7 @@ class Solution {
         return res;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Trapping_Rain_Water.java
+
 class Solution {
     public int trap(int[] height) {
         int left = 0;
@@ -5465,7 +5467,7 @@ class Solution {
         return ans;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Triangle.java
+
 /*public class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         if (triangle == null || triangle.size() == 0 || triangle.get(0) == null || triangle.get(0).size() == 0){
@@ -5498,7 +5500,7 @@ public class Solution {
         return A[0];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Two_Sum_II_-_Input_array_is_sorted.java
+
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
         int start = 0;
@@ -5517,7 +5519,7 @@ public class Solution {
         return ans;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Ugly_Number.java
+
 public class Solution {
     public boolean isUgly(int num) {
         if (num == 1 ) {
@@ -5542,7 +5544,7 @@ public class Solution {
         return false;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Ugly_Number_II.java
+
 public class Solution {
     /*
     public int nthUglyNumber(int n) {
@@ -5587,7 +5589,7 @@ public class Solution {
     }
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Unique_Paths.java
+
 /*public class Solution {
     public int uniquePaths(int m, int n) {
         int[][] d = new int[m][n];
@@ -5633,7 +5635,7 @@ public class Solution {
         return (int)res;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Unique_Paths_II.java
+
 public class Solution {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int width = obstacleGrid[0].length;
@@ -5665,7 +5667,7 @@ public class Solution {
         return d[height - 1][width - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Validate_Binary_Search_Tree.java
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -5694,7 +5696,7 @@ class Solution {
         return left && right;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Valid_Anagram.java
+
 class Solution {
     public boolean isAnagram(String s, String t) {
         int[] charSet = new int[26];
@@ -5713,7 +5715,7 @@ class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Valid_Palindrome.java
+
 public class Solution {
     public boolean isPalindrome(String s) {
         if (s == null || s.length() == 0){
@@ -5743,7 +5745,7 @@ public class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Valid_Parentheses.java
+
 class Solution {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
@@ -5771,7 +5773,7 @@ class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Valid_Parenthesis_String.java
+
 class Solution {
     public boolean checkValidString(String s) {
         int down = 0;
@@ -5801,7 +5803,7 @@ class Solution {
         
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Valid_Sudoku.java
+
 public class Solution {
     public boolean isValidSudoku(char[][] board) {
         HashSet[] horizontal = new HashSet[9];
@@ -5827,7 +5829,7 @@ public class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Valid_Word_Square.java
+
 class Solution {
     public boolean validWordSquare(List<String> words) {
         if (words.size() == 1) {
@@ -5855,7 +5857,7 @@ class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Walls_and_Gates.java
+
 class Solution {
     public void wallsAndGates(int[][] rooms) {
         Queue<String> queue = new LinkedList<>();
@@ -5900,7 +5902,7 @@ class Solution {
         }
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Wiggle_Sort.java
+
 class Solution {
     public void wiggleSort(int[] nums) {
         boolean large = true;
@@ -5925,7 +5927,7 @@ class Solution {
 
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Word_Break.java
+
 public class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         HashSet<String> wordSet = new HashSet();
@@ -5949,7 +5951,7 @@ public class Solution {
         return dp[s.length() - 1];
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Word_Break_II.java
+
 class Solution {
     public List<String> wordBreak(String s, List<String> wordDict) {
         return DFS(s, wordDict, new HashMap<String, LinkedList<String>>());
@@ -5976,7 +5978,7 @@ class Solution {
         return res;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Word_Ladder.java
+
 class Solution {
     
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
@@ -6081,7 +6083,7 @@ class Solution {
         return 0;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Word_Pattern.java
+
 
 public class Solution {
     public boolean wordPattern(String pattern, String str) {
@@ -6114,7 +6116,7 @@ public class Solution {
         return true;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\Word_Search.java
+
 class Solution {
     public boolean exist(char[][] board, String word) {
         boolean result = false;
@@ -6191,7 +6193,7 @@ class Solution {
         return result;
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\leetcode-solution\code\ZigZag_Conversion.java
+
 class Solution {
     public String convert(String s, int nRows) {
         char[] c = s.toCharArray();
@@ -6211,7 +6213,7 @@ class Solution {
         return sb[0].toString();
     }
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\leetcode-github\requirements.txt
+
 requests
 grequests
 gevent

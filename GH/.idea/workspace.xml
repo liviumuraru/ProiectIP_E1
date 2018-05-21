@@ -15,21 +15,56 @@
       <file leaf-file-name="MergePipeline.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/merge/MergePipeline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
+            <state relative-caret-position="984">
+              <caret line="101" column="1" selection-start-line="101" selection-start-column="1" selection-end-line="101" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Assets.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/asset/Assets.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/MainTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="57" column="48" lean-forward="true" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
+            <state relative-caret-position="419">
+              <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#printRepos#0;class#MainTest#0" />
                 <element signature="method#createMergedFiles#0;class#MainTest#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Machine.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/lucene/Machine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="69" column="119" selection-start-line="69" selection-start-column="119" selection-end-line="69" selection-end-column="119" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Repo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lucene/Repo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+              <folding>
+                <element signature="e#288#289#0" expanded="true" />
+                <element signature="e#318#319#0" expanded="true" />
+                <element signature="e#363#364#0" expanded="true" />
+                <element signature="e#400#401#0" expanded="true" />
+                <element signature="e#450#451#0" expanded="true" />
+                <element signature="e#507#508#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,7 +91,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Assets.java" />
         <option value="$PROJECT_DIR$/src/asset/Asset.java" />
         <option value="$PROJECT_DIR$/src/lucene/LuceneConstants.java" />
         <option value="$PROJECT_DIR$/src/lucene/Searcher.java" />
@@ -84,7 +118,6 @@
         <option value="$PROJECT_DIR$/src/filterTypes/ORFilter.java" />
         <option value="$PROJECT_DIR$/src/crawler/subset/AllSubsets.java" />
         <option value="$PROJECT_DIR$/src/filter/filterInterfaces/ElementFilter.java" />
-        <option value="$PROJECT_DIR$/src/lucene/Machine.java" />
         <option value="$PROJECT_DIR$/src/lucene/DocVector.java" />
         <option value="$PROJECT_DIR$/src/lucene/CosineSimilarity.java" />
         <option value="$PROJECT_DIR$/src/lucene/Configuration.java" />
@@ -93,7 +126,6 @@
         <option value="$PROJECT_DIR$/src/lucene/Indexer.java" />
         <option value="$PROJECT_DIR$/mergedFiles/merged0.txt" />
         <option value="$PROJECT_DIR$/mergedFiles/merged2.txt" />
-        <option value="$PROJECT_DIR$/src/asset/Assets.java" />
         <option value="$PROJECT_DIR$/src/exceptions/CrawlerException.java" />
         <option value="$PROJECT_DIR$/src/exceptions/CrawlerSorterException.java" />
         <option value="$PROJECT_DIR$/src/crawler/sort/CriteriaSorter.java" />
@@ -105,8 +137,11 @@
         <option value="$PROJECT_DIR$/src/filter/concreteFilters/PyFilesOnly.java" />
         <option value="$PROJECT_DIR$/src/filter/concreteFilters/TextFilesOnly.java" />
         <option value="$PROJECT_DIR$/src/lucene/AllTerms.java" />
+        <option value="$PROJECT_DIR$/src/lucene/Repo.java" />
         <option value="$PROJECT_DIR$/src/merge/MergePipeline.java" />
+        <option value="$PROJECT_DIR$/src/asset/Assets.java" />
         <option value="$PROJECT_DIR$/src/MainTest.java" />
+        <option value="$PROJECT_DIR$/src/lucene/Machine.java" />
       </list>
     </option>
   </component>
@@ -120,16 +155,15 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="951" />
-    <option name="width" value="977" />
-    <option name="height" value="1042" />
+    <option name="x" value="949" />
+    <option name="width" value="978" />
+    <option name="height" value="1043" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -146,14 +180,21 @@
               <item name="GH" type="b2602c69:ProjectViewProjectNode" />
               <item name="GH" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="merge" type="462c0819:PsiDirectoryNode" />
+              <item name="asset" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GH" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="lucene" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,11 +325,12 @@
       <option name="presentableId" value="Default" />
       <updated>1524755083061</updated>
       <workItem from="1526716407968" duration="2476000" />
+      <workItem from="1526878319685" duration="7375000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2476000" />
+    <option name="totallyTimeSpent" value="9851000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1691" height="917" extended-state="6" />
@@ -302,14 +344,14 @@
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.1994852" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32303733" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21485575" />
-      <window_info anchor="right" id="Database" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21731123" />
+      <window_info anchor="right" id="Database" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -319,9 +361,9 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,7 +378,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/crawler/Test.java" />
     <entry file="file://$PROJECT_DIR$/src/crawler/Test.java" />
     <entry file="file://$PROJECT_DIR$/src/merge/FilesMerger.java" />
     <entry file="file://$PROJECT_DIR$/src/MergePipelineTest.java" />
@@ -408,30 +449,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/filter/concreteFilters/PyFilterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/filter/concreteFilters/PyFilterTest.java" />
     <entry file="file://$PROJECT_DIR$/src/asset/Asset.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/asset/Assets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="103" selection-start-line="9" selection-start-column="103" selection-end-line="9" selection-end-column="103" />
-          <folding>
-            <element signature="method#MergeFiles#0;class#Assets#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -492,10 +514,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding>
-            <element signature="e#726#727#0" expanded="true" />
-            <element signature="e#786#787#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -632,13 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lucene/Machine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="70" selection-start-line="7" selection-start-column="70" selection-end-line="7" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lucene/DocVector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -648,20 +659,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/merge/MergePipeline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
+        <state relative-caret-position="984">
+          <caret line="101" column="1" selection-start-line="101" selection-start-column="1" selection-end-line="101" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/asset/Assets.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lucene/Repo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+          <folding>
+            <element signature="e#288#289#0" expanded="true" />
+            <element signature="e#318#319#0" expanded="true" />
+            <element signature="e#363#364#0" expanded="true" />
+            <element signature="e#400#401#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#507#508#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="57" column="48" lean-forward="true" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
+        <state relative-caret-position="419">
+          <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#printRepos#0;class#MainTest#0" />
             <element signature="method#createMergedFiles#0;class#MainTest#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lucene/Machine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="69" column="119" selection-start-line="69" selection-start-column="119" selection-end-line="69" selection-end-column="119" />
         </state>
       </provider>
     </entry>

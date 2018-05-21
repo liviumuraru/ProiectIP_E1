@@ -1,4 +1,6 @@
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DoubanCrawler\MultiThreadDoubanCrawler\src\doubanBook\DoubanBookInfo.java
+https://github.com/persevere1/DoubanCrawler.git
+git/DoubanCrawler
+
 package doubanBook;
 
 public class DoubanBookInfo {
@@ -137,7 +139,7 @@ public class DoubanBookInfo {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DoubanCrawler\MultiThreadDoubanCrawler\src\main\Main.java
+
 package main;
 
 import java.util.List;
@@ -158,7 +160,7 @@ public class Main {
 		CSVUtils.exportCsv("sorted_list_4.csv", dataList);
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DoubanCrawler\MultiThreadDoubanCrawler\src\util\CSVUtils.java
+
 package util;
 
 import java.io.BufferedWriter;
@@ -227,7 +229,7 @@ public class CSVUtils {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\DoubanCrawler\MultiThreadDoubanCrawler\src\util\MultiThreadCrawler.java
+
 package util;
 
 import java.io.BufferedReader;

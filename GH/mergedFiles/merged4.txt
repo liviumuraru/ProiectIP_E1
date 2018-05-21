@@ -1,4 +1,6 @@
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\GithubDungeonCrawler.txt
+https://github.com/AzureTail/GithubCrawl.git
+git/GithubCrawl
+
 Prosjekt GITHUB
 
 Prosjekt Navn: GithubCrawl
@@ -27,7 +29,7 @@ Energi: Items for å bruke noe avansert energi.
 ---------------Alchemy----------------
 Gathering: 
 Processing(Heating,Drying):
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\res\world\world1.txt
+
 25 20
 100 100
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
@@ -50,7 +52,7 @@ C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\res\world\world1.t
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\creatures\Creature.java
+
 package dungeon.crawler.Engine.entities.creatures;
 
 import java.awt.Graphics;
@@ -175,7 +177,7 @@ public abstract class Creature extends Entity{
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\creatures\Player.java
+
 package dungeon.crawler.Engine.entities.creatures;
 
 import java.awt.Color;
@@ -365,7 +367,7 @@ public class Player extends Creature{
 		this.inventory = inventory;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\Entity.java
+
 package dungeon.crawler.Engine.entities;
 
 import java.awt.Graphics;
@@ -471,7 +473,7 @@ public abstract class Entity {
 
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\EntityManager.java
+
 package dungeon.crawler.Engine.entities;
 
 import java.awt.Graphics;
@@ -553,7 +555,7 @@ public class EntityManager {
 		this.entities = entities;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\statics\Rock.java
+
 package dungeon.crawler.Engine.entities.statics;
 
 import java.awt.Graphics;
@@ -590,7 +592,7 @@ public class Rock extends StaticEntity{
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\statics\StaticEntity.java
+
 package dungeon.crawler.Engine.entities.statics;
 
 import Engine.Handler;
@@ -604,7 +606,7 @@ public abstract class StaticEntity extends Entity{
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\entities\statics\Tree.java
+
 package dungeon.crawler.Engine.entities.statics;
 
 import java.awt.Graphics;
@@ -641,7 +643,7 @@ public class Tree extends StaticEntity{
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\Animation.java
+
 package dungeon.crawler.Engine.gfx;
 
 import java.awt.image.BufferedImage;
@@ -675,7 +677,7 @@ public class Animation {
 		return frames[index];
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\Assets.java
+
 package dungeon.crawler.Engine.gfx;
 
 import java.awt.Font;
@@ -791,7 +793,7 @@ public class Assets {
 		rock = tileSheet.crop(2, 2, 0, 0, width, height);
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\FontLoader.java
+
 package dungeon.crawler.Engine.gfx;
 
 import java.awt.Font;
@@ -811,7 +813,7 @@ public class FontLoader {
 		return null;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\GameCamera.java
+
 package dungeon.crawler.Engine.gfx;
 
 import Engine.Handler;
@@ -875,7 +877,7 @@ public class GameCamera {
 	
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\ImageLoader.java
+
 package dungeon.crawler.Engine.gfx;
 
 import java.awt.image.BufferedImage;
@@ -896,7 +898,7 @@ public class ImageLoader {
 			return null;
 		}
 	}
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\SpriteSheet.java
+
 package dungeon.crawler.Engine.gfx;
 
 import java.awt.image.BufferedImage;
@@ -929,7 +931,7 @@ public class SpriteSheet {
 		}
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\gfx\Text.java
+
 package dungeon.crawler.Engine.gfx;
 
 
@@ -955,7 +957,7 @@ public class Text {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\input\KeyManager.java
+
 package dungeon.crawler.Engine.input;
 
 import java.awt.event.KeyEvent;
@@ -1024,7 +1026,7 @@ public class KeyManager implements KeyListener{
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\input\MouseManager.java
+
 package dungeon.crawler.Engine.input;
 
 import java.awt.event.MouseEvent;
@@ -1107,7 +1109,7 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 		
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\Inventory\Inventory.java
+
 package dungeon.crawler.Engine.Inventory;
 
 import java.awt.Graphics;
@@ -1232,7 +1234,7 @@ public class Inventory {
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\Items\ItemManager.java
+
 package dungeon.crawler.Engine.Items;
 
 import java.awt.Graphics;
@@ -1281,7 +1283,7 @@ public class ItemManager {
 		this.handler = handler;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\Items\Items.java
+
 package dungeon.crawler.Engine.Items;
 
 import java.awt.Graphics;
@@ -1423,7 +1425,7 @@ public class Items {
 	}
 	
 }	
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\states\GameState.java
+
 package dungeon.crawler.Engine.states;
 
 import java.awt.Graphics;
@@ -1460,7 +1462,7 @@ public class GameState extends State{
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\states\MenuState.java
+
 package dungeon.crawler.Engine.states;
 
 import java.awt.Graphics;
@@ -1510,7 +1512,7 @@ public class MenuState extends State{
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\states\SettingState.java
+
 package dungeon.crawler.Engine.states;
 
 import java.awt.Graphics;
@@ -1537,7 +1539,7 @@ public class SettingState extends State{
 		}
 		
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\states\State.java
+
 package dungeon.crawler.Engine.states;
 
 import java.awt.Graphics;
@@ -1568,7 +1570,7 @@ public abstract class State {
 	
 	public abstract void render(Graphics g);
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\GrassTile.java
+
 package dungeon.crawler.Engine.tiles;
 
 import dungeon.crawler.Engine.gfx.Assets;
@@ -1580,7 +1582,7 @@ public class GrassTile extends Tile{
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\SandTile.java
+
 package dungeon.crawler.Engine.tiles;
 
 import dungeon.crawler.Engine.gfx.Assets;
@@ -1592,7 +1594,7 @@ public class SandTile extends Tile{
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\Test4Tile.java
+
 package dungeon.crawler.Engine.tiles;
 
 import dungeon.crawler.Engine.gfx.Assets;
@@ -1606,7 +1608,7 @@ public class Test4Tile extends Tile{
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\Tile.java
+
 package dungeon.crawler.Engine.tiles;
 
 import java.awt.Graphics;
@@ -1654,7 +1656,7 @@ public class Tile {
 		return id;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\tiles\WaterTile.java
+
 package dungeon.crawler.Engine.tiles;
 
 import dungeon.crawler.Engine.gfx.Assets;
@@ -1673,14 +1675,14 @@ public class WaterTile extends Tile{
 	
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\ui\ClickListener.java
+
 package dungeon.crawler.Engine.ui;
 
 public interface ClickListener {
 	
 	public void onClick();
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\ui\UIImageButton.java
+
 package dungeon.crawler.Engine.ui;
 
 import java.awt.Graphics;
@@ -1711,7 +1713,7 @@ public class UIImageButton extends UIObject{
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\ui\UIManager.java
+
 package dungeon.crawler.Engine.ui;
 
 import java.awt.Graphics;
@@ -1778,7 +1780,7 @@ public class UIManager {
 		objects.remove(o);
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\ui\UIObject.java
+
 package dungeon.crawler.Engine.ui;
 
 import java.awt.Graphics;
@@ -1861,7 +1863,7 @@ public abstract class UIObject {
 		this.hoovering = hoovering;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\utils\Utils.java
+
 package dungeon.crawler.Engine.utils;
 
 import java.io.BufferedReader;
@@ -1899,7 +1901,7 @@ public class Utils {
 	}
 	
 
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\Window\Window.java
+
 package dungeon.crawler.Engine.Window;
 
 import java.awt.Canvas;
@@ -1957,7 +1959,7 @@ public class Window{
 	}
 	
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\dungeon\crawler\Engine\world\World.java
+
 package dungeon.crawler.Engine.world;
 
 import java.awt.Graphics;
@@ -2085,7 +2087,7 @@ public class World {
 		return height;
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\Engine\Handler.java
+
 package Engine;
 
 import dungeon.crawler.Engine.gfx.GameCamera;
@@ -2139,7 +2141,7 @@ public class Handler {
 	}
 
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\Engine\Launcher.java
+
 package Engine;
 
 
@@ -2151,7 +2153,7 @@ public class Launcher {
 		mainengine.start();
 	}
 }
-C:\Users\flori\Documents\ProiectIP_E1\GH\git\GithubCrawl\Java\src\Engine\mainEngine.java
+
 package Engine;
 
 import java.awt.Graphics;

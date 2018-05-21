@@ -14,12 +14,8 @@ public class Machine
 
         for ( int i = 0; i < numberOfDocuments; i++ )
         {
-            boolean [] selected = new boolean [ numberOfDocuments + 1 ];
-            for ( int j = 0; j < numberOfDocuments; j++ )
-                selected[ j ] = false;
-
             List<Repo> currentRepos = new ArrayList<>();
-            getSimilarRepos( selected, currentRepos, cosineSimilarities, numberOfDocuments, i, limit );
+            getSimilarRepos( currentRepos, cosineSimilarities, numberOfDocuments, i, limit );
 
             if ( currentRepos.size() > selectedRepos.size() )
                 selectedRepos = new ArrayList<>( currentRepos );
@@ -28,25 +24,22 @@ public class Machine
         return selectedRepos;
     }
 
-    private static void getSimilarRepos( boolean [] selected, List<Repo> selectedRepos, double [][] cosineSimilarities, int numberOfDocuments, int index, double limit )
+    private static void getSimilarRepos( List<Repo> selectedRepos, double [][] cosineSimilarities, int numberOfDocuments, int index, double limit )
     {
         try
         {
-            //System.out.println( index + " : mergedFiles/merged" + index + ".txt" );
             BufferedReader br = new BufferedReader( new FileReader( "mergedFiles/merged" + index + ".txt" ) );
 
-            String repoURL = br.readLine();
-            String destinationDIR = br.readLine();
-            //System.out.println( repoURL + " " + destinationDIR );
-            selectedRepos.add( new Repo( repoURL, destinationDIR ) );
-            /*for ( Repo repo : selectedRepos )
-                System.out.println( repo );*/
+            selectedRepos.add( new Repo( br.readLine(), br.readLine() ) );
             br.close();
-            selected[ index ] = true;
 
             for ( int i = 0; i < numberOfDocuments; i++ )
-                if ( i != index && cosineSimilarities[ index ][ i ] >= limit && !selected[ i ] )
-                    getSimilarRepos( selected, selectedRepos, cosineSimilarities, numberOfDocuments, i, limit );
+                if ( i != index && cosineSimilarities[ index ][ i ] >= limit )
+                {
+                    BufferedReader bufferedReader = new BufferedReader( new FileReader( "mergedFiles/merged" + i + ".txt" ) );
+
+                    selectedRepos.add( new Repo( bufferedReader.readLine(), bufferedReader.readLine() ) );
+                }
         }
         catch ( IOException e )
         {

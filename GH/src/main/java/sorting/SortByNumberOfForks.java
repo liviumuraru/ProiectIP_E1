@@ -1,5 +1,6 @@
 package sorting;
 
+import lucene.Repo;
 import org.kohsuke.github.GHRepository;
 
 import java.util.*;
@@ -9,15 +10,15 @@ import static java.util.stream.Collectors.toMap;
 public class SortByNumberOfForks extends SortingMethod {
 
     @Override
-    public List<GHRepository> sort(List<GHRepository> repositories){
+    public List<GHRepository> sort(List<Repo> repositories){
         Map<GHRepository, Integer> map = new HashMap<>();
-        for(GHRepository repo : repositories){
+        for(Repo repo : repositories){
             try{
-                map.put(repo,repo.getForks());
+                map.put(repo.getGhRepository(),repo.getGhRepository().getForks());
             }
             catch(Exception e)
             {
-                System.out.println("An error occurred: "+repo.getFullName());
+                System.out.println("An error occurred: "+repo.getGhRepository().getFullName());
             }
         }
         map=map.entrySet().stream()

@@ -1,15 +1,19 @@
 package manager;
 
+import lucene.Repo;
 import org.kohsuke.github.GHRepository;
 import sorting.*;
 
 
 import java.util.List;
 
+import static manager.Trim.getRemaining;
+
 public class SortingManager {
     private String stringMethod;
     private SortingMethod sortingMethod;
     private SortingFactory sortingFactory = new SortingFactory();
+    private List<Repo> repositoryList = getRemaining();
 
     public void init(){
         sortingFactory.AddSortingMethod("SortByNumberOfContributorFollowers", new SortByNumberOfContributorFollowers());
@@ -37,7 +41,7 @@ public class SortingManager {
         this.stringMethod = stringMethod;
     }
 
-    public List<GHRepository> callSortMethod(List<GHRepository> repositoryList) {
+    public List<GHRepository> callSortMethod(List<Repo> repositoryList) {
         return sortingMethod.sort(repositoryList);
     }
 }

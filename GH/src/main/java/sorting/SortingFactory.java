@@ -8,6 +8,7 @@ public class SortingFactory {
 
     private Map<String, SortingMethod> sortingMethods = new HashMap<>();
 
+
     public SortingMethod getSortingMethod(String sortingMethod) {
         try
         {

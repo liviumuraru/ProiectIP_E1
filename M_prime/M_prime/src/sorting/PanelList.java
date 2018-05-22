@@ -21,7 +21,10 @@ class PanelList extends JFrame {
 
 
         JPanel panelLeft = new JPanel();
-        JButton button = new JButton("Sort");
+        panelLeft.setBackground(Color.LIGHT_GRAY);
+        JButton button = new JButton("<html><font color='black'>Sort</font></html>");
+        button.setBackground(Color.white);
+        
         panelLeft.add(button);
         this.add(panelLeft, BorderLayout.EAST);
 
@@ -42,15 +45,12 @@ class PanelList extends JFrame {
         box4.setBackground(Color.LIGHT_GRAY);
         JPanel panelRight = new JPanel();
 
-        panelRight.setLayout(new GridLayout(5, 1));
+        panelRight.setLayout(new GridLayout(4, 1));
         panelRight.add(box1);
         panelRight.add(box2);
         panelRight.add(box3);
         panelRight.add(box4);
         this.add(panelRight, BorderLayout.WEST);
-
-
-
 
     }
 

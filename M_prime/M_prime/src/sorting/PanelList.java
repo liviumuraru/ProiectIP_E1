@@ -6,10 +6,10 @@ import java.io.File;
 
 class PanelList extends JFrame {
 
-    private JCheckBox box1 = new JCheckBox("Criterion 1");
-    private JCheckBox box2 = new JCheckBox("Criterion 2");
-    private JCheckBox box3 = new JCheckBox("Criterion 3");
-    private JCheckBox box4 = new JCheckBox("Criterion 4");
+    private JCheckBox box1 = new JCheckBox("Number of Contributor Followers");
+    private JCheckBox box2 = new JCheckBox("Number of Forks");
+    private JCheckBox box3 = new JCheckBox("Number of Releases");
+//    private JCheckBox box4 = new JCheckBox("Criterion 4");
 
     PanelList() {
     	
@@ -42,14 +42,14 @@ class PanelList extends JFrame {
         box1.setBackground(Color.LIGHT_GRAY);
         box2.setBackground(Color.LIGHT_GRAY);
         box3.setBackground(Color.LIGHT_GRAY);
-        box4.setBackground(Color.LIGHT_GRAY);
+//        box4.setBackground(Color.LIGHT_GRAY);
         JPanel panelRight = new JPanel();
 
-        panelRight.setLayout(new GridLayout(4, 1));
+        panelRight.setLayout(new GridLayout(3, 1));
         panelRight.add(box1);
         panelRight.add(box2);
         panelRight.add(box3);
-        panelRight.add(box4);
+//        panelRight.add(box4);
         this.add(panelRight, BorderLayout.WEST);
 
     }

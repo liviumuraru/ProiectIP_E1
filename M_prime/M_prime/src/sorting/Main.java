@@ -10,7 +10,7 @@ public class Main {
         System.out.println("Hello World!");
         PanelList frame = new PanelList ();
         //frame.setBackground(Color.LIGHT_GRAY);
-        frame.setSize(500,400);
+        frame.setSize(820,680);
         
         frame.setLocationRelativeTo(null);
         //frame.pack();

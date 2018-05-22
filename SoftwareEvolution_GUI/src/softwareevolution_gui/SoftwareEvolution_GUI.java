@@ -35,6 +35,10 @@ public class SoftwareEvolution_GUI implements ActionListener {
 
     }
 
+    public JButton getSearchButton() {
+        return searchButton;
+    }
+    
 
     public ArrayList<String> getSelectedLangs() {
 		return selectedLangs;
@@ -101,7 +105,7 @@ public class SoftwareEvolution_GUI implements ActionListener {
             toolb.setBorder(new EmptyBorder(10, 10, 10, 10));
 
             searchButton = new SearchButton(this);
-            searchButton.addActionListener(this);
+            searchButton.addActionListener(new IntegrationListener(this));
 
             ImageIcon image;
             image = new ImageIcon("title.jpg");

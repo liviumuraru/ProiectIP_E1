@@ -5,6 +5,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -40,22 +41,14 @@ public class FileTree extends JPanel {
                 File file = new File(anotherOne.trim());
 
                 try {
-//                    if (file.toString().endsWith(".pdf"))
-//                        Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
-//                    else {
                     Desktop desktop = Desktop.getDesktop();
                     desktop.open(file);
-//                    }
-                    //Desktop.getDesktop().open(f);
                 } catch (IOException e1) {
                     System.out.println("");
                 }
             }
 
         });
-
-
-
         // Lastly, put the JTree into a JScrollPane.
         JScrollPane scrollpane = new JScrollPane();
         scrollpane.getViewport().add(tree);
@@ -75,10 +68,17 @@ public class FileTree extends JPanel {
         ol.sort(String.CASE_INSENSITIVE_ORDER);
         File f;
         Vector<String> files = new Vector<>();
+
+        List< String > ol1 = PanelList.paths;
+        if ( ol1.isEmpty() )
+            System.out.println( "Empty ol1" );
+        else
+            System.out.println("not empty");
         // Make two passes, one for Dirs and one for Files. This is #1.
-        for (int i = 0; i < ol.size(); i++) {
-            String thisObject = ol.elementAt(i);
+        for (int i = 0; i < ol1.size(); i++) {
+            String thisObject = ol1.get(i);
             String newPath;
+            System.out.println(ol1.get( i) );
             if (curPath.equals("."))
                 newPath = thisObject;
             else
@@ -91,7 +91,6 @@ public class FileTree extends JPanel {
         // Pass two: for files.
         for (int fnum = 0; fnum < files.size(); fnum++) {
             curDir.add(new DefaultMutableTreeNode(files.elementAt(fnum)));
-
         }
         return curDir;
     }

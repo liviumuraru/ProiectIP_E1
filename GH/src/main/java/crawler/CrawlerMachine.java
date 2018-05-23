@@ -34,6 +34,7 @@ public class CrawlerMachine
 
                 mergedFiles.add( mergePipeline.GetMergedFile() );
                 Trim.add(mergePipeline.getDestinationDir().toString(), repository);
+
             }
             catch ( GitAPIException | IOException e )
             {

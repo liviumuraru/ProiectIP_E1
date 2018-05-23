@@ -97,7 +97,7 @@ public class SoftwareEvolution_GUI implements ActionListener {
             List<GHRepository > repositories = null;
             try
             {
-                Crawler crawler = new Crawler( 2 );
+                Crawler crawler = new Crawler( 7 );
                 repositories = crawler.getRepos( getTags(), getSelectedLangs() );
 
                 // print repos

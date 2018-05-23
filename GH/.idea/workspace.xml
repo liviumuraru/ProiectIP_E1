@@ -1,980 +1,1056 @@
-<?xml version="1.0" encoding="UTF-8"?>
+Skip to content
+        This repository
+        Search
+        Pull requests
+        Issues
+        Marketplace
+        Explore
+        @FlorinGrigorosoaia
+        Sign out
+        7
+        0 1 liviumuraru/ProiectIP_E1
+        Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
+        ProiectIP_E1/GH/.idea/workspace.xml
+        ce3fe26  9 hours ago
+        @alexad19 alexad19 added sort () method to SortingManager class
+        @FlorinGrigorosoaia @alexad19
+
+        1038 lines (1038 sloc)  57.7 KB
+        <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ChangeListManager">
-    <list default="true" id="4264f078-a068-473d-a7b3-e0ddcb260914" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
-    <option name="SHOW_DIALOG" value="false" />
-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
-    <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="MergePipeline.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/merge/MergePipeline.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="93" column="12" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
-              <folding>
-                <element signature="e#1671#1672#0" expanded="true" />
-                <element signature="e#1708#1709#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+    <component name="ChangeListManager">
+        <list default="true" id="4264f078-a068-473d-a7b3-e0ddcb260914" name="Default" comment="">
+            <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+            <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+            <change beforePath="$PROJECT_DIR$/src/main/java/manager/SortingManager.java" afterPath="$PROJECT_DIR$/src/main/java/manager/SortingManager.java" />
+            <change beforePath="$PROJECT_DIR$/src/main/java/sorting/SortingFactory.java" afterPath="$PROJECT_DIR$/src/main/java/sorting/SortingFactory.java" />
+        </list>
+        <ignored path="$PROJECT_DIR$/out/" />
+        <ignored path="$PROJECT_DIR$/target/" />
+        <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+        <option name="TRACKING_ENABLED" value="true" />
+        <option name="SHOW_DIALOG" value="false" />
+        <option name="HIGHLIGHT_CONFLICTS" value="true" />
+        <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+        <option name="LAST_RESOLUTION" value="IGNORE" />
+    </component>
+    <component name="FileEditorManager">
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+            <file leaf-file-name="SoftwareEvolution_GUI.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/SoftwareEvolution_GUI.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="391">
+                            <caret line="41" column="34" lean-forward="false" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+                            <folding>
+                                <element signature="imports" expanded="true" />
+                                <element signature="method#assignTags#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                                <element signature="method#assignLanguages#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                                <element signature="method#actionPerformed#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                                <element signature="method#SoftwareEvolution_GUI#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                                <element signature="method#init#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                            </folding>
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="SortingManager.java" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/src/main/java/manager/SortingManager.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="459">
+                            <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
+                            <folding>
+                                <element signature="e#803#804#0" expanded="true" />
+                                <element signature="e#871#872#0" expanded="true" />
+                                <element signature="e#910#911#0" expanded="true" />
+                                <element signature="e#945#946#0" expanded="true" />
+                                <element signature="e#1001#1002#0" expanded="true" />
+                                <element signature="e#1049#1050#0" expanded="true" />
+                            </folding>
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="SortingFactory.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortingFactory.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="153">
+                            <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="24" />
+                            <folding />
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="RepoCrawler.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/sorting/RepoCrawler.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="68">
+                            <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+                            <folding />
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="SortByNumberOfContributorFollowers.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfContributorFollowers.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="255">
+                            <caret line="20" column="46" lean-forward="false" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+                            <folding />
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="SortByNumberOfReleases.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfReleases.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="527">
+                            <caret line="36" column="45" lean-forward="true" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
+                            <folding />
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="SortByNumberOfForks.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfForks.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="187">
+                            <caret line="16" column="46" lean-forward="false" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+                            <folding />
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="SortingMethod.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortingMethod.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="85">
+                            <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+                            <folding />
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="Trim.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/manager/Trim.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="374">
+                            <caret line="25" column="45" lean-forward="true" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+                            <folding>
+                                <element signature="imports" expanded="true" />
+                                <element signature="e#549#550#0" expanded="true" />
+                                <element signature="e#606#607#0" expanded="true" />
+                            </folding>
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+            <file leaf-file-name="Repo.java" pinned="false" current-in-tab="false">
+                <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Repo.java">
+                    <provider selected="true" editor-type-id="text-editor">
+                        <state relative-caret-position="340">
+                            <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+                            <folding />
+                        </state>
+                    </provider>
+                </entry>
+            </file>
+        </leaf>
+    </component>
+    <component name="FileTemplateManagerImpl">
+        <option name="RECENT_TEMPLATES">
+            <list>
+                <option value="Interface" />
+                <option value="Class" />
+            </list>
+        </option>
+    </component>
+    <component name="FindInProjectRecents">
+        <findStrings>
+            <find>acc</find>
+            <find>createIndex</find>
+            <find>repoList</find>
+            <find>System</find>
+            <find>fileTre</find>
+            <find>.</find>
+        </findStrings>
+    </component>
+    <component name="Git.Settings">
+        <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    </component>
+    <component name="GradleLocalSettings">
+        <option name="externalProjectsViewState">
+            <projects_view />
+        </option>
+    </component>
+    <component name="IdeDocumentHistory">
+        <option name="CHANGED_PATHS">
+            <list>
+                <option value="$PROJECT_DIR$/src/filterTypes/ORFilter.java" />
+                <option value="$PROJECT_DIR$/src/crawler/subset/AllSubsets.java" />
+                <option value="$PROJECT_DIR$/src/filter/filterInterfaces/ElementFilter.java" />
+                <option value="$PROJECT_DIR$/src/lucene/DocVector.java" />
+                <option value="$PROJECT_DIR$/src/lucene/CosineSimilarity.java" />
+                <option value="$PROJECT_DIR$/src/lucene/Configuration.java" />
+                <option value="$PROJECT_DIR$/src/lucene/VectorGenerator.java" />
+                <option value="$PROJECT_DIR$/src/lucene/IndexOpener.java" />
+                <option value="$PROJECT_DIR$/src/lucene/Indexer.java" />
+                <option value="$PROJECT_DIR$/mergedFiles/merged0.txt" />
+                <option value="$PROJECT_DIR$/mergedFiles/merged2.txt" />
+                <option value="$PROJECT_DIR$/src/exceptions/CrawlerException.java" />
+                <option value="$PROJECT_DIR$/src/exceptions/CrawlerSorterException.java" />
+                <option value="$PROJECT_DIR$/src/crawler/sort/CriteriaSorter.java" />
+                <option value="$PROJECT_DIR$/src/crawler/concreteCrawler/Crawler.java" />
+                <option value="$PROJECT_DIR$/src/filter/concreteFilters/CHeaderFilesOnly.java" />
+                <option value="$PROJECT_DIR$/src/filter/concreteFilters/CSFilesOnly.java" />
+                <option value="$PROJECT_DIR$/src/filter/concreteFilters/JavaFilesOnly.java" />
+                <option value="$PROJECT_DIR$/src/filter/concreteFilters/PyFilesOnly.java" />
+                <option value="$PROJECT_DIR$/src/filter/concreteFilters/TextFilesOnly.java" />
+                <option value="$PROJECT_DIR$/src/lucene/AllTerms.java" />
+                <option value="$PROJECT_DIR$/src/lucene/Repo.java" />
+                <option value="$PROJECT_DIR$/src/asset/Assets.java" />
+                <option value="$PROJECT_DIR$/src/lucene/Machine.java" />
+                <option value="$PROJECT_DIR$/src/softwareevolution_gui/CheckComboRenderer.java" />
+                <option value="$PROJECT_DIR$/src/softwareevolution_gui/CheckComboStore.java" />
+                <option value="$PROJECT_DIR$/src/softwareevolution_gui/MyToolbar.java" />
+                <option value="$PROJECT_DIR$/src/softwareevolution_gui/SearchButton.java" />
+                <option value="$PROJECT_DIR$/src/MainTest.java" />
+                <option value="$PROJECT_DIR$/src/CrawlerMachine.java" />
+                <option value="$PROJECT_DIR$/src/crawler/concreteCrawler/RepoCrawler.java" />
+                <option value="$PROJECT_DIR$/src/m_prime/PanelList.java" />
+                <option value="$PROJECT_DIR$/src/softwareevolution_gui/SoftwareEvolution_GUI.java" />
+                <option value="$PROJECT_DIR$/src/m_prime/FileTree.java" />
+                <option value="$PROJECT_DIR$/src/merge/MergePipeline.java" />
+                <option value="$PROJECT_DIR$/src/crawler/CrawlerMachine.java" />
+                <option value="$PROJECT_DIR$/src/main/java/re/Concat.java" />
+                <option value="$PROJECT_DIR$/src/main/java/re/concatenation/Concat.java" />
+                <option value="$PROJECT_DIR$/src/main/java/concatenation/Concat.java" />
+                <option value="$PROJECT_DIR$/src/main/java/lucene/Repo.java" />
+                <option value="$PROJECT_DIR$/src/main/java/merge/MergePipeline.java" />
+                <option value="$PROJECT_DIR$/src/main/java/crawler/CrawlerMachine.java" />
+                <option value="$PROJECT_DIR$/src/main/java/lucene/Machine.java" />
+                <option value="$PROJECT_DIR$/src/main/java/manager/Trim.java" />
+                <option value="$PROJECT_DIR$/pom.xml" />
+                <option value="$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfReleases.java" />
+                <option value="$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfForks.java" />
+                <option value="$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfContributorFollowers.java" />
+                <option value="$PROJECT_DIR$/src/main/java/sorting/SortingMethod.java" />
+                <option value="$PROJECT_DIR$/src/main/java/sorting/SortingFactory.java" />
+                <option value="$PROJECT_DIR$/src/main/java/manager/SortingManager.java" />
+            </list>
+        </option>
+    </component>
+    <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+    <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+    <component name="JsGulpfileManager">
+        <detection-done>true</detection-done>
+        <sorting>DEFINITION_ORDER</sorting>
+    </component>
+    <component name="MavenImportPreferences">
+        <option name="importingSettings">
+            <MavenImportingSettings>
+                <option name="importAutomatically" value="true" />
+            </MavenImportingSettings>
+        </option>
+    </component>
+    <component name="NodePackageJsonFileManager">
+        <packageJsonPaths />
+    </component>
+    <component name="ProjectFrameBounds" extendedState="6">
+        <option name="x" value="948" />
+        <option name="width" value="979" />
+        <option name="height" value="1044" />
+    </component>
+    <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+        <ConfirmationsSetting value="1" id="Add" />
+    </component>
+    <component name="ProjectView">
+        <navigator currentView="ProjectPane" proportions="" version="1">
+            <flattenPackages />
+            <showMembers />
+            <showModules />
+            <showLibraryContents />
+            <hideEmptyPackages />
+            <abbreviatePackageNames />
+            <autoscrollToSource />
+            <autoscrollFromSource />
+            <sortByType />
+            <manualOrder />
+            <foldersAlwaysOnTop value="true" />
+        </navigator>
+        <panes>
+            <pane id="ProjectPane">
+                <subPane>
+                    <expand>
+                        <path>
+                            <item name="GH" type="b2602c69:ProjectViewProjectNode" />
+                            <item name="GH" type="462c0819:PsiDirectoryNode" />
+                        </path>
+                        <path>
+                            <item name="GH" type="b2602c69:ProjectViewProjectNode" />
+                            <item name="GH" type="462c0819:PsiDirectoryNode" />
+                            <item name="src" type="462c0819:PsiDirectoryNode" />
+                        </path>
+                        <path>
+                            <item name="GH" type="b2602c69:ProjectViewProjectNode" />
+                            <item name="GH" type="462c0819:PsiDirectoryNode" />
+                            <item name="src" type="462c0819:PsiDirectoryNode" />
+                            <item name="main" type="462c0819:PsiDirectoryNode" />
+                        </path>
+                        <path>
+                            <item name="GH" type="b2602c69:ProjectViewProjectNode" />
+                            <item name="GH" type="462c0819:PsiDirectoryNode" />
+                            <item name="src" type="462c0819:PsiDirectoryNode" />
+                            <item name="main" type="462c0819:PsiDirectoryNode" />
+                            <item name="java" type="462c0819:PsiDirectoryNode" />
+                        </path>
+                        <path>
+                            <item name="GH" type="b2602c69:ProjectViewProjectNode" />
+                            <item name="GH" type="462c0819:PsiDirectoryNode" />
+                            <item name="src" type="462c0819:PsiDirectoryNode" />
+                            <item name="main" type="462c0819:PsiDirectoryNode" />
+                            <item name="java" type="462c0819:PsiDirectoryNode" />
+                            <item name="lucene" type="462c0819:PsiDirectoryNode" />
+                        </path>
+                        <path>
+                            <item name="GH" type="b2602c69:ProjectViewProjectNode" />
+                            <item name="GH" type="462c0819:PsiDirectoryNode" />
+                            <item name="src" type="462c0819:PsiDirectoryNode" />
+                            <item name="main" type="462c0819:PsiDirectoryNode" />
+                            <item name="java" type="462c0819:PsiDirectoryNode" />
+                            <item name="manager" type="462c0819:PsiDirectoryNode" />
+                        </path>
+                        <path>
+                            <item name="GH" type="b2602c69:ProjectViewProjectNode" />
+                            <item name="GH" type="462c0819:PsiDirectoryNode" />
+                            <item name="src" type="462c0819:PsiDirectoryNode" />
+                            <item name="main" type="462c0819:PsiDirectoryNode" />
+                            <item name="java" type="462c0819:PsiDirectoryNode" />
+                            <item name="sorting" type="462c0819:PsiDirectoryNode" />
+                        </path>
+                    </expand>
+                    <select />
+                </subPane>
+            </pane>
+            <pane id="AndroidView" />
+            <pane id="Scope" />
+            <pane id="Scratches" />
+            <pane id="PackagesPane" />
+        </panes>
+    </component>
+    <component name="PropertiesComponent">
+        <property name="Downloaded.Files.Path.Enabled" value="true" />
+        <property name="Repository.Attach.JavaDocs" value="false" />
+        <property name="Repository.Attach.Sources" value="false" />
+        <property name="WebServerToolWindowFactoryState" value="false" />
+        <property name="aspect.path.notification.shown" value="true" />
+        <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+        <property name="project.structure.last.edited" value="Libraries" />
+        <property name="project.structure.proportion" value="0.15" />
+        <property name="project.structure.side.proportion" value="0.2" />
+    </component>
+    <component name="RecentsManager">
+        <key name="MoveFile.RECENT_KEYS">
+            <recent name="C:\Users\flori\Documents\ProiectIP_E1\GH\src" />
+        </key>
+    </component>
+    <component name="RunDashboard">
+        <option name="ruleStates">
+            <list>
+                <RuleState>
+                    <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+                </RuleState>
+                <RuleState>
+                    <option name="name" value="StatusDashboardGroupingRule" />
+                </RuleState>
+            </list>
+        </option>
+    </component>
+    <component name="RunManager" selected="Application.SoftwareEvolution_GUI">
+        <configuration default="true" type="Applet" factoryName="Applet">
+            <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+            <option name="WIDTH" value="0" />
+            <option name="HEIGHT" value="0" />
+            <module />
+        </configuration>
+        <configuration name="Machine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+            <extension name="coverage" enabled="false" merge="false" runner="idea">
+                <pattern>
+                    <option name="PATTERN" value="lucene.*" />
+                    <option name="ENABLED" value="true" />
+                </pattern>
+            </extension>
+            <option name="MAIN_CLASS_NAME" value="lucene.Machine" />
+            <option name="VM_PARAMETERS" />
+            <option name="PROGRAM_PARAMETERS" />
+            <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+            <option name="ALTERNATIVE_JRE_PATH" />
+            <option name="ENABLE_SWING_INSPECTOR" value="false" />
+            <option name="ENV_VARIABLES" />
+            <option name="PASS_PARENT_ENVS" value="true" />
+            <module name="GHCrawler" />
+            <envs />
+        </configuration>
+        <configuration name="MainTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+            <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+            <option name="MAIN_CLASS_NAME" value="MainTest" />
+            <option name="VM_PARAMETERS" />
+            <option name="PROGRAM_PARAMETERS" />
+            <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+            <option name="ALTERNATIVE_JRE_PATH" />
+            <option name="ENABLE_SWING_INSPECTOR" value="false" />
+            <option name="ENV_VARIABLES" />
+            <option name="PASS_PARENT_ENVS" value="true" />
+            <module name="GHCrawler" />
+            <envs />
+        </configuration>
+        <configuration name="SoftwareEvolution_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+            <extension name="coverage" enabled="false" merge="false" runner="idea">
+                <pattern>
+                    <option name="PATTERN" value="softwareevolution_gui.*" />
+                    <option name="ENABLED" value="true" />
+                </pattern>
+            </extension>
+            <option name="MAIN_CLASS_NAME" value="softwareevolution_gui.SoftwareEvolution_GUI" />
+            <option name="VM_PARAMETERS" />
+            <option name="PROGRAM_PARAMETERS" />
+            <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+            <option name="ALTERNATIVE_JRE_PATH" />
+            <option name="ENABLE_SWING_INSPECTOR" value="false" />
+            <option name="ENV_VARIABLES" />
+            <option name="PASS_PARENT_ENVS" value="true" />
+            <module name="GHCrawler" />
+            <envs />
+        </configuration>
+        <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+            <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+            <option name="MAIN_CLASS_NAME" value="crawler.Test" />
+            <option name="VM_PARAMETERS" />
+            <option name="PROGRAM_PARAMETERS" />
+            <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+            <option name="ALTERNATIVE_JRE_PATH" />
+            <option name="ENABLE_SWING_INSPECTOR" value="false" />
+            <option name="ENV_VARIABLES" />
+            <option name="PASS_PARENT_ENVS" value="true" />
+            <module name="GHCrawler" />
+            <envs />
+        </configuration>
+        <configuration default="true" type="Application" factoryName="Application">
+            <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+            <option name="MAIN_CLASS_NAME" />
+            <option name="VM_PARAMETERS" />
+            <option name="PROGRAM_PARAMETERS" />
+            <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+            <option name="ALTERNATIVE_JRE_PATH" />
+            <option name="ENABLE_SWING_INSPECTOR" value="false" />
+            <option name="ENV_VARIABLES" />
+            <option name="PASS_PARENT_ENVS" value="true" />
+            <module name="" />
+            <envs />
+        </configuration>
+        <configuration default="true" type="JUnit" factoryName="JUnit">
+            <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+            <module name="" />
+            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+            <option name="ALTERNATIVE_JRE_PATH" />
+            <option name="PACKAGE_NAME" />
+            <option name="MAIN_CLASS_NAME" />
+            <option name="METHOD_NAME" />
+            <option name="TEST_OBJECT" value="class" />
+            <option name="VM_PARAMETERS" value="-ea" />
+            <option name="PARAMETERS" />
+            <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+            <option name="ENV_VARIABLES" />
+            <option name="PASS_PARENT_ENVS" value="true" />
+            <option name="TEST_SEARCH_SCOPE">
+                <value defaultName="singleModule" />
+            </option>
+            <envs />
+            <patterns />
+        </configuration>
+        <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+            <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+            <option name="MAIN_CLASS_NAME" />
+            <option name="VM_PARAMETERS" />
+            <option name="PROGRAM_PARAMETERS" />
+            <option name="WORKING_DIRECTORY" />
+            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+            <option name="ALTERNATIVE_JRE_PATH" />
+            <option name="PASS_PARENT_ENVS" value="true" />
+            <module name="GH" />
+            <envs />
+        </configuration>
+        <configuration default="true" type="TestNG" factoryName="TestNG">
+            <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+            <module name="" />
+            <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+            <option name="ALTERNATIVE_JRE_PATH" />
+            <option name="SUITE_NAME" />
+            <option name="PACKAGE_NAME" />
+            <option name="MAIN_CLASS_NAME" />
+            <option name="METHOD_NAME" />
+            <option name="GROUP_NAME" />
+            <option name="TEST_OBJECT" value="CLASS" />
+            <option name="VM_PARAMETERS" value="-ea" />
+            <option name="PARAMETERS" />
+            <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+            <option name="OUTPUT_DIRECTORY" />
+            <option name="ANNOTATION_TYPE" />
+            <option name="ENV_VARIABLES" />
+            <option name="PASS_PARENT_ENVS" value="true" />
+            <option name="TEST_SEARCH_SCOPE">
+                <value defaultName="singleModule" />
+            </option>
+            <option name="USE_DEFAULT_REPORTERS" value="false" />
+            <option name="PROPERTIES_FILE" />
+            <envs />
+            <properties />
+            <listeners />
+        </configuration>
+        <list size="4">
+            <item index="0" class="java.lang.String" itemvalue="Application.Test" />
+            <item index="1" class="java.lang.String" itemvalue="Application.MainTest" />
+            <item index="2" class="java.lang.String" itemvalue="Application.Machine" />
+            <item index="3" class="java.lang.String" itemvalue="Application.SoftwareEvolution_GUI" />
+        </list>
+        <recent_temporary>
+            <list size="4">
+                <item index="0" class="java.lang.String" itemvalue="Application.SoftwareEvolution_GUI" />
+                <item index="1" class="java.lang.String" itemvalue="Application.MainTest" />
+                <item index="2" class="java.lang.String" itemvalue="Application.Machine" />
+                <item index="3" class="java.lang.String" itemvalue="Application.Test" />
+            </list>
+        </recent_temporary>
+    </component>
+    <component name="ShelveChangesManager" show_recycled="false">
+        <option name="remove_strategy" value="false" />
+    </component>
+    <component name="SvnConfiguration">
+        <configuration />
+    </component>
+    <component name="TaskManager">
+        <task active="true" id="Default" summary="Default task">
+            <changelist id="4264f078-a068-473d-a7b3-e0ddcb260914" name="Default" comment="" />
+            <created>1524755083061</created>
+            <option name="number" value="Default" />
+            <option name="presentableId" value="Default" />
+            <updated>1524755083061</updated>
+            <workItem from="1526716407968" duration="2476000" />
+            <workItem from="1526878319685" duration="9258000" />
+            <workItem from="1526994975818" duration="7843000" />
+        </task>
+        <servers />
+    </component>
+    <component name="TimeTrackingManager">
+        <option name="totallyTimeSpent" value="19577000" />
+    </component>
+    <component name="ToolWindowManager">
+        <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+        <editor active="true" />
+        <layout>
+            <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+            <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+            <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+            <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+            <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+            <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+            <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+            <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32303733" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+            <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+            <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+            <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+            <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+            <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21927084" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+            <window_info id="Learn" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+            <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+            <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+            <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+            <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+            <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+            <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+            <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+            <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+            <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+            <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+            <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+            <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+            <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947233" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+            <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+            <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+            <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+            <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+        </layout>
+    </component>
+    <component name="TypeScriptGeneratedFilesManager">
+        <option name="version" value="1" />
+    </component>
+    <component name="VcsContentAnnotationSettings">
+        <option name="myLimit" value="2678400000" />
+    </component>
+    <component name="XDebuggerManager">
+        <breakpoint-manager>
+            <option name="time" value="8" />
+        </breakpoint-manager>
+        <watches-manager />
+    </component>
+    <component name="editorHistoryManager">
+        <entry file="file://$PROJECT_DIR$/src/main/java/crawler/sort/CriteriaSorter.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="263">
+                    <caret line="55" column="15" lean-forward="false" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="Assets.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/asset/Assets.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-            </state>
-          </provider>
+        <entry file="jar://D:/Java/src.zip!/java/util/List.java" />
+        <entry file="file://$PROJECT_DIR$/src/main/java/exceptions/CrawlerException.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                    <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="CrawlerMachine.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/crawler/CrawlerMachine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/java/exceptions/CrawlerSorterException.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                    <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="1" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="Machine.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Machine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="40" column="61" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/java/crawler/subset/AllSubsets.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                    <caret line="20" column="34" lean-forward="false" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="SortingMethod.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortingMethod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/CHeaderFilesOnly.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                    <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="SortingManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/manager/SortingManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/CSFilesOnly.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                    <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="SortByNumberOfContributorFollowers.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfContributorFollowers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-153">
-              <caret line="10" column="58" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/FilterByFormat.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="221">
+                    <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="Trim.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/manager/Trim.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#549#550#0" expanded="true" />
-                <element signature="e#606#607#0" expanded="true" />
-                <element signature="e#842#843#0" expanded="true" />
-                <element signature="e#904#905#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/JavaFilesOnly.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="289">
+                    <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="FileTree.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/PyFilesOnly.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="272">
+                    <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/TextFilesOnly.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                    <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterInterfaces/ElementFilter.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="119">
+                    <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterInterfaces/Filter.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="68">
+                    <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterInterfaces/ListFilter.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="119">
+                    <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterTypes/ANDFilter.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="33">
+                    <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterTypes/CompositeFilter.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                    <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterTypes/ORFilter.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="313">
+                    <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/AllTerms.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="340">
+                    <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Configuration.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="153">
+                    <caret line="9" column="1" lean-forward="false" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/IndexOpener.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="340">
+                    <caret line="24" column="34" lean-forward="false" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="jar://F:/Stuff/Faculty/IP/cosineSimilarityJARS/lucene-core-4.10.2.jar!/org/apache/lucene/index/FieldInfo.class" />
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Indexer.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="197">
+                    <caret line="72" column="72" lean-forward="true" selection-start-line="72" selection-start-column="72" selection-end-line="72" selection-end-column="72" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/VectorGenerator.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="97">
+                    <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/DocVector.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="245">
+                    <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/CheckComboStore.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="204">
+                    <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/CheckComboRenderer.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1088">
+                    <caret line="64" column="1" lean-forward="false" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="1" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/MyToolbar.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="589">
+                    <caret line="168" column="1" lean-forward="false" selection-start-line="168" selection-start-column="1" selection-end-line="168" selection-end-column="1" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/SearchButton.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="289">
+                    <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+                </state>
+            </provider>
+        </entry>
         <entry file="file://$PROJECT_DIR$/src/main/java/m_prime/FileTree.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="23" column="39" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-136">
+                    <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+                </state>
+            </provider>
         </entry>
-      </file>
-      <file leaf-file-name="PanelList.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/m_prime/PanelList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="53" column="51" lean-forward="true" selection-start-line="53" selection-start-column="51" selection-end-line="53" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="357">
+                    <caret line="54" column="5" lean-forward="false" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+                </state>
+            </provider>
         </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>acc</find>
-      <find>createIndex</find>
-      <find>repoList</find>
-      <find>System</find>
-      <find>fileTre</find>
-    </findStrings>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/filter/filterInterfaces/ListFilter.java" />
-        <option value="$PROJECT_DIR$/src/filterTypes/ANDFilter.java" />
-        <option value="$PROJECT_DIR$/src/filterTypes/CompositeFilter.java" />
-        <option value="$PROJECT_DIR$/src/filterTypes/ORFilter.java" />
-        <option value="$PROJECT_DIR$/src/crawler/subset/AllSubsets.java" />
-        <option value="$PROJECT_DIR$/src/filter/filterInterfaces/ElementFilter.java" />
-        <option value="$PROJECT_DIR$/src/lucene/DocVector.java" />
-        <option value="$PROJECT_DIR$/src/lucene/CosineSimilarity.java" />
-        <option value="$PROJECT_DIR$/src/lucene/Configuration.java" />
-        <option value="$PROJECT_DIR$/src/lucene/VectorGenerator.java" />
-        <option value="$PROJECT_DIR$/src/lucene/IndexOpener.java" />
-        <option value="$PROJECT_DIR$/src/lucene/Indexer.java" />
-        <option value="$PROJECT_DIR$/mergedFiles/merged0.txt" />
-        <option value="$PROJECT_DIR$/mergedFiles/merged2.txt" />
-        <option value="$PROJECT_DIR$/src/exceptions/CrawlerException.java" />
-        <option value="$PROJECT_DIR$/src/exceptions/CrawlerSorterException.java" />
-        <option value="$PROJECT_DIR$/src/crawler/sort/CriteriaSorter.java" />
-        <option value="$PROJECT_DIR$/src/crawler/concreteCrawler/Crawler.java" />
-        <option value="$PROJECT_DIR$/src/filter/concreteFilters/CHeaderFilesOnly.java" />
-        <option value="$PROJECT_DIR$/src/filter/concreteFilters/CSFilesOnly.java" />
-        <option value="$PROJECT_DIR$/src/filter/concreteFilters/JavaFilesOnly.java" />
-        <option value="$PROJECT_DIR$/src/filter/concreteFilters/PyFilesOnly.java" />
-        <option value="$PROJECT_DIR$/src/filter/concreteFilters/TextFilesOnly.java" />
-        <option value="$PROJECT_DIR$/src/lucene/AllTerms.java" />
-        <option value="$PROJECT_DIR$/src/lucene/Repo.java" />
-        <option value="$PROJECT_DIR$/src/asset/Assets.java" />
-        <option value="$PROJECT_DIR$/src/lucene/Machine.java" />
-        <option value="$PROJECT_DIR$/src/softwareevolution_gui/CheckComboRenderer.java" />
-        <option value="$PROJECT_DIR$/src/softwareevolution_gui/CheckComboStore.java" />
-        <option value="$PROJECT_DIR$/src/softwareevolution_gui/MyToolbar.java" />
-        <option value="$PROJECT_DIR$/src/softwareevolution_gui/SearchButton.java" />
-        <option value="$PROJECT_DIR$/src/MainTest.java" />
-        <option value="$PROJECT_DIR$/src/CrawlerMachine.java" />
-        <option value="$PROJECT_DIR$/src/crawler/concreteCrawler/RepoCrawler.java" />
-        <option value="$PROJECT_DIR$/src/m_prime/PanelList.java" />
-        <option value="$PROJECT_DIR$/src/softwareevolution_gui/SoftwareEvolution_GUI.java" />
-        <option value="$PROJECT_DIR$/src/m_prime/FileTree.java" />
-        <option value="$PROJECT_DIR$/src/merge/MergePipeline.java" />
-        <option value="$PROJECT_DIR$/src/crawler/CrawlerMachine.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/re/Concat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/re/concatenation/Concat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/concatenation/Concat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lucene/Repo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/merge/MergePipeline.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lucene/Machine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/softwareevolution_gui/SoftwareEvolution_GUI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/crawler/CrawlerMachine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/m_prime/PanelList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/manager/Trim.java" />
-        <option value="$PROJECT_DIR$/src/main/java/m_prime/FileTree.java" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="946" />
-    <option name="width" value="981" />
-    <option name="height" value="1045" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="asset" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="m_prime" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="sorting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GH" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GH" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-    </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="true" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\flori\Documents\ProiectIP_E1\GH\src" />
-    </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.SoftwareEvolution_GUI">
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-    </configuration>
-    <configuration name="Machine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="lucene.Machine" />
-      <module name="GHCrawler" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lucene.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-    </configuration>
-    <configuration name="MainTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainTest" />
-      <module name="GHCrawler" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
-    <configuration name="SoftwareEvolution_GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="softwareevolution_gui.SoftwareEvolution_GUI" />
-      <module name="GHCrawler" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="softwareevolution_gui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-    </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="crawler.Test" />
-      <module name="GHCrawler" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <module name="GH" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <properties />
-      <listeners />
-    </configuration>
-    <list>
-      <item itemvalue="Application.Test" />
-      <item itemvalue="Application.MainTest" />
-      <item itemvalue="Application.Machine" />
-      <item itemvalue="Application.SoftwareEvolution_GUI" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.SoftwareEvolution_GUI" />
-        <item itemvalue="Application.MainTest" />
-        <item itemvalue="Application.Machine" />
-        <item itemvalue="Application.Test" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
-  <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="4264f078-a068-473d-a7b3-e0ddcb260914" name="Default" comment="" />
-      <created>1524755083061</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1524755083061</updated>
-      <workItem from="1526716407968" duration="2476000" />
-      <workItem from="1526878319685" duration="9258000" />
-      <workItem from="1526994975818" duration="8202000" />
-      <workItem from="1527013488535" duration="616000" />
-      <workItem from="1527052094552" duration="5030000" />
-    </task>
-    <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25582000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1691" height="917" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.32947233" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info id="Image Layers" order="6" />
-      <window_info anchor="bottom" id="Java Enterprise" order="9" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32303733" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22283609" />
-      <window_info anchor="right" id="Bean Validation" order="8" />
-      <window_info anchor="right" id="Database" order="8" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3989704" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
-    </layout>
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="9" />
-    </breakpoint-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="jar://F:/Stuff/Faculty/IP/cosineSimilarityJARS/lucene-core-4.10.2.jar!/org/apache/lucene/index/IndexReader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="191" selection-start-line="191" selection-end-line="191" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/filter/concreteFilters/PyFilterTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/asset/Asset.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/crawler/sort/CriteriaSorter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Java/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="110" column="17" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/exceptions/CrawlerException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-          <folding>
-            <element signature="e#117#118#0" expanded="true" />
-            <element signature="e#150#151#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/exceptions/CrawlerSorterException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="1" selection-start-line="6" selection-end-line="6" selection-end-column="1" />
-          <folding>
-            <element signature="e#128#129#0" expanded="true" />
-            <element signature="e#161#162#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/crawler/subset/AllSubsets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/CHeaderFilesOnly.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/CSFilesOnly.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/FilterByFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/JavaFilesOnly.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/PyFilesOnly.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/concreteFilters/TextFilesOnly.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterInterfaces/ElementFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterInterfaces/Filter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterInterfaces/ListFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterTypes/ANDFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterTypes/CompositeFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/filter/filterTypes/ORFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/AllTerms.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Configuration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/IndexOpener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://F:/Stuff/Faculty/IP/cosineSimilarityJARS/lucene-core-4.10.2.jar!/org/apache/lucene/index/FieldInfo.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="220" column="8" selection-start-line="220" selection-start-column="8" selection-end-line="220" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Indexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="72" column="72" lean-forward="true" selection-start-line="72" selection-start-column="72" selection-end-line="72" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/VectorGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/DocVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/CheckComboStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/CheckComboRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="64" column="1" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#511#512#0" expanded="true" />
-            <element signature="e#542#543#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/MyToolbar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="168" column="1" selection-start-line="168" selection-start-column="1" selection-end-line="168" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#874#875#0" expanded="true" />
-            <element signature="e#900#901#0" expanded="true" />
-            <element signature="e#935#936#0" expanded="true" />
-            <element signature="e#963#964#0" expanded="true" />
-            <element signature="e#1007#1008#0" expanded="true" />
-            <element signature="e#1036#1037#0" expanded="true" />
-            <element signature="e#1083#1084#0" expanded="true" />
-            <element signature="e#1111#1112#0" expanded="true" />
-            <element signature="e#1143#1144#0" expanded="true" />
-            <element signature="e#1168#1169#0" expanded="true" />
-            <element signature="e#1223#1224#0" expanded="true" />
-            <element signature="e#1259#1260#0" expanded="true" />
-            <element signature="e#1298#1299#0" expanded="true" />
-            <element signature="e#1328#1329#0" expanded="true" />
-            <element signature="e#2786#3042#0" expanded="true" />
-            <element signature="e#3041#3042#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/SearchButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#301#302#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/crawler/concreteCrawler/Crawler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/crawler/concreteCrawler/RepoCrawler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="22" column="61" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/re/concatenation/Concat.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/re/manager/ReverseManager.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/concatenation/Concat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="15" column="52" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#431#437#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Repo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/CosineSimilarity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="691">
-          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfReleases.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/SoftwareEvolution_GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="92" column="39" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#assignTags#0;class#SoftwareEvolution_GUI#0" />
-            <element signature="method#assignLanguages#0;class#SoftwareEvolution_GUI#0" />
-            <element signature="method#actionPerformed#0;class#SoftwareEvolution_GUI#0" />
-            <element signature="method#SoftwareEvolution_GUI#0;class#SoftwareEvolution_GUI#0" />
-            <element signature="method#init#0;class#SoftwareEvolution_GUI#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/merge/MergePipeline.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="93" column="12" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
-          <folding>
-            <element signature="e#1671#1672#0" expanded="true" />
-            <element signature="e#1708#1709#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/asset/Assets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortingMethod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Machine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="40" column="61" selection-start-line="40" selection-start-column="61" selection-end-line="40" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/crawler/CrawlerMachine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/manager/Trim.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#549#550#0" expanded="true" />
-            <element signature="e#606#607#0" expanded="true" />
-            <element signature="e#842#843#0" expanded="true" />
-            <element signature="e#904#905#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfContributorFollowers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="10" column="58" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/m_prime/FileTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="23" column="39" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/m_prime/PanelList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="53" column="51" lean-forward="true" selection-start-line="53" selection-start-column="51" selection-end-line="53" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/manager/SortingManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>GHCrawler</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>commons-math-2.0</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
-  </component>
+        <entry file="file://$PROJECT_DIR$/src/main/java/crawler/concreteCrawler/Crawler.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="469">
+                    <caret line="36" column="11" lean-forward="false" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+                    <folding>
+                        <element signature="imports" expanded="false" />
+                    </folding>
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/crawler/concreteCrawler/RepoCrawler.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="176">
+                    <caret line="22" column="61" lean-forward="false" selection-start-line="22" selection-start-column="61" selection-end-line="22" selection-end-column="61" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/asset/Assets.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="238">
+                    <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/re/concatenation/Concat.java" />
+        <entry file="file://$PROJECT_DIR$/src/main/java/re/manager/ReverseManager.java" />
+        <entry file="file://$PROJECT_DIR$/src/main/java/concatenation/Concat.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="153">
+                    <caret line="15" column="52" lean-forward="false" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
+                    <folding>
+                        <element signature="imports" expanded="false" />
+                        <element signature="e#431#437#0" expanded="false" />
+                    </folding>
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/merge/MergePipeline.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                    <caret line="64" column="13" lean-forward="false" selection-start-line="64" selection-start-column="13" selection-end-line="64" selection-end-column="13" />
+                    <folding>
+                        <element signature="e#1671#1672#0" expanded="false" />
+                        <element signature="e#1708#1709#0" expanded="false" />
+                    </folding>
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/crawler/CrawlerMachine.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="408">
+                    <caret line="35" column="81" lean-forward="false" selection-start-line="35" selection-start-column="81" selection-end-line="35" selection-end-column="81" />
+                    <folding>
+                        <element signature="imports" expanded="false" />
+                    </folding>
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/CosineSimilarity.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="170">
+                    <caret line="10" column="9" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Machine.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="680">
+                    <caret line="45" column="17" lean-forward="false" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/softwareevolution_gui/SoftwareEvolution_GUI.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="391">
+                    <caret line="41" column="34" lean-forward="false" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+                    <folding>
+                        <element signature="imports" expanded="true" />
+                        <element signature="method#assignTags#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                        <element signature="method#assignLanguages#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                        <element signature="method#actionPerformed#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                        <element signature="method#SoftwareEvolution_GUI#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                        <element signature="method#init#0;class#SoftwareEvolution_GUI#0" expanded="false" />
+                    </folding>
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="753">
+                    <caret line="65" column="21" lean-forward="false" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfReleases.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="527">
+                    <caret line="36" column="45" lean-forward="true" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfForks.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="187">
+                    <caret line="16" column="46" lean-forward="false" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortByNumberOfContributorFollowers.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="255">
+                    <caret line="20" column="46" lean-forward="false" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/sorting/RepoCrawler.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="68">
+                    <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/lucene/Repo.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="340">
+                    <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/manager/Trim.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="374">
+                    <caret line="25" column="45" lean-forward="true" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+                    <folding>
+                        <element signature="imports" expanded="true" />
+                        <element signature="e#549#550#0" expanded="true" />
+                        <element signature="e#606#607#0" expanded="true" />
+                    </folding>
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortingMethod.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="85">
+                    <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/sorting/SortingFactory.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="153">
+                    <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="24" />
+                    <folding />
+                </state>
+            </provider>
+        </entry>
+        <entry file="file://$PROJECT_DIR$/src/main/java/manager/SortingManager.java">
+            <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="459">
+                    <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
+                    <folding>
+                        <element signature="e#803#804#0" expanded="true" />
+                        <element signature="e#871#872#0" expanded="true" />
+                        <element signature="e#910#911#0" expanded="true" />
+                        <element signature="e#945#946#0" expanded="true" />
+                        <element signature="e#1001#1002#0" expanded="true" />
+                        <element signature="e#1049#1050#0" expanded="true" />
+                    </folding>
+                </state>
+            </provider>
+        </entry>
+    </component>
+    <component name="masterDetails">
+        <states>
+            <state key="ArtifactsStructureConfigurable.UI">
+                <settings>
+                    <artifact-editor />
+                    <splitter-proportions>
+                        <option name="proportions">
+                            <list>
+                                <option value="0.2" />
+                            </list>
+                        </option>
+                    </splitter-proportions>
+                </settings>
+            </state>
+            <state key="FacetStructureConfigurable.UI">
+                <settings>
+                    <last-edited>No facets are configured</last-edited>
+                    <splitter-proportions>
+                        <option name="proportions">
+                            <list>
+                                <option value="0.2" />
+                            </list>
+                        </option>
+                    </splitter-proportions>
+                </settings>
+            </state>
+            <state key="GlobalLibrariesConfigurable.UI">
+                <settings>
+                    <splitter-proportions>
+                        <option name="proportions">
+                            <list>
+                                <option value="0.2" />
+                            </list>
+                        </option>
+                    </splitter-proportions>
+                </settings>
+            </state>
+            <state key="JdkListConfigurable.UI">
+                <settings>
+                    <last-edited>1.8</last-edited>
+                    <splitter-proportions>
+                        <option name="proportions">
+                            <list>
+                                <option value="0.2" />
+                            </list>
+                        </option>
+                    </splitter-proportions>
+                </settings>
+            </state>
+            <state key="ModuleStructureConfigurable.UI">
+                <settings>
+                    <last-edited>GHCrawler</last-edited>
+                    <splitter-proportions>
+                        <option name="proportions">
+                            <list>
+                                <option value="0.2" />
+                                <option value="0.6" />
+                            </list>
+                        </option>
+                    </splitter-proportions>
+                </settings>
+            </state>
+            <state key="ProjectLibrariesConfigurable.UI">
+                <settings>
+                    <last-edited>commons-math-2.0</last-edited>
+                    <splitter-proportions>
+                        <option name="proportions">
+                            <list>
+                                <option value="0.2" />
+                            </list>
+                        </option>
+                    </splitter-proportions>
+                </settings>
+            </state>
+        </states>
+    </component>
 </project>

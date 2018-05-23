@@ -1,32 +1,28 @@
 package manager;
 
+import lucene.Repo;
 import org.kohsuke.github.GHRepository;
 import sorting.*;
 
 
 import java.util.List;
 
+import static manager.Trim.getRemaining;
+
 public class SortingManager {
-    private String stringMethod;
+    private String stringMethod = "SortByNumberOfForks"; //default
     private SortingMethod sortingMethod;
     private SortingFactory sortingFactory = new SortingFactory();
+    private List<Repo> repositoryList = getRemaining();
 
-    public void init(){
+    public SortingManager() {
         sortingFactory.AddSortingMethod("SortByNumberOfContributorFollowers", new SortByNumberOfContributorFollowers());
         sortingFactory.AddSortingMethod("SortByNumberOfForks", new SortByNumberOfForks());
         sortingFactory.AddSortingMethod("SortByNumberOfReleases", new SortByNumberOfReleases());
     }
 
-    public SortingManager() {
-        // Default sorting method
-        init();
-        this.stringMethod = "SortByNumberOfReleases";
-        this.sortingMethod = sortingFactory.getSortingMethod(stringMethod);
-    }
-
-    public SortingManager(String stringMethod) {
-        this.stringMethod = stringMethod;
-        this.sortingMethod = sortingFactory.getSortingMethod(stringMethod);
+    public SortingMethod sort() {
+        return sortingFactory.getSortingMethod(stringMethod);
     }
 
     public String getStringMethod() {
@@ -35,9 +31,5 @@ public class SortingManager {
 
     public void setStringMethod(String stringMethod) {
         this.stringMethod = stringMethod;
-    }
-
-    public List<GHRepository> callSortMethod(List<GHRepository> repositoryList) {
-        return sortingMethod.sort(repositoryList);
     }
 }

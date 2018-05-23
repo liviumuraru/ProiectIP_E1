@@ -1,4 +1,5 @@
 package sorting;
+import lucene.Repo;
 import org.kohsuke.github.GHRepository;
 
 import java.util.*;
@@ -8,20 +9,20 @@ import static java.util.stream.Collectors.toMap;
 public class SortByNumberOfContributorFollowers extends SortingMethod {
 
     @Override
-    public List<GHRepository> sort(List<GHRepository> repositories){
+    public List<GHRepository> sort(List<Repo> repositories){
         Map<GHRepository, Integer> map = new HashMap<>();
-        for(GHRepository repo : repositories){
+        for(Repo repo : repositories){
             try{
-                List<GHRepository.Contributor> contributors= repo.listContributors().asList();
+                List<GHRepository.Contributor> contributors= repo.getGhRepository().listContributors().asList();
                 int followers=0;
                 for(GHRepository.Contributor contributor:contributors){
                     followers+=contributor.getFollowersCount();
                 }
-                map.put(repo,followers);
+                map.put(repo.getGhRepository(),followers);
             }
             catch(Exception e)
             {
-                System.out.println("An error occurred: "+repo.getFullName());
+                System.out.println("An error occurred: "+repo.getGhRepository().getFullName());
             }
         }
         map=map.entrySet().stream()

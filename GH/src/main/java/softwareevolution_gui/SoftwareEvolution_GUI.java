@@ -109,9 +109,7 @@ public class SoftwareEvolution_GUI implements ActionListener {
                 // create lucene machine
                 try
                 {
-                    List< Repo > selectedRepos = Machine.getCosineSimilarity( 0.6 );
-                    for ( Repo repo : selectedRepos )
-                        System.out.println( repo );
+                    Machine.getCosineSimilarity( 0.6 );
                 }
                 catch ( IOException e )
                 {

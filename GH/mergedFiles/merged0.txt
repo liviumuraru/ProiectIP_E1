@@ -1,5 +1,5 @@
 https://github.com/GitGram/grawler.git
-git/grawler
+git\grawler
 
 package dev.gitgram.grawler.config;
 

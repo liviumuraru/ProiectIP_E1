@@ -9,13 +9,13 @@ import org.apache.lucene.store.LockObtainFailedException;
 
 public class Machine
 {
-    private static List<Repo> getBiggestCluster( int numberOfDocuments, double [][] cosineSimilarities, double limit )
+    private static List<String> getBiggestCluster( int numberOfDocuments, double [][] cosineSimilarities, double limit )
     {
-        List<Repo> selectedRepos = new ArrayList<>();
+        List<String> selectedRepos = new ArrayList<>();
 
         for ( int i = 0; i < numberOfDocuments; i++ )
         {
-            List<Repo> currentRepos = new ArrayList<>();
+            List<String> currentRepos = new ArrayList<>();
             getSimilarRepos( currentRepos, cosineSimilarities, numberOfDocuments, i, limit );
 
             if ( currentRepos.size() > selectedRepos.size() )
@@ -25,14 +25,14 @@ public class Machine
         return selectedRepos;
     }
 
-    private static void getSimilarRepos( List<Repo> selectedRepos, double [][] cosineSimilarities, int numberOfDocuments, int index, double limit )
+    private static void getSimilarRepos( List<String> selectedRepos, double [][] cosineSimilarities, int numberOfDocuments, int index, double limit )
     {
         try
         {
             BufferedReader br = new BufferedReader( new FileReader( "mergedFiles/merged" + index + ".txt" ) );
 
-            //selectedRepos.add( new Repo( br.readLine(), br.readLine() ) );
-            Trim.addRemainingProject( br.readLine());
+            br.readLine();
+            selectedRepos.add( br.readLine() );
             br.close();
 
             for ( int i = 0; i < numberOfDocuments; i++ )
@@ -42,7 +42,7 @@ public class Machine
 
 
                     bufferedReader.readLine();
-                    Trim.addRemainingProject( bufferedReader.readLine());
+                    selectedRepos.add( bufferedReader.readLine() );
                 }
         }
         catch ( IOException e )
@@ -51,7 +51,7 @@ public class Machine
         }
     }
 
-    public static List<Repo> getCosineSimilarity( double limit ) throws LockObtainFailedException, IOException
+    public static void getCosineSimilarity( double limit ) throws LockObtainFailedException, IOException
     {
         double [][] cosineSimilarities = new double[ 40 ][ 40 ];
 
@@ -72,6 +72,11 @@ public class Machine
             System.out.println();
         }
 
-        return getBiggestCluster( docVector.length, cosineSimilarities, limit );
+        List<String> selectedRepos = getBiggestCluster( docVector.length, cosineSimilarities, limit );
+        for ( String repoPath : selectedRepos )
+        {
+            System.out.println( "Selected: " + repoPath );
+            Trim.addRemainingProject( repoPath );
+        }
     }
 }

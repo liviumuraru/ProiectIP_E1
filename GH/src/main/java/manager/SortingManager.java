@@ -21,7 +21,7 @@ public class SortingManager {
         sortingFactory.AddSortingMethod("SortByNumberOfReleases", new SortByNumberOfReleases());
     }
 
-    public SortingMethod sort() {
+    public SortingMethod getSortingMethod() {
         return sortingFactory.getSortingMethod(stringMethod);
     }
 

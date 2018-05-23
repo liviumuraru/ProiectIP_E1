@@ -1,5 +1,6 @@
 package m_prime;
 
+import manager.SortingManager;
 import manager.Trim;
 import sorting.SortByNumberOfContributorFollowers;
 import sorting.SortByNumberOfForks;
@@ -45,14 +46,14 @@ public class PanelList extends JFrame {
         button.addActionListener(e -> {
 
             // Get new tree based on the checkbox criteria
-
+            SortingManager sortingManager = new SortingManager();
             if(box1.isSelected())
-                paths = Trim.getPaths( new SortByNumberOfContributorFollowers().sort( Trim.getRepos() ) );
+                sortingManager.setStringMethod( "SortByNumberOfContributorFollowers" );
             else if ( box2.isSelected() )
-                paths = Trim.getPaths( new SortByNumberOfForks().sort( Trim.getRepos() ) );
+                sortingManager.setStringMethod("SortByNumberOfForks");
             else if ( box3.isSelected() )
-                paths = Trim.getPaths( new SortByNumberOfReleases().sort( Trim.getRepos() ) );
-
+                sortingManager.setStringMethod("SortByNumberOfReleases");
+            paths = Trim.getPaths(  sortingManager.getSortingMethod().sort(Trim.getRemaining()) );
         });
 
         box1.setBackground(Color.LIGHT_GRAY);

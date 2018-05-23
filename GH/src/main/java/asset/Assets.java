@@ -3,6 +3,7 @@ package asset;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class Assets
@@ -14,7 +15,7 @@ public class Assets
 
         bw.write( repoURL );
         bw.newLine();
-        bw.write( destinationDir );
+        bw.write( Paths.get( destinationDir ).toString() );
         bw.newLine();
 
         for (Asset<File> fileAsset : fileList)

@@ -1,5 +1,5 @@
 https://github.com/persevere1/DoubanCrawler.git
-git/DoubanCrawler
+git\DoubanCrawler
 
 package doubanBook;
 

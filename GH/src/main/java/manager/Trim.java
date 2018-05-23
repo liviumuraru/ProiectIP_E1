@@ -40,7 +40,7 @@ public class Trim
         for(String path : remainingProjects) {
             if(allProjects.containsKey( path ))
             {
-                System.out.println( path );
+                System.out.println( "!!" + path );
                 remaining.add( new Repo(path, allProjects.get( path )) );
             }
         }

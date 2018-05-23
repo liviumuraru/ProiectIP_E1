@@ -1,5 +1,5 @@
 https://github.com/david-grey/leetcode-github.git
-git/leetcode-github
+git\leetcode-github
 
 public class Solution {
     public List<List<Integer>> threeSum(int[] nums) {

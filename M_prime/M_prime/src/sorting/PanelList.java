@@ -19,14 +19,11 @@ class PanelList extends JFrame {
         panelUp.setBackground(Color.GRAY);
         //this.setSize
 
-
-        JPanel panelLeft = new JPanel();
-        panelLeft.setBackground(Color.LIGHT_GRAY);
-        JButton button = new JButton("<html><font color='black'>Sort</font></html>");
-        button.setBackground(Color.white);
-        
-        panelLeft.add(button);
-        this.add(panelLeft, BorderLayout.EAST);
+        JButton button = new JButton("<html><font size='5'>Sort</font></html>");
+        button.setBackground(Color.GRAY);
+        button.setForeground(Color.white);
+        button.setPreferredSize(new Dimension(100, 60));        
+        this.add(button, BorderLayout.SOUTH);
 
 
         FileTree model = new FileTree(new File("M_Prime"));

@@ -1,5 +1,5 @@
-https://github.com/FTRobbin/GithubCrawler.git
-git\GithubCrawler
+https://github.com/PiPiNaN/githubcrawler.git
+git\githubcrawler
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;

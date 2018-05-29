@@ -8,6 +8,7 @@ import os
 import sys
 import dict2uml
 import plantuml
+import shutil
 
 
 classes = []
@@ -73,9 +74,15 @@ def get_info():
     :return: relations -> a dictionary with all the classes and their relations; implementations etc
     >> info = get_info()
     """
+    global fldr
+    found = 0
+    
     for folder, dirs, files in os.walk(root_dir):
         for filename in files:
             if filename.endswith('.cs'):
+                if (found == 0):
+                    found = 1
+                    fldr = folder
                 full_path = os.path.join(folder, filename)
                 try:
                     parse_file(full_path)
@@ -105,6 +112,15 @@ def concat_images(images):
         x_offset += im.size[0]
     new_im.save('final_diagram.png')
 
+def move_photos(folder):
+    dir_path = os.path.dirname(os.path.realpath(__file__)) 
+    for files in os.walk(dir_path):
+        for file in files:
+            for f in file:
+                if f.endswith('.png'):
+                    path = os.path.join(dir_path, f)
+                    path_to_move = os.path.join(folder, f)
+                    shutil.move(path, path_to_move)  
 
 def main():
     """
@@ -134,6 +150,7 @@ def main():
         exit()
 
     concat_images(to_concat)
+    move_photos(fldr)
 
 
 if __name__ == "__main__":

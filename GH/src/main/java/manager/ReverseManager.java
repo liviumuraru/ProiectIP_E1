@@ -1,29 +1,56 @@
 package manager;
 
+import com.jcabi.immutable.ArrayComparator;
 import reverse.RunScript;
 
+import java.util.List;
+
 public class ReverseManager {
-    String reverseFolder = "../reverse/reverse_";
-    String reverseString;
-    String reverseArgs;
-    List<String> projects;
-    List<String> projectsReverse;
+    public static class ReverseBuilder {
+        private List<String> projects;
+        private List<String> projectsReverse;
+        private String arg;
 
-    public ReverseManager(List<String> projects, List<String> projectsReverse) {
-        this.projects = projects;
-        this.projectsReverse = projectsReverse;
+        public ReverseBuilder() {
+        }
 
-        reverseString = reverseFolder + "c#/c#.py";
-        reverseArgs = "default_folder";
+        public ReverseBuilder withProjects(List<String> projects) {
+            this.projects = projects;
+            return this;
+        }
+
+        public ReverseBuilder withReverseScript(List<String> projectsReverse) {
+            this.projectsReverse = projectsReverse;
+            return this;
+        }
+
+        public ReverseBuilder withArg(String arg) {
+            this.arg = arg;
+            return this;
+        }
+
+        public ReverseManager build(){
+            ReverseManager manager = new ReverseManager();
+
+            manager.projects = this.projects;
+            manager.projectsReverse = this.projectsReverse;
+            manager.reverseArgs = this.arg;
+            return manager;
+        }
     }
 
-    public ReverseManager(List<String> projects, String reverseArgs) {
-        this.projects = projects;
-        this.reverseArgs = reverseArgs;
+    private String reverseFolder = "../reverse/reverse_";
+    private String reverseString = reverseFolder + "c#/c#.py";;
+    private String reverseArgs = "default_folder";
+    private List<String> projects;
+    private List<String> projectsReverse;
+
+    private ReverseManager() {
+
     }
 
     public void callReverse() {
-        if (projects.size() != projectsLanguage.size()) {
+        if (projects.size() != projectsReverse.size()) {
             System.out.println("Projects' paths list size must equal projects' reverse list size.");
             return;
         }

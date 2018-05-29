@@ -8,8 +8,19 @@ import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Concat {
+/**
+ * Class Concat finds all UML diagrams in a folder and concatenates them in a single, final .png file
+ */
 
+public class Concat {
+    /**
+     * Files with the .png extension and a title different from "saved.png" are stored in a List;
+     * A BuffereImage variable is created and given the maximum height of the images from the aforementioned
+     * list and the sum of their widths;
+     * Images are concatenate and drawn in a final image titled "saved.png";
+     * @param dirPath
+     * @throws IOException
+     */
     public void run(File dirPath) throws IOException {
         File path = new File(String.valueOf(dirPath));
         System.out.println(dirPath);
@@ -25,7 +36,7 @@ public class Concat {
                 }
             }
 
-            else return;
+        else return;
 
 
         List<BufferedImage> images = new ArrayList<BufferedImage>();

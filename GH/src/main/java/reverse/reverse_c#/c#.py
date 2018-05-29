@@ -112,15 +112,13 @@ def concat_images(images):
         x_offset += im.size[0]
     new_im.save('final_diagram.png')
 
+
 def move_photos(folder):
     dir_path = os.path.dirname(os.path.realpath(__file__)) 
-    for files in os.walk(dir_path):
-        for file in files:
-            for f in file:
-                if f.endswith('.png'):
-                    path = os.path.join(dir_path, f)
-                    path_to_move = os.path.join(folder, f)
-                    shutil.move(path, path_to_move)  
+    for file in os.listdir(dir_path):
+        if file.endswith('.png'): 
+            shutil.move(os.path.join(dir_path, file), os.path.join(folder, file))
+
 
 def main():
     """

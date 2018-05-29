@@ -19,11 +19,6 @@ public class ReverseManager {
             return this;
         }
 
-        public ReverseBuilder withReverseScript(List<String> projectsReverse) {
-            this.projectsReverse = projectsReverse;
-            return this;
-        }
-
         public ReverseBuilder withArg(String arg) {
             this.arg = arg;
             return this;
@@ -33,7 +28,6 @@ public class ReverseManager {
             ReverseManager manager = new ReverseManager();
 
             manager.projects = this.projects;
-            manager.projectsReverse = this.projectsReverse;
             manager.reverseArgs = this.arg;
             return manager;
         }
@@ -42,14 +36,26 @@ public class ReverseManager {
     private String reverseFolder = "../reverse/reverse_";
     private String reverseString = reverseFolder + "c#/c#.py";;
     private String reverseArgs = "default_folder";
+
+    private String revPython = "python/PyRev.py";
+    private String revCSharp = "c#/c#.py";
+    private String revJava = "java/JavaParser.py";
+
     private List<String> projects;
-    private List<String> projectsReverse;
 
     private ReverseManager() {
 
     }
 
-    public void callReverse() {
+    public void callReverseAll() {
+        for(int i = 0; i < projects.size(); i++) {
+            callCSharp(projects.get(i));
+            callPython(projects.get(i));
+            callJava(projects.get(i));
+        }
+    }
+
+    public void callReverse(List<String> projectsReverse) {
         if (projects.size() != projectsReverse.size()) {
             System.out.println("Projects' paths list size must equal projects' reverse list size.");
             return;
@@ -57,6 +63,9 @@ public class ReverseManager {
 
         for(int i = 0; i < projects.size(); i++) {
             callScript(projectsReverse.get(i), projects.get(i));
+            //callCSharp(projects.get(i));
+            //callPython(projects.get(i));
+            //callJava(projects.get(i));
         }
     }
 
@@ -65,14 +74,14 @@ public class ReverseManager {
     }
 
     public void callCSharp(String project) {
-        RunScript.run(reverseFolder + "c#/c#.py", project);
+        RunScript.run(reverseFolder + revCSharp, project);
     }
 
     public void callPython(String project) {
-        RunScript.run(reverseFolder + "python/PyRev.py", project);
+        RunScript.run(reverseFolder + revPython, project);
     }
 
     public void callJava(String project) {
-        RunScript.run(reverseFolder + "java/JavaParser.py", project);
+        RunScript.run(reverseFolder + revJava, project);
     }
 }

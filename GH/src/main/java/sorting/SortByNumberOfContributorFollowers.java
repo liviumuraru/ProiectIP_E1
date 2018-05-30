@@ -6,8 +6,16 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * This class provides the means to sort a list of repositories based on the overall number of followers/repository
+ */
 public class SortByNumberOfContributorFollowers extends SortingMethod {
 
+     /**
+     * Returns a list of GHRepository objects sorted in descending order based on the total number of the contributors' followers.
+     * repositories - a list of Repo objects (which contain a GHRepository and a path)
+     * @param repositories
+     */
     @Override
     public List<GHRepository> sort(List<Repo> repositories){
         Map<GHRepository, Integer> map = new HashMap<>();

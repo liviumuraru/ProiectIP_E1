@@ -7,8 +7,16 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * This class provides the means to sort a list of repositories based on the number of releases
+ */
 public class SortByNumberOfReleases extends SortingMethod {
 
+     /**
+     * Returns a list of GHRepository objects sorted in descending order based on the number of releases.
+     * a list of Repo objects (which contain a GHRepository and a path)
+	 * @param repositories
+     */
     @Override
     public List<GHRepository> sort(List<Repo> repositories){
         Map<GHRepository, Integer> map = new HashMap<>();

@@ -1,5 +1,6 @@
 package m_prime;
 
+import concatenation.Concat;
 import manager.ReverseManager;
 import manager.SortingManager;
 import manager.Trim;
@@ -92,7 +93,7 @@ public class PanelList extends JFrame
                 sortingManager.setStringMethod( "SortByNumberOfReleases" );
             }
             List< String > paths = Trim.getPaths( sortingManager.getSortingMethod().sort( Trim.getRemaining() ) );
-            ReverseManager reverseManager = new ReverseManager.ReverseBuilder().withProjects(paths).build();
+            ReverseManager reverseManager = new ReverseManager.ReverseBuilder().withProjects(paths).withConcat(new Concat()).build();
             reverseManager.callReverseAll();
 
             for ( String path : paths )
